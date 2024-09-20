@@ -1,0 +1,188 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  /* font-family: "bebas-neue", sans-serif;
+  font-weight: 400;
+  font-style: normal; */
+  background-color: #fafafa;
+  color: #333;
+  line-height: 1.6;
+}
+
+header {
+  text-align: center;
+  padding: 60px 20px;
+  background-color: #a4b3b8;
+  color: #333;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+h1 {
+  font-size: 48px;
+  font-weight: 300;
+  color: #dfe1db;
+  font-family: "bebas-neue", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+h2 {
+  font-size: 48px;
+  font-weight: 300;
+  color: #82959d;
+  font-family: "bebas-neue", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+header p {
+  font-size: 18px;
+  color: #efefe9;
+  font-family: "Meddon", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+p {
+  font-size: 18px;
+  color: #6a7d81;
+  font-family: sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* .about,
+.portfolio {
+  padding: 40px 20px;
+  text-align: center;
+  background-color: #f4f4f4;
+} */
+
+/* .about h2,
+.portfolio h2 {
+  font-size: 32px;
+  font-family: "Playfair Display", serif;
+  color: #2d4059;
+  margin-bottom: 20px;
+} */
+
+/* .about p,
+.portfolio p {
+  font-size: 18px;
+  color: #6d7987;
+  max-width: 600px;
+  margin: 0 auto;
+} */
+
+.projects-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 40px;
+}
+
+.project {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 300px;
+  text-align: center;
+}
+
+.project:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.project img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.project h3 {
+  font-size: 24px;
+  color: #2d4059;
+  margin-top: 15px;
+}
+
+.project p {
+  font-size: 16px;
+  color: #6d7987;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #f9f9f9;
+  font-size: 14px;
+  color: #6d7987;
+}
+/* .divider {
+  background: url("wavy-line.svg") no-repeat center;
+  height: 100px;
+} */
+/* .project img {
+  width: 100%;
+  border-radius: 8px;
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
+} */
+
+/* .project img:hover {
+  opacity: 1;
+} */
+/* header {
+  background-color: #f0ece3; 
+  color: #403d39; 
+} */
+
+/* .project {
+  background-color: #fafafa;
+  border: 2px solid #dcd7c9; 
+} */
+/* blockquote {
+  font-family: "Dancing Script", cursive;
+  font-size: 20px;
+  color: #6d7987;
+  text-align: center;
+  margin: 20px auto;
+} */
+/* button {
+  background-color: #f0ece3;
+  border: none;
+  padding: 10px 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+  transition: box-shadow 0.3s ease;
+} */
+/* 
+button:hover {
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+} */
+
+.wavy-line {
+  --s: 60px; /* size of the wave */
+  --b: 7px; /* thickness of the line */
+  --m: 0.4; /* curvature of the wave [0 2] */
+
+  background: #ddd2c0;
+  --R: calc(var(--s) * sqrt(var(--m) * var(--m) + 1) + var(--b) / 2);
+  height: calc(2 * var(--R));
+  width: 100%;
+  --_g: #0000 calc(99% - var(--b)), #000 calc(101% - var(--b)) 99%, #0000 101%;
+  mask: radial-gradient(
+        var(--R) at left 50% bottom calc(-1 * var(--m) * var(--s)),
+        var(--_g)
+      )
+      calc(50% - 2 * var(--s)) calc(50% - var(--s) / 2 - var(--b) / 2) /
+      calc(4 * var(--s)) calc(var(--s) + var(--b)) repeat-x,
+    radial-gradient(
+        var(--R) at left 50% top calc(-1 * var(--m) * var(--s)),
+        var(--_g)
+      )
+      50% calc(50% + var(--s) / 2 + var(--b) / 2) / calc(4 * var(--s))
+      calc(var(--s) + var(--b)) repeat-x;
+}
