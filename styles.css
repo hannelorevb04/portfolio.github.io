@@ -7,7 +7,6 @@ header {
   padding: 40px;
   background-color: #a4b3b8;
   color: #333;
-  border-bottom: 2px solid #e0e0e0;
   margin: 10px;
 }
 
@@ -34,7 +33,7 @@ h2 {
   font-family: "bebas-neue", sans-serif;
   font-weight: 400;
   margin-left: 15px;
-  margin: 10px 15px;
+  margin: 15px 15px;
 }
 p {
   font-size: 18px;
@@ -73,6 +72,7 @@ p {
   justify-content: center;
   gap: 20px;
   padding: 40px;
+  flex-wrap: wrap;
 }
 
 .project {
@@ -81,7 +81,7 @@ p {
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  width: 300px;
+  width: 40%;
   text-align: center;
 }
 
@@ -226,7 +226,7 @@ button:hover {
 
 /* Zorgt ervoor dat de golf container het volledige scherm bedekt */
 .wave-container {
-  position: relative;
+  /* position: relative; */
   width: 100%;
   height: 150px;
   overflow: hidden;
@@ -234,14 +234,15 @@ button:hover {
 
 /* Style de golf zelf */
 .wave {
-  position: absolute;
+  /* position: absolute;
   top: 0;
-  left: 0;
-  width: 200%; /* Houd de breedte op 200% voor herhaling aan de zijkanten */
+  left: 0; */
+  width: 300%; /* Houd de breedte op 200% voor herhaling aan de zijkanten */
   height: 100%;
   background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 150" preserveAspectRatio="none"><path d="M 0 100 Q 50 50 100 100 T 200 100 T 300 100 T 400 100 T 500 100 T 600 100 T 700 100 T 800 100 T 900 100 T 1000 100 T 1100 100" fill="none" stroke="%23ddd2c0" stroke-width="3" /></svg>')
     repeat-x;
   animation: wave-animation 12s linear infinite; /* Langzaam voor vloeiender effect */
+  margin-bottom: 10px;
 }
 
 /* CSS animatie voor de golf van links naar rechts */
