@@ -1,49 +1,40 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 body {
-  /* font-family: "bebas-neue", sans-serif;
-  font-weight: 400;
-  font-style: normal; */
   background-color: #fafafa;
-  color: #333;
-  line-height: 1.6;
 }
 
 header {
   text-align: center;
-  padding: 60px 20px;
+  padding: 40px;
   background-color: #a4b3b8;
   color: #333;
   border-bottom: 2px solid #e0e0e0;
+  margin: 10px;
 }
 
 h1 {
   font-size: 48px;
-  font-weight: 300;
   color: #dfe1db;
   font-family: "bebas-neue", sans-serif;
+  font-weight: 400;
+  margin: 10px;
+}
+header p {
+  font-size: 28px;
+  color: #ddd2c0;
+  /* font-family: "Meddon", system-ui;
+  font-weight: 400;
+  font-style: normal; */
+  font-family: "great-vibes", sans-serif;
   font-weight: 400;
   font-style: normal;
 }
 h2 {
   font-size: 48px;
-  font-weight: 300;
   color: #82959d;
   font-family: "bebas-neue", sans-serif;
   font-weight: 400;
-  font-style: normal;
-}
-
-header p {
-  font-size: 18px;
-  color: #efefe9;
-  font-family: "Meddon", system-ui;
-  font-weight: 400;
-  font-style: normal;
+  margin-left: 15px;
+  margin: 10px 15px;
 }
 p {
   font-size: 18px;
@@ -51,6 +42,7 @@ p {
   font-family: sans-serif;
   font-weight: 400;
   font-style: normal;
+  margin: 0 15px;
 }
 
 /* .about,
@@ -163,10 +155,32 @@ button:hover {
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
 } */
 
+/* .box {
+  --mask: radial-gradient(
+        56.84px at 50% calc(100% + 46.5px),
+        #0000 calc(99% - 3px),
+        #000 calc(101% - 3px) 99%,
+        #0000 101%
+      )
+      calc(50% - 60px) calc(50% - 16.5px + 0.5px) / 120px 33px repeat-x,
+    radial-gradient(
+        56.84px at 50% -46.5px,
+        #0000 calc(99% - 3px),
+        #000 calc(101% - 3px) 99%,
+        #0000 101%
+      )
+      50% calc(50% + 16.5px) / 120px 33px repeat-x;
+  -webkit-mask: var(--mask);
+  mask: var(--mask);
+} */
 .wavy-line {
-  --s: 60px; /* size of the wave */
-  --b: 7px; /* thickness of the line */
-  --m: 0.4; /* curvature of the wave [0 2] */
+  /* --s: 60px;
+  --b: 7px;
+  --m: 0.4; */
+
+  --s: 50px;
+  --b: 5px;
+  --m: 1.4;
 
   background: #ddd2c0;
   --R: calc(var(--s) * sqrt(var(--m) * var(--m) + 1) + var(--b) / 2);
@@ -185,4 +199,57 @@ button:hover {
       )
       50% calc(50% + var(--s) / 2 + var(--b) / 2) / calc(4 * var(--s))
       calc(var(--s) + var(--b)) repeat-x;
+}
+/* .wave-container {
+  position: absolute;
+  width: 200%;
+  height: 100px;
+  top: 50%;
+  left: -100%;
+  animation: waveAnimation 10s infinite linear;
+}
+
+.wave {
+  fill: none;
+  stroke: black;
+  stroke-width: 6;
+}
+
+@keyframes waveAnimation {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+} */
+
+/* Zorgt ervoor dat de golf container het volledige scherm bedekt */
+.wave-container {
+  position: relative;
+  width: 100%;
+  height: 150px;
+  overflow: hidden;
+}
+
+/* Style de golf zelf */
+.wave {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%; /* Houd de breedte op 200% voor herhaling aan de zijkanten */
+  height: 100%;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 150" preserveAspectRatio="none"><path d="M 0 100 Q 50 50 100 100 T 200 100 T 300 100 T 400 100 T 500 100 T 600 100 T 700 100 T 800 100 T 900 100 T 1000 100 T 1100 100" fill="none" stroke="%23ddd2c0" stroke-width="3" /></svg>')
+    repeat-x;
+  animation: wave-animation 12s linear infinite; /* Langzaam voor vloeiender effect */
+}
+
+/* CSS animatie voor de golf van links naar rechts */
+@keyframes wave-animation {
+  0% {
+    transform: translateX(0); /* Begin zonder verschuiving */
+  }
+  100% {
+    transform: translateX(-50%); /* Beweeg naar links */
+  }
 }
