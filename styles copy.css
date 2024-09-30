@@ -1,0 +1,462 @@
+body {
+  background-color: #fafafa;
+  overflow-x: hidden;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%; /* Zorgt ervoor dat de body en html 100% van het scherm bedekken */
+}
+/* header {
+  text-align: center;
+  padding: 40px;
+  background-color: #a0b8bf;
+  color: #333;
+  margin: 10px;
+  position: relative;
+} */
+
+.background-video {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100vw; /* Vult de volledige breedte van het scherm */
+  z-index: -1; /* Zorgt ervoor dat de video achter de content blijft */
+  /* overflow: hidden; */
+}
+
+.background-video video {
+  width: 100%;
+  /* height: 100vh; */
+  object-fit: cover; /* Zorgt ervoor dat de volledige video zichtbaar blijft binnen het scherm */
+  /* position: absolute;
+  top: 0;
+  left: 0; */
+}
+.background-video img {
+  width: 100%;
+  /* height: 100vh; */
+  object-fit: cover; /* Zorgt ervoor dat de volledige video zichtbaar blijft binnen het scherm */
+  /* position: absolute;
+  top: 0;
+  left: 0; */
+}
+.header-video {
+  /* position: relative;
+  top: 0;
+  left: 0; */
+  z-index: -1; /* Zorgt ervoor dat de video achter de content blijft */
+  /* overflow: hidden; */
+  margin: 5px;
+}
+.header-video video {
+  width: 100%;
+  /* height: 100vh; */
+  /* position: absolute;
+  top: 0;
+  left: 0; */
+}
+.header-image {
+  margin: 50px 0px;
+  display: flex;
+  justify-content: center; /* Plaatst de inhoud horizontaal in het midden */
+}
+.header-image img {
+  width: 50%;
+  /* height: 100vh; */
+  /* object-fit: cover; */
+  margin: auto;
+  /* position: absolute;
+  top: 0;
+  left: 0; */
+}
+
+#profiel_pic {
+  border-radius: 100%;
+  position: fixed;
+  /* top: 195px; */
+  top: 50px;
+  right: 39%;
+  width: 20%;
+  height: auto;
+}
+nav {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.burger {
+  font-size: 2.5em;
+  margin: 0.5em;
+  color: #82959d;
+}
+
+#burger {
+  display: none;
+}
+
+#burger:checked ~ .subnav {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 45px;
+  right: 15px;
+  background-color: #fafafa;
+  background-color: #82959d;
+
+  padding: 10px;
+  width: 250px;
+}
+
+.subnav {
+  display: none;
+  z-index: 2;
+}
+
+.subnav a {
+  text-decoration: none;
+  color: #82959d;
+  color: #fafafa;
+  padding: 0.5em;
+  font-family: "bebas-neue", sans-serif;
+  font-weight: 100;
+  letter-spacing: 0.25em;
+}
+
+/* Subnav links styling */
+.subnav a:hover {
+  color: #fff;
+  background-color: #82959d;
+  background-color: #fafafa;
+  color: #82959d;
+}
+h1 {
+  font-size: 75px;
+  color: #ddd2c0;
+  font-family: "bebas-neue", sans-serif;
+  font-weight: 400;
+  margin: 10px;
+  text-align: center;
+  margin-top: 50px;
+}
+header p {
+  font-size: 28px;
+  color: #e9d6c3;
+  /* font-family: "Meddon", system-ui;
+  font-weight: 400;
+  font-style: normal; */
+  font-family: "great-vibes", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  margin: 0 15px;
+}
+h2 {
+  font-size: 48px;
+  color: #82959d;
+  font-family: "bebas-neue", sans-serif;
+  font-weight: 400;
+  margin-left: 15px;
+  margin: 15px 15px;
+  letter-spacing: 0.05em;
+}
+p {
+  font-size: 18px;
+  color: #6a7d81;
+  font-family: sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  margin: 15px;
+}
+li {
+  font-size: 18px;
+  color: #6a7d81;
+  font-family: sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  margin: 0 15px;
+}
+
+.highlight {
+  /* border-radius: 1em 0 1em 0; */
+  /*     background: rgb(138,184,178);
+    background: linear-gradient(90deg, rgba(138,184,178,1) 0%, rgba(185,221,215,1) 100%); */
+  /* background-color: #b9ddd7;
+  margin-top: 1px; */
+  /* margin-top: 20px; */
+}
+.highlight {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 50%, #ddd2c0 50%);
+  display: inline;
+  padding: 0 4px;
+  margin: 0;
+}
+/* .about,
+.portfolio {
+  padding: 40px 20px;
+  text-align: center;
+  background-color: #f4f4f4;
+} */
+
+/* .about h2,
+.portfolio h2 {
+  font-size: 32px;
+  font-family: "Playfair Display", serif;
+  color: #2d4059;
+  margin-bottom: 20px;
+} */
+
+/* .about p,
+.portfolio p {
+  font-size: 18px;
+  color: #6d7987;
+  max-width: 600px;
+  margin: 0 auto;
+} */
+
+.projects-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 10px 20px;
+  flex-wrap: wrap;
+}
+
+.project {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  /* width: 25%; */
+  /* width: 175px; */
+  width: 170px;
+  /* text-align: center; */
+}
+
+.project:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.project img {
+  width: 100%;
+  border-radius: 8px;
+}
+.project video {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.project h3 {
+  font-size: 24px;
+  color: #2d4059;
+  margin-top: 15px;
+  text-align: center;
+  color: #82959d;
+  font-family: "bebas-neue", sans-serif;
+  font-weight: 100;
+}
+
+.project p {
+  font-size: 15px;
+  color: #6d7987;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+.button {
+  background-color: #ddd2c0;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-family: sans-serif;
+  color: #6a7d81;
+  font-weight: 500;
+  margin-left: 15px;
+}
+
+/* Zorgt ervoor dat de .video-detail container gecentreerd wordt */
+.video-detail {
+  width: 100%; /* Stel de gewenste breedte in, bijvoorbeeld 80% van het scherm */
+  padding: 20px; /* Optioneel: voegt wat padding toe */
+  text-align: center; /* Centreer de tekst binnen de sectie */
+  box-sizing: border-box; /* Zorgt ervoor dat padding en border bij de breedte worden gerekend */
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #f9f9f9;
+  font-size: 14px;
+  color: #6d7987;
+}
+/* .divider {
+  background: url("wavy-line.svg") no-repeat center;
+  height: 100px;
+} */
+/* .project img {
+  width: 100%;
+  border-radius: 8px;
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
+} */
+
+/* .project img:hover {
+  opacity: 1;
+} */
+/* header {
+  background-color: #f0ece3; 
+  color: #403d39; 
+} */
+
+/* .project {
+  background-color: #fafafa;
+  border: 2px solid #dcd7c9; 
+} */
+/* blockquote {
+  font-family: "Dancing Script", cursive;
+  font-size: 20px;
+  color: #6d7987;
+  text-align: center;
+  margin: 20px auto;
+} */
+/* button {
+  background-color: #f0ece3;
+  border: none;
+  padding: 10px 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+  transition: box-shadow 0.3s ease;
+} */
+/* 
+button:hover {
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+} */
+
+/* .box {
+  --mask: radial-gradient(
+        56.84px at 50% calc(100% + 46.5px),
+        #0000 calc(99% - 3px),
+        #000 calc(101% - 3px) 99%,
+        #0000 101%
+      )
+      calc(50% - 60px) calc(50% - 16.5px + 0.5px) / 120px 33px repeat-x,
+    radial-gradient(
+        56.84px at 50% -46.5px,
+        #0000 calc(99% - 3px),
+        #000 calc(101% - 3px) 99%,
+        #0000 101%
+      )
+      50% calc(50% + 16.5px) / 120px 33px repeat-x;
+  -webkit-mask: var(--mask);
+  mask: var(--mask);
+} */
+.wavy-line {
+  /* --s: 60px;
+  --b: 7px;
+  --m: 0.4; */
+
+  --s: 50px;
+  --b: 5px;
+  --m: 1.4;
+
+  background: #ddd2c0;
+  --R: calc(var(--s) * sqrt(var(--m) * var(--m) + 1) + var(--b) / 2);
+  height: calc(2 * var(--R));
+  width: 100%;
+  --_g: #0000 calc(99% - var(--b)), #000 calc(101% - var(--b)) 99%, #0000 101%;
+  mask: radial-gradient(
+        var(--R) at left 50% bottom calc(-1 * var(--m) * var(--s)),
+        var(--_g)
+      )
+      calc(50% - 2 * var(--s)) calc(50% - var(--s) / 2 - var(--b) / 2) /
+      calc(4 * var(--s)) calc(var(--s) + var(--b)) repeat-x,
+    radial-gradient(
+        var(--R) at left 50% top calc(-1 * var(--m) * var(--s)),
+        var(--_g)
+      )
+      50% calc(50% + var(--s) / 2 + var(--b) / 2) / calc(4 * var(--s))
+      calc(var(--s) + var(--b)) repeat-x;
+}
+/* .wave-container {
+  position: absolute;
+  width: 200%;
+  height: 100px;
+  top: 50%;
+  left: -100%;
+  animation: waveAnimation 10s infinite linear;
+}
+
+.wave {
+  fill: none;
+  stroke: black;
+  stroke-width: 6;
+}
+
+@keyframes waveAnimation {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+} */
+
+/* Zorgt ervoor dat de golf container het volledige scherm bedekt */
+.wave-container {
+  /* position: relative; */
+  width: 100%;
+  height: 150px;
+  overflow: hidden;
+}
+
+/* Style de golf zelf */
+.wave {
+  /* position: absolute;
+  top: 0;
+  left: 0; */
+  width: 300%; /* Houd de breedte op 200% voor herhaling aan de zijkanten */
+  height: 100%;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 150" preserveAspectRatio="none"><path d="M 0 100 Q 50 50 100 100 T 200 100 T 300 100 T 400 100 T 500 100 T 600 100 T 700 100 T 800 100 T 900 100 T 1000 100 T 1100 100" fill="none" stroke="%23ddd2c0" stroke-width="3" /></svg>')
+    repeat-x;
+  animation: wave-animation 12s linear infinite; /* Langzaam voor vloeiender effect */
+  margin-bottom: 10px;
+}
+
+.filter-buttons {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.filter-buttons button {
+  padding: 10px 20px;
+  margin: 5px;
+  font-family: "bebas-neue", sans-serif;
+  font-size: 16px;
+  background-color: #82959d;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  letter-spacing: 0.15em;
+}
+
+.filter-buttons button:hover {
+  background-color: #6a7d81;
+}
+.filter-buttons a {
+  letter-spacing: 0.05em;
+}
+
+/* CSS animatie voor de golf van links naar rechts */
+@keyframes wave-animation {
+  0% {
+    transform: translateX(0); /* Begin zonder verschuiving */
+  }
+  100% {
+    transform: translateX(-50%); /* Beweeg naar links */
+  }
+}

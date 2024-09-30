@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="normalize.css" />
+    <link rel="stylesheet" href="styles copy.css" />
+    <link rel="stylesheet" href="https://use.typekit.net/zfy3tmf.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <label class="burger" for="burger">&equiv;</label>
+        <input id="burger" type="checkbox" />
+        <div class="subnav">
+          <a id="home" href="index copy.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="projecten.html">Projecten</a>
+        </div>
+      </nav>
+      <div class="background-video">
+        <video autoplay muted loop>
+          <source src="images/beach_1.mp4" type="video/mp4" />
+        </video>
+      </div>
+    </header>
+
+    <section class="portfolio">
+      <h2>Mijn project(en)</h2>
+
+      <!-- Filter knoppen -->
+      <div class="filter-buttons">
+        <button onclick="filterProjects('all')">Alle</button>
+        <button onclick="filterProjects('design')">Design</button>
+        <button onclick="filterProjects('development')">Development</button>
+      </div>
+
+      <div class="projects-container">
+        <a class="project design" href="projecten/forcia.html">
+          <img src="images/mockup_forcia.png" alt="Forcia" />
+          <h3>Forcia</h3>
+          <p>
+            App die studenten door hun schoolcarrière helpt, door middel van
+            collegiale competities
+          </p>
+        </a>
+
+        <a class="project development" href="projecten/useless_web.html">
+          <video autoplay muted loop class="video">
+            <source src="images/useless_web_individueel.mp4" type="video/mp4" />
+          </video>
+          <h3>Useless web</h3>
+          <p>
+            In 2012 startte Tim Holman een useless website. Wij maakten van dit
+            idee onze eigen XD versie
+          </p>
+        </a>
+
+        <a class="project development" href="projecten/useless_web_groep.html">
+          <video autoplay muted loop class="video">
+            <source src="images/uselessweb_groep.mp4" type="video/mp4" />
+          </video>
+          <h3>Useless web - groep</h3>
+          <p>
+            In 2012 startte Tim Holman een useless website. Wij maakten van dit
+            idee onze eigen XD versie. Deze keer deden we dit in groep
+          </p>
+        </a>
+
+        <a class="project design" href="projecten/cargov.html">
+          <img src="images/mockup_cargov.png" alt="Cargov" />
+          <h3>CarGov</h3>
+          <p>
+            App voor autobestuurders, waar ze hun auto-documenten kunnen
+            bundelen
+          </p>
+        </a>
+
+        <a class="project development" href="projecten/woordlogo.html">
+          <video autoplay muted loop class="video">
+            <source src="images/woordlogo.mp4" type="video/mp4" />
+          </video>
+          <h3>Woordlogo</h3>
+          <p>
+            In het woordlogo hebben we een visuele verwijzing naar de betekenis
+            van het woord verwerkt en voegden hier ook een animatie aan toe
+          </p>
+        </a>
+
+        <a class="project development" href="projecten/woordlogo_groep.html">
+          <video autoplay muted loop class="video">
+            <source src="images/woordlogo_groep.mp4" type="video/mp4" />
+          </video>
+          <h3>Woordlogo - groep</h3>
+          <p>
+            In het woordlogo hebben we een visuele verwijzing naar de betekenis
+            van het woord verwerkt en voegden hier ook een animatie aan toe. Dit
+            deden we deze keer in groep
+          </p>
+        </a>
+
+        <a class="project design" href="projecten/hoppin/html">
+          <img src="images/mockup_hoppin.png" alt="Hoppin" />
+          <h3>Hoppin</h3>
+          <p>
+            App van de overheid die mensen helpt van punt A naar punt B te
+            geraken
+          </p>
+        </a>
+
+        <a class="project development" href="projecten/css_zen_garden.html">
+          <video autoplay muted loop class="video">
+            <source src="images/css_zen_garden.mp4" type="video/mp4" />
+          </video>
+          <h3>CSS zen garden</h3>
+          <p>
+            We kregen de opdracht om een CSS-zen-garden te ontwerpen, met
+            postmodernisme als het toegewezen thema.
+          </p>
+        </a>
+
+        <a class="project development" href="projecten/arduino.html">
+          <video autoplay muted loop class="video">
+            <source src="images/arduino.mp4" type="video/mp4" />
+          </video>
+          <h3>Arduino piano</h3>
+          <p>
+            Voor ons Arduino-project hebben we een piano gebouwd waarmee
+            gebruikers muziek kunnen spelen met drukknoppen.
+          </p>
+        </a>
+
+        <a class="project design" href="projecten/find_me.html">
+          <img src="images/mockup_find_me.png" alt="Find me" />
+          <h3>Find me</h3>
+          <p>
+            App voor Live Nation, waarbij concertgangers snel hun vrienden,
+            familie, kennissen, ... kunnen terugvinden
+          </p>
+        </a>
+
+        <a class="project development" href="projecten/dynamic_poster.html">
+          <video autoplay muted loop class="video">
+            <source src="images/dynamic_poster.mp4" type="video/mp4" />
+          </video>
+          <h3>Dynamic poster</h3>
+          <p>
+            We kregen de opdracht om een dynamische poster te maken met als
+            thema de films van Christopher Nolan. Ik deed dit voor de film
+            'Batman: The Dark Knight'
+          </p>
+        </a>
+
+        <a class="project design" href="projecten/Nevah.html">
+          <img class="img" src="images/mockup_nevah.png" alt="" />
+          <h3>Nevah</h3>
+          <p>
+            App voor mensen met paniekstoornissen, die hen helpt paniekaanvallen
+            onder controle te houden.
+          </p>
+        </a>
+
+        <a class="project development design" href="projecten/404.html">
+          <video autoplay muted loop>
+            <source src="images/404.mp4" type="video/mp4" />
+          </video>
+          <h3>404-pagina</h3>
+          <p>
+            Voor de Nevah (app die mensen met paniekstoornissen, paniekaanvallen
+            onder controle helpt te houden) app maakten we een bijpassende
+            404-pagina
+          </p>
+        </a>
+
+        <a class="project design" href="projecten/xd.html">
+          <img src="images/mockup_TM.png" alt="Thomas More" />
+          <h3>Thomas More</h3>
+          <p>
+            App waarbij we een community hebben gecreëerd voor de studenten van
+            XD
+          </p>
+        </a>
+
+        <a class="project development" href="projecten/google_doodle.html">
+          <video autoplay muted loop class="video">
+            <source src="images/google_doodle.mp4" type="video/mp4" />
+          </video>
+          <h3>Google Doodle</h3>
+          <p>
+            Een Google Doodle met als thema de serie 'Friends', dit om de 30ste
+            verjaardag van de eerste aflevering te vieren
+          </p>
+        </a>
+      </div>
+    </section>
+
+    <footer>
+      <p>© 2024 Hannelore Van Buynderen</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+      function filterProjects(category) {
+        const projects = document.querySelectorAll(".project");
+
+        projects.forEach((project) => {
+          if (category === "all") {
+            project.style.display = "block"; // Toon alle projecten
+          } else {
+            if (project.classList.contains(category)) {
+              project.style.display = "block"; // Toon projecten van de geselecteerde categorie
+            } else {
+              project.style.display = "none"; // Verberg andere projecten
+            }
+          }
+        });
+      }
+    </script>
+  </body>
+</html>
