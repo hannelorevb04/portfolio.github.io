@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Hoofdpagina -->
+  <url>
+    <loc>https://hannelorevb04.github.io/portfolio.github.io/index%20copy.html</loc>
+    <lastmod>2024-09-30</lastmod>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Andere belangrijke pagina's (vervang dit met de daadwerkelijke pagina's van je portfolio) -->
+  <url>
+    <loc>https://hannelorevb04.github.io/portfolio.github.io/about.html</loc>
+    <lastmod>2024-09-30</lastmod>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://hannelorevb04.github.io/portfolio.github.io/projects.html</loc>
+    <lastmod>2024-09-30</lastmod>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://hannelorevb04.github.io/portfolio.github.io/contact.html</loc>
+    <lastmod>2024-09-30</lastmod>
+    <priority>0.6</priority>
+  </url>
+
+</urlset>
