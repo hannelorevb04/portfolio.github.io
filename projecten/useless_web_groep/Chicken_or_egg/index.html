@@ -1,1 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chicken or Egg?</title>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+    <header>
+        <h1>What came first, chicken or egg?</h1>
+    </header>
+
+    <div class="slideshow">
+        <img id="currentImage" src="" alt="">
+    </div>
+
+    <script>
+        // Afbeeldingen voor de diavoorstelling van het ei
+        const eggImages = [
+            "images/Asset_1.png",
+            "images/Asset_2.png",
+            "images/Asset_3.png",
+            "images/Asset_4.png",
+            "images/Asset_5.png",
+            "images/Asset_6.png"
+        ];
+
+        // Afbeeldingen voor de diavoorstelling van de kip
+        const chickenImages = [
+            "images/Asset_5.png",
+            "images/Asset_6.png",
+            "images/Asset_1.png",
+            "images/Asset_2.png",
+            "images/Asset_3.png",
+            "images/Asset_4.png"
+        ];
+
+        // Functie om een afbeelding te tonen op basis van de index
+        function showImage(images, index) {
+            document.getElementById("currentImage").src = images[index];
+        }
+
+        // Willekeurig bepalen of we beginnen met kip of ei
+        const startWithChicken = Math.random() < 0.5;
+        const startingImages = startWithChicken ? chickenImages : eggImages;
+
+        // Totaal aantal afbeeldingen
+        const totalImages = startingImages.length;
+
+        // Variabele om de huidige index bij te houden
+        let currentIndex = 0;
+
+        // Functie om naar de volgende afbeelding te gaan
+        function nextImage() {
+            currentIndex = (currentIndex + 1) % totalImages;
+            showImage(startingImages, currentIndex);
+        }
+
+        // Toon de eerste afbeelding
+        showImage(startingImages, currentIndex);
+
+        // Interval om elke 2 seconden naar de volgende afbeelding te gaan
+        setInterval(nextImage, 2500);
+    </script>
+
+</body>
+
+</html>
