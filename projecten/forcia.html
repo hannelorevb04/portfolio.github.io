@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="/normalize.css" />
+    <link rel="stylesheet" href="/styles copy.css" />
+    <link rel="stylesheet" href="https://use.typekit.net/zfy3tmf.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <label class="burger" for="burger">&equiv;</label>
+        <input id="burger" type="checkbox" />
+        <div class="subnav">
+          <a id="home" href="/index copy.html">Home</a>
+          <a href="/about.html">About</a>
+          <a href="/projecten.html">Projecten</a>
+        </div>
+      </nav>
+      <h1>Forcia</h1>
+      <div class="header-image">
+        <img src="/images/mockup_forcia.png" alt="" />
+      </div>
+    </header>
+
+    <p>
+      Forcia is the first project I developed in my career as an Experience
+      Designer for the course Creation 1. The theme was to create a superhero
+      app. After brainstorming, I decided to make an app that helps students
+      organize their lives.
+    </p>
+    <h2>How did I proceed?</h2>
+      <ul>
+        <li>
+          <p class="highlight"> Theme:</p> I started with researching the needs of students and analyzed existing solutions. Then I created wireframes and user flows to visualize the app's features.
+        </li>
+        <li>
+          <p class="highlight"> Brainstorming:</p> I generated various ideas and ultimately decided to develop an app that helps students organize their lives through a clear calendar and a competitive element.
+        </li>
+        <li>
+          <p class="highlight"> Research:</p> I conducted research on students' needs through surveys and interviews, and analyzed existing productivity apps to identify best practices.
+        </li>
+        <li>
+          <p class="highlight"> Design:</p> I created wireframes and user flows to visualize the key features and navigation of the app. After feedback and iterations, I refined these designs.
+        </li>
+        <li>
+          <p class="highlight"> Prototype:</p> I created an interactive prototype of Forcia using tools like Figma. This prototype was tested with users to evaluate usability and functionality.
+        </li>
+      </ul>
+
+    <h2>My Process</h2>
+    <div class="responsive-iframe"><iframe width="100%" height="432" src="https://miro.com/app/live-embed/uXjVP0FSr2Y=/?moveToViewport=139551,-16318,33056,16750&embedId=749297934186" frameborder="0" scrolling="no" allow="fullscreen; clipboard-read; clipboard-write" allowfullscreen></iframe></div>
+      <h2>The Result</h2>
+    <div class="responsive-iframe"><iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="100%" height="450" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FlPmocMJZk3cvGyMO4ocJui%2FForcia---Hi---fi-wireframes%3Fpage-id%3D0%253A1%26type%3Ddesign%26node-id%3D2-2%26viewport%3D-189%252C1561%252C0.7%26t%3DfH7OJhiAlQm5j6iU-1%26scaling%3Dscale-down%26starting-point-node-id%3D2%253A2%26mode%3Ddesign" allowfullscreen></iframe></div>
+</div>
+    <!-- <section class="portfolio"> -->
+
+    <!-- <h2>Mijn project(en)</h2> -->
+
+    <!-- Filter knoppen -->
+    <!-- <div class="filter-buttons">
+        <button onclick="filterProjects('all')">Alle</button>
+        <button onclick="filterProjects('design')">Design</button>
+        <button onclick="filterProjects('development')">Development</button>
+      </div> -->
+    <!-- 
+      <div class="projects-container">
+        <a href="#"
+          ><div class="project design">
+            <img src="images/mockup_forcia.png" alt="Forcia" />
+            <h3>Forcia</h3>
+            <p>App die studenten door hun schoolcarrière helpt</p>
+          </div>
+        </a>
+        <div class="project design">
+          <img src="images/mockup_cargov.png" alt="Cargov" />
+          <h3>CarGov</h3>
+          <p>
+            App voor autobestuurders, waar ze hun auto-documenten kunnen
+            bundelen
+          </p>
+        </div>
+        <div class="project design">
+          <img src="images/mockup_hoppin.png" alt="Hoppin" />
+          <h3>Hoppin</h3>
+          <p>
+            App van de overheid die mensen helpt van punt A naar punt B te
+            geraken
+          </p>
+        </div>
+        <div class="project design">
+          <img src="images/mockup_find_me.png" alt="Find me" />
+          <h3>Find me</h3>
+          <p>
+            App voor Live Nation, waarbij concertgangers snel hun vrienden,
+            familie, kennissen, ... kunnen terugvinden
+          </p>
+        </div>
+        <div class="project design">
+          <img src="images/mockup_TM.png" alt="Thomas More" />
+          <h3>Thomas More</h3>
+          <p>
+            App waarbij we een community hebben gecreëerd voor de studenten van
+            XD
+          </p>
+        </div>
+      </div>
+    </section> -->
+
+    <footer>
+      <p>© 2024 Hannelore Van Buynderen</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+      function filterProjects(category) {
+        const projects = document.querySelectorAll(".project");
+
+        projects.forEach((project) => {
+          if (category === "all") {
+            project.style.display = "block"; // Toon alle projecten
+          } else {
+            if (project.classList.contains(category)) {
+              project.style.display = "block"; // Toon projecten van de geselecteerde categorie
+            } else {
+              project.style.display = "none"; // Verberg andere projecten
+            }
+          }
+        });
+      }
+    </script>
+  </body>
+</html>
