@@ -1,0 +1,1355 @@
+body {
+	font-family: arial, sans-serif;
+	}
+.center {
+	width:650px;
+	height:400px;
+	position:absolute;
+    z-index: 0;
+	left:50%;
+	top:50%;
+	margin:-200px 0 0 -325px;
+	text-align:center;
+}
+a:hover {
+	text-decoration:underline;
+	}
+nav {
+	float: right;
+	width: 280px;
+	margin-top: 24px;
+	margin-right: 20px;
+	font-size: .8em;
+}
+nav a {
+	color: #222;
+	display: block;
+	float:left;
+	margin: 0px 8px;
+	}
+.apps {
+	text-indent: -9999px;
+	height: 16px;
+	width: 16px;
+	background: url(../images/apps.png);
+	margin-top:5px;
+	}
+.signin {
+	font-weight: bold;
+	color: #FFF;
+	background: #4485f4;
+	padding: 8px 10px;
+	border-style: none;
+	border-radius: 2px;
+	}
+.l {
+	line-height: 25px;	
+	}
+.signin:hover {
+	text-decoration:none;
+	}
+.search {
+	width:80%;
+	height:40px;
+    padding-left: 15px;
+	border-top: 1px solid #c0c0c0;
+	border-right: 1px solid #c0c0c0;
+	border-bottom: 1px solid #d9d9d9;
+	border-left: 1px solid #d9d9d9;
+	background: url(../images/micro.png) no-repeat 95% center;
+	margin-top: 300px;
+	margin-bottom: 15px;
+    font-size: .9em;
+    border-radius: 25px;
+	}
+.button {
+	font-size: .85em;
+	color: #131313;
+	background: #f2f2f2;
+	height: 30px;
+	padding: 6px 12px;
+	margin: 0px 5px;
+    border:none;
+	}
+p {
+	font-size: .8em;
+	color: #222;
+	margin-top: 35px;
+}
+a {
+	text-decoration: none;
+	margin-right: 4px;
+	margin-left: 4px;
+}
+
+.intro_1{
+	position:absolute;
+	width: 500px;
+	height: auto;
+	margin: 5px 20px 5px -250px;
+
+	animation-name: change_1;
+	animation-duration:30s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: 1;
+	animation-direction: alternate;
+	animation-fill-mode: forwards;
+	
+}
+
+@keyframes change_1{
+	0% {visibility: hidden;}
+	1% {visibility: visible;}
+	2% {visibility: hidden;}
+	
+    /* 49% {visibility: hidden;}
+	50% {visibility: visible;}
+    51% {visibility: hidden;} */
+    100% {visibility: hidden;}
+}
+
+.intro_2{
+	position: absolute;
+	width: 500px;
+	height: auto;
+	margin: 5px 20px 5px -250px;
+
+	animation-name: change_2;
+	animation-duration: 10s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: 1;
+	animation-direction: alternate;
+	animation-fill-mode: forwards;
+
+}
+
+@keyframes change_2{
+	0% {visibility: hidden;}
+	1% {visibility: hidden;}
+	2% {visibility: visible;}
+	3% {visibility: hidden;}
+	
+    /* 50% {visibility: hidden;}
+	51% {visibility: visible;}
+    52% {visibility: hidden;} */
+    100% {visibility: hidden;}
+}
+
+.intro_3{
+	position: absolute;
+	width: 500px;
+	height: auto;
+	margin: 5px 20px 5px -250px;
+
+	animation-name: change_3;
+	animation-duration: 10s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: 1;
+	animation-direction: alternate;
+	animation-fill-mode: forwards;
+
+}
+
+@keyframes change_3{
+	0% {visibility: hidden;}
+	2% {visibility: hidden;}
+	3% {visibility: visible;}
+	4% {visibility: hidden;}
+	100% {visibility: hidden;}
+}
+
+.intro_4{
+	position: absolute;
+	width: 500px;
+	height: auto;
+	margin: 5px 20px 5px -250px;
+
+	animation-name: change_4;
+	animation-duration: 10s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: 1;
+	animation-direction: alternate;
+	animation-fill-mode: forwards;
+
+}
+
+@keyframes change_4{
+	0% {visibility: hidden;}
+	3% {visibility: hidden;}
+	4% {visibility: visible;}
+	5% {visibility: hidden;}
+	100% {visibility: hidden;}
+}
+
+.intro_5{
+	position: absolute;
+	width: 500px;
+	height: auto;
+	margin: 5px 20px 5px -250px;
+
+	animation-name: change_5;
+	animation-duration: 10s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: 1;
+	animation-direction: alternate;
+	animation-fill-mode: forwards;
+
+}
+
+@keyframes change_5{
+	0% {visibility: hidden;}
+	4% {visibility: hidden;}
+	5% {visibility: visible;}
+	6% {visibility: hidden;}
+	100% {visibility: hidden;}
+}
+
+.intro_6{
+	position: absolute;
+	width: 500px;
+	height: auto;
+	margin: 5px 20px 5px -250px;
+
+	animation-name: change_6;
+	animation-duration: 10s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: 1;
+	animation-direction: alternate;
+	animation-fill-mode: forwards;
+
+}
+
+@keyframes change_6{
+	0% {visibility: hidden;}
+	5% {visibility: hidden;}
+	6% {visibility: visible;}
+	7% {visibility: hidden;}
+	100% {visibility: hidden;}
+}
+
+.intro_7{
+	position: absolute;
+	width: 500px;
+	height: auto;
+	margin: 5px 20px 5px -250px;
+
+	animation-name: change_7;
+	animation-duration: 10s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: 1;
+	animation-direction: alternate;
+	animation-fill-mode: forwards;
+
+}
+
+@keyframes change_7{
+	0% {visibility: hidden;}
+	6% {visibility: hidden;}
+	7% {visibility: visible;}
+	8% {visibility: hidden;}
+	100% {visibility: hidden;}
+}
+
+.intro_8{
+	position: absolute;
+	width: 500px;
+	height: auto;
+	margin: 5px 20px 5px -250px;
+
+	animation-name: change_8;
+	animation-duration: 10s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: 1;
+	animation-direction: alternate;
+	animation-fill-mode: forwards;
+
+}
+
+@keyframes change_8{
+	0% {visibility: hidden;}
+	7% {visibility: hidden;}
+	8% {visibility: visible;}
+	9% {visibility: hidden;}
+	100% {visibility: hidden;}
+}
+
+.intro_9{
+	position: absolute;
+	width: 500px;
+	height: auto;
+	margin: 5px 20px 5px -250px;
+
+	animation-name: change_9;
+	animation-duration: 10s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: 1;
+	animation-direction: alternate;
+	animation-fill-mode: forwards;
+
+}
+
+@keyframes change_9{
+	0% {visibility: hidden;}
+	8% {visibility: hidden;}
+	9% {visibility: visible;}
+	10% {visibility: hidden;}
+	100% {visibility: hidden;}
+}
+
+.intro_10{
+	position: absolute;
+	width: 500px;
+	height: auto;
+	margin: 5px 20px 5px -250px;
+
+	animation-name: change_10;
+	animation-duration: 10s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: 1;
+	animation-direction: alternate;
+	animation-fill-mode: forwards;
+
+}
+
+@keyframes change_10{
+	0% {visibility: hidden;}
+	9% {visibility: hidden;}
+	10% {visibility: visible;}
+	11% {visibility: hidden;}
+	100% {visibility: hidden;}
+}
+
+.intro_11{
+	position: absolute;
+	width: 500px;
+	height: auto;
+	margin: 5px 20px 5px -250px;
+
+    z-index: -2;
+
+    /* color: white; */
+
+	animation-name: change_11;
+	animation-duration: 10s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: 1;
+	animation-direction: alternate;
+	animation-fill-mode: forwards;
+
+}
+
+@keyframes change_11{
+	0% {visibility: hidden;}
+	10% {visibility: hidden;}
+	11% {visibility: visible;}
+	12% {visibility: hidden;}
+
+    /* 49%{visibility: hidden;}
+	50% {
+        visibility: visible;
+    }*/
+    }
+
+/* h1{
+    color:#4485f4;
+    position:absolute;
+    
+    
+    animation-name: google;
+	animation-duration: 10s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: 1;
+	animation-direction: alternate;
+	animation-fill-mode: forwards;
+} */
+
+/* @keyframes google {
+    0%{visibility: hidden;}
+    100%{visibility: visible;}  
+} */
+
+
+/* .google{
+    z-index: -1;
+    margin-left: 85px;
+    margin-top: 75px;  
+
+    animation-name: google;
+    animation-duration: 10s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 1;
+    animation-direction: alternate;
+    animation-fill-mode: forwards;
+}
+@keyframes google{
+    0%{visibility: hidden;}
+    50%{
+        visibility: visible;}
+    51%{
+        transform: scale(0.5);
+    } 
+    100%{
+        visibility: hidden;
+    }
+    } */
+
+
+
+
+
+.intro_12{
+	position: absolute;
+	width: 500px;
+	height: auto;
+	margin: 5px 20px 5px -250px;
+
+	animation-name: change_12;
+	animation-duration: 10s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: 1;
+	animation-direction: alternate;
+	animation-fill-mode: forwards;
+}
+
+@keyframes change_12{
+	0% {visibility: hidden;}
+	11% {visibility: hidden;}
+	12% {visibility: visible;}
+	13% {visibility: hidden;}
+	100% {visibility: hidden;}
+}
+
+.intro_13{
+	position: absolute;
+	width: 500px;
+	height: auto;
+	margin: 5px 20px 5px -250px;
+
+	animation-name: change_13;
+	animation-duration: 10s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: 1;
+	animation-direction: alternate;
+	animation-fill-mode: forwards;
+
+}
+
+@keyframes change_13{
+	0% {visibility: hidden;}
+	12% {visibility: hidden;}
+	13% {visibility: visible;}
+	14% {visibility: hidden;}
+	100% {visibility: hidden;}
+}
+
+.intro_14{
+	position: absolute;
+	width: 500px;
+	height: auto;
+	margin: 5px 20px 5px -250px;
+
+	animation-name: change_14;
+	animation-duration: 10s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: 1;
+	animation-direction: alternate;
+	animation-fill-mode: forwards;
+
+}
+
+@keyframes change_14{
+	0% {visibility: hidden;}
+	13% {visibility: hidden;}
+	14% {visibility: visible;}
+	15% {visibility: hidden;}
+	100% {visibility: hidden;}
+}
+
+.intro_15{
+	position: absolute;
+	width: 500px;
+	height: auto;
+	margin: 5px 20px 5px -250px;
+
+	animation-name: change_15;
+	animation-duration: 10s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: 1;
+	animation-direction: alternate;
+	animation-fill-mode: forwards;
+
+}
+
+@keyframes change_15{
+	0% {visibility: hidden;}
+	14% {visibility: hidden;}
+	15% {visibility: visible;}
+	16% {visibility: hidden;}
+	100% {visibility: hidden;}
+}
+
+.intro_16{
+	position: absolute;
+	width: 500px;
+	height: auto;
+	margin: 5px 20px 5px -250px;
+
+	animation-name: change_16;
+	animation-duration: 10s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: 1;
+	animation-direction: alternate;
+	animation-fill-mode: forwards;
+
+}
+
+@keyframes change_16{
+	0% {visibility: hidden;}
+	15% {visibility: hidden;}
+	16% {visibility: visible;}
+	17% {visibility: hidden;}
+	100% {visibility: hidden;}
+}
+
+.intro_17{
+	position: absolute;
+	width: 500px;
+	height: auto;
+	margin: 5px 20px 5px -250px;
+
+	animation-name: change_17;
+	animation-duration: 10s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: 1;
+	animation-direction: alternate;
+	animation-fill-mode: forwards;
+
+}
+
+@keyframes change_17{
+	0% {visibility: hidden;}
+	16% {visibility: hidden;}
+	17% {visibility: visible;}
+	18% {visibility: hidden;}
+	100% {visibility: hidden;}
+}
+
+.intro_18{
+	position: absolute;
+	width: 500px;
+	height: auto;
+	margin: 5px 20px 5px -250px;
+
+	animation-name: change_18;
+	animation-duration: 10s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: 1;
+	animation-direction: alternate;
+	animation-fill-mode: forwards;
+
+}
+
+@keyframes change_18{
+	0% {visibility: hidden;}
+	17% {visibility: hidden;}
+	18% {visibility: visible;}
+	19% {visibility: hidden;}
+	100% {visibility: hidden;}
+}
+
+.intro_19{
+	position: absolute;
+	width: 500px;
+	height: auto;
+	margin: 5px 20px 5px -250px;
+
+	animation-name: change_19;
+	animation-duration: 10s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: 1;
+	animation-direction: alternate;
+	animation-fill-mode: forwards;
+
+}
+
+@keyframes change_19{
+	0% {visibility: hidden;}
+	18% {visibility: hidden;}
+	19% {visibility: visible;}
+	20% {visibility: hidden;}
+	100% {visibility: hidden;}
+}
+
+.intro_20{
+	position: absolute;
+	width: 500px;
+	height: auto;
+	margin: 5px 20px 5px -250px;
+
+	animation-name: change_20;
+	animation-duration: 10s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: 1;
+	animation-direction: alternate;
+	animation-fill-mode: forwards;
+
+}
+
+@keyframes change_20{
+	0% {visibility: hidden;}
+	19% {visibility: hidden;}
+	20% {visibility: visible;}
+	21% {visibility: hidden;}
+	100% {visibility: hidden;}
+}
+
+.intro_21{
+	position: absolute;
+	width: 500px;
+	height: auto;
+	margin: 5px 20px 5px -250px;
+
+	animation-name: change_21;
+	animation-duration: 10s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: 1;
+	animation-direction: alternate;
+	animation-fill-mode: forwards;
+
+}
+
+@keyframes change_21{
+	0% {visibility: hidden;}
+	20% {visibility: hidden;}
+	21% {visibility: visible;}
+	22% {visibility: hidden;}
+	100% {visibility: hidden;}
+}
+
+.intro_22{
+	position: absolute;
+	width: 500px;
+	height: auto;
+	margin: 5px 20px 5px -250px;
+
+	animation-name: change_22;
+	animation-duration: 10s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: 1;
+	animation-direction: alternate;
+	animation-fill-mode: forwards;
+
+}
+
+@keyframes change_22{
+	0% {visibility: hidden;}
+	21% {visibility: hidden;}
+	22% {visibility: visible;}
+	23% {visibility: hidden;}
+	100% {visibility: hidden;}
+}
+
+.intro_23{
+	position: absolute;
+	width: 500px;
+	height: auto;
+	margin: 5px 20px 5px -250px;
+
+	animation-name: change_23;
+	animation-duration: 10s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: 1;
+	animation-direction: alternate;
+	animation-fill-mode: forwards;
+
+}
+
+@keyframes change_23{
+	0% {visibility: hidden;}
+	22% {visibility: hidden;}
+	23% {visibility: visible;}
+	24% {visibility: hidden;}
+	100% {visibility: hidden;}
+}
+
+.intro_24{
+	position: absolute;
+	width: 500px;
+	height: auto;
+	margin: 5px 20px 5px -250px;
+
+	animation-name: change_24;
+	animation-duration: 10s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: 1;
+	animation-direction: alternate;
+	animation-fill-mode: forwards;
+
+}
+
+@keyframes change_24{
+	0% {visibility: hidden;}
+	23% {visibility: hidden;}
+	24% {visibility: visible;}
+	25% {visibility: hidden;}
+	100% {visibility: hidden;}
+}
+
+.intro_25{
+	position: absolute;
+	width: 500px;
+	height: auto;
+	margin: 5px 20px 5px -250px;
+
+	animation-name: change_25;
+	animation-duration: 10s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: 1;
+	animation-direction: alternate;
+	animation-fill-mode: forwards;
+
+}
+
+@keyframes change_25{
+	0% {visibility: hidden;}
+	24% {visibility: hidden;}
+	25% {visibility: visible;}
+	26% {visibility: hidden;}
+	100% {visibility: hidden;}
+}
+
+.intro_26{
+	position: absolute;
+	width: 500px;
+	height: auto;
+	margin: 5px 20px 5px -250px;
+
+	animation-name: change_26;
+	animation-duration: 10s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: 1;
+	animation-direction: alternate;
+	animation-fill-mode: forwards;
+
+}
+
+@keyframes change_26{
+	0% {visibility: hidden;}
+	25% {visibility: hidden;}
+	26% {visibility: visible;}
+	27% {visibility: hidden;}
+	100% {visibility: hidden;}
+}
+
+.intro_27{
+	position: absolute;
+	width: 500px;
+	height: auto;
+	margin: 5px 20px 5px -250px;
+
+	animation-name: change_27;
+	animation-duration: 10s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: 1;
+	animation-direction: alternate;
+	animation-fill-mode: forwards;
+
+}
+
+@keyframes change_27{
+	0% {visibility: hidden;}
+	26% {visibility: hidden;}
+	27% {visibility: visible;}
+	28% {visibility: hidden;}
+	100% {visibility: hidden;}
+}
+
+.intro_28{
+	position: absolute;
+	width: 500px;
+	height: auto;
+	margin: 5px 20px 5px -250px;
+
+	animation-name: change_28;
+	animation-duration: 10s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: 1;
+	animation-direction: alternate;
+	animation-fill-mode: forwards;
+
+}
+
+@keyframes change_28{
+	0% {visibility: hidden;}
+	27% {visibility: hidden;}
+	28% {visibility: visible;}
+	29% {visibility: hidden;}
+	100% {visibility: hidden;}
+}
+
+.intro_29{
+	position: absolute;
+	width: 500px;
+	height: auto;
+	margin: 5px 20px 5px -250px;
+
+	animation-name: change_29;
+	animation-duration: 10s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: 1;
+	animation-direction: alternate;
+	animation-fill-mode: forwards;
+
+}
+
+@keyframes change_29{
+	0% {visibility: hidden;}
+	28% {visibility: hidden;}
+	29% {visibility: visible;}
+	30% {visibility: hidden;}
+	100% {visibility: hidden;}
+}
+
+.intro_30{
+	position: absolute;
+	width: 500px;
+	height: auto;
+	margin: 5px 20px 5px -250px;
+
+	animation-name: change_30;
+	animation-duration: 10s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: 1;
+	animation-direction: alternate;
+	animation-fill-mode: forwards;
+
+}
+
+@keyframes change_30{
+	0% {visibility: hidden;}
+	29% {visibility: hidden;}
+	30% {visibility: visible;}
+	31% {visibility: hidden;}
+	100% {visibility: hidden;}
+}
+
+.intro_31{
+	position: absolute;
+	width: 500px;
+	height: auto;
+	margin: 5px 20px 5px -250px;
+
+	animation-name: change_31;
+	animation-duration: 10s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: 1;
+	animation-direction: alternate;
+	animation-fill-mode: forwards;
+
+}
+
+@keyframes change_31{
+	0% {visibility: hidden;}
+	30% {visibility: hidden;}
+	31% {visibility: visible;}
+	32% {visibility: hidden;}
+	100% {visibility: hidden;}
+}
+
+.intro_32{
+	position: absolute;
+	width: 500px;
+	height: auto;
+	margin: 5px 20px 5px -250px;
+
+	animation-name: change_32;
+	animation-duration: 10s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: 1;
+	animation-direction: alternate;
+	animation-fill-mode: forwards;
+
+}
+
+@keyframes change_32{
+	0% {visibility: hidden;}
+	31% {visibility: hidden;}
+	32% {visibility: visible;}
+	33% {visibility: hidden;}
+	100% {visibility: hidden;}
+}
+
+.intro_33{
+	position: absolute;
+	width: 500px;
+	height: auto;
+	margin: 5px 20px 5px -250px;
+
+	animation-name: change_33;
+	animation-duration: 10s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: 1;
+	animation-direction: alternate;
+	animation-fill-mode: forwards;
+
+}
+
+@keyframes change_33{
+	0% {visibility: hidden;}
+	32% {visibility: hidden;}
+	33% {visibility: visible;}
+	34% {visibility: hidden;}
+	100% {visibility: hidden;}
+}
+
+.intro_34{
+	position: absolute;
+	width: 500px;
+	height: auto;
+	margin: 5px 20px 5px -250px;
+
+	animation-name: change_34;
+	animation-duration: 10s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: 1;
+	animation-direction: alternate;
+	animation-fill-mode: forwards;
+
+}
+
+@keyframes change_34{
+	0% {visibility: hidden;}
+	33% {visibility: hidden;}
+	34% {visibility: visible;}
+	35% {visibility: hidden;}
+	100% {visibility: hidden;}
+}
+
+.intro_35{
+	position: absolute;
+	width: 500px;
+	height: auto;
+	margin: 5px 20px 5px -250px;
+
+	animation-name: change_35;
+	animation-duration: 10s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: 1;
+	animation-direction: alternate;
+	animation-fill-mode: forwards;
+
+}
+
+@keyframes change_35{
+	0% {visibility: hidden;}
+	34% {visibility: hidden;}
+	35% {visibility: visible;}
+	36% {visibility: hidden;}
+	100% {visibility: hidden;}
+}
+
+.intro_36{
+	position: absolute;
+	width: 500px;
+	height: auto;
+	margin: 5px 20px 5px -250px;
+
+	animation-name: change_36;
+	animation-duration: 10s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: 1;
+	animation-direction: alternate;
+	animation-fill-mode: forwards;
+
+}
+
+@keyframes change_36{
+	0% {visibility: hidden;}
+	35% {visibility: hidden;}
+	36% {visibility: visible;}
+	37% {visibility: hidden;}
+	100% {visibility: hidden;}
+}
+
+.intro_37{
+	position: absolute;
+	width: 500px;
+	height: auto;
+	margin: 5px 20px 5px -250px;
+
+	animation-name: change_37;
+	animation-duration: 10s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: 1;
+	animation-direction: alternate;
+	animation-fill-mode: forwards;
+
+}
+
+@keyframes change_37{
+	0% {visibility: hidden;}
+	36% {visibility: hidden;}
+	37% {visibility: visible;}
+	38% {visibility: hidden;}
+	100% {visibility: hidden;}
+}
+
+.intro_38{
+	position: absolute;
+	width: 500px;
+	height: auto;
+	margin: 5px 20px 5px -250px;
+
+	animation-name: change_38;
+	animation-duration: 10s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: 1;
+	animation-direction: alternate;
+	animation-fill-mode: forwards;
+
+}
+
+@keyframes change_38{
+	0% {visibility: hidden;}
+	37% {visibility: hidden;}
+	38% {visibility: visible;}
+	39% {visibility: hidden;}
+	100% {visibility: hidden;}
+}
+
+.intro_39{
+	position: absolute;
+	width: 500px;
+	height: auto;
+	margin: 5px 20px 5px -250px;
+
+	animation-name: change_39;
+	animation-duration: 10s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: 1;
+	animation-direction: alternate;
+	animation-fill-mode: forwards;
+
+}
+
+@keyframes change_39{
+	0% {visibility: hidden;}
+	38% {visibility: hidden;}
+	39% {visibility: visible;}
+	40% {visibility: hidden;}
+	100% {visibility: hidden;}
+}
+
+.intro_40{
+	position: absolute;
+	width: 500px;
+	height: auto;
+	margin: 5px 20px 5px -250px;
+
+	animation-name: change_40;
+	animation-duration: 10s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: 1;
+	animation-direction: alternate;
+	animation-fill-mode: forwards;
+
+}
+
+@keyframes change_40{
+	0% {visibility: hidden;}
+	39% {visibility: hidden;}
+	40% {visibility: visible;}
+	41% {visibility: hidden;}
+	100% {visibility: hidden;}
+}
+
+.intro_41{
+	position: absolute;
+	width: 500px;
+	height: auto;
+	margin: 5px 20px 5px -250px;
+
+	animation-name: change_41;
+	animation-duration: 10s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: 1;
+	animation-direction: alternate;
+	animation-fill-mode: forwards;
+
+}
+
+@keyframes change_41{
+	0% {visibility: hidden;}
+	40% {visibility: hidden;}
+	41% {visibility: visible;}
+	42% {visibility: hidden;}
+	100% {visibility: hidden;}
+}
+
+.intro_42{
+	position: absolute;
+	width: 500px;
+	height: auto;
+	margin: 5px 20px 5px -250px;
+
+	animation-name: change_42;
+	animation-duration: 10s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: 1;
+	animation-direction: alternate;
+	animation-fill-mode: forwards;
+
+}
+
+@keyframes change_42{
+	0% {visibility: hidden;}
+	41% {visibility: hidden;}
+	42% {visibility: visible;}
+	43% {visibility: hidden;}
+	100% {visibility: hidden;}
+}
+
+.intro_43{
+	position: absolute;
+	width: 500px;
+	height: auto;
+	margin: 5px 20px 5px -250px;
+
+	animation-name: change_43;
+	animation-duration: 10s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: 1;
+	animation-direction: alternate;
+	animation-fill-mode: forwards;
+
+}
+
+@keyframes change_43{
+	0% {visibility: hidden;}
+	42% {visibility: hidden;}
+	43% {visibility: visible;}
+	44% {visibility: hidden;}
+	100% {visibility: hidden;}
+}
+
+.intro_44{
+	position: absolute;
+	width: 500px;
+	height: auto;
+	margin: 5px 20px 5px -250px;
+
+	animation-name: change_44;
+	animation-duration: 10s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: 1;
+	animation-direction: alternate;
+	animation-fill-mode: forwards;
+
+}
+
+@keyframes change_44{
+	0% {visibility: hidden;}
+	43% {visibility: hidden;}
+	44% {visibility: visible;}
+	45% {visibility: hidden;}
+	100% {visibility: hidden;}
+}
+
+.intro_45{
+	position: absolute;
+	width: 500px;
+	height: auto;
+	margin: 5px 20px 5px -250px;
+
+	animation-name: change_45;
+	animation-duration: 10s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: 1;
+	animation-direction: alternate;
+	animation-fill-mode: forwards;
+
+}
+
+@keyframes change_45{
+	0% {visibility: hidden;}
+	44% {visibility: hidden;}
+	45% {visibility: visible;}
+	46% {visibility: hidden;}
+	100% {visibility: hidden;}
+}
+
+.intro_46{
+	position: absolute;
+	width: 500px;
+	height: auto;
+	margin: 5px 20px 5px -250px;
+
+	animation-name: change_46;
+	animation-duration: 10s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: 1;
+	animation-direction: alternate;
+	animation-fill-mode: forwards;
+
+}
+
+@keyframes change_46{
+	0% {visibility: hidden;}
+	45% {visibility: hidden;}
+	46% {visibility: visible;}
+	47% {visibility: hidden;}
+	100% {visibility: hidden;}
+}
+
+.intro_47{
+	position: absolute;
+	width: 500px;
+	height: auto;
+	margin: 5px 20px 5px -250px;
+
+	animation-name: change_47;
+	animation-duration: 10s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: 1;
+	animation-direction: alternate;
+	animation-fill-mode: forwards;
+
+}
+
+@keyframes change_47{
+	0% {visibility: hidden;}
+	46% {visibility: hidden;}
+	47% {visibility: visible;}
+	48% {visibility: hidden;}
+	100% {visibility: hidden;}
+}
+
+.intro_48{
+	position: absolute;
+	width: 500px;
+	height: auto;
+	margin: 5px 20px 5px -250px;
+
+	animation-name: change_48;
+	animation-duration: 10s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: 1;
+	animation-direction: alternate;
+	animation-fill-mode: forwards;
+
+}
+
+@keyframes change_48{
+	0% {visibility: hidden;}
+	47% {visibility: hidden;}
+	48% {visibility: visible;}
+	49% {visibility: hidden;}
+	100% {visibility: hidden;}
+}
+
+.intro_49{
+	position: absolute;
+	width: 500px;
+	height: auto;
+	margin: 5px 20px 5px -250px;
+
+	animation-name: change_49;
+	animation-duration: 10s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: 1;
+	animation-direction: alternate;
+	animation-fill-mode: forwards;
+
+}
+
+@keyframes change_49{
+	0% {visibility: hidden;}
+	48% {visibility: hidden;}
+	49% {visibility: visible;}
+	50% {visibility: hidden;}
+    100%{visibility: hidden;}
+}
+
+
+/* .intro_einde{
+	position: absolute;
+	width: 500px;
+	height: auto;
+
+	animation-name: change_einde;
+	animation-duration: 10s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: 1;
+	animation-direction: alternate;
+	animation-fill-mode: forwards;
+
+}
+
+@keyframes change_einde{
+	0% {visibility: hidden;}
+	49% {visibility: hidden;}
+	50% {visibility: visible;}
+	51% {visibility: hidden;}
+	100% {visibility: hidden;}
+} */
+
+
+.google{
+    z-index: -1;
+    position: absolute;
+    width: 200px;
+    margin-left: -100px;
+    margin-top: 85px; 
+
+    animation-name: google;
+    animation-duration: 10s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 1;
+    animation-direction:reverse;
+    animation-fill-mode: forwards;
+}
+
+@keyframes google{
+    0%{visibility: hidden;}
+    50%{
+        visibility: visible;}
+    51%{
+        /* transform: scale(1); */
+        
+    } 
+    60%{
+        transform: scale(-2);
+        /* transform: rotate(360deg); */
+        /*transform: scale(0.5);
+        transform: rotate(180deg); */
+
+    }
+    /* 70%{
+        transform: scale(1);
+    } */
+    100%{
+        visibility: hidden;
+    }
+}
+
+/* .end{
+    position: absolute;
+	width: 500px;
+	height: auto;
+	margin: 5px 20px 5px -250px;
+
+	animation-name: end;
+	animation-duration: 10s;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: 1;
+	animation-direction: alternate;
+	animation-fill-mode: forwards;
+}
+
+@keyframes end{
+	0% {visibility: hidden;}
+	70% {visibility: hidden;}
+	71% {visibility: visible;}
+	72% {visibility: hidden;}
+    100%{visibility: hidden;}
+} */
