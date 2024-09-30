@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Timeline Logo</title>
+<style>
+    *{
+        font-family: sans-serif;
+    }
+
+    body{
+        background-image: url(../timeline/images/background.jpg.avif);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        /* width: max-content; */
+        height: 1000px;
+        overflow: hidden;
+    }
+
+    .logo{
+        position: absolute;
+        top: 35%;
+        left: 37%;
+
+    }
+    .t{
+        width: 200px;
+    }
+
+    .lineH {
+        border-top: 8px solid black;
+        width: 0; /* Start met breedte van 0 */
+        position: relative;
+        /* top: 190px; */
+        /* left: 300px; */
+        animation: growLine 2s forwards infinite; /* 2s animatieduur, oneindige loop */
+    }
+
+    .lineV {
+        border-left: 8px solid black;
+        height: 100px;
+        position: absolute;
+        top: 50px;
+        left: 35px;
+        transform: translateY(-50%);
+        z-index: -1;
+    }
+
+    /* .melne{
+        font-size: 100px;
+        z-index: 0;
+        position: absolute;
+    } */
+    .eenI{
+        border-left: 8px solid black;
+        height: 55px;
+        position: absolute;
+        top: 45px;
+        left: 75px;  
+    }
+    .puntEenI{
+        border-left: 8px solid black;
+        height: 27px;
+        position: absolute;
+        top: -7px;
+        left: 75px;
+        animation: puntI 2s forwards infinite; /* Animatie van puntEenI */
+    }
+
+    .mel{
+        font-size:100px;
+        position: absolute;
+        top: -92px;
+        left: 100px;
+    }
+
+    .tweeI{
+        border-left: 8px solid black;
+        height: 55px;
+        position: absolute;
+        top: 45px;
+        left: 275px;
+        
+    }
+
+    .puntTweeI {
+    border-left: 8px solid black;
+    height: 27px;
+    position: absolute;
+    top: -7px;
+    left: 275px;
+    animation: puntI 2s forwards infinite;
+    animation-delay: 2s; /* Vertraging van 1 seconde toegevoegd */
+}
+
+    .ne{
+        font-size:100px;
+        position: absolute;
+        top: -92px;
+        left: 300px;
+    }
+
+
+
+    
+
+
+
+    @keyframes growLine {
+        to {
+            width: 450px; /* Groei naar de uiteindelijke breedte */
+        }
+    }
+
+    
+    @keyframes puntEenI {
+        from {
+            border-left-width: 0px;
+        }
+        to{
+            border-left-width: 8px;
+        }
+    }
+
+    @keyframes puntTweeI {
+        from {
+            border-left-width: 0px;
+        }
+        to{
+            border-left-width: 8px;
+        }
+    }
+
+    .right {
+        border: solid black;
+        border-width: 0 8px 8px 0;
+        display: inline-block;
+        padding: 10px;
+        transform: rotate(-45deg);
+        -webkit-transform: rotate(-45deg);
+        position: absolute;
+        left: 425px;
+        top: -10px;
+    }
+
+    @media (max-width: 1200px){
+    .logo{
+        left: 24%;
+    }
+}
+
+@media (max-width: 800px){
+    .logo{
+        left: 15%;
+    }
+}
+</style>
+</head>
+<body>
+  <div class="logo">
+    <div class="t">
+        <div class="lineH"></div>
+        <div class="lineV"></div>
+    </div>
+        <div class="eenI"></div>
+        <div class="puntEenI"></div>
+        <p class="mel">mel</p>
+        <div class="tweeI"></div>
+        <div class="puntTweeI"></div>
+        <p class="ne">ne</p>
+        <p><i class="arrow right"></i>
+        <div class="line_test"></div>
+  </div>
+</body>
+</html>
