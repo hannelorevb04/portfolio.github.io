@@ -1,0 +1,456 @@
+@import url("https://use.typekit.net/zfy3tmf.css");
+
+* {
+  /* font-family: sans-serif; */
+  font-family: "tarif", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: #1e2154;
+}
+
+.intro h1{
+  
+  /* background-color: #1e2154;
+  color: white; */
+  padding: 10px 0;
+  /* display: inline-block; */
+  text-align: center;
+  margin-top: 15px;
+  font-size: 3em;
+
+
+}
+a{
+  font-size: 1.1em;
+  font-family: sans-serif;
+}
+.intro {
+  /* height: 20vh; */
+  /* padding: 17px 20px;
+  background-color: white;
+  border-image: url("motieven_nieuw-21.jpg")  27/ 36px 28px 18px 8px / 18px 14px 9px 4px
+  round; */
+  /* border: 10px solid transparent;
+  padding: 15px;
+  border-image: url("motieven_nieuw-21.jpg") 30 round; */
+  border: 55px solid transparent;
+  padding: 15px;
+  border-image: url("motieven_volledig_3-25.jpg");
+  border-image-slice: 25%;
+  border-image-repeat: round;
+}
+
+.intro {
+  line-height: 13px;
+  /* background-image: url("motieven_nieuw-21.jpg"); */
+  margin-bottom: 10px;
+}
+/* Plaats de div's naast elkaar */
+#zen-supporting {
+  display: flex;
+  flex-wrap: wrap; 
+  /* background-color: tomato; */
+  padding: 0 10px;
+  padding-top: 15px;
+  /* background-image: url("motieven_nieuw-21.jpg"); */
+
+  background-repeat: repeat;
+}
+
+
+.explanation,
+.participation,
+.benefits,
+.requirements {
+  /* flex: 1;  */
+  margin: 4px; 
+  box-sizing: border-box; 
+  /* background-color: aqua; */
+  width: 24%;
+  margin: 0 auto;
+  /* padding: 0 25px; */
+  background-color: rgba(255, 255, 255, 0.75);
+}
+/* .explanation p,
+.participation p ,
+.benefits p ,
+.requirements p{
+ background-color: white;
+}  */
+
+.explanation {
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.75),
+      rgba(255, 255, 255, 0.75)
+    ),
+    url("house_motieven-27.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.explanation h3 {
+  margin-top: 235px;
+  text-align: center;
+  font-size: 1.8em;
+}
+
+.explanation p {
+  padding: 0 50px 0 50px;
+  font-size: 1.1em;
+  font-family: sans-serif;
+}
+
+.participation {
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.75),
+      rgba(255, 255, 255, 0.75)
+    ),
+    url("house_motieven-27.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.participation h3 {
+  margin-top: 235px;
+  text-align: center;
+  font-size: 1.8em;
+}
+
+.participation p {
+  padding: 0 50px 0 50px;
+  font-size: 1.1em;
+  font-family: sans-serif;
+}
+
+.benefits {
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.75),
+      rgba(255, 255, 255, 0.75)
+    ),
+    url("house_motieven-27.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.benefits h3 {
+  margin-top: 235px;
+  text-align: center;
+  font-size: 1.8em;
+}
+
+.benefits p {
+  padding: 0 50px 0 50px;
+  font-size: 1.1em;
+  font-family: sans-serif;
+}
+.requirements {
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.75),
+      rgba(255, 255, 255, 0.75)
+    ),
+    url("house_motieven-27.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.requirements h3 {
+  margin-top: 235px;
+  text-align: center;
+  font-size: 1.8em;
+}
+
+.requirements p {
+  padding: 0 50px 0 50px;
+  font-size: 1.1em;
+  font-family: sans-serif;
+}
+
+.design-selection {
+  /* background-image: linear-gradient(
+      rgba(255, 255, 255, 0.5),
+      rgba(255, 255, 255, 0.5)
+    ),
+    url("house-22.png"); */
+  background-position: center;
+  background-repeat: repeat;
+  background-size: contain;
+  padding: 10px 2%;
+  
+}
+
+.design-selection ul {
+  display: flex; 
+  flex-wrap: wrap; 
+  padding: 0; 
+  list-style: none; 
+
+}
+
+.design-selection ul li {
+  margin-right: 100px; 
+  padding: 100px 0 25px;
+  
+}
+.design-selection li{
+ width: 100px;
+ text-align: center;
+ color: white;
+ 
+
+  /* background-image: url("house-22.png"); */
+}
+
+.design-selection ul li a{
+  margin-top: 100px; 
+  color: white;
+  padding: 0 10px;
+  
+  
+}
+
+.design-selection ul:nth-child(1) {
+  /* background-image: url("house_db-22-22.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain; */
+    height: 200px;
+    width: auto;
+  }
+
+.design-selection ul li:nth-child(1) {
+background-image: url("house_db-22.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100px;
+}
+.design-selection ul:nth-child(2) {
+  /* background-image: url("house_db-22-22.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain; */
+    height: 200px;
+    width: auto;
+  }
+
+.design-selection ul li:nth-child(2) {
+background-image: url("house_db-22.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100px;
+}
+
+.design-selection ul:nth-child(3) {
+  /* background-image: url("house_db-22-22.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain; */
+    height: 200px;
+    width: auto;
+  }
+
+.design-selection ul li:nth-child(3) {
+background-image: url("house_db-22.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100px;
+}
+.design-selection ul:nth-child(4) {
+  /* background-image: url("house_db-22-22.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain; */
+    height: 200px;
+    width: auto;
+  }
+
+.design-selection ul li:nth-child(4) {
+background-image: url("house_db-22.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100px;
+}
+
+.design-selection ul:nth-child(5) {
+  /* background-image: url("house_db-22-22.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain; */
+    height: 200px;
+    width: auto;
+  }
+
+.design-selection ul li:nth-child(5) {
+background-image: url("house_db-22.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100px;
+}
+
+.design-selection ul:nth-child(6) {
+  /* background-image: url("house_db-22-22.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain; */
+    height: 200px;
+    width: auto;
+  }
+
+.design-selection ul li:nth-child(6) {
+background-image: url("house_db-22.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100px;
+}
+.design-selection ul:nth-child(7) {
+  /* background-image: url("house_db-22-22.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain; */
+    height: 200px;
+    width: auto;
+  }
+
+.design-selection ul li:nth-child(7) {
+background-image: url("house_db-22.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100px;
+}
+
+.design-selection ul:nth-child(8) {
+  /* background-image: url("house_db-22-22.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain; */
+    height: 200px;
+    width: auto;
+  }
+
+.design-selection ul li:nth-child(8) {
+background-image: url("house_db-22.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100px;
+}
+.design-archives {
+  /* background-image: linear-gradient(
+      rgba(255, 255, 255, 0.5),
+      rgba(255, 255, 255, 0.5)
+    ),
+    url("rood_blauw_strepen-11.jpg");
+  background-position: center;
+  background-repeat: repeat;
+  background-size: contain;
+  padding: 10px; */
+    /* height: 20vh; */
+  /* padding: 17px 20px;
+  background-color: white;
+  border-image: url("motieven_nieuw-21.jpg")  27/ 36px 28px 18px 8px / 18px 14px 9px 4px
+  round; */
+  /* border: 10px solid transparent;
+  padding: 15px;
+  border-image: url("motieven_nieuw-21.jpg") 30 round; */
+
+  /* margin-top: 50px;
+  border: 55px solid transparent;
+  padding: 15px;
+  border-image: url("motieven_volledig_3-25.jpg");
+  border-image-slice: 25%;
+  border-image-repeat: round; */
+  padding: 0 40px;
+}
+
+.zen-resources {
+  /* background-image: linear-gradient(
+      rgba(255, 255, 255, 0.5),
+      rgba(255, 255, 255, 0.5)
+    ),
+    url("roos_blauw-12.jpg");
+  background-position: center;
+  background-repeat: repeat;
+  background-size: contain;
+  padding: 10px; */
+
+    padding:0 40px;
+  }
+
+
+
+.wrapper{
+    /* height: 20vh; */
+  /* padding: 17px 20px;
+  background-color: white;
+  border-image: url("motieven_nieuw-21.jpg")  27/ 36px 28px 18px 8px / 18px 14px 9px 4px
+  round; */
+  /* border: 10px solid transparent;
+  padding: 15px;
+  border-image: url("motieven_nieuw-21.jpg") 30 round; */
+  border: 55px solid transparent;
+  padding: 10px;
+  border-image: url("motieven_volledig_3-25.jpg");
+  border-image-slice: 25%;
+  border-image-repeat: round;
+
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  padding: 0 auto;
+}
+
+@media only screen and (min-width: 769px) and (max-width: 1023px) {
+  .explanation,
+  .participation,
+  .benefits,
+  .requirements {
+    width: 45%; 
+    margin: 10px; 
+  }
+  .design-selection ul li {
+    margin-right: 10px;
+}
+.design-archives{
+  margin-top: 250px;
+  padding-left: 10px;
+}
+.zen-resources{
+  margin-top: 250px;
+  padding-left: 10px;
+}
+}
+
+@media only screen and (max-width: 768px) {
+
+  .explanation,
+  .participation,
+  .benefits,
+  .requirements {
+    width: 100%; 
+    height: 100vh;
+    margin: 10px; 
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    background-position: center; 
+    font-size: 0.80em;
+  }
+  
+  .design-selection ul li {
+    margin-right: 10px;
+}
+.design-archives{
+  margin-top: 500px;
+  padding-left: 10px;
+}
+.zen-resources{
+
+  padding-left: 10px;
+}
+
+}
