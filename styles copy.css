@@ -273,6 +273,14 @@ section.about {
 }
 
 footer {
+  text-align: center;
+  padding: 3px;
+  background-color: #ddd2c0;
+  color: white;
+  bottom: 0;
+}
+
+.footer-welkom {
   background-color: #ddd2c0;
   width: 100vw;
   position: fixed;
