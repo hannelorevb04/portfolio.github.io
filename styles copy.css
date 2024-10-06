@@ -272,12 +272,24 @@ section.about {
   font-size: 1.2em;
 }
 
+.header-video {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.header-video video {
+  width: 50%;
+  height: auto;
+}
+
 footer {
   text-align: center;
   padding: 3px;
   background-color: #ddd2c0;
   color: white;
   bottom: 0;
+  margin-top: 50px;
 }
 
 .footer-welkom {
