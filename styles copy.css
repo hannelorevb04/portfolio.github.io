@@ -166,6 +166,11 @@ a {
   color: #6a7d81;
   font-weight: 500;
   margin-left: 15px;
+  border: 1px solid #ddd2c0;
+}
+
+input {
+  border: 1px solid #6a7d81;
 }
 
 .video-detail {
@@ -272,6 +277,15 @@ section.about {
   font-size: 1.2em;
 }
 
+label {
+  font-size: 18px;
+  color: #6a7d81;
+  font-family: sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  margin: 0 15px;
+}
+
 .header-video {
   display: flex;
   justify-content: center;
@@ -290,6 +304,7 @@ footer {
   color: white;
   bottom: 0;
   margin-top: 50px;
+  position: relative;
 }
 
 .footer-welkom {
