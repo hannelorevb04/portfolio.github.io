@@ -1,67 +1,107 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
 body {
   background-color: #fafafa;
   overflow-x: hidden;
 }
 
 nav {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  z-index: 2;
-}
-
-.burger {
-  font-size: 2.5em;
-  margin: 0.5em;
-  color: #82959d;
-}
-
-#burger {
-  display: none;
-}
-
-#burger:checked ~ .subnav {
+  background-color: #82959d; /* Achtergrondkleur voor de navigatiebalk */
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 10;
   display: flex;
-  flex-direction: column;
-  position: absolute;
-  top: 45px;
-  right: 15px;
-  background-color: #fafafa;
-  background-color: #82959d;
-  padding: 10px;
-  width: 250px;
+  justify-content: right;
+  padding: 15px 20px;
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
 }
 
 .subnav {
-  display: none;
-  z-index: 2;
+  display: flex; /* Standaard zichtbaar op desktop */
+  gap: 20px;
+  align-items: center;
+  margin-right: 45px;
 }
 
 .subnav a {
+  color: white;
   text-decoration: none;
-  color: #82959d;
-  color: #fafafa;
-  padding: 0.5em;
   font-family: "bebas-neue", sans-serif;
   font-weight: 100;
   letter-spacing: 0.25em;
+  margin-top: 0;
+  font-size: 1.25em;
+  padding: 5px 10px;
 }
 
 .subnav a:hover {
   color: #fff;
   background-color: #82959d;
-  background-color: #fafafa;
-  color: #82959d;
+  border-radius: 5px;
+}
+
+/* Hamburger menu (standaard verborgen op desktop) */
+.burger {
+  display: none;
+}
+
+/* Verberg standaard de checkbox en de dropdown */
+#burger {
+  display: none;
+}
+
+/* Alleen zichtbaar op mobiele apparaten */
+@media (max-width: 768px) {
+  .burger {
+    display: block;
+    font-size: 2em;
+    color: #82959d;
+    cursor: pointer;
+    margin-right: 45px;
+  }
+
+  .subnav {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 50px;
+    right: 10px;
+    background-color: #ddd2c0;
+    padding: 10px;
+    width: 200px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  #burger:checked ~ .subnav {
+    display: flex;
+  }
+
+  .subnav a {
+    text-align: left;
+    padding: 10px;
+    margin: 0;
+    border-bottom: 1px solid #82959d;
+  }
+
+  .subnav a:last-child {
+    border-bottom: none;
+  }
 }
 
 h1 {
   font-size: 75px;
-  color: #ddd2c0;
+  color: #82959d;
   font-family: "bebas-neue", sans-serif;
   font-weight: 400;
   margin: 10px;
   text-align: center;
-  margin-top: 50px;
+  /* margin-top: 75px; */
 }
 
 /* header p {
@@ -244,21 +284,71 @@ header {
   letter-spacing: 0.1em;
 } */
 
+/* Container styling */
 .video-container {
+  /* position: relative; */
+  width: 100vw;
+  /* height: 550px */
+  /* margin: 50px auto;  */
+  /* border: 5px solid #ddd2c0; */
+  /* border-radius: 100%;  */
+  overflow-x: hidden; /* Verberg alles buiten het kader */
+  /* box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); Schaduw voor stijl */
+  background-color: #fafafa;
+}
+.video-container video {
+  opacity: 0.75;
+}
+.video-container img {
+  position: relative;
+  width: 100vw;
+  height: 80vh;
+  /* height: 550px */
+  /* margin: 50px auto;  */
+  /* border: 5px solid #ddd2c0; */
+  /* border-radius: 100%;  */
+  overflow: hidden; /* Verberg alles buiten het kader */
+  /* box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); Schaduw voor stijl */
+  background-color: #fafafa;
+}
+.video-container h1 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  /* color: white;
+  font-size: 2em; */
+}
+/* Background video styling */
+.background-video {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -1;
-  overflow: hidden;
+  object-fit: cover; /* Zorg dat de video het kader netjes vult */
+  z-index: 0;
 }
 
-.background-video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
+/* Profile image styling */
+/* .profile-image {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%; 
+  height: auto;
+  z-index: 1;
+
+
+  mask-image: radial-gradient(circle, black 70%, transparent 100%);
+  -webkit-mask-image: radial-gradient(circle, black 70%, transparent 100%);
+  mask-position: bottom;
+  -webkit-mask-position: bottom;
+  mask-repeat: no-repeat;
+  -webkit-mask-repeat: no-repeat;
+} */
 
 .header-content {
   position: absolute;
@@ -275,19 +365,77 @@ section.about {
   align-items: center;
   gap: 20px;
   padding: 50px;
-  background-color: #f4f4f4;
+
   flex-wrap: wrap;
+  margin-top: 100px;
 }
 
 .profile-photo {
-  width: 250px;
+  width: 25%;
   height: auto;
-  border-radius: 50%;
+  /* border-radius: 50%; */
 }
 
-.about-text {
+.about-item {
   max-width: 600px;
   font-size: 1.2em;
+  margin-top: 50px;
+}
+
+.photo-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* Grotere ruimte tussen de kaders */
+  justify-content: center;
+  padding: 20px;
+}
+
+.gallery-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between; /* Zorgt dat inhoud zich verspreidt binnen het kader */
+  width: 400px;
+  height: 700px;
+  text-align: center;
+  border: 1px solid #ddd; /* Optioneel: visueel kader */
+  border-radius: 10px; /* Rondere hoeken voor een modernere look */
+  padding: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+.gallery-item img {
+  max-width: 100%;
+  max-height: 70%; /* Beperk de hoogte tot een percentage van het kader */
+  height: auto; /* Behoud de oorspronkelijke verhoudingen */
+  display: block;
+  border-radius: 8px; /* Rondere hoeken voor afbeeldingen */
+}
+
+.bottom-align {
+  justify-content: flex-end; /* Foto's uitlijnen aan de onderkant */
+}
+
+.top-align {
+  justify-content: flex-start; /* Foto's uitlijnen aan de bovenkant */
+}
+
+.gallery-item p {
+  font-size: 16px; /* Groter lettertype voor betere leesbaarheid */
+  color: #6a7d81;
+  margin: 10px 0 0 0;
+}
+
+@media (max-width: 768px) {
+  .gallery-item {
+    width: 90%; /* Neem bijna de volledige breedte van het scherm */
+    height: auto; /* Laat de hoogte meegroeien met de inhoud */
+  }
+
+  .gallery-item img {
+    max-height: 50%; /* Beperk de afbeelding op kleinere schermen */
+  }
 }
 
 label {
@@ -375,4 +523,36 @@ footer {
 
   animation: waveAnimation 8s linear infinite;
   background-color: #ddd2c0;
+}
+/* Styling voor scroll-down indicator */
+.scroll-down {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  text-align: center;
+}
+
+.scroll-down span {
+  font-size: 2rem;
+  color: #2c699a;
+  animation: bounce 2s infinite;
+}
+
+/* Bounce animatie */
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
 }
