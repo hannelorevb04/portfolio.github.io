@@ -322,6 +322,7 @@ header {
   /* box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); Schaduw voor stijl */
   background-color: #fafafa;
   margin-top: 25px;
+  margin-bottom: 50px;
 }
 
 .video-container img {

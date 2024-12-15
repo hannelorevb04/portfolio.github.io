@@ -53,7 +53,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N2C4HW2R"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
-    <header>
       <nav>
         <label class="burger" for="burger">&equiv;</label>
         <input id="burger" type="checkbox" />
@@ -64,41 +63,32 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <a href="/contact.html">Contact</a>
         </div>
       </nav>
+      <main class="content-container">
       <h1>Forcia</h1>
-      <div class="header-image">
+<p>
+  Forcia is het eerste project dat ik ontwikkelde als Digital Experience Designer voor de cursus Creatie 1. Het thema was om een superhelden-app te creëren. Na een brainstormsessie besloot ik een app te ontwikkelen die studenten helpt om hun leven te organiseren.
+</p>
+<h3 class="highlight">Verkenningsfase</h3>
+<p>
+  In de verkenningsfase onderzocht ik de behoeften van studenten en analyseerde ik bestaande oplossingen. Door middel van enquêtes en interviews kreeg ik inzicht in de uitdagingen waarmee studenten dagelijks worden geconfronteerd, zoals het beheren van deadlines, het plannen van taken en het behouden van motivatie. Daarnaast bestudeerde ik bestaande productiviteitsapps om te begrijpen welke functies succesvol waren en welke verbeterd konden worden. Deze inzichten vormden de basis voor het ontwerpen van een app die niet alleen praktisch is, maar ook studenten motiveert met een competitief element. Met wireframes en user flows visualiseerde ik de belangrijkste functies en navigatie, wat hielp om een duidelijk beeld te krijgen van de app en feedback te verzamelen voor verdere verfijning.
+</p>
+
+<h3 class="highlight">Ontwerpfase</h3>
+<p>
+  In de ontwerpfase lag de focus op het vertalen van de inzichten uit de verkenningsfase naar een functionele en aantrekkelijke app. Ik begon met het uitwerken van wireframes en user flows, waarbij ik de belangrijkste functies, zoals een overzichtelijke kalender en het competitieve element, verder definieerde. Na feedbacksessies verfijnde ik deze ontwerpen om ze gebruiksvriendelijker en visueel aantrekkelijker te maken. Vervolgens creëerde ik een interactief prototype met tools zoals Figma, waarbij ik gebruik maakte van een consistente stijl en visuele identiteit. Dit prototype werd getest met gebruikers om de bruikbaarheid en functionaliteit te beoordelen, waarna ik de nodige aanpassingen doorvoerde om een eindontwerp te realiseren dat voldoet aan de behoeften van studenten.
+</p>
+
+
+    <h2>Het resultaat</h2>
+          <a
+        class="projects button"
+        href="https://www.figma.com/design/lPmocMJZk3cvGyMO4ocJui/Forcia---Hi---fi-wireframes?node-id=0-1&t=Xf9spvazLOXgKgYz-1"
+        target="_blank"
+        >Ga naar het prototype</a
+      >
+     <div class="video-container">
         <img src="/images/mockup_forcia.png" alt="" />
       </div>
-    </header>
-
-    <p>
-      Forcia is the first project I developed in my career as an Experience
-      Designer for the course Creation 1. The theme was to create a superhero
-      app. After brainstorming, I decided to make an app that helps students
-      organize their lives.
-    </p>
-    <h2>How did I proceed?</h2>
-      <ul>
-        <li>
-          <p class="highlight"> Theme:</p> I started with researching the needs of students and analyzed existing solutions. Then I created wireframes and user flows to visualize the app's features.
-        </li>
-        <li>
-          <p class="highlight"> Brainstorming:</p> I generated various ideas and ultimately decided to develop an app that helps students organize their lives through a clear calendar and a competitive element.
-        </li>
-        <li>
-          <p class="highlight"> Research:</p> I conducted research on students' needs through surveys and interviews, and analyzed existing productivity apps to identify best practices.
-        </li>
-        <li>
-          <p class="highlight"> Design:</p> I created wireframes and user flows to visualize the key features and navigation of the app. After feedback and iterations, I refined these designs.
-        </li>
-        <li>
-          <p class="highlight"> Prototype:</p> I created an interactive prototype of Forcia using tools like Figma. This prototype was tested with users to evaluate usability and functionality.
-        </li>
-      </ul>
-
-    <h2>My Process</h2>
-    <div class="responsive-iframe"><iframe width="100%" height="432" src="https://miro.com/app/live-embed/uXjVP0FSr2Y=/?moveToViewport=139551,-16318,33056,16750&embedId=749297934186" frameborder="0" scrolling="no" allow="fullscreen; clipboard-read; clipboard-write" allowfullscreen></iframe></div>
-      <h2>The Result</h2>
-    <div class="responsive-iframe"><iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="100%" height="450" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fproto%2FlPmocMJZk3cvGyMO4ocJui%2FForcia---Hi---fi-wireframes%3Fpage-id%3D0%253A1%26type%3Ddesign%26node-id%3D2-2%26viewport%3D-189%252C1561%252C0.7%26t%3DfH7OJhiAlQm5j6iU-1%26scaling%3Dscale-down%26starting-point-node-id%3D2%253A2%26mode%3Ddesign" allowfullscreen></iframe></div>
 </div>
     <!-- <section class="portfolio"> -->
 
@@ -153,28 +143,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
       </div>
     </section> -->
-
+ </main>
     <footer>
       <p>© 2024 Hannelore Van Buynderen</p>
     </footer>
-
-    <script src="script.js"></script>
-    <script>
-      function filterProjects(category) {
-        const projects = document.querySelectorAll(".project");
-
-        projects.forEach((project) => {
-          if (category === "all") {
-            project.style.display = "block"; // Toon alle projecten
-          } else {
-            if (project.classList.contains(category)) {
-              project.style.display = "block"; // Toon projecten van de geselecteerde categorie
-            } else {
-              project.style.display = "none"; // Verberg andere projecten
-            }
-          }
-        });
-      }
-    </script>
   </body>
 </html>
