@@ -106,7 +106,7 @@ h1 {
   font-weight: 400;
   margin: 10px;
   text-align: center;
-  margin-top: 100px;
+  margin-top: 150px;
   margin-left: 80px;
 }
 
@@ -125,6 +125,7 @@ h2 {
   font-weight: 400;
   /* margin-left: 15px;
   margin: 15px 15px; */
+  margin: 25px 0;
   letter-spacing: 0.05em;
 }
 
@@ -188,7 +189,7 @@ a {
   color: #6a7d81;
   font-weight: 500;
   /* margin-left: 15px; */
-  margin-bottom: 25px;
+  margin: 25px 0;
   border: 1px solid #ddd2c0;
 }
 
@@ -341,7 +342,7 @@ header {
 
 .video-container img {
   position: relative;
-  width: 50vw;
+  width: 25vw;
   /* height: 80vh; */
   /* height: 550px */
   /* margin: 50px auto;  */
@@ -430,7 +431,7 @@ section.about {
   flex-direction: column;
   align-items: center;
   justify-content: space-between; /* Zorgt dat inhoud zich verspreidt binnen het kader */
-  width: 400px;
+  width: 35%;
   height: 700px;
   text-align: center;
   border: 1px solid #ddd; /* Optioneel: visueel kader */
