@@ -428,6 +428,7 @@ header {
   color: white;
   font-size: 2em;
   text-align: center;
+  font-weight: 700;
   z-index: 1;
   font-family: Arial, sans-serif;
 }
@@ -440,6 +441,7 @@ header {
   top: 0;
   left: 0;
   z-index: -1; /* Zet de video achter de overlays */
+  opacity: 0.75;
 }
 
 .video-title {
