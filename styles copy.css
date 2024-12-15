@@ -107,6 +107,7 @@ h1 {
   margin: 10px;
   text-align: center;
   margin-top: 100px;
+  margin-left: 80px;
 }
 
 /* header p {
@@ -136,6 +137,16 @@ h3 {
   margin: 15px 15px;
   letter-spacing: 0.05em;
   display: inline;
+}
+h4 {
+  font-size: 48px;
+  color: #ddd2c0;
+  font-family: sans-serif;
+  font-weight: 400;
+  margin-left: 15px;
+  margin: 50px 0px;
+  text-align: center;
+  letter-spacing: 0.05em;
 }
 p {
   font-size: 18px;
@@ -209,10 +220,12 @@ a {
 
 .project img {
   width: 100%;
+  height: 225px;
   border-radius: 8px;
 }
 .project video {
   width: 100%;
+  height: 225px;
   border-radius: 8px;
 }
 
@@ -220,6 +233,7 @@ a {
   font-size: 24px;
   color: #2d4059;
   margin-top: 15px;
+  margin-left: 0;
   text-align: center;
   color: #82959d;
   font-family: "bebas-neue", sans-serif;
@@ -388,7 +402,7 @@ section.about {
   padding: 50px;
 
   flex-wrap: wrap;
-  margin-top: 100px;
+  /* margin-top: 100px; */
 }
 
 .profile-photo {

@@ -95,37 +95,57 @@
       ></iframe
     ></noscript>
     <!-- End Google Tag Manager (noscript) -->
-    <header>
-      <nav>
-        <label class="burger" for="burger">&equiv;</label>
-        <input id="burger" type="checkbox" />
-        <div class="subnav">
-          <a id="home" href="/index.html">Home</a>
-          <a href="about.html">About</a>
-          <a href="projecten.html">Projecten</a>
-          <a href="contact.html">Contact</a>
-        </div>
-      </nav>
-      <div class="background-video">
+    <!-- <header> -->
+    <nav>
+      <label class="burger" for="burger">&equiv;</label>
+      <input id="burger" type="checkbox" />
+      <div class="subnav">
+        <a id="home" href="/index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="projecten.html">Projecten</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </nav>
+    <!-- <div class="background-video">
         <video autoplay muted loop>
           <source src="images/beach_1.mp4" type="video/mp4" />
         </video>
-      </div>
-    </header>
+      </div> -->
+    <!-- </header> -->
 
     <section class="portfolio">
-      <h2>Mijn project(en)</h2>
+      <h1>Mijn project(en)</h1>
 
       <!-- Filter knoppen -->
       <div class="filter-buttons">
-        <button onclick="filterProjects('all')">Alle</button>
-        <button onclick="filterProjects('design')">Design</button>
-        <button onclick="filterProjects('development')">Development</button>
-        <button onclick="filterProjects('fotobewerking')">Fotobewerking</button>
+        <button
+          onclick="filterProjects('all')"
+          aria-label="Toon alle projecten"
+        >
+          Alle
+        </button>
+        <button
+          onclick="filterProjects('design')"
+          aria-label="Filter op design projecten"
+        >
+          Design
+        </button>
+        <button
+          onclick="filterProjects('development')"
+          aria-label="Filter op development projecten"
+        >
+          Development
+        </button>
+        <button
+          onclick="filterProjects('fotobewerking')"
+          aria-label="Filter op fotobewerking"
+        >
+          Fotobewerking
+        </button>
       </div>
 
       <div class="projects-container">
-        <a class="project design" href="#">
+        <!-- <a class="project design" href="#">
           <img
             src="images/selective_color_jen.png"
             alt="selective color Jennifer Aniston"
@@ -133,77 +153,23 @@
           <h3>Selective color - Jennifer Aniston</h3>
           <p>
             Selective color is een techniek waarbij een foto grotendeels in
-            zwart-wit is, maar waarbij een deel van de foto in kleur blijft.
+            zwart-wit is, maar waarbij een deel van de foto in kleur blijft
           </p>
-        </a>
+        </a> -->
 
-        <a class="project design" href="#">
-          <img
-            src="images/Hannelore_selectivecolor_resultaat.jpg"
-            alt="selective color"
-          />
-          <h3>Selective color</h3>
+        <a class="project design" href="projecten/kerstkaartjes.html">
+          <h4>Coming soon!</h4>
+          <h3>Bachelorproef</h3>
           <p>
-            Selective color is een techniek waarbij een foto grotendeels in
-            zwart-wit is, maar waarbij een deel van de foto in kleur blijft.
+            Mijn bachelorproef draait om het creëren van een innovatieve
+            oplossing voor toekomstige dierenadoptanten. Binnenkort meer
+            details!
           </p>
         </a>
-
-        <a class="project design" href="#">
-          <img src="images/bauhaus.png" alt="Bauhaus" />
-          <h3>Geinspireetrd door Bauhaus</h3>
-          <p>In de stijl van Bauhaus maakte ik een poster.</p>
-        </a>
-
-        <a class="project design" href="#">
-          <img src="images/mock_up_smartwater.png" alt="Mock up smartwater " />
-          <h3>Mock-up Smart water</h3>
-          <p>Smartwater is een merk van mineraalwater.</p>
-        </a>
-
-        <a class="project design" href="#">
-          <img src="images/Cristmas_card_1-03.png" alt="Kerstkaartje " />
-          <h3>Kerstkaartje</h3>
-          <p>Een kerstkaartje dat ik maakte voor mijn familie en vrienden.</p>
-        </a>
-
-        <a class="project design" href="#">
+        <a class="project design" href="projecten/kerstkaartjes.html">
           <img src="images/Christmas_card-02.png" alt="Kerstkaartje " />
-          <h3>Kerstkaartje</h3>
-          <p>Een kerstkaartje dat ik maakte voor mijn familie en vrienden.</p>
-        </a>
-
-        <a class="project design" href="#">
-          <img
-            src="images/Hannelore_doubleexposure1.jpg"
-            alt="Double exposure "
-          />
-          <h3>Double exposure</h3>
-          <p>
-            Double exposure is een techniek waarbij twee foto's over elkaar
-            worden gelegd.
-          </p>
-        </a>
-
-        <a class="project design" href="#">
-          <img
-            src="images/Hannelore_doubleexposure2.jpg"
-            alt="Double exposure "
-          />
-          <h3>Double exposure</h3>
-          <p>
-            Double exposure is een techniek waarbij twee foto's over elkaar
-            worden gelegd.
-          </p>
-        </a>
-
-        <a class="project design" href="projecten/forcia.html">
-          <img src="images/mockup_forcia.png" alt="Forcia" />
-          <h3>Forcia</h3>
-          <p>
-            App die studenten door hun schoolcarrière helpt, door middel van
-            collegiale competities
-          </p>
+          <h3>Kerstkaartjes</h3>
+          <p>Een kerstkaartje dat ik maakte om wat te spelen in Illustrator</p>
         </a>
 
         <a class="project development" href="projecten/useless_web.html">
@@ -225,15 +191,6 @@
           <p>
             In 2012 startte Tim Holman een useless website. Wij maakten van dit
             idee onze eigen XD versie. Deze keer deden we dit in groep
-          </p>
-        </a>
-
-        <a class="project design" href="projecten/cargov.html">
-          <img src="images/mockup_cargov.png" alt="Cargov" />
-          <h3>CarGov</h3>
-          <p>
-            App voor autobestuurders, waar ze hun auto-documenten kunnen
-            bundelen
           </p>
         </a>
 
@@ -260,46 +217,6 @@
           </p>
         </a>
 
-        <a class="project design" href="projecten/hoppin.html">
-          <img src="images/mockup_hoppin.png" alt="Hoppin" />
-          <h3>Hoppin</h3>
-          <p>
-            App van de overheid die mensen helpt van punt A naar punt B te
-            geraken
-          </p>
-        </a>
-
-        <!-- <a class="project development" href="projecten/css_zen_garden.html">
-          <video autoplay muted loop class="video">
-            <source src="images/css_zen_garden.mp4" type="video/mp4" />
-          </video>
-          <h3>CSS zen garden</h3>
-          <p>
-            We kregen de opdracht om een CSS-zen-garden te ontwerpen, met
-            postmodernisme als het toegewezen thema.
-          </p>
-        </a> -->
-
-        <a class="project development" href="projecten/arduino.html">
-          <video autoplay muted loop class="video">
-            <source src="images/arduino.mp4" type="video/mp4" />
-          </video>
-          <h3>Arduino piano</h3>
-          <p>
-            Voor ons Arduino-project hebben we een piano gebouwd waarmee
-            gebruikers muziek kunnen spelen met drukknoppen.
-          </p>
-        </a>
-
-        <a class="project design" href="projecten/find_me.html">
-          <img src="images/mockup_find_me.png" alt="Find me" />
-          <h3>Find me</h3>
-          <p>
-            App voor Live Nation, waarbij concertgangers snel hun vrienden,
-            familie, kennissen, ... kunnen terugvinden
-          </p>
-        </a>
-
         <a class="project development" href="projecten/dynamic_poster.html">
           <video autoplay muted loop class="video">
             <source src="images/dynamic_poster.mp4" type="video/mp4" />
@@ -312,12 +229,41 @@
           </p>
         </a>
 
-        <a class="project design" href="projecten/Nevah.html">
-          <img class="img" src="images/mockup_nevah.png" alt="" />
-          <h3>Nevah</h3>
+        <a class="project design" href="projecten/find_me.html">
+          <img src="images/mockup_find_me.png" alt="Find me" />
+          <h3>Find me</h3>
           <p>
-            App voor mensen met paniekstoornissen, die hen helpt paniekaanvallen
-            onder controle te houden.
+            App voor Live Nation, waarbij concertgangers snel hun vrienden,
+            familie, kennissen, ... kunnen terugvinden
+          </p>
+        </a>
+
+        <a class="project design" href="projecten/cargov.html">
+          <img src="images/mockup_cargov.png" alt="Cargov" />
+          <h3>CarGov</h3>
+          <p>
+            App voor autobestuurders, waar ze hun auto-documenten kunnen
+            bundelen
+          </p>
+        </a>
+
+        <a class="project design" href="projecten/hoppin.html">
+          <img src="images/mockup_hoppin.png" alt="Hoppin" />
+          <h3>Hoppin</h3>
+          <p>
+            App van de overheid die mensen helpt van punt A naar punt B te
+            geraken
+          </p>
+        </a>
+
+        <a class="project development" href="projecten/arduino.html">
+          <video autoplay muted loop class="video">
+            <source src="images/arduino.mp4" type="video/mp4" />
+          </video>
+          <h3>Arduino piano</h3>
+          <p>
+            Voor ons Arduino-project hebben we een piano gebouwd waarmee
+            gebruikers muziek kunnen spelen met drukknoppen.
           </p>
         </a>
 
@@ -330,6 +276,15 @@
             Voor de Nevah (app die mensen met paniekstoornissen, paniekaanvallen
             onder controle helpt te houden) app maakten we een bijpassende
             404-pagina
+          </p>
+        </a>
+
+        <a class="project design" href="projecten/Nevah.html">
+          <img class="img" src="images/mockup_nevah.png" alt="" />
+          <h3>Nevah</h3>
+          <p>
+            App voor mensen met paniekstoornissen, die hen helpt paniekaanvallen
+            onder controle te houden.
           </p>
         </a>
 
@@ -352,6 +307,80 @@
             verjaardag van de eerste aflevering te vieren
           </p>
         </a>
+
+        <a class="project design" href="projecten/forcia.html">
+          <img src="images/mockup_forcia.png" alt="Forcia" />
+          <h3>Forcia</h3>
+          <p>
+            App die studenten door hun schoolcarrière helpt, door middel van
+            collegiale competities
+          </p>
+        </a>
+
+        <a class="project fotobewerking" href="projecten/selective_color.html">
+          <img
+            src="images/Hannelore_selectivecolor_resultaat.jpg"
+            alt="selective color"
+          />
+          <h3>Selective color</h3>
+          <p>
+            Selective color is een techniek waarbij een foto grotendeels in
+            zwart-wit is, maar waarbij een deel van de foto in kleur blijft
+          </p>
+        </a>
+
+        <a class="project design" href="projecten/bauhaus.html">
+          <img src="images/bauhaus.png" alt="Bauhaus" />
+          <h3>Geinspireerd door Bauhaus</h3>
+          <p>In de stijl van Bauhaus maakte ik een poster</p>
+        </a>
+
+        <a class="project fotobewerking" href="projecten/smart_water.html">
+          <img src="images/mock_up_smartwater.png" alt="Mock up smartwater " />
+          <h3>Mock-up Smart water</h3>
+          <p>Smartwater is een merk van mineraalwater</p>
+        </a>
+
+        <!-- <a class="project design" href="#">
+          <img src="images/Cristmas_card_1-03.png" alt="Kerstkaartje " />
+          <h3>Kerstkaartje</h3>
+          <p>Een kerstkaartje dat ik maakte voor mijn familie en vrienden.</p>
+        </a> -->
+
+        <!-- <a class="project design" href="#">
+          <img
+            src="images/Hannelore_doubleexposure1.jpg"
+            alt="Double exposure "
+          />
+          <h3>Double exposure</h3>
+          <p>
+            Double exposure is een techniek waarbij twee foto's over elkaar
+            worden gelegd.
+          </p>
+        </a> -->
+
+        <a class="project fotobewerking" href="projecten/double_exposure.html">
+          <img
+            src="images/Hannelore_doubleexposure2.jpg"
+            alt="Double exposure "
+          />
+          <h3>Double exposure</h3>
+          <p>
+            Double exposure is een techniek waarbij twee foto's over elkaar
+            worden gelegd
+          </p>
+        </a>
+
+        <!-- <a class="project development" href="projecten/css_zen_garden.html">
+          <video autoplay muted loop class="video">
+            <source src="images/css_zen_garden.mp4" type="video/mp4" />
+          </video>
+          <h3>CSS zen garden</h3>
+          <p>
+            We kregen de opdracht om een CSS-zen-garden te ontwerpen, met
+            postmodernisme als het toegewezen thema.
+          </p>
+        </a> -->
       </div>
     </section>
 
@@ -363,16 +392,25 @@
     <script>
       function filterProjects(category) {
         const projects = document.querySelectorAll(".project");
+        const buttons = document.querySelectorAll(".filter-buttons button");
 
+        // Maak alle knoppen inactief
+        buttons.forEach((button) => button.classList.remove("active"));
+
+        // Markeer de huidige filterknop als actief
+        const activeButton = document.querySelector(
+          `.filter-buttons button[onclick="filterProjects('${category}')"]`
+        );
+        if (activeButton) {
+          activeButton.classList.add("active");
+        }
+
+        // Filter de projecten
         projects.forEach((project) => {
-          if (category === "all") {
-            project.style.display = "block"; // Toon alle projecten
+          if (category === "all" || project.classList.contains(category)) {
+            project.style.display = "block"; // Toon projecten
           } else {
-            if (project.classList.contains(category)) {
-              project.style.display = "block"; // Toon projecten van de geselecteerde categorie
-            } else {
-              project.style.display = "none"; // Verberg andere projecten
-            }
+            project.style.display = "none"; // Verberg andere projecten
           }
         });
       }
