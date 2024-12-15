@@ -3,7 +3,6 @@
 ========================== */
 html,
 body {
-  /* height: 100%; */
   margin: 0;
   display: flex;
   flex-direction: column;
@@ -110,21 +109,11 @@ h1 {
   margin-left: 80px;
 }
 
-/* header p {
-  font-size: 28px;
-  color: #e9d6c3;
-  font-family: "great-vibes", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-  margin: 0 15px;
-} */
 h2 {
   font-size: 48px;
   color: #82959d;
   font-family: "bebas-neue", sans-serif;
   font-weight: 400;
-  /* margin-left: 15px;
-  margin: 15px 15px; */
   margin: 25px 0;
   letter-spacing: 0.05em;
 }
@@ -155,7 +144,6 @@ p {
   font-family: sans-serif;
   font-weight: 400;
   font-style: normal;
-  /* margin: 15px; */
 }
 
 /* ==========================
@@ -188,7 +176,6 @@ a {
   font-family: sans-serif;
   color: #6a7d81;
   font-weight: 500;
-  /* margin-left: 15px; */
   margin: 25px 0;
   border: 1px solid #ddd2c0;
 }
@@ -246,10 +233,6 @@ a {
   color: #6d7987;
   margin: 0;
 }
-
-/* input {
-  border: 1px solid #6a7d81;
-} */
 
 .video-detail {
   width: 100%;
@@ -313,28 +296,9 @@ header {
   letter-spacing: 0.1em;
 }
 
-/* .contact_button {
-  background-color: #ddd2c0;
-  padding: 10px 20px;
-  border-radius: 40px;
-  color: #6a7d81;
-  font-weight: 500;
-  font-size: 1.5em;
-  text-decoration: none;
-  font-family: "bebas-neue", sans-serif;
-  letter-spacing: 0.1em;
-} */
-
-/* Container styling */
 .video-container {
-  /* position: relative; */
   width: 100vw;
-  /* height: 550px */
-  /* margin: 50px auto;  */
-  /* border: 5px solid #ddd2c0; */
-  /* border-radius: 100%;  */
-  overflow-x: hidden; /* Verberg alles buiten het kader */
-  /* box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); Schaduw voor stijl */
+  overflow-x: hidden;
   background-color: #fafafa;
   margin-top: 25px;
   margin-bottom: 50px;
@@ -343,13 +307,7 @@ header {
 .video-container img {
   position: relative;
   width: 25vw;
-  /* height: 80vh; */
-  /* height: 550px */
-  /* margin: 50px auto;  */
-  /* border: 5px solid #ddd2c0; */
-  /* border-radius: 100%;  */
-  overflow: hidden; /* Verberg alles buiten het kader */
-  /* box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); Schaduw voor stijl */
+  overflow: hidden;
   background-color: #fafafa;
 }
 .video-container h1 {
@@ -359,44 +317,23 @@ header {
   transform: translate(-50%, -50%);
   text-align: center;
   margin: 0;
-  /* color: white;
-  font-size: 2em; */
 }
-/* Background video styling */
+
 .background-video {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Zorg dat de video het kader netjes vult */
+  object-fit: cover;
   z-index: 0;
 }
 
-/* Profile image styling */
-/* .profile-image {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%; 
-  height: auto;
-  z-index: 1;
-
-
-  mask-image: radial-gradient(circle, black 70%, transparent 100%);
-  -webkit-mask-image: radial-gradient(circle, black 70%, transparent 100%);
-  mask-position: bottom;
-  -webkit-mask-position: bottom;
-  mask-repeat: no-repeat;
-  -webkit-mask-repeat: no-repeat;
-} */
-
 .video-wrapper {
   position: relative;
-  width: 100vw; /* Volledige breedte van het scherm */
-  height: 100vh; /* Volledige hoogte van het scherm */
-  overflow: hidden; /* Verberg eventuele scrollbars */
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .video-overlay {
@@ -411,13 +348,13 @@ header {
 
 .video-overlay-image {
   position: absolute;
-  top: 40.5%; /* Centreer verticaal */
-  left: 50%; /* Centreer horizontaal */
-  transform: translate(-50%, -50%); /* Precieze centrering */
-  width: 200px; /* Pas grootte aan */
+  top: 40.5%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px;
   height: auto;
-  border-radius: 50%; /* Maakt de afbeelding rond */
-  z-index: 1; /* Zet bovenop de video */
+  border-radius: 50%;
+  z-index: 1;
 }
 
 .video-overlay-text {
@@ -436,11 +373,11 @@ header {
 .fullscreen-video {
   width: 100%;
   height: 100vh;
-  object-fit: cover; /* Zorgt ervoor dat de video de volledige ruimte vult */
+  object-fit: cover;
   position: absolute;
   top: 0;
   left: 0;
-  z-index: -1; /* Zet de video achter de overlays */
+  z-index: -1;
   opacity: 0.75;
 }
 
@@ -484,13 +421,11 @@ section.about {
   padding: 50px;
 
   flex-wrap: wrap;
-  /* margin-top: 100px; */
 }
 
 .profile-photo {
   width: 25%;
   height: auto;
-  /* border-radius: 50%; */
 }
 
 .about-item {
@@ -502,7 +437,7 @@ section.about {
 .photo-gallery {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px; /* Grotere ruimte tussen de kaders */
+  gap: 20px;
   justify-content: center;
   padding: 20px;
 }
@@ -511,12 +446,12 @@ section.about {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between; /* Zorgt dat inhoud zich verspreidt binnen het kader */
+  justify-content: space-between;
   width: 35%;
   height: 700px;
   text-align: center;
-  border: 1px solid #ddd; /* Optioneel: visueel kader */
-  border-radius: 10px; /* Rondere hoeken voor een modernere look */
+  border: 1px solid #ddd;
+  border-radius: 10px;
   padding: 15px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   background-color: #fff;
@@ -524,22 +459,22 @@ section.about {
 
 .gallery-item img {
   max-width: 100%;
-  max-height: 70%; /* Beperk de hoogte tot een percentage van het kader */
-  height: auto; /* Behoud de oorspronkelijke verhoudingen */
+  max-height: 70%;
+  height: auto;
   display: block;
-  border-radius: 8px; /* Rondere hoeken voor afbeeldingen */
+  border-radius: 8px;
 }
 
 .bottom-align {
-  justify-content: flex-end; /* Foto's uitlijnen aan de onderkant */
+  justify-content: flex-end;
 }
 
 .top-align {
-  justify-content: flex-start; /* Foto's uitlijnen aan de bovenkant */
+  justify-content: flex-start;
 }
 
 .gallery-item p {
-  font-size: 16px; /* Groter lettertype voor betere leesbaarheid */
+  font-size: 16px;
   color: #6a7d81;
   margin: 10px 0 0 0;
   text-align: left;
@@ -547,12 +482,12 @@ section.about {
 
 @media (max-width: 768px) {
   .gallery-item {
-    width: 90%; /* Neem bijna de volledige breedte van het scherm */
-    height: auto; /* Laat de hoogte meegroeien met de inhoud */
+    width: 90%;
+    height: auto;
   }
 
   .gallery-item img {
-    max-height: 50%; /* Beperk de afbeelding op kleinere schermen */
+    max-height: 50%;
   }
 }
 
@@ -567,17 +502,14 @@ label {
   font-style: normal;
   margin: 0 15px;
 }
-/* Algemene container voor inhoud */
 .content-container {
-  max-width: 900px; /* Limiteer de breedte voor leesbaarheid */
-  margin: 0 auto; /* Centreer de inhoud horizontaal */
+  max-width: 900px;
+  margin: 0 auto;
   padding: 20px;
-  /* display: flex; */
   flex-direction: column;
-  gap: 30px; /* Voeg ruimte tussen secties toe */
+  gap: 30px;
 }
 
-/* Styling voor video */
 .video-container {
   width: 100%;
   height: auto;
@@ -586,20 +518,11 @@ label {
 .video-container video {
   width: 100%;
   height: auto;
-  border-radius: 10px; /* Voeg afgeronde hoeken toe */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Schaduw voor visuele diepte */
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Responsive aanpassingen */
 @media (max-width: 768px) {
-  /* h1 {
-    font-size: 2em;
-  } */
-
-  /* h2 {
-    font-size: 1.5em;
-  } */
-
   .content-container {
     padding: 10px;
   }
@@ -615,7 +538,7 @@ label {
 
 .download-button {
   display: inline-block;
-  background-color: #82959d; /* Pas deze kleur aan naar wens */
+  background-color: #82959d;
   color: white;
   text-decoration: none;
   font-family: "bebas-neue", sans-serif;
@@ -674,17 +597,15 @@ footer {
 }
 
 .wavy-line {
-  --s: 50px; /* Hoogte van de golf */
-  --b: 5px; /* Dikte van de golf */
-  --m: 1.4; /* Steilheid van de golf */
+  --s: 50px;
+  --b: 5px;
+  --m: 1.4;
 
   background: #ddd2c0;
-  --R: calc(
-    var(--s) * sqrt(var(--m) * var(--m) + 1) + var(--b) / 2
-  ); /* Bereken straal van de golf */
-  height: calc(2 * var(--R)); /* Hoogte instellen */
+  --R: calc(var(--s) * sqrt(var(--m) * var(--m) + 1) + var(--b) / 2);
+  height: calc(2 * var(--R));
   width: 100%;
-  position: relative; /* Nodig om positionering correct te houden */
+  position: relative;
 
   --_g: #0000 calc(99% - var(--b)), #000 calc(101% - var(--b)) 99%, #0000 101%;
   mask: radial-gradient(
@@ -700,7 +621,6 @@ footer {
       50% calc(50% + var(--s) / 2 + var(--b) / 2) / calc(4 * var(--s))
       calc(var(--s) + var(--b)) repeat-x;
 
-  /* Voeg mask toe voor ondersteuning in WebKit browsers */
   -webkit-mask: radial-gradient(
         var(--R) at left 50% bottom calc(-1 * var(--m) * var(--s)),
         var(--_g)
@@ -714,12 +634,11 @@ footer {
       50% calc(50% + var(--s) / 2 + var(--b) / 2) / calc(4 * var(--s))
       calc(var(--s) + var(--b)) repeat-x;
 
-  animation: waveAnimation 8s linear infinite; /* Voeg animatie toe */
-  background-color: #ddd2c0; /* Golfkleur */
-  background-size: 200% 100%; /* Beweeg de achtergrond */
+  animation: waveAnimation 8s linear infinite;
+  background-color: #ddd2c0;
+  background-size: 200% 100%;
 }
 
-/* Styling voor scroll-down indicator */
 .scroll-down {
   position: absolute;
   bottom: 20px;
@@ -735,7 +654,6 @@ footer {
   animation: bounce 2s infinite;
 }
 
-/* Bounce animatie */
 @keyframes bounce {
   0%,
   20%,
