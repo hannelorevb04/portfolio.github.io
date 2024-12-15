@@ -1,1 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+        body{
+            background-color: #21211f;
+        }
+        h1{
+            font-family: sans-serif;
+            font-style: italic;
+            font-weight: 900;
+            font-size: 150px;
+            color: #ffe600;
+            position: absolute;
+            top: 22%;
+            left: 38%;
+            
+        }
+        .lightning {
+            /* left: 160px; */
+            width: 65px;
+            height: 117px;
+            position: absolute;
+            top: 45%;
+            left: 30%;
+        }
+        .lightning:before,
+        .lightning:after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: #ffe600;
+            box-shadow: 0 0 0 50px;
+            clip-path: polygon(26% 0%,63% 0%,42% 45%,82% 45%,28% 100%,39% 75%,0% 76%);clip-path: polygon(26% 0%,60% 0%,44% 34%,89% 34%,28% 100%,40% 55%,0% 55%);
+            scale: 4.5;
+        }
 
+        .lightning:after {
+            animation: effect 2s infinite;
+            transform: perspective(300px) translateZ(0px);
+        }
+
+        @keyframes effect {
+            to {
+            transform: perspective(600px) translateZ(180px);
+            opacity: 0;
+            }
+        }
+
+        @media (max-width: 1500px) {
+            .lightning {
+            left: 30%;
+        }
+            .lightning:before,
+            .lightning:after{
+                scale: 2;
+            }
+            h1{
+                font-size: 50px;
+                top: 325px;
+            }
+        }
+
+        @media (max-width: 1200px) {
+            .lightning {
+            left: 27%;
+        }
+            .lightning:before,
+            .lightning:after{
+                scale: 2;
+            }
+            h1{
+                font-size: 50px;
+                top: 325px;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .lightning {
+            left: 25%;
+        }
+            .lightning:before,
+            .lightning:after{
+                scale: 2;
+            }
+            h1{
+                font-size: 50px;
+                top: 325px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .lightning {
+            left: 22%;
+        }
+            .lightning:before,
+            .lightning:after{
+                scale: 2;
+            }
+            h1{
+                font-size: 50px;
+                top: 325px;
+            }
+        }
+
+
+
+        
+
+
+
+
+    </style>
+    <title>Lightning</title>
+  </head>
+  <body>
+    <div class="content">
+        <div class="lightning"></div>
+        <h1>IGHTNING</h1>
+    </div>
+  </body>
+</html>
