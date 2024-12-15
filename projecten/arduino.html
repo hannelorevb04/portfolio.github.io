@@ -95,75 +95,79 @@
       ></iframe
     ></noscript>
     <!-- End Google Tag Manager (noscript) -->
-    <header>
-      <nav>
-        <label class="burger" for="burger">&equiv;</label>
-        <input id="burger" type="checkbox" />
-        <div class="subnav">
-          <a id="home" href="/index.html">Home</a>
-          <a href="/about.html">About</a>
-          <a href="/projecten.html">Projecten</a>
-          <a href="/contact.html">Contact</a>
-        </div>
-      </nav>
-      <h1>Arduino Piano</h1>
-      <div class="header-video">
-        <video autoplay muted loop>
-          <source src="/images/arduino.mp4" type="video/mp4" />
-        </video>
+    <nav>
+      <label class="burger" for="burger">&equiv;</label>
+      <input id="burger" type="checkbox" />
+      <div class="subnav">
+        <a id="home" href="/index.html">Home</a>
+        <a href="/about.html">About</a>
+        <a href="/projecten.html">Projecten</a>
+        <a href="/contact.html">Contact</a>
       </div>
-    </header>
+    </nav>
+    <main class="content-container">
+      <h1>Arduino Piano</h1>
 
-    <p>
-      For our Arduino project, we built a piano allowing users to play music
-      using push buttons. The piano is equipped with a buzzer for sound output
-      and an LCD screen to display the keys being pressed. Additionally, there's
-      a feature enabling users to automatically play and learn songs.
-    </p>
+      <p>
+        For our Arduino project, we built a piano allowing users to play music
+        using push buttons. The piano is equipped with a buzzer for sound output
+        and an LCD screen to display the keys being pressed. Additionally,
+        there's a feature enabling users to automatically play and learn songs.
+      </p>
 
-    <h2>How did we approach it?</h2>
-    <ul>
-      <li>
-        <span class="highlight">Exploration:</span> In the exploration phase, we
-        researched the technical capabilities of the Arduino platform to build a
-        functional piano. We identified the necessary components such as push
-        buttons, a buzzer, and an LCD screen. By studying existing DIY projects
-        and documentation, we gained insight into the best approach to realize
-        our idea.
-      </li>
-      <li>
-        <span class="highlight">Execution:</span> The execution phase involved
-        implementing the various functions of the piano. We started by
-        connecting the push buttons to the Arduino to simulate the piano keys.
-        Then, we linked the buzzer to produce the sound of the piano when the
-        keys are pressed.
-      </li>
-      <li>
-        <span class="highlight">Functional description:</span>
-        <ul>
-          <li>
-            <span class="highlight">Input and output:</span> We connected push
-            buttons acting as piano keys. When a button is pressed, a signal is
-            sent to the Arduino, which then activates the buzzer to produce the
-            corresponding sound.
-          </li>
-          <li>
-            <span class="highlight">Serial communication:</span> Communication
-            between the push buttons and the buzzer is essential for the
-            operation of the piano. With each press of a button, the Arduino
-            sends a signal to the buzzer to generate the correct sound.
-          </li>
-          <li>
-            <span class="highlight">LCD:</span> The LCD screen is integrated to
-            display the notes. When a key is pressed, the screen shows which
-            note is played. Additionally, users can press a button to see an
-            automatically played song displayed on the screen and attempt to
-            play it.
-          </li>
-        </ul>
-      </li>
-    </ul>
-    <!-- <h2>The result</h2>
+      <h3 class="highlight">Verkenningsfase</h3>
+      <p>In the exploration phase,
+          we researched the technical capabilities of the Arduino platform to
+          build a functional piano. We identified the necessary components such
+          as push buttons, a buzzer, and an LCD screen. By studying existing DIY
+          projects and documentation, we gained insight into the best approach
+          to realize our idea.
+          </p> 
+
+ <h3 class="highlight">Ontwerpfase</h3>
+          <p>The execution phase involved
+          implementing the various functions of the piano. We started by
+          connecting the push buttons to the Arduino to simulate the piano keys.
+          Then, we linked the buzzer to produce the sound of the piano when the
+          keys are pressed.
+
+          <h3 class="highlight">Functional description:</h3>
+          <ul>
+            <li>
+               We connected push
+              buttons acting as piano keys. When a button is pressed, a signal
+              is sent to the Arduino, which then activates the buzzer to produce
+              the corresponding sound.
+            </li>
+            <li>
+              Communication
+              between the push buttons and the buzzer is essential for the
+              operation of the piano. With each press of a button, the Arduino
+              sends a signal to the buzzer to generate the correct sound.
+            </li>
+            <li>
+              The LCD screen is integrated
+              to display the notes. When a key is pressed, the screen shows
+              which note is played. Additionally, users can press a button to
+              see an automatically played song displayed on the screen and
+              attempt to play it.
+            </li>
+          </ul>
+        </li>
+      </ul>
+       <!-- <h2>Het resultaat</h2> -->
+      <!-- <a
+        class="projects button"
+        href="/projecten/Google_Doodle/google_doodle/index.html"
+        target="_blank"
+        >Ga naar de site</a
+      >
+            <div class="video-container">
+        <video autoplay muted loop>
+          <source src="/images/" type="video/mp4" />
+        </video>
+      </div> -->
+      <!-- <h2>The result</h2>
     <video class="video-detail" autoplay muted loop class="video">
       <source src="/images/arduino.mp4" type="video/mp4" />
     </video>
@@ -173,6 +177,7 @@
         style="border: none"
       ></iframe>
     </div> -->
+    </main>
     <footer>
       <p>&copy; Hannelore Van Buynderen</p>
     </footer>
