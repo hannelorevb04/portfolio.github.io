@@ -1,4 +1,0 @@
-User-agent: *
-Disallow:
-
-Sitemap: https://hannelorevb04.github.io/portfolio.github.io/sitemap.xml
