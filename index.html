@@ -102,41 +102,35 @@
 
       .profile-option:hover .figma-icon {
         box-shadow: 0 0 70px rgba(242, 78, 30, 0.7),
-                    0 0 140px rgba(242, 78, 30, 0.5),
-                    0 0 210px rgba(242, 78, 30, 0.3);
+          0 0 140px rgba(242, 78, 30, 0.5), 0 0 210px rgba(242, 78, 30, 0.3);
       }
 
       .profile-option:hover .vscode-icon {
         box-shadow: 0 0 70px rgba(0, 122, 204, 0.7),
-                    0 0 140px rgba(0, 122, 204, 0.5),
-                    0 0 210px rgba(0, 122, 204, 0.3);
+          0 0 140px rgba(0, 122, 204, 0.5), 0 0 210px rgba(0, 122, 204, 0.3);
       }
 
       .profile-option:hover .adobe-icon {
         box-shadow: 0 0 70px rgba(255, 0, 0, 0.7),
-                    0 0 140px rgba(255, 0, 0, 0.5),
-                    0 0 210px rgba(255, 0, 0, 0.3);
+          0 0 140px rgba(255, 0, 0, 0.5), 0 0 210px rgba(255, 0, 0, 0.3);
       }
 
       .figma-icon {
         background-color: white !important;
         box-shadow: 0 0 50px rgba(242, 78, 30, 0.5),
-                    0 0 100px rgba(242, 78, 30, 0.3),
-                    0 0 150px rgba(242, 78, 30, 0.2);
+          0 0 100px rgba(242, 78, 30, 0.3), 0 0 150px rgba(242, 78, 30, 0.2);
       }
 
       .vscode-icon {
         background-color: white !important;
         box-shadow: 0 0 50px rgba(0, 122, 204, 0.5),
-                    0 0 100px rgba(0, 122, 204, 0.3),
-                    0 0 150px rgba(0, 122, 204, 0.2);
+          0 0 100px rgba(0, 122, 204, 0.3), 0 0 150px rgba(0, 122, 204, 0.2);
       }
 
       .adobe-icon {
         background-color: white !important;
         box-shadow: 0 0 50px rgba(255, 0, 0, 0.5),
-                    0 0 100px rgba(255, 0, 0, 0.3),
-                    0 0 150px rgba(255, 0, 0, 0.2);
+          0 0 100px rgba(255, 0, 0, 0.3), 0 0 150px rgba(255, 0, 0, 0.2);
       }
 
       .profile-icon {
@@ -155,9 +149,15 @@
       }
 
       @keyframes gradient {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
       }
 
       .profile-label {
@@ -261,19 +261,31 @@
       <div class="profile-options">
         <div class="profile-option" onclick="selectProfile('designer')">
           <div class="profile-icon figma-icon">
-            <img src="images/logos_figma.png" alt="Figma Logo" class="logo-img">
+            <img
+              src="images/logos_figma.png"
+              alt="Figma Logo"
+              class="logo-img"
+            />
           </div>
           <div class="profile-label">Designer</div>
         </div>
         <div class="profile-option" onclick="selectProfile('developer')">
           <div class="profile-icon vscode-icon">
-            <img src="images/devicon_vscode.png" alt="VS Code Logo" class="logo-img">
+            <img
+              src="images/devicon_vscode.png"
+              alt="VS Code Logo"
+              class="logo-img"
+            />
           </div>
           <div class="profile-label">Developer</div>
         </div>
         <div class="profile-option" onclick="selectProfile('mixed-media')">
           <div class="profile-icon adobe-icon">
-            <img src="images/logos_adobe-icon.png" alt="Adobe Logo" class="logo-img">
+            <img
+              src="images/logos_adobe-icon.png"
+              alt="Adobe Logo"
+              class="logo-img"
+            />
           </div>
           <div class="profile-label">Mixed-media</div>
         </div>
@@ -282,35 +294,47 @@
 
     <script>
       // Add click event to the entire body for the initial transition
-      document.body.addEventListener('click', function() {
+      document.body.addEventListener("click", function () {
         // Only trigger if we're on the first screen
-        if (!document.getElementById('splitContainer').classList.contains('fade-out')) {
+        if (
+          !document
+            .getElementById("splitContainer")
+            .classList.contains("fade-out")
+        ) {
           transitionToWhosWatching();
         }
       });
 
       function transitionToWhosWatching() {
-        const splitContainer = document.getElementById('splitContainer');
-        const textContainer = document.getElementById('textContainer');
-        const whosWatching = document.getElementById('whosWatching');
+        const splitContainer = document.getElementById("splitContainer");
+        const textContainer = document.getElementById("textContainer");
+        const whosWatching = document.getElementById("whosWatching");
 
         // Add fade out classes
-        splitContainer.classList.add('fade-out');
-        textContainer.classList.add('fade-out');
+        splitContainer.classList.add("fade-out");
+        textContainer.classList.add("fade-out");
 
         // After animation completes, show the who's watching page
         setTimeout(() => {
-          splitContainer.style.display = 'none';
-          textContainer.style.display = 'none';
-          whosWatching.classList.add('show');
+          splitContainer.style.display = "none";
+          textContainer.style.display = "none";
+          whosWatching.classList.add("show");
         }, 800);
       }
 
       function selectProfile(profileType) {
-        console.log('Selected profile:', profileType);
-        // Here you can add navigation to different portfolio sections
-        // based on the selected profile type
-        alert(`You selected: ${profileType}`);
+        console.log("Selected profile:", profileType);
+
+        if (profileType === "designer") {
+          // Navigate to the designer portfolio page
+          window.location.href = "designer.html";
+        } else if (profileType === "developer") {
+          // Navigate to the developer portfolio page
+          window.location.href = "developer.html";
+        } else if (profileType === "mixed-media") {
+          // Navigate to the mixed-media portfolio page
+          window.location.href = "mixed-media.html";
+        }
       }
     </script>
   </body>
