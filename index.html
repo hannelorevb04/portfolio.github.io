@@ -3,7 +3,113 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Portfolio</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        height: 100vh;
+        overflow: hidden;
+        font-family: "Arial", sans-serif;
+        cursor: pointer;
+      }
+
+      .split-container {
+        display: flex;
+        height: 100vh;
+        transition: all 0.8s ease-in-out;
+      }
+
+      .split-container.fade-out {
+        opacity: 0;
+        transform: scale(1.1);
+      }
+
+      .left-side {
+        width: 50%;
+        background-color: #f5f5f5;
+      }
+
+      .right-side {
+        width: 50%;
+        background-color: #102e4a;
+      }
+
+      .text-container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        z-index: 10;
+      }
+
+      .text-design,
+      .text-development {
+        font-size: 5rem;
+        font-weight: bold;
+        line-height: 1;
+        margin: 0;
+      }
+
+      .text-design {
+        margin-bottom: 1rem;
+      }
+
+      /* Split text styling */
+      .design-left {
+        color: #102e4a;
+      }
+
+      .design-right {
+        color: white;
+      }
+
+      .development-left {
+        color: #102e4a;
+      }
+
+      .development-right {
+        color: white;
+      }
+
+      @media (max-width: 768px) {
+        .split-container {
+          flex-direction: column;
+        }
+
+        .left-side,
+        .right-side {
+          width: 100%;
+          height: 50vh;
+        }
+
+        .text-design,
+        .text-development {
+          font-size: 3rem;
+        }
+      }
+    </style>
   </head>
-  <body></body>
+  <body>
+    <div class="split-container">
+      <div class="left-side"></div>
+      <div class="right-side"></div>
+    </div>
+
+    <div class="text-container">
+      <h1 class="text-design">
+        <span class="design-left">Des</span
+        ><span class="design-right">ign</span>
+      </h1>
+      <h1 class="text-development">
+        <span class="development-left">Develo</span
+        ><span class="development-right">pment</span>
+      </h1>
+    </div>
+  </body>
 </html>
