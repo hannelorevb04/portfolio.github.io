@@ -1,0 +1,93 @@
+*{
+    font-family: Arial, Helvetica, sans-serif;
+}
+nav{
+    background-color: #30302e;
+    padding: 65px;
+}
+/* #hockey_video {
+    position: fixed;
+    right: 0;
+    top: 148px;
+    width: 1725px;
+    height: 500px;
+   
+  } */
+  
+header {
+    /* background: rgba(0, 0, 0, 0.5); */
+    /* color: #f1f1f1;
+    width: 100%; */
+    /* padding: 20px; */
+    margin-top: 15%;
+}
+  
+h1{
+    text-align: center;
+}
+
+nav a{
+    text-decoration: none;
+    color: white;
+    padding: 10px;
+    font-size: larger;
+}
+
+.item img{
+    margin-left: 20px;
+    width: 180px;
+    height: 180px;
+}
+
+.item a{
+    text-decoration: none;
+    color: #30302e;
+    padding: 10px;
+    background-color: #c5d2cf;
+    border-radius: 25px;
+    width: 200px;
+    text-align: center;
+}
+
+.item h3{
+    width: 200px;
+    margin-left: 20px;
+}
+
+.item p{
+    margin-bottom: 25px;
+    margin-left: 20px;
+    justify-content: center;
+}
+
+.item{
+    margin: 50px;
+    
+}
+
+.sticks{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.prijs{
+    display: flex;
+}
+
+.oude_prijs{
+    text-decoration: line-through;
+    color: grey;
+}
+
+.kleding{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.accessoires{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}

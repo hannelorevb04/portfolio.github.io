@@ -1,0 +1,23 @@
+* {
+    background-color: #c0e1c1;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    margin-top: 48px;
+}
+
+header {
+    text-align: center;
+}
+
+
+.slideshow img {
+    margin-left: 40%;
+}
+
+@media (max-width: 42em) {
+    /* Voor schermen kleiner dan of gelijk aan 42em breedte */
+    #currentImage {
+        width: 250px;
+        height: auto;
+        margin-left: 30%;
+    }
+}
