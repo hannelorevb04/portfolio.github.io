@@ -254,3 +254,197 @@ body.index {
     height: 40px;
   }
 }
+
+/* =================================================================
+   DESIGNER PAGE STYLES
+   ================================================================= */
+.designer-page {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.video-header {
+  position: relative;
+  width: 100%;
+  height: 75vh;
+  overflow: hidden;
+}
+
+.background-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  opacity: 0.7;
+}
+
+/* Navigation Styles */
+.main-nav {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 3rem;
+}
+
+.nav-logo {
+  color: #102e4a;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.nav-profile {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgba(16, 46, 74, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+}
+
+.profile-image {
+  height: 24px;
+}
+
+/* Hero Content */
+.hero-content {
+  position: absolute;
+  top: 75%;
+  left: 3rem;
+  transform: translateY(-50%);
+  z-index: 10;
+  max-width: 600px;
+}
+
+.hero-title {
+  color: #102e4a;
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.hero-description {
+  color: #102e4a;
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+/* Button Styles */
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.btn-resume,
+.btn-linkedin {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-resume {
+  background-color: rgba(255, 255, 255, 0.25);
+  color: #102e4a;
+  backdrop-filter: blur(10px);
+}
+
+.btn-resume:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+  transform: translateY(-2px);
+}
+
+.btn-linkedin {
+  background-color: rgba(16, 46, 74, 0.9);
+  color: white;
+  backdrop-filter: blur(10px);
+}
+
+.btn-linkedin:hover {
+  background-color: rgba(16, 46, 74, 1);
+  transform: translateY(-2px);
+}
+
+.play-icon {
+  font-size: 0.8rem;
+}
+
+.linkedin-icon {
+  background-color: white;
+  color: #0077b5;
+  width: 20px;
+  height: 20px;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+/* Responsive Design for Designer Page */
+@media (max-width: 768px) {
+  .main-nav {
+    padding: 1.5rem 2rem;
+  }
+
+  .hero-content {
+    left: 2rem;
+    max-width: calc(100% - 4rem);
+  }
+
+  .hero-title {
+    font-size: 2.5rem;
+  }
+
+  .hero-description {
+    font-size: 0.9rem;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-nav {
+    padding: 1rem 1.5rem;
+  }
+
+  .nav-logo {
+    font-size: 1.2rem;
+  }
+
+  .hero-content {
+    left: 1.5rem;
+    max-width: calc(100% - 3rem);
+  }
+
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .btn-resume,
+  .btn-linkedin {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+  }
+}
