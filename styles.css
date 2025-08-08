@@ -451,9 +451,30 @@ body.index {
 
 .projects {
   display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
+  gap: 1rem;
   padding: 2rem 3rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  padding-bottom: 1rem;
+}
+
+.projects::-webkit-scrollbar {
+  height: 8px;
+}
+
+.projects::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+.projects::-webkit-scrollbar-thumb {
+  background: rgba(16, 46, 74, 0.6);
+  border-radius: 4px;
+}
+
+.projects::-webkit-scrollbar-thumb:hover {
+  background: rgba(16, 46, 74, 0.8);
 }
 
 .project-card {
@@ -463,6 +484,7 @@ body.index {
   overflow: hidden;
   cursor: pointer;
   transition: transform 0.3s ease;
+  flex-shrink: 0;
 }
 
 .project-card:hover {
