@@ -261,8 +261,8 @@ body.index {
 .designer-page {
   margin: 0;
   padding: 0;
-  height: 100vh;
-  overflow: hidden;
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
 .video-header {
@@ -303,7 +303,7 @@ body.index {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background-color: rgba(16, 46, 74, 0.8);
+  background-color: #102e4a;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -447,4 +447,86 @@ body.index {
     padding: 0.6rem 1.2rem;
     font-size: 0.9rem;
   }
+}
+
+.projects {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  padding: 2rem 3rem;
+}
+
+.project-card {
+  width: 303px;
+  height: 227px;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.project-card:hover {
+  transform: scale(1.03);
+}
+
+.overlap-group {
+  position: relative;
+  height: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.image {
+  position: absolute;
+  width: 303px;
+  height: 170px;
+  top: 0;
+  left: 0;
+  object-fit: contain;
+}
+
+.gradient {
+  position: absolute;
+  width: 303px;
+  height: 227px;
+  top: 0;
+  left: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(16, 46, 74, 0) 0%,
+    rgba(16, 46, 74, 1) 100%
+  );
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 6px;
+  padding-left: 10px;
+  position: absolute;
+  bottom: 10px;
+}
+
+.text-wrapper {
+  font-family: "Inter-Bold", Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  color: #ffffff;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 4px 8px;
+  border-radius: 12px;
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  display: inline-block;
+  width: fit-content;
+}
+
+.div {
+  font-family: "Inter-Bold", Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  color: #ffffff;
+  font-size: 16px;
 }
