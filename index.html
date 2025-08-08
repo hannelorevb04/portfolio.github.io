@@ -8,26 +8,26 @@
   </head>
   <body>
     <div class="split-container" id="splitContainer">
-      <div class="left-side"></div>
-      <div class="right-side"></div>
+      <div class="left-side" onclick="window.location.href='designer.html'"></div>
+      <div class="right-side" onclick="window.location.href='developer.html'"></div>
     </div>
 
     <div class="text-container" id="textContainer">
-      <h1 class="text-design">
-        <span class="design-left">Des</span
-        ><span class="design-right">ign</span>
-      </h1>
-      <h1 class="text-development">
-        <span class="development-left">Develo</span
-        ><span class="development-right">pment</span>
-      </h1>
+      <div class="text-design">
+        <div class="text-layer text-left">Design</div>
+        <div class="text-layer text-right">Design</div>
+      </div>
+      <div class="text-development">
+        <div class="text-layer text-left">Development</div>
+        <div class="text-layer text-right">Development</div>
+      </div>
     </div>
 
     <script>
       // Auto-redirect after 10 seconds
-      setTimeout(function () {
-        window.location.href = "profiles.html";
-      }, 5000);
+      //   setTimeout(function () {
+      //     window.location.href = "profiles.html";
+      //   }, 5000);
     </script>
   </body>
 </html>
