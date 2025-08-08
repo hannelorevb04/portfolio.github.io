@@ -449,10 +449,22 @@ body.index {
   }
 }
 
+.projects-section {
+  padding: 0 3rem;
+}
+
+.section-title {
+  color: #102e4a;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  margin-top: 3rem;
+  text-align: left;
+}
+
 .projects {
   display: flex;
   gap: 1rem;
-  padding: 2rem 3rem;
   overflow-x: auto;
   overflow-y: hidden;
   scroll-behavior: smooth;
