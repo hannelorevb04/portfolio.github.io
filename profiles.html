@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Portfolio - Who's Watching?</title>
+  </head>
+  <body>
+    <div class="profiles-page">
+      <h1 class="profiles-title">Who's watching?</h1>
+
+      <div class="profiles-container">
+        <div class="profile-card" onclick="selectProfile('designer')">
+          <div class="profile-circle">
+            <img
+              src="images/logos_figma.png"
+              alt="Figma"
+              class="profile-icon"
+            />
+          </div>
+          <h3 class="profile-label">Designer</h3>
+        </div>
+
+        <div class="profile-card" onclick="selectProfile('developer')">
+          <div class="profile-circle">
+            <img
+              src="images/devicon_vscode.png"
+              alt="VS Code"
+              class="profile-icon"
+            />
+          </div>
+          <h3 class="profile-label">Developer</h3>
+        </div>
+
+        <div class="profile-card" onclick="selectProfile('mixed-media')">
+          <div class="profile-circle">
+            <img
+              src="images/logos_adobe-icon.png"
+              alt="Adobe"
+              class="profile-icon"
+            />
+          </div>
+          <h3 class="profile-label">Mixed-media</h3>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function selectProfile(profileType) {
+        if (profileType === "designer") {
+          window.location.href = "designer.html";
+        } else if (profileType === "developer") {
+          window.location.href = "developer.html";
+        } else if (profileType === "mixed-media") {
+          window.location.href = "mixed-media.html";
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        height: 100vh;
+        overflow: hidden;
+        font-family: "Arial", sans-serif;
+        cursor: pointer;
+      }
+
+      .split-container {
+        display: flex;
+        height: 100vh;
+        transition: all 0.8s ease-in-out;
+      }
+
+      .split-container.fade-out {
+        opacity: 0;
+        transform: scale(1.1);
+      }
+
+      .left-side {
+        width: 50%;
+        background-color: #f5f5f5;
+      }
+
+      .right-side {
+        width: 50%;
+        background-color: #102e4a;
+      }
+
+      .text-container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        z-index: 10;
+        transition: all 0.8s ease-in-out;
+      }
+
+      .text-container.fade-out {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.9);
+      }
+
+      /* Who's watching page styles */
+      .whos-watching {
+        display: none;
+        background-color: #102e4a;
+        height: 100vh;
+        color: white;
+        text-align: center;
+        padding: 2rem;
+        opacity: 0;
+        transition: opacity 0.8s ease-in-out;
+      }
+
+      .whos-watching.show {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        opacity: 1;
+      }
+
+      .whos-watching h2 {
+        font-size: 3rem;
+        margin-bottom: 3rem;
+        font-weight: normal;
+      }
+
+      .profile-options {
+        display: flex;
+        gap: 3rem;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .profile-option {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+        position: relative;
+      }
+
+      .profile-option:hover {
+        transform: scale(1.05);
+      }
+
+      .profile-option:hover .figma-icon {
+        box-shadow: 0 0 70px rgba(242, 78, 30, 0.7),
+          0 0 140px rgba(242, 78, 30, 0.5), 0 0 210px rgba(242, 78, 30, 0.3);
+      }
+
+      .profile-option:hover .vscode-icon {
+        box-shadow: 0 0 70px rgba(0, 122, 204, 0.7),
+          0 0 140px rgba(0, 122, 204, 0.5), 0 0 210px rgba(0, 122, 204, 0.3);
+      }
+
+      .profile-option:hover .adobe-icon {
+        box-shadow: 0 0 70px rgba(255, 0, 0, 0.7),
+          0 0 140px rgba(255, 0, 0, 0.5), 0 0 210px rgba(255, 0, 0, 0.3);
+      }
+
+      .figma-icon {
+        background-color: white !important;
+        box-shadow: 0 0 50px rgba(242, 78, 30, 0.5),
+          0 0 100px rgba(242, 78, 30, 0.3), 0 0 150px rgba(242, 78, 30, 0.2);
+      }
+
+      .vscode-icon {
+        background-color: white !important;
+        box-shadow: 0 0 50px rgba(0, 122, 204, 0.5),
+          0 0 100px rgba(0, 122, 204, 0.3), 0 0 150px rgba(0, 122, 204, 0.2);
+      }
+
+      .adobe-icon {
+        background-color: white !important;
+        box-shadow: 0 0 50px rgba(255, 0, 0, 0.5),
+          0 0 100px rgba(255, 0, 0, 0.3), 0 0 150px rgba(255, 0, 0, 0.2);
+      }
+
+      .profile-icon {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        background-color: white !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1rem;
+        font-size: 3rem;
+        position: relative;
+        transition: all 0.3s ease, box-shadow 0.3s ease;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+      }
+
+      @keyframes gradient {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      .profile-label {
+        font-size: 1.2rem;
+        color: #cccccc;
+      }
+
+      .logo-svg {
+        width: 60px;
+        height: 60px;
+        fill: white;
+      }
+
+      .logo-img {
+        width: 60px;
+        height: 60px;
+        object-fit: contain;
+      }
+
+      .text-design,
+      .text-development {
+        font-size: 5rem;
+        font-weight: bold;
+        line-height: 1;
+        margin: 0;
+      }
+
+      .text-design {
+        margin-bottom: 1rem;
+      }
+
+      /* Split text styling */
+      .design-left {
+        color: #102e4a;
+      }
+
+      .design-right {
+        color: white;
+      }
+
+      .development-left {
+        color: #102e4a;
+      }
+
+      .development-right {
+        color: white;
+      }
+
+      @media (max-width: 768px) {
+        .split-container {
+          flex-direction: column;
+        }
+
+        .left-side,
+        .right-side {
+          width: 100%;
+          height: 50vh;
+        }
+
+        .text-design,
+        .text-development {
+          font-size: 3rem;
+        }
+
+        .profile-options {
+          flex-direction: column;
+          gap: 2rem;
+        }
+
+        .profile-icon {
+          width: 100px;
+          height: 100px;
+          font-size: 2.5rem;
+        }
+
+        .whos-watching h2 {
+          font-size: 2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="split-container" id="splitContainer">
+      <div class="left-side"></div>
+      <div class="right-side"></div>
+    </div>
+
+    <div class="text-container" id="textContainer">
+      <h1 class="text-design">
+        <span class="design-left">Des</span
+        ><span class="design-right">ign</span>
+      </h1>
+      <h1 class="text-development">
+        <span class="development-left">Develo</span
+        ><span class="development-right">pment</span>
+      </h1>
+    </div>
+
+    <div class="whos-watching" id="whosWatching">
+      <h2>Who's watching?</h2>
+      <div class="profile-options">
+        <div class="profile-option" onclick="selectProfile('designer')">
+          <div class="profile-icon figma-icon">
+            <img
+              src="images/logos_figma.png"
+              alt="Figma Logo"
+              class="logo-img"
+            />
+          </div>
+          <div class="profile-label">Designer</div>
+        </div>
+        <div class="profile-option" onclick="selectProfile('developer')">
+          <div class="profile-icon vscode-icon">
+            <img
+              src="images/devicon_vscode.png"
+              alt="VS Code Logo"
+              class="logo-img"
+            />
+          </div>
+          <div class="profile-label">Developer</div>
+        </div>
+        <div class="profile-option" onclick="selectProfile('mixed-media')">
+          <div class="profile-icon adobe-icon">
+            <img
+              src="images/logos_adobe-icon.png"
+              alt="Adobe Logo"
+              class="logo-img"
+            />
+          </div>
+          <div class="profile-label">Mixed-media</div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Add click event to the entire body for the initial transition
+      document.body.addEventListener("click", function () {
+        // Only trigger if we're on the first screen
+        if (
+          !document
+            .getElementById("splitContainer")
+            .classList.contains("fade-out")
+        ) {
+          transitionToWhosWatching();
+        }
+      });
+
+      function transitionToWhosWatching() {
+        const splitContainer = document.getElementById("splitContainer");
+        const textContainer = document.getElementById("textContainer");
+        const whosWatching = document.getElementById("whosWatching");
+
+        // Add fade out classes
+        splitContainer.classList.add("fade-out");
+        textContainer.classList.add("fade-out");
+
+        // After animation completes, show the who's watching page
+        setTimeout(() => {
+          splitContainer.style.display = "none";
+          textContainer.style.display = "none";
+          whosWatching.classList.add("show");
+        }, 800);
+      }
+
+      function selectProfile(profileType) {
+        console.log("Selected profile:", profileType);
+
+        if (profileType === "designer") {
+          // Navigate to the designer portfolio page
+          window.location.href = "designer.html";
+        } else if (profileType === "developer") {
+          // Navigate to the developer portfolio page
+          window.location.href = "developer.html";
+        } else if (profileType === "mixed-media") {
+          // Navigate to the mixed-media portfolio page
+          window.location.href = "mixed-media.html";
+        }
+      }
+    </script>
+  </body>
+</html>

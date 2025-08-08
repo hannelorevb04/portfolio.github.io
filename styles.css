@@ -1,0 +1,256 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Arial", sans-serif;
+}
+
+body {
+  height: 100vh;
+  position: relative;
+}
+
+/* Index page styles */
+body.index {
+  overflow: hidden;
+}
+
+.split-container {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+}
+
+.left-side {
+  width: 50%;
+  background-color: #ffffff;
+  height: 100%;
+}
+
+.right-side {
+  width: 50%;
+  background-color: #102e4a;
+  height: 100%;
+}
+
+.text-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+}
+
+.text-design,
+.text-development {
+  font-size: 5rem;
+  font-weight: bold;
+  margin: 0;
+  line-height: 1;
+}
+
+.text-design {
+  margin-bottom: 1rem;
+}
+
+.design-left {
+  color: #2c3e50;
+}
+
+.design-right {
+  color: #f5f5f5;
+}
+
+.development-left {
+  color: #2c3e50;
+}
+
+.development-right {
+  color: #f5f5f5;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .text-design,
+  .text-development {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .text-design,
+  .text-development {
+    font-size: 2rem;
+  }
+}
+
+/* =================================================================
+   PROFILES PAGE STYLES
+   ================================================================= */
+.profiles-page {
+  min-height: 100vh;
+  background-color: #102e4a;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.profiles-title {
+  color: white;
+  font-size: 3.5rem;
+  font-weight: 300;
+  margin-bottom: 4rem;
+  text-align: center;
+}
+
+.profiles-container {
+  display: flex;
+  gap: 4rem;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.profile-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  position: relative;
+}
+
+.profile-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  filter: blur(15px);
+  opacity: 0.3;
+  z-index: 0;
+  transition: all 0.3s ease;
+}
+
+/* Individual colored backgrounds for each profile */
+.profile-card:nth-child(1)::before {
+  background: radial-gradient(circle, #ff6b6b, #4ecdc4, #45b7d1);
+}
+
+.profile-card:nth-child(2)::before {
+  background: radial-gradient(circle, #007acc, #4fc3f7, #1976d2);
+}
+
+.profile-card:nth-child(3)::before {
+  background: radial-gradient(circle, #ff0000, #ff4444, #cc0000);
+}
+
+.profile-card:hover::before {
+  opacity: 0.5;
+  transform: translateX(-50%) scale(1.1);
+}
+
+.profile-card:hover {
+  transform: scale(1.1);
+}
+
+.profile-circle {
+  width: 150px;
+  height: 150px;
+  background-color: rgba(80, 80, 80, 0.8);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.3), 0 0 60px rgba(255, 255, 255, 0.1),
+    inset 0 0 20px rgba(255, 255, 255, 0.1);
+  position: relative;
+  z-index: 1;
+}
+
+.profile-card:hover .profile-circle {
+  background-color: rgba(100, 100, 100, 0.9);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: scale(1.05);
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.4), 0 0 80px rgba(255, 255, 255, 0.2),
+    inset 0 0 30px rgba(255, 255, 255, 0.2);
+}
+
+.profile-label {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 400;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+/* Profile Icons */
+.profile-icon {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.profile-card:hover .profile-icon {
+  transform: scale(1.1);
+  filter: brightness(1.1);
+}
+
+/* Responsive Design for Profiles */
+@media (max-width: 768px) {
+  .profiles-title {
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .profiles-container {
+    gap: 2rem;
+  }
+
+  .profile-circle {
+    width: 120px;
+    height: 120px;
+  }
+
+  .profile-icon {
+    width: 45px;
+    height: 45px;
+  }
+}
+
+@media (max-width: 480px) {
+  .profiles-title {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .profiles-container {
+    gap: 1.5rem;
+    flex-direction: column;
+  }
+
+  .profile-circle {
+    width: 100px;
+    height: 100px;
+  }
+
+  .profile-icon {
+    width: 40px;
+    height: 40px;
+  }
+}
