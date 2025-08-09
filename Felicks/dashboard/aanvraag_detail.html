@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>📄 Detail adoptieaanvraag</title>
+    <link rel="stylesheet" href="https://use.typekit.net/wcl0jwk.css" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600&family=Sirinia&display=swap");
+      @import url("https://use.typekit.net/wcl0jwk.css");
+
+      body {
+        font-family: "Nunito", sans-serif;
+        background-color: #fde4d2;
+        padding: 2rem;
+        color: #183a36;
+      }
+
+      nav {
+        padding: 1rem;
+        margin-bottom: 2rem;
+      }
+
+      nav a {
+        margin-right: 1rem;
+        text-decoration: none;
+        color: #183a36;
+        font-weight: bold;
+      }
+
+      .container {
+        max-width: 860px;
+        background: #fffdf9;
+        margin: 0 auto;
+        padding: 2rem;
+        border-radius: 20px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+      }
+
+      h1,
+      h2 {
+        font-family: "Sirenia", serif;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+      }
+
+      .dog-photo {
+        width: 100%;
+        max-height: 500px;
+        height: auto;
+        object-fit: cover;
+        border-radius: 12px;
+        margin-bottom: 2rem;
+        background-color: #fffdf9;
+      }
+
+      .info-block,
+      .profiel-item {
+        margin-bottom: 0.6rem;
+      }
+
+      .info-block strong,
+      .profiel-item strong {
+        display: inline-block;
+        width: 180px;
+        font-weight: 600;
+        color: #183a36;
+      }
+
+      .status-label {
+        display: inline-block;
+        padding: 0.3rem 0.8rem;
+        border-radius: 12px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin-left: 0.5rem;
+      }
+
+      .status-goedgekeurd {
+        background-color: #97b8a5;
+        color: #183a36;
+      }
+
+      .status-in_behandeling {
+        background-color: #ffd87e;
+        color: #183a36;
+      }
+
+      .status-afgewezen {
+        background-color: #f18b7e;
+        color: #183a36;
+      }
+
+      .styled-select {
+        font-family: "Nunito", sans-serif;
+        padding: 0.1rem 0.6rem;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        background-color: #f6f6f6;
+        font-size: 1rem;
+        color: #173a36;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <a href="index.html">Aanvragen in behandeling</a>
+      <a href="dashboard/aanvragen_per_hond.html">Per hond</a>
+      <a href="dashboard/aanvragen_per_persoon.html">Per persoon</a>
+    </nav>
+
+    <div
+      style="
+        max-width: 925px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 2rem;
+      "
+    >
+      <h1 style="font-size: 2rem; font-family: 'Sirenia', serif; margin: 0">
+        Detail adoptieaanvraag
+      </h1>
+    </div>
+
+    <div class="container">
+      <div id="dog-image"></div>
+      <div class="info-block">
+        <strong>Hond:</strong> <span id="dog-name"></span>
+      </div>
+      <div class="info-block">
+        <strong>Aanvrager:</strong> <span id="user-email"></span>
+      </div>
+      <div class="info-block">
+        <strong>Status:</strong>
+        <select class="styled-select" id="status-select"></select>
+        <span class="status-label" id="status-label"></span>
+      </div>
+      <div class="info-block">
+        <strong>Bericht:</strong> <span id="user-message"></span>
+      </div>
+
+      <h2>Adoptieprofiel</h2>
+      <div class="profiel-item">
+        <strong>Leefsituatie:</strong>
+        <span class="antwoord" id="living_situation"></span>
+      </div>
+      <div class="profiel-item">
+        <strong>Ervaring:</strong>
+        <span class="antwoord" id="experience_level"></span>
+      </div>
+      <div class="profiel-item">
+        <strong>Activiteitsniveau:</strong>
+        <span class="antwoord" id="activity_level"></span>
+      </div>
+      <div class="profiel-item">
+        <strong>Thuisfrequentie:</strong>
+        <span class="antwoord" id="home_frequency"></span>
+      </div>
+      <div class="profiel-item">
+        <strong>Voorkeursgrootte:</strong>
+        <span class="antwoord" id="preferred_size"></span>
+      </div>
+      <div class="profiel-item">
+        <strong>Kinderen in huis:</strong>
+        <span class="antwoord" id="has_children"></span>
+      </div>
+      <div class="profiel-item">
+        <strong>Andere huisdieren:</strong>
+        <span class="antwoord" id="has_pets"></span>
+      </div>
+      <div class="profiel-item">
+        <strong>Persoonlijkheid:</strong>
+        <span class="antwoord" id="personality"></span>
+      </div>
+      <div class="profiel-item">
+        <strong>Blaffen:</strong> <span class="antwoord" id="barking"></span>
+      </div>
+      <div class="profiel-item">
+        <strong>Trainbaarheid:</strong>
+        <span class="antwoord" id="training"></span>
+      </div>
+      <div class="profiel-item">
+        <strong>Vachtverzorging:</strong>
+        <span class="antwoord" id="grooming"></span>
+      </div>
+      <div class="profiel-item">
+        <strong>Haarverlies:</strong>
+        <span class="antwoord" id="shedding"></span>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <script>
+      const supabase = window.supabase.createClient(
+        "https://vgbuoxdfrbzqbqltcelz.supabase.co",
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZnYnVveGRmcmJ6cWJxbHRjZWx6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDEwMTgyMzQsImV4cCI6MjA1NjU5NDIzNH0.JJdiJGHZS1yhVP_hnFAdve-VGfNBK5LmiBSMICSdkbk"
+      );
+
+      const id = new URLSearchParams(window.location.search).get("id");
+      let userId = null;
+
+      async function loadStatus() {
+        const select = document.getElementById("status-select");
+        const label = document.getElementById("status-label");
+
+        ["goedgekeurd", "in_behandeling", "afgewezen"].forEach((val) => {
+          const opt = document.createElement("option");
+          opt.value = val;
+          opt.textContent = val
+            .replace("_", " ")
+            .replace(/\b\w/g, (c) => c.toUpperCase());
+          select.appendChild(opt);
+        });
+
+        const { data, error } = await supabase
+          .from("adoption_requests")
+          .select("status")
+          .eq("id", id)
+          .single();
+
+        if (data?.status) {
+          select.value = data.status;
+          updateStatusLabel(data.status);
+        }
+
+        select.addEventListener("change", async (e) => {
+          const selectedStatus = e.target.value;
+          const { error } = await supabase
+            .from("adoption_requests")
+            .update({ status: selectedStatus })
+            .eq("id", id);
+
+          if (!error) updateStatusLabel(selectedStatus);
+          else console.error("Update error:", error);
+        });
+      }
+
+      function updateStatusLabel(status) {
+        const label = document.getElementById("status-label");
+        const displayText = document.querySelector(
+          `#status-select option[value="${status}"]`
+        ).textContent;
+        label.textContent = displayText;
+        label.className = "status-label status-" + status;
+      }
+
+      async function loadAdoptionProfile() {
+        if (!userId) return;
+
+        const { data: profile } = await supabase
+          .from("adoption_profiles")
+          .select("*")
+          .eq("user_id", userId)
+          .single();
+
+        if (!profile) return;
+
+        const mapping = {
+          living_situation: {
+            garden: "We hebben een tuin waar de hond lekker kan snuffelen",
+            apartment: "In een gezellig appartement – knus en compact",
+            no_garden:
+              "Een huis zonder tuin, maar met veel wandelopties in de buurt",
+            rural:
+              "Veel ruimte, veel natuur – buiten zijn is bij ons vanzelfsprekend",
+          },
+          home_frequency: {
+            always_home:
+              "Bijna altijd, ik werk van thuis uit of ben vaak thuis",
+            mixed: "Gedeeld – soms thuis, soms weg",
+            mostly_away:
+              "Vaak van huis – mijn hond moet goed alleen kunnen zijn",
+          },
+          experience_level: {
+            none: "Ik heb nog geen ervaring met honden",
+            some: "Ik heb al eens een hond gehad of ken er veel over",
+            expert: "Honden zijn altijd al deel van mijn leven geweest",
+          },
+          preferred_size: {
+            small: "Klein en compact – makkelijk mee te nemen",
+            medium: "Middelgroot – ideaal voor thuis én onderweg",
+            large: "Groot en imposant – ik hou van honden met aanwezigheid",
+          },
+          has_children: {
+            none: "Nee, er zijn geen kinderen in huis",
+            teens: "Ja, met tieners of oudere kinderen",
+            young: "Ja, met jonge kinderen",
+          },
+          has_pets: {
+            none: "Nee, dit wordt ons eerste huisdier",
+            other_pets: "Ja, katten of andere dieren",
+            first_pet: "Nee, dit wordt ons eerste huisdier",
+            dogs: "Ja, één of meerdere honden",
+          },
+          personality: {
+            calm: "Gezelligheid en rust – een trouwe metgezel in huis",
+            playmate: "Een vrolijk maatje voor wandelingen en spel",
+            guardian: "Een loyale hond die ook goed waakt als dat nodig is",
+            smart: "Een slimme hond om mee te trainen en dingen aan te leren",
+          },
+          barking: {
+            quiet: "Liever zo stil mogelijk",
+            some: "Een beetje blaffen hoort erbij",
+            vocal: "Een praatgrage hond is geen probleem",
+          },
+          training: {
+            very_important:
+              "Heel belangrijk – ik wil een hond die snel leert en goed luistert",
+            important:
+              "Belangrijk, maar het hoeft geen perfect gehoorzame hond te zijn",
+            independent:
+              "Niet zo belangrijk – ik waardeer een zelfstandige hond",
+          },
+          grooming: {
+            minimal: "Minimale verzorging nodig",
+            occasional: "Af en toe borstelen of wassen is prima",
+            daily: "Dagelijkse verzorging is geen probleem",
+          },
+          shedding: {
+            no_hair: "Geen haarverlies",
+            little: "Een beetje haarverlies is oké",
+            a_lot: "Ik heb geen probleem met veel haarverlies",
+          },
+        };
+
+        // Zet de juiste zinnen op de pagina
+        Object.entries(profile).forEach(([key, value]) => {
+          const el = document.getElementById(key);
+          if (el && value && mapping[key] && mapping[key][value]) {
+            el.textContent = mapping[key][value];
+          }
+        });
+      }
+      async function loadData() {
+        const { data: requestData } = await supabase
+          .from("requests_with_user_and_dog")
+          .select("dog_name, user_email, message, images, user_id")
+          .eq("id", id)
+          .single();
+
+        if (requestData) {
+          userId = requestData.user_id;
+          document.getElementById("dog-name").textContent =
+            requestData.dog_name;
+          document.getElementById("user-email").textContent =
+            requestData.user_email;
+          document.getElementById("user-message").textContent =
+            requestData.message;
+
+          if (requestData.images?.length > 0) {
+            const img = document.createElement("img");
+            img.src = requestData.images[0];
+            img.alt = "Hondfoto";
+            img.className = "dog-photo";
+            document.getElementById("dog-image").appendChild(img);
+          }
+
+          await loadAdoptionProfile();
+        }
+      }
+
+      window.onload = async () => {
+        await loadStatus();
+        await loadData();
+      };
+    </script>
+  </body>
+</html>

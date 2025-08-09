@@ -1,0 +1,204 @@
+
+
+/* ------------------------ BASIS ------------------------ */
+body {
+  margin: 0;
+  font-family: "Nunito", sans-serif;
+  background-color: #FFFDF9;
+  color: #183A36;
+  line-height: 1.4;
+  font-size: 16px;
+}
+
+.article-container {
+  padding: 0 1.5rem;
+}
+
+#categoryButtons,
+#categoryButtonsClone {
+  margin-bottom: 0;
+}
+
+/* ------------------------ Titel & pijl ------------------------ */
+.title-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+  text-align: center;
+ margin-top: 3rem;
+}
+
+.back-link {
+  margin-right: auto;
+   z-index: 1000; 
+}
+
+.back-link img {
+  max-width: 22px;
+}
+
+#articleTitle {
+  font-size: 24px;
+  font-weight: 600;
+  font-family: "Sirenia", serif;
+ 
+  flex: 1 1 auto;
+  width: 60%;
+  color: #183A36;
+}
+
+/* ------------------------ Afbeelding ------------------------ */
+.image-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+#articleImage {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 12px;
+}
+
+/* ------------------------ Tekst ------------------------ */
+.summary {
+  font-weight: 500;
+  font-family: "Sirenia", serif;
+  font-size: 18px;
+  padding: 12px 0;
+  font-style: italic;
+  color: #183A36;
+}
+
+.description-content {
+  text-align: left;
+  color: #183A36;
+}
+
+.description-content ul {
+  margin-top: 1rem;
+}
+
+.description-content li {
+  margin-bottom: 0.5rem;
+}
+
+/* ------------------------ Footer ------------------------ */
+.footer {
+  margin-top: 100px;
+  
+}
+
+/* ------------------------ TABLET ------------------------ */
+@media screen and (min-width: 725px) {
+  
+  body {
+    font-size: 16px;
+  }
+
+  .article-container {
+    padding: 0 120px;
+  }
+
+  .title-row .back-link {
+    position: static;
+    grid-area: back;
+  }
+
+  .back-link img {
+    max-width: 30px;
+  }
+
+  #articleTitle {
+    grid-area: title;
+    width: 100%;
+    margin-top: -42px;
+    font-size: 32px;
+  }
+
+  .summary {
+    font-size: 20px;
+    padding: 31px 0;
+  }
+}
+
+/* ------------------------ WEB ------------------------ */
+@media screen and (min-width: 1100px) {
+ 
+  body {
+    font-size: 18px;
+  }
+
+  .title-row {
+    text-align: center;
+   margin-top: 4rem;
+  }
+
+  .back-link img {
+    max-width: 35px;
+    align-items: center;
+  }
+
+  #articleTitle {
+    grid-area: title;
+    width: 100%;
+    margin-top: -58px;
+    font-size: 42px;
+  }
+
+  .image-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 0 auto 2rem auto;
+  }
+
+  #articleImage {
+    max-width: 400px;
+    width: 100%;
+    height: auto;
+  }
+
+  .summary {
+    font-size: 22px;
+    padding: 31px 0;
+    max-width: 700px;
+    margin: 0 auto;
+    color: #183A36;
+  }
+
+  .footer {
+    margin-top: 160px;
+  }
+
+  .description-content {
+    margin-top: 36px;
+    margin-left: 10%;
+  }
+}
+
+
+
+#categoryButtons .category-button.active {
+  background-color: #F18B7E !important;
+  
+}
+.description-content p {
+  margin-bottom: 1.5rem;  
+  font-weight: 600;
+}
+
+.description-content ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+  margin: 1.5rem 0; 
+  margin-bottom: 3rem;    
+}
+
+.description-content li {
+  margin-bottom: 0.75rem;  
+}
+

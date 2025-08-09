@@ -111,13 +111,13 @@ body.index {
     height: 4rem;
     line-height: 0.9;
   }
-  
+
   .text-layer {
     font-size: 4.5rem;
     line-height: 0.9;
     letter-spacing: -0.01em;
   }
-  
+
   .text-design {
     margin-bottom: 1rem;
   }
@@ -130,13 +130,13 @@ body.index {
     height: 2.5rem;
     line-height: 0.9;
   }
-  
+
   .text-layer {
     font-size: 2.8rem;
     line-height: 0.9;
     letter-spacing: 0;
   }
-  
+
   .text-design {
     margin-bottom: 0.8rem;
   }
@@ -616,4 +616,91 @@ body.index {
   font-weight: 700;
   color: #ffffff;
   font-size: 16px;
+}
+
+/* Iframe specific styles */
+.iframe-project {
+  border: none;
+  pointer-events: auto;
+  width: 1212px !important;
+  height: 681px !important;
+  transform: scale(0.25);
+  transform-origin: top left;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 1;
+  visibility: visible;
+  background: white;
+}
+
+/* Force iframe content to load and animate */
+.iframe-project[src*="Google doodle"] {
+  animation: forceLoad 1s ease-in-out;
+}
+
+/* Specific styling for Hockey Shop iframe */
+.iframe-project[src*="Hockey_shop"] {
+  background: #f0f0f0;
+  transform: scale(0.32);
+  width: 950px !important;
+  height: 530px !important;
+}
+
+/* Specific styling for Felicks iframe */
+.iframe-project[src*="Felicks"] {
+  background: #ffffff;
+  transform: scale(0.25);
+  width: 1212px !important;
+  height: 680px !important;
+}
+
+@keyframes forceLoad {
+  0% {
+    opacity: 0.99;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.iframe-project::-webkit-scrollbar {
+  display: none;
+}
+
+.project-card:hover .iframe-project {
+  pointer-events: auto;
+}
+
+.overlap-group:hover .iframe-project {
+  pointer-events: auto;
+}
+
+.overlap-group {
+  position: relative;
+  height: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  clip-path: inset(0);
+}
+
+@media (max-width: 768px) {
+  .iframe-project {
+    width: 1212px !important;
+    height: 681px !important;
+    transform: scale(0.25);
+  }
+
+  .iframe-project[src*="Hockey_shop"] {
+    width: 950px !important;
+    height: 530px !important;
+    transform: scale(0.32);
+  }
+
+  .iframe-project[src*="Felicks"] {
+    width: 1212px !important;
+    height: 680px !important;
+    transform: scale(0.25);
+  }
 }
