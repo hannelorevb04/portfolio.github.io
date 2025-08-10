@@ -12,7 +12,7 @@
       }
 
       body {
-        font-family: 'Arial', sans-serif;
+        font-family: "Arial", sans-serif;
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         overflow: hidden;
       }
@@ -93,7 +93,7 @@
       }
 
       .shoe-placeholder::before {
-        content: '';
+        content: "";
         position: absolute;
         top: 20px;
         left: 20px;
@@ -104,7 +104,7 @@
       }
 
       .shoe-placeholder::after {
-        content: 'SWEAR';
+        content: "SWEAR";
         position: absolute;
         bottom: 10px;
         right: 20px;
@@ -115,8 +115,13 @@
       }
 
       @keyframes float {
-        0%, 100% { transform: translateY(0px) rotateY(0deg); }
-        50% { transform: translateY(-20px) rotateY(10deg); }
+        0%,
+        100% {
+          transform: translateY(0px) rotateY(0deg);
+        }
+        50% {
+          transform: translateY(-20px) rotateY(10deg);
+        }
       }
 
       #controls {
@@ -178,7 +183,8 @@
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
       }
 
-      .color:hover, .color.active {
+      .color:hover,
+      .color.active {
         border-color: #007bff;
         transform: scale(1.1);
         box-shadow: 0 4px 16px rgba(0, 123, 255, 0.4);
@@ -214,8 +220,13 @@
       }
 
       @keyframes pulse {
-        0%, 100% { opacity: 0.6; }
-        50% { opacity: 1; }
+        0%,
+        100% {
+          opacity: 0.6;
+        }
+        50% {
+          opacity: 1;
+        }
       }
     </style>
   </head>
@@ -249,10 +260,26 @@
           </div>
 
           <div id="colors">
-            <div class="color active" data-color="#000000" style="background-color: #000000"></div>
-            <div class="color" data-color="#FFFFFF" style="background-color: #ffffff"></div>
-            <div class="color" data-color="#C0C0C0" style="background-color: #c0c0c0"></div>
-            <div class="color" data-color="#F5DEB3" style="background-color: #f5deb3"></div>
+            <div
+              class="color active"
+              data-color="#000000"
+              style="background-color: #000000"
+            ></div>
+            <div
+              class="color"
+              data-color="#FFFFFF"
+              style="background-color: #ffffff"
+            ></div>
+            <div
+              class="color"
+              data-color="#C0C0C0"
+              style="background-color: #c0c0c0"
+            ></div>
+            <div
+              class="color"
+              data-color="#F5DEB3"
+              style="background-color: #f5deb3"
+            ></div>
           </div>
 
           <button id="submit-product">Bestellen</button>
@@ -262,23 +289,29 @@
 
     <script>
       // Simple interactive functionality
-      const colors = document.querySelectorAll('.color');
-      const prevBtn = document.getElementById('prev-step');
-      const nextBtn = document.getElementById('next-step');
-      const currentStepSpan = document.getElementById('current-step');
-      const shoeElement = document.querySelector('.shoe-placeholder');
+      const colors = document.querySelectorAll(".color");
+      const prevBtn = document.getElementById("prev-step");
+      const nextBtn = document.getElementById("next-step");
+      const currentStepSpan = document.getElementById("current-step");
+      const shoeElement = document.querySelector(".shoe-placeholder");
 
       const steps = [
-        "inside", "laces", "outside_1", "outside_2", "outside_3", "sole_bottom", "sole_top"
+        "inside",
+        "laces",
+        "outside_1",
+        "outside_2",
+        "outside_3",
+        "sole_bottom",
+        "sole_top",
       ];
       let currentStep = 0;
 
       // Color selection
-      colors.forEach(color => {
-        color.addEventListener('click', function() {
-          colors.forEach(c => c.classList.remove('active'));
-          this.classList.add('active');
-          
+      colors.forEach((color) => {
+        color.addEventListener("click", function () {
+          colors.forEach((c) => c.classList.remove("active"));
+          this.classList.add("active");
+
           // Change shoe color based on selection
           const selectedColor = this.dataset.color;
           shoeElement.style.background = `linear-gradient(45deg, ${selectedColor}, #ffa500)`;
@@ -286,12 +319,12 @@
       });
 
       // Step navigation
-      prevBtn.addEventListener('click', function() {
+      prevBtn.addEventListener("click", function () {
         currentStep = Math.max(0, currentStep - 1);
         updateStep();
       });
 
-      nextBtn.addEventListener('click', function() {
+      nextBtn.addEventListener("click", function () {
         currentStep = Math.min(steps.length - 1, currentStep + 1);
         updateStep();
       });
@@ -306,9 +339,11 @@
       updateStep();
 
       // Submit button
-      document.getElementById('submit-product').addEventListener('click', function() {
-        alert('Bestelling geplaatst! (Demo versie)');
-      });
+      document
+        .getElementById("submit-product")
+        .addEventListener("click", function () {
+          alert("Bestelling geplaatst! (Demo versie)");
+        });
     </script>
   </body>
 </html>

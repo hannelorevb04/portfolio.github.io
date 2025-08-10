@@ -1,42 +1,47 @@
 // Import necessary libraries and modules
-import * as THREE from 'three';
-import gsap from 'gsap';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
-import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader.js';
-import * as dat from 'dat.gui';
+import * as THREE from "three";
+import gsap from "gsap";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
+import { RGBELoader } from "three/examples/jsm/loaders/RGBELoader.js";
+import * as dat from "dat.gui";
 
-      const steps = [
-        { name: "Inside", editableParts: "inside" },
-        { name: "Laces", editableParts: "laces" },
-        { name: "Outside Part 1", editableParts: "outside_1" },
-        { name: "Outside Part 2", editableParts: "outside_2" },
-        { name: "Outside Part 3", editableParts: "outside_3" },
-        { name: "Sole Bottom", editableParts: "sole_bottom" },
-        { name: "Sole Top", editableParts: "sole_top" },
-      ];
+const steps = [
+  { name: "Inside", editableParts: "inside" },
+  { name: "Laces", editableParts: "laces" },
+  { name: "Outside Part 1", editableParts: "outside_1" },
+  { name: "Outside Part 2", editableParts: "outside_2" },
+  { name: "Outside Part 3", editableParts: "outside_3" },
+  { name: "Sole Bottom", editableParts: "sole_bottom" },
+  { name: "Sole Top", editableParts: "sole_top" },
+];
 
-      let currentStep = 0;
-      
-      // const selections = {};
-      const stepName = document.getElementById("current-step");
-      const prevStepBtn = document.getElementById("prev-step");
-      const nextStepBtn = document.getElementById("next-step");
-      const submitButton = document.getElementById("submit-product");
+let currentStep = 0;
+
+// const selections = {};
+const stepName = document.getElementById("current-step");
+const prevStepBtn = document.getElementById("prev-step");
+const nextStepBtn = document.getElementById("next-step");
+const submitButton = document.getElementById("submit-product");
 
 // Scene, Camera, Renderer Setup
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById("three-canvas") });
+const camera = new THREE.PerspectiveCamera(
+  75,
+  window.innerWidth / window.innerHeight,
+  0.1,
+  1000
+);
+const renderer = new THREE.WebGLRenderer({
+  canvas: document.getElementById("three-canvas"),
+});
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(window.devicePixelRatio);
 
 const controls = new OrbitControls(camera, renderer.domElement);
 // camera.position.set(0, 5, 3);
 controls.update();
-
-
 
 // Lights
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.1);
@@ -74,15 +79,17 @@ scene.add(pointLight);
 
 // GUI Controls
 const gui = new dat.GUI();
-const lightFolder = gui.addFolder('Light Settings');
-lightFolder.add(directionalLight, 'intensity', 0, 2, 0.1).name('Directional Intensity');
-lightFolder.add(pointLight, 'intensity', 0, 2, 0.1).name('Point Intensity');
-lightFolder.add(ambientLight, 'intensity', 0, 2, 0.1).name('Ambient Intensity');
+const lightFolder = gui.addFolder("Light Settings");
+lightFolder
+  .add(directionalLight, "intensity", 0, 2, 0.1)
+  .name("Directional Intensity");
+lightFolder.add(pointLight, "intensity", 0, 2, 0.1).name("Point Intensity");
+lightFolder.add(ambientLight, "intensity", 0, 2, 0.1).name("Ambient Intensity");
 lightFolder.open();
 
 // Texture Loaders
 const rgbeLoader = new RGBELoader();
-rgbeLoader.load('./teufelsberg_inner_4k.hdr', (hdrTexture) => {
+rgbeLoader.load("./teufelsberg_inner_4k.hdr", (hdrTexture) => {
   hdrTexture.mapping = THREE.EquirectangularReflectionMapping;
   scene.background = hdrTexture;
   scene.environment = hdrTexture;
@@ -97,21 +104,20 @@ rgbeLoader.load('./teufelsberg_inner_4k.hdr', (hdrTexture) => {
   scene.environmentIntensity = 0.25; // Adjust environment intensity
 });
 
-
 const cubeTextureLoader = new THREE.CubeTextureLoader();
 const environmentMapTexture = cubeTextureLoader.load([
-  'Standard-Cube-Map/nx.png',
-  'Standard-Cube-Map/ny.png',
-  'Standard-Cube-Map/nz.png',
-  'Standard-Cube-Map/px.png',
-  'Standard-Cube-Map/py.png',
-  'Standard-Cube-Map/pz.png',
+  "Standard-Cube-Map/nx.png",
+  "Standard-Cube-Map/ny.png",
+  "Standard-Cube-Map/nz.png",
+  "Standard-Cube-Map/px.png",
+  "Standard-Cube-Map/py.png",
+  "Standard-Cube-Map/pz.png",
 ]);
 scene.environment = environmentMapTexture;
 
 // Draco and GLTF Loaders
 const dracoLoader = new DRACOLoader();
-dracoLoader.setDecoderPath('https://www.gstatic.com/draco/v1/decoders/');
+dracoLoader.setDecoderPath("https://www.gstatic.com/draco/v1/decoders/");
 
 const gltfLoader = new GLTFLoader();
 gltfLoader.setDRACOLoader(dracoLoader);
@@ -119,27 +125,26 @@ let shoeModel;
 let currentPart = null;
 
 // Load GLTF Model
-      // const gltfLoader = new GLTFLoader();
-      // let shoeModel = null;
-      // let currentPart = null;
+// const gltfLoader = new GLTFLoader();
+// let shoeModel = null;
+// let currentPart = null;
 
-      gltfLoader.load("./Shoe_compressed.glb", (gltf) => {
-        shoeModel = gltf.scene;
-        shoeModel.traverse((child) => {
-          if (child.isMesh) {
-            child.material = new THREE.MeshStandardMaterial({ color: 0xffffff });
-            if (steps.some(step => step.editableParts === child.name)) {
-              child.userData.editable = true;
-            }
-          }
-        });
- scene.add(shoeModel);
+gltfLoader.load("./Shoe_compressed.glb", (gltf) => {
+  shoeModel = gltf.scene;
+  shoeModel.traverse((child) => {
+    if (child.isMesh) {
+      child.material = new THREE.MeshStandardMaterial({ color: 0xffffff });
+      if (steps.some((step) => step.editableParts === child.name)) {
+        child.userData.editable = true;
+      }
+    }
+  });
+  scene.add(shoeModel);
   updateStep();
   shoeModel.scale.set(20, 20, 20);
   shoeModel.position.y = 1.5;
   shoeModel.rotation.x = Math.PI / 5;
   scene.add(shoeModel);
-
 });
 
 function spinModel() {
@@ -151,7 +156,6 @@ function spinModel() {
     });
   }
 }
-
 
 function updateStep() {
   const step = steps[currentStep];
@@ -179,29 +183,26 @@ function updateStep() {
   spinModel();
 }
 
+// function applyColorToActivePart(color) {
+//   if (currentPart && currentPart.userData.editable) {
+//     currentPart.material.color.set(color);
+//     selections[currentPart.name] = selections[currentPart.name] || {};
+//     selections[currentPart.name].color = color;
+//     console.log(`Kleur toegepast op ${currentPart.name}: ${color}`);
+//   } else {
+//     console.error("Geen actief onderdeel geselecteerd of niet bewerkbaar.");
+//   }
+// }
 
-      // function applyColorToActivePart(color) {
-      //   if (currentPart && currentPart.userData.editable) {
-      //     currentPart.material.color.set(color);
-      //     selections[currentPart.name] = selections[currentPart.name] || {};
-      //     selections[currentPart.name].color = color;
-      //     console.log(`Kleur toegepast op ${currentPart.name}: ${color}`);
-      //   } else {
-      //     console.error("Geen actief onderdeel geselecteerd of niet bewerkbaar.");
-      //   }
-      // }
-      
-
-      // function applyMaterialToActivePart(material) {
-      //   if (currentPart && currentPart.userData.editable) {
-      //     selections[currentPart.name] = selections[currentPart.name] || {};
-      //     selections[currentPart.name].material = material;
-      //     console.log(`Materiaal toegepast op ${currentPart.name}: ${material}`);
-      //   } else {
-      //     console.error("Geen actief onderdeel geselecteerd of niet bewerkbaar.");
-      //   }
-      // }
-
+// function applyMaterialToActivePart(material) {
+//   if (currentPart && currentPart.userData.editable) {
+//     selections[currentPart.name] = selections[currentPart.name] || {};
+//     selections[currentPart.name].material = material;
+//     console.log(`Materiaal toegepast op ${currentPart.name}: ${material}`);
+//   } else {
+//     console.error("Geen actief onderdeel geselecteerd of niet bewerkbaar.");
+//   }
+// }
 
 function applyColorToActivePart(color) {
   if (currentPart && currentPart.userData.editable) {
@@ -219,7 +220,6 @@ function applyColorToActivePart(color) {
   }
 }
 
-
 function applyMaterialToActivePart(material) {
   if (currentPart && currentPart.userData.editable) {
     selections[currentPart.name] = selections[currentPart.name] || {};
@@ -232,8 +232,8 @@ function applyMaterialToActivePart(material) {
 
 const selections = {}; // Mock object for storing configurations
 
-  // Event listener for "Bestellen" button
-  // const submitButton = document.getElementById("submit-product");
+// Event listener for "Bestellen" button
+// const submitButton = document.getElementById("submit-product");
 
 submitButton.addEventListener("click", async () => {
   const productData = {
@@ -268,10 +268,9 @@ submitButton.addEventListener("click", async () => {
       throw new Error("Fout bij het opslaan van het product.");
     }
 
-const result = await response.json();
-console.log("Product opgeslagen:", result); // Log het resultaat
-const createdProductId = result._id; // Controleer of _id bestaat
-    
+    const result = await response.json();
+    console.log("Product opgeslagen:", result); // Log het resultaat
+    const createdProductId = result._id; // Controleer of _id bestaat
 
     // Navigeer naar de formulierpagina met het product-ID in de URL
     window.location.href = `/form.html?productId=${createdProductId}`;
@@ -280,10 +279,6 @@ const createdProductId = result._id; // Controleer of _id bestaat
     alert("Er is een fout opgetreden bij het plaatsen van uw bestelling.");
   }
 });
-
-
-
-
 
 document.getElementById("prev-step").addEventListener("click", () => {
   if (currentStep > 0) {
@@ -306,14 +301,15 @@ document.querySelectorAll(".color").forEach((button) => {
   });
 });
 
-      document.querySelectorAll(".material-btn").forEach((button) => {
-        button.addEventListener("click", (e) => {
-          const material = e.target.dataset.material;
-          applyMaterialToActivePart(material);
-        });
-      });
+document.querySelectorAll(".material-btn").forEach((button) => {
+  button.addEventListener("click", (e) => {
+    const material = e.target.dataset.material;
+    applyMaterialToActivePart(material);
+  });
+});
 
-const apiUrl = "https://sneaker-configurator-api-ak6n.onrender.com/api/v1/products";
+const apiUrl =
+  "https://sneaker-configurator-api-ak6n.onrender.com/api/v1/products";
 
 // const submitButton = document.getElementById("submit-product");
 
@@ -328,29 +324,24 @@ submitButton.addEventListener("click", () => {
     .catch((error) => console.error("Fout:", error));
 });
 
-
-      
-
-
-
-
 // Raycaster and interaction
 const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
 const editableObjects = [
-  'inside',
-  'laces',
-  'outside_1',
-  'outside_2',
-  'outside_3',
-  'sole_bottom',
-  'sole_top',
+  "inside",
+  "laces",
+  "outside_1",
+  "outside_2",
+  "outside_3",
+  "sole_bottom",
+  "sole_top",
 ];
 let currentIntersect = null;
 
 // Handle Mouse Clicks
-window.addEventListener('click', (event) => {
-  const { left, top, width, height } = renderer.domElement.getBoundingClientRect();
+window.addEventListener("click", (event) => {
+  const { left, top, width, height } =
+    renderer.domElement.getBoundingClientRect();
   mouse.x = ((event.clientX - left) / width) * 2 - 1;
   mouse.y = -((event.clientY - top) / height) * 2 + 1;
 
@@ -366,10 +357,13 @@ window.addEventListener('click', (event) => {
 });
 
 // Change Color on Button Click
-document.querySelectorAll('.color').forEach((color) => {
-  color.addEventListener('click', (event) => {
-    const colorValue = event.target.getAttribute('data-color');
-    if (currentIntersect && editableObjects.includes(currentIntersect.object.name)) {
+document.querySelectorAll(".color").forEach((color) => {
+  color.addEventListener("click", (event) => {
+    const colorValue = event.target.getAttribute("data-color");
+    if (
+      currentIntersect &&
+      editableObjects.includes(currentIntersect.object.name)
+    ) {
       const material = currentIntersect.object.material;
       if (material && material.color) {
         material.color.set(colorValue);
@@ -387,6 +381,6 @@ camera.position.y = 1;
 function animate() {
   controls.update();
   renderer.render(scene, camera);
-   requestAnimationFrame(animate);
+  requestAnimationFrame(animate);
 }
 animate();
