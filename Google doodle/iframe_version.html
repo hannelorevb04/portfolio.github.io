@@ -278,9 +278,79 @@
           visibility: visible;
         }
       }
+
+      nav {
+        float: right;
+        width: 280px;
+        margin-top: 24px;
+        margin-right: 20px;
+        font-size: .8em;
+      }
+      nav a {
+        color: #222;
+        display: block;
+        float:left;
+        margin: 0px 8px;
+      }
+      .signin {
+        font-weight: bold;
+        color: #FFF;
+        background: #4485f4;
+        padding: 8px 10px;
+        border-style: none;
+        border-radius: 2px;
+      }
+      .l {
+        line-height: 25px;	
+      }
+
+      .search {
+        margin-top: 30px;
+        width: 400px;
+        padding: 12px 16px;
+        border: 1px solid #dfe1e5;
+        border-radius: 24px;
+        font-size: 16px;
+        outline: none;
+      }
+
+      .button {
+        background: #f8f9fa;
+        border: 1px solid #f8f9fa;
+        border-radius: 4px;
+        color: #3c4043;
+        font-size: 14px;
+        margin: 11px 4px;
+        padding: 0 20px;
+        line-height: 27px;
+        height: 36px;
+        cursor: pointer;
+      }
+
+      form {
+        margin-top: 20px;
+      }
+
+      p {
+        margin-top: 20px;
+        font-size: 13px;
+        color: #222;
+      }
+
+      p a {
+        color: #1a0dab;
+        text-decoration: none;
+        margin: 0 5px;
+      }
     </style>
   </head>
   <body>
+    <nav>
+      <a href="#" class="l">+You</a> 
+      <a href="#" class="l">Gmail</a> 
+      <a href="#" class="l">Images</a> 
+      <a href="#" class="signin">Sign In</a>
+    </nav>
     <section class="center">
       <div class="doodle">
         <div class="intro">
@@ -531,6 +601,12 @@
           />
         </div>
       </div>
+      <form action="" method="post">
+        <input type="text" class="search" placeholder="How you doin'?" />
+        <input type="button" value="I know, I know, I know!" class="button" /> 
+        <input type="button" value="Oh my god!" class="button" />
+      </form>
+      <p>Google.be offered in: <a href="#">Nederlands</a> <a href="#">Français</a> <a href="#">Deutsch</a></p>
     </section>
   </body>
 </html>
