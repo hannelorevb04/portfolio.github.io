@@ -656,6 +656,22 @@ body.index {
   height: 680px !important;
 }
 
+/* Specific styling for Disney+ iframe */
+.iframe-project[src*="Disney+"] {
+  background: #040714;
+  transform: scale(0.28);
+  width: 1080px !important;
+  height: 607px !important;
+}
+
+/* Specific styling for Swear iframe */
+.iframe-project[src*="Swear"] {
+  background: #222222;
+  transform: scale(0.28);
+  width: 1080px !important;
+  height: 607px !important;
+}
+
 @keyframes forceLoad {
   0% {
     opacity: 0.99;

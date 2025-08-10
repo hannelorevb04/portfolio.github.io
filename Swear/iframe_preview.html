@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Swear Sneaker Configurator</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Arial', sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        overflow: hidden;
+      }
+
+      #app {
+        height: 100vh;
+        position: relative;
+      }
+
+      #groen_vlak {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(45deg, #00ff88, #00ccff);
+        opacity: 0.1;
+      }
+
+      #header {
+        position: relative;
+        z-index: 10;
+        padding: 20px;
+        background: rgba(0, 0, 0, 0.8);
+      }
+
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      #logo img {
+        height: 40px;
+        filter: brightness(0) invert(1);
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 30px;
+      }
+
+      .nav-links a {
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s;
+      }
+
+      .nav-links a:hover {
+        color: #00ff88;
+      }
+
+      #configurator-container {
+        display: flex;
+        height: calc(100vh - 80px);
+        position: relative;
+        z-index: 5;
+      }
+
+      #shoe-viewer {
+        flex: 1;
+        background: rgba(0, 0, 0, 0.9);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+      }
+
+      .shoe-placeholder {
+        width: 300px;
+        height: 200px;
+        background: linear-gradient(45deg, #ff6b6b, #ffa500);
+        border-radius: 50px 20px 50px 20px;
+        position: relative;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        animation: float 3s ease-in-out infinite;
+      }
+
+      .shoe-placeholder::before {
+        content: '';
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        width: 260px;
+        height: 160px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 40px 15px 40px 15px;
+      }
+
+      .shoe-placeholder::after {
+        content: 'SWEAR';
+        position: absolute;
+        bottom: 10px;
+        right: 20px;
+        color: white;
+        font-weight: bold;
+        font-size: 18px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      }
+
+      @keyframes float {
+        0%, 100% { transform: translateY(0px) rotateY(0deg); }
+        50% { transform: translateY(-20px) rotateY(10deg); }
+      }
+
+      #controls {
+        width: 350px;
+        background: rgba(255, 255, 255, 0.95);
+        padding: 30px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      #step-navigation {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px;
+        background: #f8f9fa;
+        border-radius: 10px;
+        border: 2px solid #e9ecef;
+      }
+
+      #step-navigation button {
+        background: #007bff;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: 500;
+        transition: background 0.3s;
+      }
+
+      #step-navigation button:hover {
+        background: #0056b3;
+      }
+
+      #current-step {
+        font-weight: bold;
+        color: #333;
+      }
+
+      #colors {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 15px;
+        padding: 20px;
+        background: #f8f9fa;
+        border-radius: 10px;
+        border: 2px solid #e9ecef;
+      }
+
+      .color {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        cursor: pointer;
+        border: 3px solid transparent;
+        transition: all 0.3s;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      .color:hover, .color.active {
+        border-color: #007bff;
+        transform: scale(1.1);
+        box-shadow: 0 4px 16px rgba(0, 123, 255, 0.4);
+      }
+
+      #submit-product {
+        background: linear-gradient(45deg, #28a745, #20c997);
+        color: white;
+        border: none;
+        padding: 15px 30px;
+        border-radius: 25px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s;
+        box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+      }
+
+      #submit-product:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+      }
+
+      .loading-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        font-size: 18px;
+        font-weight: bold;
+        animation: pulse 2s ease-in-out infinite;
+      }
+
+      @keyframes pulse {
+        0%, 100% { opacity: 0.6; }
+        50% { opacity: 1; }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div id="groen_vlak"></div>
+      <div id="header">
+        <nav>
+          <a id="logo" href="index.html">
+            <img src="./logo.webp" alt="logo" />
+          </a>
+          <div class="nav-links">
+            <a href="">shop</a>
+            <a href="">about</a>
+            <a href="">vault</a>
+            <a href="">journal</a>
+            <a href="">sustainability</a>
+          </div>
+        </nav>
+      </div>
+      <div id="configurator-container">
+        <div id="shoe-viewer">
+          <div class="shoe-placeholder"></div>
+          <div class="loading-text">3D Sneaker Configurator</div>
+        </div>
+        <div id="controls">
+          <div id="step-navigation">
+            <button id="prev-step">&larr; Vorige</button>
+            <span id="current-step">Onderdeel: inside</span>
+            <button id="next-step">Volgende &rarr;</button>
+          </div>
+
+          <div id="colors">
+            <div class="color active" data-color="#000000" style="background-color: #000000"></div>
+            <div class="color" data-color="#FFFFFF" style="background-color: #ffffff"></div>
+            <div class="color" data-color="#C0C0C0" style="background-color: #c0c0c0"></div>
+            <div class="color" data-color="#F5DEB3" style="background-color: #f5deb3"></div>
+          </div>
+
+          <button id="submit-product">Bestellen</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Simple interactive functionality
+      const colors = document.querySelectorAll('.color');
+      const prevBtn = document.getElementById('prev-step');
+      const nextBtn = document.getElementById('next-step');
+      const currentStepSpan = document.getElementById('current-step');
+      const shoeElement = document.querySelector('.shoe-placeholder');
+
+      const steps = [
+        "inside", "laces", "outside_1", "outside_2", "outside_3", "sole_bottom", "sole_top"
+      ];
+      let currentStep = 0;
+
+      // Color selection
+      colors.forEach(color => {
+        color.addEventListener('click', function() {
+          colors.forEach(c => c.classList.remove('active'));
+          this.classList.add('active');
+          
+          // Change shoe color based on selection
+          const selectedColor = this.dataset.color;
+          shoeElement.style.background = `linear-gradient(45deg, ${selectedColor}, #ffa500)`;
+        });
+      });
+
+      // Step navigation
+      prevBtn.addEventListener('click', function() {
+        currentStep = Math.max(0, currentStep - 1);
+        updateStep();
+      });
+
+      nextBtn.addEventListener('click', function() {
+        currentStep = Math.min(steps.length - 1, currentStep + 1);
+        updateStep();
+      });
+
+      function updateStep() {
+        currentStepSpan.textContent = `Onderdeel: ${steps[currentStep]}`;
+        prevBtn.disabled = currentStep === 0;
+        nextBtn.disabled = currentStep === steps.length - 1;
+      }
+
+      // Initialize
+      updateStep();
+
+      // Submit button
+      document.getElementById('submit-product').addEventListener('click', function() {
+        alert('Bestelling geplaatst! (Demo versie)');
+      });
+    </script>
+  </body>
+</html>
