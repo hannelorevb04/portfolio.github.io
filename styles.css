@@ -5,6 +5,22 @@
   font-family: "Arial", sans-serif;
 }
 
+/* Hide scrollbars globally */
+body::-webkit-scrollbar,
+html::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+html {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 body {
   height: 100vh;
   position: relative;
@@ -535,21 +551,12 @@ body.index {
 }
 
 .projects::-webkit-scrollbar {
-  height: 8px;
+  display: none;
 }
 
-.projects::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.1);
-  border-radius: 4px;
-}
-
-.projects::-webkit-scrollbar-thumb {
-  background: rgba(16, 46, 74, 0.6);
-  border-radius: 4px;
-}
-
-.projects::-webkit-scrollbar-thumb:hover {
-  background: rgba(16, 46, 74, 0.8);
+.projects {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .project-card {
