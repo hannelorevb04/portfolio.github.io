@@ -180,50 +180,75 @@
       <div class="projects-section">
         <h2 class="section-title">Illustrator</h2>
         <div class="projects">
-          <!-- Project Card 2 -->
+          <!-- Project Card 1 - Bauhaus -->
           <div class="project-card">
             <div class="overlap-group">
               <img
                 class="image"
-                src="images/jen_2_hair_pink.png"
-                alt="Hair Color Edit"
+                src="images/bauhaus.png"
+                alt="Bauhaus Design"
               />
               <div class="gradient"></div>
               <div class="text">
-                <div class="div">Hair Recolor</div>
-                <div class="text-wrapper">Color Grading</div>
+                <div class="div">Bauhaus Style</div>
+                <div class="text-wrapper">Geometric Design</div>
               </div>
             </div>
           </div>
 
-          <!-- Project Card 3 -->
+          <!-- Project Card 2 - Sidekick -->
           <div class="project-card">
             <div class="overlap-group">
               <img
                 class="image"
-                src="images/Smurf_grey.jpg"
-                alt="Character Edit"
+                src="images/sidekick_definitief_1.png"
+                alt="Sidekick Design"
               />
               <div class="gradient"></div>
               <div class="text">
-                <div class="div">Character Edit</div>
-                <div class="text-wrapper">Digital Paint</div>
+                <div class="div">Sidekick</div>
+                <div class="text-wrapper">Logo Design</div>
               </div>
             </div>
           </div>
 
-          <!-- Project Card 4 -->
+          <!-- Project Card 3 - Kerstkaartjes Slideshow -->
           <div class="project-card">
             <div class="overlap-group">
-              <img
-                class="image"
-                src="images/court_1_brown_eyes.jpg"
-                alt="Eye Color Change"
-              />
+              <div class="slideshow-container" id="slideshow4">
+                <div class="slides">
+                  <img
+                    class="image slide active"
+                    src="images/Christmas_card-02.png"
+                    alt="Christmas Card 1"
+                  />
+                  <img
+                    class="image slide"
+                    src="images/Cristmas_card_1-03.png"
+                    alt="Christmas Card 2"
+                  />
+                </div>
+                <div class="slideshow-nav">
+                  <button class="prev" onclick="changeSlide4(-1)">‹</button>
+                  <button class="next" onclick="changeSlide4(1)">›</button>
+                </div>
+              </div>
               <div class="gradient"></div>
               <div class="text">
-                <div class="div">Eye Retouch</div>
-                <div class="text-wrapper">Portrait Edit</div>
+                <div class="div">Kerstkaartjes</div>
+                <div class="text-wrapper">Holiday Design</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project Card 4 - Skyline -->
+          <div class="project-card">
+            <div class="overlap-group">
+              <img class="image" src="Skyline/stad.jpg" alt="Skyline Design" />
+              <div class="gradient"></div>
+              <div class="text">
+                <div class="div">Skyline</div>
+                <div class="text-wrapper">Urban Design</div>
               </div>
             </div>
           </div>
@@ -235,6 +260,7 @@
       let slideIndex1 = 1;
       let slideIndex2 = 1;
       let slideIndex3 = 1;
+      let slideIndex4 = 1;
       let currentSlideshow = 1; // Track which slideshow should advance next
 
       // Functions for slideshow 1 (Double Exposure)
@@ -309,7 +335,31 @@
         }
       }
 
-      // Alternating slideshow advancement between all three slideshows
+      // Functions for slideshow 4 (Kerstkaartjes)
+      function changeSlide4(n) {
+        showSlide4((slideIndex4 += n));
+      }
+
+      function showSlide4(n) {
+        const slides = document.querySelectorAll("#slideshow4 .slide");
+
+        if (n > slides.length) {
+          slideIndex4 = 1;
+        }
+        if (n < 1) {
+          slideIndex4 = slides.length;
+        }
+
+        // Hide all slides
+        slides.forEach((slide) => slide.classList.remove("active"));
+
+        // Show current slide
+        if (slides[slideIndex4 - 1]) {
+          slides[slideIndex4 - 1].classList.add("active");
+        }
+      }
+
+      // Alternating slideshow advancement between all four slideshows
       setInterval(() => {
         if (currentSlideshow === 1) {
           changeSlide1(1);
@@ -317,8 +367,11 @@
         } else if (currentSlideshow === 2) {
           changeSlide2(1);
           currentSlideshow = 3; // Switch to slideshow 3 next time
-        } else {
+        } else if (currentSlideshow === 3) {
           changeSlide3(1);
+          currentSlideshow = 4; // Switch to slideshow 4 next time
+        } else {
+          changeSlide4(1);
           currentSlideshow = 1; // Switch back to slideshow 1 next time
         }
       }, 3000); // Every 3 seconds, cycle through all slideshows
