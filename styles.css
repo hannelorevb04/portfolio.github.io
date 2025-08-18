@@ -440,8 +440,7 @@ body.index {
 }
 
 .linkedin-icon {
-  background-color: white;
-  color: #0077b5;
+  color: white;
   width: 20px;
   height: 20px;
   border-radius: 3px;
@@ -450,6 +449,12 @@ body.index {
   justify-content: center;
   font-size: 0.8rem;
   font-weight: bold;
+}
+
+.btn-linkedin img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
 }
 
 /* Responsive Design for Designer Page */

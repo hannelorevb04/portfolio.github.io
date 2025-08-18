@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Woordlogo Showcase</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          sans-serif;
+        margin: 0;
+        padding: 20px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      h1 {
+        text-align: center;
+        color: white;
+        font-size: 2.5rem;
+        margin-bottom: 40px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      }
+
+      .logo-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 30px;
+        margin-bottom: 40px;
+      }
+
+      .logo-card {
+        background: white;
+        border-radius: 15px;
+        padding: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .logo-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+      }
+
+      .logo-title {
+        font-size: 1.4rem;
+        font-weight: bold;
+        margin-bottom: 15px;
+        color: #333;
+        text-align: center;
+      }
+
+      .logo-video {
+        width: 100%;
+        height: 200px;
+        border-radius: 10px;
+        object-fit: cover;
+        background: #f0f0f0;
+      }
+
+      .logo-description {
+        margin-top: 15px;
+        color: #666;
+        font-size: 0.9rem;
+        text-align: center;
+        line-height: 1.4;
+      }
+
+      .logo-tag {
+        display: inline-block;
+        background: linear-gradient(45deg, #667eea, #764ba2);
+        color: white;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        margin: 5px 5px 0 0;
+      }
+
+      @media (max-width: 768px) {
+        .logo-grid {
+          grid-template-columns: 1fr;
+        }
+
+        h1 {
+          font-size: 2rem;
+        }
+
+        .logo-card {
+          padding: 15px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Woordlogo Showcase</h1>
+
+      <div class="logo-grid">
+        <!-- Main Woordlogo -->
+        <div class="logo-card">
+          <div class="logo-title">Main Woordlogo</div>
+          <video class="logo-video" controls loop muted>
+            <source src="images/woorlogo.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          <div class="logo-description">
+            The primary word logo animation showcasing dynamic typography and
+            motion design.
+          </div>
+          <div>
+            <span class="logo-tag">Typography</span>
+            <span class="logo-tag">Animation</span>
+            <span class="logo-tag">Motion Design</span>
+          </div>
+        </div>
+
+        <!-- Fitness Woordlogo -->
+        <div class="logo-card">
+          <div class="logo-title">Fitness Woordlogo</div>
+          <video class="logo-video" controls loop muted>
+            <source src="images/woordlogo - fitness.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          <div class="logo-description">
+            A fitness-themed word logo with energetic movements and
+            sports-inspired typography.
+          </div>
+          <div>
+            <span class="logo-tag">Fitness</span>
+            <span class="logo-tag">Sports</span>
+            <span class="logo-tag">Energy</span>
+          </div>
+        </div>
+
+        <!-- Timeline Woordlogo -->
+        <div class="logo-card">
+          <div class="logo-title">Timeline Woordlogo</div>
+          <video class="logo-video" controls loop muted>
+            <source src="images/woordlogo - timeline.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          <div class="logo-description">
+            A timeline-based word logo featuring chronological progression and
+            temporal design elements.
+          </div>
+          <div>
+            <span class="logo-tag">Timeline</span>
+            <span class="logo-tag">Chronology</span>
+            <span class="logo-tag">Progression</span>
+          </div>
+        </div>
+
+        <!-- Lightning Woordlogo -->
+        <div class="logo-card">
+          <div class="logo-title">Lightning Woordlogo</div>
+          <video class="logo-video" controls loop muted>
+            <source src="Woordlogo/lightning.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          <div class="logo-description">
+            A high-energy word logo with lightning effects and electric visual
+            dynamics.
+          </div>
+          <div>
+            <span class="logo-tag">Lightning</span>
+            <span class="logo-tag">Electric</span>
+            <span class="logo-tag">High Energy</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Auto-play videos when they come into view
+      const videos = document.querySelectorAll(".logo-video");
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.play();
+            } else {
+              entry.target.pause();
+            }
+          });
+        },
+        { threshold: 0.5 }
+      );
+
+      videos.forEach((video) => {
+        observer.observe(video);
+
+        // Add click to play/pause functionality
+        video.addEventListener("click", () => {
+          if (video.paused) {
+            video.play();
+          } else {
+            video.pause();
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
