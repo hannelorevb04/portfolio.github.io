@@ -46,6 +46,7 @@
       </div>
 
       <!-- Modal: screenshot-layout -->
+      <!-- Modal: detail + hero + gallery -->
       <div id="doubleExposureModal" class="modal-overlay" style="display: none">
         <div class="nx-card">
           <button
@@ -56,16 +57,52 @@
             ×
           </button>
 
-          <!-- BOVEN: hero-beeld -->
-          <div class="nx-hero">
-            <img
-              src="images/double_exposure.png"
-              alt="Double Exposure"
-              class="nx-hero-img"
-            />
+          <!-- BOVEN: hero-beeld (enkelvoudige lead image) -->
+          <!-- BOVEN: hero-slideshow (vervangt enkelvoudige foto + gallery) -->
+          <div
+            class="nx-hero-slider"
+            id="nxHeroSlider"
+            aria-label="Project afbeeldingen"
+          >
+            <div class="nx-slides">
+              <img
+                src="images/Hannelore_doubleexposure1.jpg"
+                alt="Double Exposure 1"
+                class="nx-slide is-active"
+              />
+              <img
+                src="images/Hannelore_doubleexposure2.jpg"
+                alt="Double Exposure 2"
+                class="nx-slide"
+              />
+              <img
+                src="images/double_exposure.png"
+                alt="Double Exposure 3"
+                class="nx-slide"
+              />
+              <!-- Voeg gerust meer slides toe: <img src="..." class="nx-slide"> -->
+            </div>
+
+            <!-- navigatie -->
+            <button class="nx-nav prev" id="nxPrev" aria-label="Vorige">
+              ‹
+            </button>
+            <button class="nx-nav next" id="nxNext" aria-label="Volgende">
+              ›
+            </button>
+
+            <!-- dots (aantal = aantal slides) -->
+            <div class="nx-dots" id="nxDots">
+              <button
+                class="nx-dot is-active"
+                aria-label="Ga naar slide 1"
+              ></button>
+              <button class="nx-dot" aria-label="Ga naar slide 2"></button>
+              <button class="nx-dot" aria-label="Ga naar slide 3"></button>
+            </div>
           </div>
 
-          <!-- ONDER: donkerblauwe content-panel -->
+          <!-- ONDER: donkerblauwe content-panel (LAY-OUT ONGEWIJZIGD) -->
           <section class="nx-panel">
             <div class="nx-panel-inner">
               <!-- links: hoofdinhoud -->
@@ -91,7 +128,6 @@
                   <button class="nx-btn nx-ghost">＋ Mijn Lijst</button>
                 </div>
 
-                <!-- nieuwe inhoud (LAY-OUT BLIJFT IDENTIEK) -->
                 <h3 class="nx-h3">Over dit project</h3>
                 <p class="nx-body">
                   Dit creëert een dramatisch visueel effect dat de aandacht
@@ -115,6 +151,7 @@
                 </div>
               </div>
 
+              <!-- rechts: specs/sidebar -->
               <aside class="nx-right">
                 <div class="nx-spec">
                   <div class="nx-spec-title">SOFTWARE</div>
@@ -413,6 +450,70 @@
           currentSlideshow = 1;
         }
       }, 3000);
+
+      // --- DETAILMODAL SLIDESHOW ---
+      (function () {
+        const slider = document.getElementById("nxHeroSlider");
+        if (!slider) return;
+
+        const slides = slider.querySelectorAll(".nx-slide");
+        const prevBtn = document.getElementById("nxPrev");
+        const nextBtn = document.getElementById("nxNext");
+        const dotsWrap = document.getElementById("nxDots");
+        const dots = dotsWrap ? dotsWrap.querySelectorAll(".nx-dot") : [];
+
+        let idx = 0,
+          timer;
+
+        function show(i) {
+          if (!slides.length) return;
+          idx = (i + slides.length) % slides.length;
+          slides.forEach((s, k) => s.classList.toggle("is-active", k === idx));
+          dots.forEach((d, k) => d.classList.toggle("is-active", k === idx));
+        }
+        function next() {
+          show(idx + 1);
+        }
+        function prev() {
+          show(idx - 1);
+        }
+
+        // controls
+        nextBtn?.addEventListener("click", next);
+        prevBtn?.addEventListener("click", prev);
+        dots.forEach((d, k) => d.addEventListener("click", () => show(k)));
+
+        // autoplay
+        function start() {
+          stop();
+          timer = setInterval(next, 3000);
+        }
+        function stop() {
+          if (timer) clearInterval(timer);
+        }
+
+        // pause on hover
+        slider.addEventListener("mouseenter", stop);
+        slider.addEventListener("mouseleave", start);
+
+        // start when modal opens, stop when it closes
+        const modal = document.getElementById("doubleExposureModal");
+        const openCard = document.getElementById("doubleExposureCard");
+        const closeBtn = document.getElementById("closeDoubleExposure");
+
+        // als je al listeners hebt, blijft dit extra licht
+        openCard?.addEventListener("click", () => {
+          show(0);
+          start();
+        });
+        closeBtn?.addEventListener("click", stop);
+        window.addEventListener("mousedown", (ev) => {
+          if (ev.target === modal) stop();
+        });
+
+        // init state (verborgen, maar alvast klaar)
+        show(0);
+      })();
     </script>
   </body>
 </html>
