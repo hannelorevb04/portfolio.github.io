@@ -8,14 +8,12 @@
   </head>
   <body>
     <div class="designer-page">
-      <!-- Video Header Section -->
+      <!-- Header -->
       <div class="video-header">
         <video class="background-video" autoplay muted loop>
           <source src="images/beach_1.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
         </video>
 
-        <!-- Navigation -->
         <nav class="main-nav">
           <div class="nav-logo">Hannelore VB</div>
           <div class="nav-profile">
@@ -29,7 +27,6 @@
           </div>
         </nav>
 
-        <!-- Main Content -->
         <div class="hero-content">
           <h1 class="hero-title">Hannelore Van Buynderen</h1>
           <p class="hero-description">
@@ -37,32 +34,128 @@
             animation, and interactive digital experiences that blend
             traditional design with modern technology.
           </p>
-
-          <!-- Action Buttons -->
           <div class="hero-buttons">
             <button class="btn-resume">
-              <span class="play-icon">▶</span>
-              Resume
+              <span class="play-icon">▶</span>Resume
             </button>
             <button class="btn-linkedin">
-              <!-- <span class="linkedin-icon">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                </svg>
-              </span> -->
-              <img src="images/linkedin.webp" alt="linkedin-icon" />
-              LinkedIn
+              <img src="images/linkedin.webp" alt="linkedin-icon" />LinkedIn
             </button>
           </div>
         </div>
       </div>
 
-      <!-- Project Cards Photoshop -->
+      <!-- Modal: screenshot-layout -->
+      <div id="doubleExposureModal" class="modal-overlay" style="display: none">
+        <div class="nx-card">
+          <button
+            class="nx-close"
+            id="closeDoubleExposure"
+            aria-label="Sluiten"
+          >
+            ×
+          </button>
+
+          <!-- BOVEN: hero-beeld -->
+          <div class="nx-hero">
+            <img
+              src="images/double_exposure.png"
+              alt="Double Exposure"
+              class="nx-hero-img"
+            />
+          </div>
+
+          <!-- ONDER: donkerblauwe content-panel -->
+          <section class="nx-panel">
+            <div class="nx-panel-inner">
+              <!-- links: hoofdinhoud -->
+              <div class="nx-left">
+                <h2 class="nx-title">Selective Color Series</h2>
+
+                <div class="nx-meta">
+                  <span class="nx-badge">HD</span>
+                  <span>Photoshop</span><span class="dot">•</span
+                  ><span>Photo Edit</span>
+                </div>
+
+                <p class="nx-desc">
+                  Een krachtige fotobewerkingstechniek waarbij specifieke
+                  kleuren worden benadrukt terwijl de rest van de afbeelding in
+                  zwart-wit wordt gehouden.
+                </p>
+
+                <div class="nx-actions">
+                  <button class="nx-btn nx-primary">
+                    <span class="nx-ico-play">▶</span> Bekijk Project
+                  </button>
+                  <button class="nx-btn nx-ghost">＋ Mijn Lijst</button>
+                </div>
+
+                <!-- nieuwe inhoud (LAY-OUT BLIJFT IDENTIEK) -->
+                <h3 class="nx-h3">Over dit project</h3>
+                <p class="nx-body">
+                  Dit creëert een dramatisch visueel effect dat de aandacht
+                  trekt naar bepaalde elementen. Door selectief kleuren te
+                  behouden ontstaat er een focus punt in de compositie.
+                </p>
+
+                <h3 class="nx-h3">Artistieke Visie</h3>
+                <p class="nx-body">
+                  Deze techniek wordt vaak gebruikt in mode- en
+                  portretfotografie om emotie te versterken en een
+                  cinematistische sfeer te creëren.
+                </p>
+
+                <!-- tags -->
+                <div class="nx-taglist">
+                  <span class="nx-tag">Selective Color</span>
+                  <span class="nx-tag">Photoshop</span>
+                  <span class="nx-tag">Foto-editing</span>
+                  <span class="nx-tag">Kleurbewerking</span>
+                </div>
+              </div>
+
+              <aside class="nx-right">
+                <div class="nx-spec">
+                  <div class="nx-spec-title">SOFTWARE</div>
+                  <ul class="nx-spec-list">
+                    <li>Adobe Photoshop</li>
+                  </ul>
+                </div>
+
+                <div class="nx-spec">
+                  <div class="nx-spec-title">TECHNIEKEN</div>
+                  <ul class="nx-spec-list">
+                    <li>Color selection</li>
+                    <li>Layer masks</li>
+                    <li>Saturation adjustments</li>
+                  </ul>
+                </div>
+
+                <div class="nx-spec">
+                  <div class="nx-spec-title">EFFECT</div>
+                  <ul class="nx-spec-list">
+                    <li>Selective desaturation</li>
+                  </ul>
+                </div>
+
+                <div class="nx-spec">
+                  <div class="nx-spec-title">FOCUS</div>
+                  <ul class="nx-spec-list">
+                    <li>Kleurcontrast en visuele impact</li>
+                  </ul>
+                </div>
+              </aside>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <!-- Projects -->
       <div class="projects-section">
         <h2 class="section-title">Photoshop</h2>
         <div class="projects">
-          <!-- Project Card 1 - Double Exposure Slideshow -->
-          <div class="project-card">
+          <div class="project-card" id="doubleExposureCard">
             <div class="overlap-group">
               <div class="slideshow-container" id="slideshow1">
                 <div class="slides">
@@ -95,7 +188,6 @@
             </div>
           </div>
 
-          <!-- Project Card 2 - Selective Color Slideshow -->
           <div class="project-card">
             <div class="overlap-group">
               <div class="slideshow-container" id="slideshow2">
@@ -124,7 +216,6 @@
             </div>
           </div>
 
-          <!-- Project Card 3 - United Colors Slideshow -->
           <div class="project-card">
             <div class="overlap-group">
               <div class="slideshow-container" id="slideshow3">
@@ -158,7 +249,6 @@
             </div>
           </div>
 
-          <!-- Project Card 4 - Smart Water Mockup -->
           <div class="project-card">
             <div class="overlap-group">
               <img
@@ -176,11 +266,9 @@
         </div>
       </div>
 
-      <!-- Project Cards Illustrator -->
       <div class="projects-section">
         <h2 class="section-title">Illustrator</h2>
         <div class="projects">
-          <!-- Project Card 1 - Bauhaus -->
           <div class="project-card">
             <div class="overlap-group">
               <img
@@ -196,7 +284,6 @@
             </div>
           </div>
 
-          <!-- Project Card 2 - Sidekick -->
           <div class="project-card">
             <div class="overlap-group">
               <img
@@ -212,7 +299,6 @@
             </div>
           </div>
 
-          <!-- Project Card 3 - Kerstkaartjes Slideshow -->
           <div class="project-card">
             <div class="overlap-group">
               <div class="slideshow-container" id="slideshow4">
@@ -241,7 +327,6 @@
             </div>
           </div>
 
-          <!-- Project Card 4 - Skyline -->
           <div class="project-card">
             <div class="overlap-group">
               <img class="image" src="Skyline/stad.jpg" alt="Skyline Design" />
@@ -257,124 +342,77 @@
     </div>
 
     <script>
-      let slideIndex1 = 1;
-      let slideIndex2 = 1;
-      let slideIndex3 = 1;
-      let slideIndex4 = 1;
-      let currentSlideshow = 1; // Track which slideshow should advance next
+      // Modal
+      document.addEventListener("DOMContentLoaded", function () {
+        const modal = document.getElementById("doubleExposureModal");
+        const card = document.getElementById("doubleExposureCard");
+        const closeBtn = document.getElementById("closeDoubleExposure");
+        card.addEventListener("click", (e) => {
+          if (
+            !e.target.classList.contains("prev") &&
+            !e.target.classList.contains("next")
+          ) {
+            modal.style.display = "flex";
+          }
+        });
+        closeBtn.addEventListener(
+          "click",
+          () => (modal.style.display = "none")
+        );
+        window.addEventListener("mousedown", (ev) => {
+          if (ev.target === modal) modal.style.display = "none";
+        });
+      });
 
-      // Functions for slideshow 1 (Double Exposure)
+      // Slideshows
+      let slideIndex1 = 1,
+        slideIndex2 = 1,
+        slideIndex3 = 1,
+        slideIndex4 = 1,
+        currentSlideshow = 1;
+      function show(n, sel, set) {
+        const s = document.querySelectorAll(sel + " .slide");
+        if (!s.length) return;
+        if (n > s.length) set(1);
+        if (n < 1) set(s.length);
+        s.forEach((x) => x.classList.remove("active"));
+        const idx =
+          (sel === "#slideshow1"
+            ? slideIndex1
+            : sel === "#slideshow2"
+            ? slideIndex2
+            : sel === "#slideshow3"
+            ? slideIndex3
+            : slideIndex4) - 1;
+        s[idx]?.classList.add("active");
+      }
       function changeSlide1(n) {
-        showSlide1((slideIndex1 += n));
+        show((slideIndex1 += n), "#slideshow1", (v) => (slideIndex1 = v));
       }
-
-      function showSlide1(n) {
-        const slides = document.querySelectorAll("#slideshow1 .slide");
-
-        if (n > slides.length) {
-          slideIndex1 = 1;
-        }
-        if (n < 1) {
-          slideIndex1 = slides.length;
-        }
-
-        // Hide all slides
-        slides.forEach((slide) => slide.classList.remove("active"));
-
-        // Show current slide
-        if (slides[slideIndex1 - 1]) {
-          slides[slideIndex1 - 1].classList.add("active");
-        }
-      }
-
-      // Functions for slideshow 2 (Selective Color)
       function changeSlide2(n) {
-        showSlide2((slideIndex2 += n));
+        show((slideIndex2 += n), "#slideshow2", (v) => (slideIndex2 = v));
       }
-
-      function showSlide2(n) {
-        const slides = document.querySelectorAll("#slideshow2 .slide");
-
-        if (n > slides.length) {
-          slideIndex2 = 1;
-        }
-        if (n < 1) {
-          slideIndex2 = slides.length;
-        }
-
-        // Hide all slides
-        slides.forEach((slide) => slide.classList.remove("active"));
-
-        // Show current slide
-        if (slides[slideIndex2 - 1]) {
-          slides[slideIndex2 - 1].classList.add("active");
-        }
-      }
-
-      // Functions for slideshow 3 (United Colors)
       function changeSlide3(n) {
-        showSlide3((slideIndex3 += n));
+        show((slideIndex3 += n), "#slideshow3", (v) => (slideIndex3 = v));
       }
-
-      function showSlide3(n) {
-        const slides = document.querySelectorAll("#slideshow3 .slide");
-
-        if (n > slides.length) {
-          slideIndex3 = 1;
-        }
-        if (n < 1) {
-          slideIndex3 = slides.length;
-        }
-
-        // Hide all slides
-        slides.forEach((slide) => slide.classList.remove("active"));
-
-        // Show current slide
-        if (slides[slideIndex3 - 1]) {
-          slides[slideIndex3 - 1].classList.add("active");
-        }
-      }
-
-      // Functions for slideshow 4 (Kerstkaartjes)
       function changeSlide4(n) {
-        showSlide4((slideIndex4 += n));
+        show((slideIndex4 += n), "#slideshow4", (v) => (slideIndex4 = v));
       }
-
-      function showSlide4(n) {
-        const slides = document.querySelectorAll("#slideshow4 .slide");
-
-        if (n > slides.length) {
-          slideIndex4 = 1;
-        }
-        if (n < 1) {
-          slideIndex4 = slides.length;
-        }
-
-        // Hide all slides
-        slides.forEach((slide) => slide.classList.remove("active"));
-
-        // Show current slide
-        if (slides[slideIndex4 - 1]) {
-          slides[slideIndex4 - 1].classList.add("active");
-        }
-      }
-
-      // Alternating slideshow advancement between all four slideshows
       setInterval(() => {
         if (currentSlideshow === 1) {
           changeSlide1(1);
-          currentSlideshow = 2; // Switch to slideshow 2 next time
+          currentSlideshow = 2;
         } else if (currentSlideshow === 2) {
           changeSlide2(1);
-          currentSlideshow = 3; // Switch to slideshow 3 next time
+          currentSlideshow = 3;
         } else if (currentSlideshow === 3) {
           changeSlide3(1);
-          currentSlideshow = 4; // Switch to slideshow 4 next time
+          currentSlideshow = 4;
         } else {
           changeSlide4(1);
-          currentSlideshow = 1; // Switch back to slideshow 1 next time
+          currentSlideshow = 1;
         }
-      }, 3000); // Every 3 seconds, cycle through all slideshows
+      }, 3000);
     </script>
   </body>
 </html>
