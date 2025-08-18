@@ -140,18 +140,36 @@
             </div>
           </div>
 
-          <!-- Project Card 3 -->
+          <!-- Project Card 3 - United Colors Slideshow -->
           <div class="project-card">
             <div class="overlap-group">
-              <img
-                class="image"
-                src="images/design.jpg"
-                alt="Design Illustration"
-              />
+              <div class="slideshow-container" id="slideshow3">
+                <div class="slides">
+                  <img
+                    class="image slide active"
+                    src="United colors/court_1_brown_eyes.jpg"
+                    alt="United Colors - Eye Color"
+                  />
+                  <img
+                    class="image slide"
+                    src="United colors/Smurf_grey.jpg"
+                    alt="United Colors - Character"
+                  />
+                  <img
+                    class="image slide"
+                    src="United colors/jen_2_hair_pink.png"
+                    alt="United Colors - Hair Color"
+                  />
+                </div>
+                <div class="slideshow-nav">
+                  <button class="prev" onclick="changeSlide3(-1)">‹</button>
+                  <button class="next" onclick="changeSlide3(1)">›</button>
+                </div>
+              </div>
               <div class="gradient"></div>
               <div class="text">
-                <div class="div">Design Work</div>
-                <div class="text-wrapper">Illustration</div>
+                <div class="div">United Colors Series</div>
+                <div class="text-wrapper">Color Grading</div>
               </div>
             </div>
           </div>
@@ -216,6 +234,7 @@
     <script>
       let slideIndex1 = 1;
       let slideIndex2 = 1;
+      let slideIndex3 = 1;
       let currentSlideshow = 1; // Track which slideshow should advance next
 
       // Functions for slideshow 1 (Double Exposure)
@@ -266,16 +285,43 @@
         }
       }
 
-      // Alternating slideshow advancement
+      // Functions for slideshow 3 (United Colors)
+      function changeSlide3(n) {
+        showSlide3((slideIndex3 += n));
+      }
+
+      function showSlide3(n) {
+        const slides = document.querySelectorAll("#slideshow3 .slide");
+
+        if (n > slides.length) {
+          slideIndex3 = 1;
+        }
+        if (n < 1) {
+          slideIndex3 = slides.length;
+        }
+
+        // Hide all slides
+        slides.forEach((slide) => slide.classList.remove("active"));
+
+        // Show current slide
+        if (slides[slideIndex3 - 1]) {
+          slides[slideIndex3 - 1].classList.add("active");
+        }
+      }
+
+      // Alternating slideshow advancement between all three slideshows
       setInterval(() => {
         if (currentSlideshow === 1) {
           changeSlide1(1);
           currentSlideshow = 2; // Switch to slideshow 2 next time
-        } else {
+        } else if (currentSlideshow === 2) {
           changeSlide2(1);
-          currentSlideshow = 1; // Switch to slideshow 1 next time
+          currentSlideshow = 3; // Switch to slideshow 3 next time
+        } else {
+          changeSlide3(1);
+          currentSlideshow = 1; // Switch back to slideshow 1 next time
         }
-      }, 3000); // Every 3 seconds, alternate between slideshows
+      }, 3000); // Every 3 seconds, cycle through all slideshows
     </script>
   </body>
 </html>
