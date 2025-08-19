@@ -223,6 +223,13 @@ body {
   display: flex;
   flex-direction: column;
   gap: 6px;
+  /* Only labels side by side */
+  .text-labels {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+  }
 }
 .text-wrapper {
   font-weight: 800;
@@ -236,6 +243,12 @@ body {
   backdrop-filter: blur(5px);
   border: 1px solid rgba(255, 255, 255, 0.3);
   width: max-content;
+}
+.text-wrapper-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
 }
 .div {
   font-weight: 800;
