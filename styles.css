@@ -1,3 +1,8 @@
+/* Zet alle text-wrapper-row naast elkaar met flex en ruimte */
+.text-wrapper-row {
+  display: flex;
+  gap: 8px;
+}
 /* Forceer overal standaard sans-serif font */
 h1,
 h2,
@@ -1403,4 +1408,98 @@ body {
 .modal-overlay .nx-card,
 .modal-overlay .nx-card * {
   font-family: sans-serif;
+}
+
+/* Maak de profile-circle iets lichter */
+.profile-circle {
+  background: #2a3950 !important;
+}
+
+/* Subtiele border rond alle profile-circles */
+.profile-circle {
+  border: 2px solid rgba(255, 255, 255, 0.12);
+}
+
+/* Zelfde achtergrond als mixed-media en designer */
+.profiles-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #18304b;
+}
+
+/* Versterk het glow-effect achter profile-circle */
+.profile-card:nth-child(1) .profile-circle::after {
+  background: radial-gradient(
+    circle,
+    rgba(255, 0, 120, 0.45) 0%,
+    transparent 70%
+  );
+}
+.profile-card:nth-child(2) .profile-circle::after {
+  background: radial-gradient(
+    circle,
+    rgba(0, 120, 255, 0.65) 0%,
+    transparent 80%
+  );
+  width: 260px;
+  height: 260px;
+}
+.profile-card:nth-child(3) .profile-circle::after {
+  background: radial-gradient(
+    circle,
+    rgba(255, 0, 0, 0.45) 0%,
+    transparent 70%
+  );
+}
+
+/* Zet de developer cirkel terug op dezelfde kleur als de andere users */
+.profile-card:nth-child(2) .profile-circle {
+  background: #2a3950 !important;
+}
+
+/* Vergroot het glow-effect bij hover op profile-card */
+.profile-card:hover .profile-circle::after {
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(
+    circle,
+    rgba(0, 120, 255, 0.75) 0%,
+    transparent 85%
+  );
+  transition: width 0.3s, height 0.3s, background 0.3s;
+}
+.profile-card .profile-circle::after {
+  transition: width 0.3s, height 0.3s, background 0.3s;
+}
+
+/* Zorg dat elke user zijn eigen glow vergroot bij hover */
+.profile-card:nth-child(1):hover .profile-circle::after {
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(
+    circle,
+    rgba(255, 0, 120, 0.75) 0%,
+    transparent 85%
+  );
+}
+.profile-card:nth-child(2):hover .profile-circle::after {
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(
+    circle,
+    rgba(0, 120, 255, 0.75) 0%,
+    transparent 85%
+  );
+}
+.profile-card:nth-child(3):hover .profile-circle::after {
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(
+    circle,
+    rgba(255, 0, 0, 0.75) 0%,
+    transparent 85%
+  );
 }
