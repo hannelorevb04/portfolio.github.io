@@ -9,116 +9,37 @@
   </head>
   <body>
     <div class="profiles-page">
-      <h1
-        class="profiles-title"
-        style="
-          color: #fff;
-          font-size: 2.8rem;
-          font-weight: 500;
-          margin-bottom: 48px;
-          text-align: center;
-        "
-      >
-        Who's watching?
-      </h1>
-      <div
-        class="profiles-container"
-        style="
-          display: flex;
-          gap: 48px;
-          justify-content: center;
-          align-items: center;
-        "
-      >
-        <div
-          class="profile-card"
-          onclick="selectProfile('designer')"
-          style="
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            cursor: pointer;
-          "
-        >
+      <h1 class="profiles-title">Who's watching?</h1>
+      <div class="profiles-container">
+        <div class="profile-card" onclick="selectProfile('designer')">
           <div class="profile-circle">
             <img
               src="images/logos_figma.png"
               alt="Figma"
               class="profile-icon"
-              style="width: 80px; height: 80px; object-fit: contain"
             />
           </div>
-          <h3
-            class="profile-label"
-            style="
-              color: #d1d5db;
-              font-size: 1.3rem;
-              font-weight: 400;
-              margin: 0;
-            "
-          >
-            Designer
-          </h3>
+          <h3 class="profile-label">Designer</h3>
         </div>
-        <div
-          class="profile-card"
-          onclick="selectProfile('developer')"
-          style="
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            cursor: pointer;
-          "
-        >
+        <div class="profile-card" onclick="selectProfile('developer')">
           <div class="profile-circle">
             <img
               src="images/devicon_vscode.png"
               alt="VS Code"
               class="profile-icon"
-              style="width: 80px; height: 80px; object-fit: contain"
             />
           </div>
-          <h3
-            class="profile-label"
-            style="
-              color: #d1d5db;
-              font-size: 1.3rem;
-              font-weight: 400;
-              margin: 0;
-            "
-          >
-            Developer
-          </h3>
+          <h3 class="profile-label">Developer</h3>
         </div>
-        <div
-          class="profile-card"
-          onclick="selectProfile('mixed-media')"
-          style="
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            cursor: pointer;
-          "
-        >
+        <div class="profile-card" onclick="selectProfile('mixed-media')">
           <div class="profile-circle">
             <img
               src="images/logos_adobe-icon.png"
               alt="Adobe"
               class="profile-icon"
-              style="width: 80px; height: 80px; object-fit: contain"
             />
           </div>
-          <h3
-            class="profile-label"
-            style="
-              color: #d1d5db;
-              font-size: 1.3rem;
-              font-weight: 400;
-              margin: 0;
-            "
-          >
-            Mixed-media
-          </h3>
+          <h3 class="profile-label">Mixed-media</h3>
         </div>
       </div>
     </div>
