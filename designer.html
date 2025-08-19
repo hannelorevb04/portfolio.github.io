@@ -8,6 +8,35 @@
   </head>
   <body>
     <div class="designer-page">
+        <script>
+          // Drag-to-scroll for all .projects containers
+          document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.projects').forEach(function(container) {
+              let isDown = false, startX, scrollLeft;
+              container.addEventListener('mousedown', function(e) {
+                isDown = true;
+                container.classList.add('dragging');
+                startX = e.pageX - container.offsetLeft;
+                scrollLeft = container.scrollLeft;
+              });
+              container.addEventListener('mouseleave', function() {
+                isDown = false;
+                container.classList.remove('dragging');
+              });
+              container.addEventListener('mouseup', function() {
+                isDown = false;
+                container.classList.remove('dragging');
+              });
+              container.addEventListener('mousemove', function(e) {
+                if (!isDown) return;
+                e.preventDefault();
+                const x = e.pageX - container.offsetLeft;
+                const walk = (x - startX) * 1.5; // scroll speed
+                container.scrollLeft = scrollLeft - walk;
+              });
+            });
+          });
+        </script>
       <!-- Video Header Section -->
       <div class="video-header">
         <video class="background-video" autoplay muted loop>

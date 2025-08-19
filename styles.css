@@ -173,6 +173,10 @@ body {
   scroll-behavior: smooth;
   padding-bottom: 1rem;
 }
+.projects.dragging {
+  cursor: grabbing;
+  user-select: none;
+}
 .projects::-webkit-scrollbar {
   display: none;
 }
