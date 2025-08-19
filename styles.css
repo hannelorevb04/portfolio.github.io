@@ -1,23 +1,3 @@
-/* Info icon for Contact me button */
-.info-icon {
-  display: inline-block;
-  margin-right: 6px;
-  vertical-align: middle;
-}
-/* Prevent label shifting in project cards and modals */
-.text-wrapper-row {
-  display: flex;
-  flex-direction: row;
-  gap: 8px;
-  justify-content: flex-start;
-  align-items: center;
-  min-height: 32px;
-}
-.text-wrapper-row .text-wrapper {
-  min-width: 110px;
-  text-align: left;
-  white-space: nowrap;
-}
 /* Forceer overal standaard sans-serif font */
 h1,
 h2,
@@ -97,23 +77,17 @@ body {
 .nav-profile {
   width: 48px;
   height: 48px;
-  background: #102e4a;
   border-radius: 50%;
+  background: #102e4a;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .profile-image {
-  width: auto;
+  width: 32px;
   height: 32px;
-  margin: 0;
-  display: block;
-}
-/* .profile-image {
-  width: auto;
-  height: 34px;
   object-fit: contain;
-} */
+}
 .hero-content {
   position: absolute;
   top: 75%;
@@ -193,10 +167,6 @@ body {
   scroll-behavior: smooth;
   padding-bottom: 1rem;
 }
-.projects.dragging {
-  cursor: grabbing;
-  user-select: none;
-}
 .projects::-webkit-scrollbar {
   display: none;
 }
@@ -243,13 +213,6 @@ body {
   display: flex;
   flex-direction: column;
   gap: 6px;
-  /* Only labels side by side */
-  .text-labels {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 8px;
-  }
 }
 .text-wrapper {
   font-weight: 800;
@@ -263,12 +226,6 @@ body {
   backdrop-filter: blur(5px);
   border: 1px solid rgba(255, 255, 255, 0.3);
   width: max-content;
-}
-.text-wrapper-row {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 8px;
 }
 .div {
   font-weight: 800;
@@ -1426,19 +1383,4 @@ body {
 .modal-overlay .nx-card,
 .modal-overlay .nx-card * {
   font-family: sans-serif;
-}
-
-/* Forceer perfecte centrering van .profile-image in .nav-profile, ook bij afwijkende hoogte */
-.nav-profile {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 48px;
-}
-.profile-image {
-  margin: 0;
-  display: block;
-  width: 32px;
-  height: 32px;
-  object-fit: contain;
 }
