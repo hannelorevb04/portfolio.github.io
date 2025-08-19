@@ -52,15 +52,15 @@
       <div id="doubleExposureModal" class="modal-overlay" style="display: none">
         <div class="nx-card">
           <button class="nx-close" id="closeDoubleExposure" aria-label="Sluiten">×</button>
-          <div class="nx-hero-slider">
+          <div class="nx-hero-slider" id="nxHeroSliderDoubleExposure" aria-label="Project afbeeldingen">
             <div class="nx-slides">
               <img src="images/Hannelore_doubleexposure1.jpg" alt="Double Exposure 1" class="nx-slide is-active" />
               <img src="images/Hannelore_doubleexposure2.jpg" alt="Double Exposure 2" class="nx-slide" />
               <img src="images/double_exposure.png" alt="Double Exposure 3" class="nx-slide" />
             </div>
-            <button class="nx-nav prev" id="nxPrev" aria-label="Vorige">‹</button>
-            <button class="nx-nav next" id="nxNext" aria-label="Volgende">›</button>
-            <div class="nx-dots" id="nxDots">
+            <button class="nx-nav prev" id="nxPrevDoubleExposure" aria-label="Vorige">‹</button>
+            <button class="nx-nav next" id="nxNextDoubleExposure" aria-label="Volgende">›</button>
+            <div class="nx-dots" id="nxDotsDoubleExposure">
               <button class="nx-dot is-active" aria-label="Ga naar slide 1"></button>
               <button class="nx-dot" aria-label="Ga naar slide 2"></button>
               <button class="nx-dot" aria-label="Ga naar slide 3"></button>
@@ -94,10 +94,16 @@
       <div id="selectiveColorModal" class="modal-overlay" style="display: none">
         <div class="nx-card">
           <button class="nx-close" id="closeSelectiveColor" aria-label="Sluiten">×</button>
-          <div class="nx-hero-slider">
+          <div class="nx-hero-slider" id="nxHeroSliderSelectiveColor" aria-label="Project afbeeldingen">
             <div class="nx-slides">
               <img src="images/Hannelore_selectivecolor_resultaat.jpg" alt="Selective Color Portrait" class="nx-slide is-active" />
               <img src="images/selective_color_jen.png" alt="Selective Color Effect" class="nx-slide" />
+            </div>
+            <button class="nx-nav prev" id="nxPrevSelectiveColor" aria-label="Vorige">‹</button>
+            <button class="nx-nav next" id="nxNextSelectiveColor" aria-label="Volgende">›</button>
+            <div class="nx-dots" id="nxDotsSelectiveColor">
+              <button class="nx-dot is-active" aria-label="Ga naar slide 1"></button>
+              <button class="nx-dot" aria-label="Ga naar slide 2"></button>
             </div>
           </div>
           <section class="nx-panel">
@@ -128,11 +134,18 @@
       <div id="unitedColorsModal" class="modal-overlay" style="display: none">
         <div class="nx-card">
           <button class="nx-close" id="closeUnitedColors" aria-label="Sluiten">×</button>
-          <div class="nx-hero-slider">
+          <div class="nx-hero-slider" id="nxHeroSliderUnitedColors" aria-label="Project afbeeldingen">
             <div class="nx-slides">
               <img src="United colors/court_1_brown_eyes.jpg" alt="United Colors - Eye Color" class="nx-slide is-active" />
               <img src="United colors/Smurf_grey.jpg" alt="United Colors - Character" class="nx-slide" />
               <img src="United colors/jen_2_hair_pink.png" alt="United Colors - Hair Color" class="nx-slide" />
+            </div>
+            <button class="nx-nav prev" id="nxPrevUnitedColors" aria-label="Vorige">‹</button>
+            <button class="nx-nav next" id="nxNextUnitedColors" aria-label="Volgende">›</button>
+            <div class="nx-dots" id="nxDotsUnitedColors">
+              <button class="nx-dot is-active" aria-label="Ga naar slide 1"></button>
+              <button class="nx-dot" aria-label="Ga naar slide 2"></button>
+              <button class="nx-dot" aria-label="Ga naar slide 3"></button>
             </div>
           </div>
           <section class="nx-panel">
@@ -262,10 +275,16 @@
       <div id="kerstkaartjesModal" class="modal-overlay" style="display: none">
         <div class="nx-card">
           <button class="nx-close" id="closeKerstkaartjes" aria-label="Sluiten">×</button>
-          <div class="nx-hero-slider">
+          <div class="nx-hero-slider" id="nxHeroSliderKerstkaartjes" aria-label="Project afbeeldingen">
             <div class="nx-slides">
               <img src="images/Christmas_card-02.png" alt="Christmas Card 1" class="nx-slide is-active" />
               <img src="images/Cristmas_card_1-03.png" alt="Christmas Card 2" class="nx-slide" />
+            </div>
+            <button class="nx-nav prev" id="nxPrevKerstkaartjes" aria-label="Vorige">‹</button>
+            <button class="nx-nav next" id="nxNextKerstkaartjes" aria-label="Volgende">›</button>
+            <div class="nx-dots" id="nxDotsKerstkaartjes">
+              <button class="nx-dot is-active" aria-label="Ga naar slide 1"></button>
+              <button class="nx-dot" aria-label="Ga naar slide 2"></button>
             </div>
           </div>
           <section class="nx-panel">
@@ -522,6 +541,36 @@
             if (ev.target === modalEl) modalEl.style.display = 'none';
           });
         });
+
+        // Slideshow functionaliteit voor alle modals met meerdere slides
+        function setupNxSlider(sliderId, prevId, nextId, dotsId) {
+          const slider = document.getElementById(sliderId);
+          if (!slider) return;
+          const slides = slider.querySelectorAll('.nx-slide');
+          const prevBtn = document.getElementById(prevId);
+          const nextBtn = document.getElementById(nextId);
+          const dotsWrap = document.getElementById(dotsId);
+          const dots = dotsWrap ? dotsWrap.querySelectorAll('.nx-dot') : [];
+          let idx = 0, timer;
+          function show(i) {
+            if (!slides.length) return;
+            idx = (i + slides.length) % slides.length;
+            slides.forEach((s, k) => s.classList.toggle('is-active', k === idx));
+            dots.forEach((d, k) => d.classList.toggle('is-active', k === idx));
+          }
+          function next() { show(idx + 1); }
+          function prev() { show(idx - 1); }
+          nextBtn?.addEventListener('click', next);
+          prevBtn?.addEventListener('click', prev);
+          dots.forEach((d, k) => d.addEventListener('click', () => show(k)));
+          slider.addEventListener('mouseenter', () => clearInterval(timer));
+          slider.addEventListener('mouseleave', () => timer = setInterval(next, 3000));
+          show(0);
+        }
+        setupNxSlider('nxHeroSliderDoubleExposure', 'nxPrevDoubleExposure', 'nxNextDoubleExposure', 'nxDotsDoubleExposure');
+        setupNxSlider('nxHeroSliderSelectiveColor', 'nxPrevSelectiveColor', 'nxNextSelectiveColor', 'nxDotsSelectiveColor');
+        setupNxSlider('nxHeroSliderUnitedColors', 'nxPrevUnitedColors', 'nxNextUnitedColors', 'nxDotsUnitedColors');
+        setupNxSlider('nxHeroSliderKerstkaartjes', 'nxPrevKerstkaartjes', 'nxNextKerstkaartjes', 'nxDotsKerstkaartjes');
 
         // Slideshows
         let slideIndex1 = 1,
