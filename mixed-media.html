@@ -47,141 +47,278 @@
 
       <!-- Modal: screenshot-layout -->
       <!-- Modal: detail + hero + gallery -->
+      <!-- Detail modals voor elk project (Photoshop & Illustrator) -->
+      <!-- Double Exposure Modal -->
       <div id="doubleExposureModal" class="modal-overlay" style="display: none">
         <div class="nx-card">
-          <button
-            class="nx-close"
-            id="closeDoubleExposure"
-            aria-label="Sluiten"
-          >
-            ×
-          </button>
-
-          <!-- BOVEN: hero-beeld (enkelvoudige lead image) -->
-          <!-- BOVEN: hero-slideshow (vervangt enkelvoudige foto + gallery) -->
-          <div
-            class="nx-hero-slider"
-            id="nxHeroSlider"
-            aria-label="Project afbeeldingen"
-          >
+          <button class="nx-close" id="closeDoubleExposure" aria-label="Sluiten">×</button>
+          <div class="nx-hero-slider">
             <div class="nx-slides">
-              <img
-                src="images/Hannelore_doubleexposure1.jpg"
-                alt="Double Exposure 1"
-                class="nx-slide is-active"
-              />
-              <img
-                src="images/Hannelore_doubleexposure2.jpg"
-                alt="Double Exposure 2"
-                class="nx-slide"
-              />
-              <img
-                src="images/double_exposure.png"
-                alt="Double Exposure 3"
-                class="nx-slide"
-              />
-              <!-- Voeg gerust meer slides toe: <img src="..." class="nx-slide"> -->
+              <img src="images/Hannelore_doubleexposure1.jpg" alt="Double Exposure 1" class="nx-slide is-active" />
+              <img src="images/Hannelore_doubleexposure2.jpg" alt="Double Exposure 2" class="nx-slide" />
+              <img src="images/double_exposure.png" alt="Double Exposure 3" class="nx-slide" />
             </div>
-
-            <!-- navigatie -->
-            <button class="nx-nav prev" id="nxPrev" aria-label="Vorige">
-              ‹
-            </button>
-            <button class="nx-nav next" id="nxNext" aria-label="Volgende">
-              ›
-            </button>
-
-            <!-- dots (aantal = aantal slides) -->
+            <button class="nx-nav prev" id="nxPrev" aria-label="Vorige">‹</button>
+            <button class="nx-nav next" id="nxNext" aria-label="Volgende">›</button>
             <div class="nx-dots" id="nxDots">
-              <button
-                class="nx-dot is-active"
-                aria-label="Ga naar slide 1"
-              ></button>
+              <button class="nx-dot is-active" aria-label="Ga naar slide 1"></button>
               <button class="nx-dot" aria-label="Ga naar slide 2"></button>
               <button class="nx-dot" aria-label="Ga naar slide 3"></button>
             </div>
           </div>
-
-          <!-- ONDER: donkerblauwe content-panel (LAY-OUT ONGEWIJZIGD) -->
           <section class="nx-panel">
             <div class="nx-panel-inner">
-              <!-- links: hoofdinhoud -->
+              <div class="nx-left">
+                <h2 class="nx-title">Double Exposure Series</h2>
+                <div class="nx-meta"><span class="nx-badge">HD</span><span>Photoshop</span><span class="dot">•</span><span>Vector Art</span></div>
+                <p class="nx-desc">Dubbele belichtingstechniek met Photoshop en vector art.</p>
+                <div class="nx-actions"><button class="nx-btn nx-primary"><span class="nx-ico-play">▶</span> Bekijk Project</button><button class="nx-btn nx-ghost">＋ Mijn Lijst</button></div>
+                <h3 class="nx-h3">Over dit project</h3>
+                <p class="nx-body">Creatieve combinatie van fotografie en digitale illustratie.</p>
+                <h3 class="nx-h3">Artistieke Visie</h3>
+                <p class="nx-body">Focus op gelaagdheid en emotie.</p>
+                <div class="nx-taglist"><span class="nx-tag">Double Exposure</span><span class="nx-tag">Photoshop</span><span class="nx-tag">Vector</span></div>
+              </div>
+              <aside class="nx-right">
+                <div class="nx-spec"><div class="nx-spec-title">SOFTWARE</div><ul class="nx-spec-list"><li>Adobe Photoshop</li></ul></div>
+                <div class="nx-spec"><div class="nx-spec-title">TECHNIEKEN</div><ul class="nx-spec-list"><li>Dubbele belichting</li><li>Vector art</li></ul></div>
+                <div class="nx-spec"><div class="nx-spec-title">EFFECT</div><ul class="nx-spec-list"><li>Gelaagdheid</li></ul></div>
+                <div class="nx-spec"><div class="nx-spec-title">FOCUS</div><ul class="nx-spec-list"><li>Emotie</li></ul></div>
+              </aside>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <!-- Selective Color Modal -->
+      <div id="selectiveColorModal" class="modal-overlay" style="display: none">
+        <div class="nx-card">
+          <button class="nx-close" id="closeSelectiveColor" aria-label="Sluiten">×</button>
+          <div class="nx-hero-slider">
+            <div class="nx-slides">
+              <img src="images/Hannelore_selectivecolor_resultaat.jpg" alt="Selective Color Portrait" class="nx-slide is-active" />
+              <img src="images/selective_color_jen.png" alt="Selective Color Effect" class="nx-slide" />
+            </div>
+          </div>
+          <section class="nx-panel">
+            <div class="nx-panel-inner">
               <div class="nx-left">
                 <h2 class="nx-title">Selective Color Series</h2>
-
-                <div class="nx-meta">
-                  <span class="nx-badge">HD</span>
-                  <span>Photoshop</span><span class="dot">•</span
-                  ><span>Photo Edit</span>
-                </div>
-
-                <p class="nx-desc">
-                  Een krachtige fotobewerkingstechniek waarbij specifieke
-                  kleuren worden benadrukt terwijl de rest van de afbeelding in
-                  zwart-wit wordt gehouden.
-                </p>
-
-                <div class="nx-actions">
-                  <button class="nx-btn nx-primary">
-                    <span class="nx-ico-play">▶</span> Bekijk Project
-                  </button>
-                  <button class="nx-btn nx-ghost">＋ Mijn Lijst</button>
-                </div>
-
+                <div class="nx-meta"><span class="nx-badge">HD</span><span>Photoshop</span><span class="dot">•</span><span>Photo Edit</span></div>
+                <p class="nx-desc">Kleurbewerking waarbij specifieke kleuren worden benadrukt.</p>
+                <div class="nx-actions"><button class="nx-btn nx-primary"><span class="nx-ico-play">▶</span> Bekijk Project</button><button class="nx-btn nx-ghost">＋ Mijn Lijst</button></div>
                 <h3 class="nx-h3">Over dit project</h3>
-                <p class="nx-body">
-                  Dit creëert een dramatisch visueel effect dat de aandacht
-                  trekt naar bepaalde elementen. Door selectief kleuren te
-                  behouden ontstaat er een focus punt in de compositie.
-                </p>
-
+                <p class="nx-body">Focus op kleurcontrast en visuele impact.</p>
                 <h3 class="nx-h3">Artistieke Visie</h3>
-                <p class="nx-body">
-                  Deze techniek wordt vaak gebruikt in mode- en
-                  portretfotografie om emotie te versterken en een
-                  cinematistische sfeer te creëren.
-                </p>
-
-                <!-- tags -->
-                <div class="nx-taglist">
-                  <span class="nx-tag">Selective Color</span>
-                  <span class="nx-tag">Photoshop</span>
-                  <span class="nx-tag">Foto-editing</span>
-                  <span class="nx-tag">Kleurbewerking</span>
-                </div>
+                <p class="nx-body">Cinematische sfeer door selectieve kleur.</p>
+                <div class="nx-taglist"><span class="nx-tag">Selective Color</span><span class="nx-tag">Photoshop</span></div>
               </div>
-
-              <!-- rechts: specs/sidebar -->
               <aside class="nx-right">
-                <div class="nx-spec">
-                  <div class="nx-spec-title">SOFTWARE</div>
-                  <ul class="nx-spec-list">
-                    <li>Adobe Photoshop</li>
-                  </ul>
-                </div>
+                <div class="nx-spec"><div class="nx-spec-title">SOFTWARE</div><ul class="nx-spec-list"><li>Adobe Photoshop</li></ul></div>
+                <div class="nx-spec"><div class="nx-spec-title">TECHNIEKEN</div><ul class="nx-spec-list"><li>Kleurbewerking</li></ul></div>
+                <div class="nx-spec"><div class="nx-spec-title">EFFECT</div><ul class="nx-spec-list"><li>Contrast</li></ul></div>
+                <div class="nx-spec"><div class="nx-spec-title">FOCUS</div><ul class="nx-spec-list"><li>Kleuraccent</li></ul></div>
+              </aside>
+            </div>
+          </section>
+        </div>
+      </div>
 
-                <div class="nx-spec">
-                  <div class="nx-spec-title">TECHNIEKEN</div>
-                  <ul class="nx-spec-list">
-                    <li>Color selection</li>
-                    <li>Layer masks</li>
-                    <li>Saturation adjustments</li>
-                  </ul>
-                </div>
+      <!-- United Colors Modal -->
+      <div id="unitedColorsModal" class="modal-overlay" style="display: none">
+        <div class="nx-card">
+          <button class="nx-close" id="closeUnitedColors" aria-label="Sluiten">×</button>
+          <div class="nx-hero-slider">
+            <div class="nx-slides">
+              <img src="United colors/court_1_brown_eyes.jpg" alt="United Colors - Eye Color" class="nx-slide is-active" />
+              <img src="United colors/Smurf_grey.jpg" alt="United Colors - Character" class="nx-slide" />
+              <img src="United colors/jen_2_hair_pink.png" alt="United Colors - Hair Color" class="nx-slide" />
+            </div>
+          </div>
+          <section class="nx-panel">
+            <div class="nx-panel-inner">
+              <div class="nx-left">
+                <h2 class="nx-title">United Colors Series</h2>
+                <div class="nx-meta"><span class="nx-badge">HD</span><span>Photoshop</span><span class="dot">•</span><span>Color Grading</span></div>
+                <p class="nx-desc">Kleurmanipulatie en grading van portretten.</p>
+                <div class="nx-actions"><button class="nx-btn nx-primary"><span class="nx-ico-play">▶</span> Bekijk Project</button><button class="nx-btn nx-ghost">＋ Mijn Lijst</button></div>
+                <h3 class="nx-h3">Over dit project</h3>
+                <p class="nx-body">Experimenteren met kleur en karakter.</p>
+                <h3 class="nx-h3">Artistieke Visie</h3>
+                <p class="nx-body">Speels en expressief kleurgebruik.</p>
+                <div class="nx-taglist"><span class="nx-tag">United Colors</span><span class="nx-tag">Photoshop</span></div>
+              </div>
+              <aside class="nx-right">
+                <div class="nx-spec"><div class="nx-spec-title">SOFTWARE</div><ul class="nx-spec-list"><li>Adobe Photoshop</li></ul></div>
+                <div class="nx-spec"><div class="nx-spec-title">TECHNIEKEN</div><ul class="nx-spec-list"><li>Kleurmanipulatie</li></ul></div>
+                <div class="nx-spec"><div class="nx-spec-title">EFFECT</div><ul class="nx-spec-list"><li>Grading</li></ul></div>
+                <div class="nx-spec"><div class="nx-spec-title">FOCUS</div><ul class="nx-spec-list"><li>Expressie</li></ul></div>
+              </aside>
+            </div>
+          </section>
+        </div>
+      </div>
 
-                <div class="nx-spec">
-                  <div class="nx-spec-title">EFFECT</div>
-                  <ul class="nx-spec-list">
-                    <li>Selective desaturation</li>
-                  </ul>
-                </div>
+      <!-- Smart Water Modal -->
+      <div id="smartwaterModal" class="modal-overlay" style="display: none">
+        <div class="nx-card">
+          <button class="nx-close" id="closeSmartwater" aria-label="Sluiten">×</button>
+          <div class="nx-hero-slider">
+            <div class="nx-slides">
+              <img src="images/mock_up_smartwater.png" alt="Smart Water Mockup" class="nx-slide is-active" />
+            </div>
+          </div>
+          <section class="nx-panel">
+            <div class="nx-panel-inner">
+              <div class="nx-left">
+                <h2 class="nx-title">Smart Water Mockup</h2>
+                <div class="nx-meta"><span class="nx-badge">HD</span><span>Photoshop</span><span class="dot">•</span><span>Product Design</span></div>
+                <p class="nx-desc">Mockup van een slim waterfles ontwerp.</p>
+                <div class="nx-actions"><button class="nx-btn nx-primary"><span class="nx-ico-play">▶</span> Bekijk Project</button><button class="nx-btn nx-ghost">＋ Mijn Lijst</button></div>
+                <h3 class="nx-h3">Over dit project</h3>
+                <p class="nx-body">Product mockup en branding voor een innovatief waterfles concept.</p>
+                <h3 class="nx-h3">Artistieke Visie</h3>
+                <p class="nx-body">Strak, modern en functioneel design.</p>
+                <div class="nx-taglist"><span class="nx-tag">Smart Water</span><span class="nx-tag">Mockup</span></div>
+              </div>
+              <aside class="nx-right">
+                <div class="nx-spec"><div class="nx-spec-title">SOFTWARE</div><ul class="nx-spec-list"><li>Adobe Photoshop</li></ul></div>
+                <div class="nx-spec"><div class="nx-spec-title">TECHNIEKEN</div><ul class="nx-spec-list"><li>Mockup</li></ul></div>
+                <div class="nx-spec"><div class="nx-spec-title">EFFECT</div><ul class="nx-spec-list"><li>Productpresentatie</li></ul></div>
+                <div class="nx-spec"><div class="nx-spec-title">FOCUS</div><ul class="nx-spec-list"><li>Functionaliteit</li></ul></div>
+              </aside>
+            </div>
+          </section>
+        </div>
+      </div>
 
-                <div class="nx-spec">
-                  <div class="nx-spec-title">FOCUS</div>
-                  <ul class="nx-spec-list">
-                    <li>Kleurcontrast en visuele impact</li>
-                  </ul>
-                </div>
+      <!-- Bauhaus Modal -->
+      <div id="bauhausModal" class="modal-overlay" style="display: none">
+        <div class="nx-card">
+          <button class="nx-close" id="closeBauhaus" aria-label="Sluiten">×</button>
+          <div class="nx-hero-slider">
+            <div class="nx-slides">
+              <img src="images/bauhaus.png" alt="Bauhaus Design" class="nx-slide is-active" />
+            </div>
+          </div>
+          <section class="nx-panel">
+            <div class="nx-panel-inner">
+              <div class="nx-left">
+                <h2 class="nx-title">Bauhaus Style</h2>
+                <div class="nx-meta"><span class="nx-badge">HD</span><span>Illustrator</span><span class="dot">•</span><span>Geometric Design</span></div>
+                <p class="nx-desc">Geometrische vormen en minimalisme.</p>
+                <div class="nx-actions"><button class="nx-btn nx-primary"><span class="nx-ico-play">▶</span> Bekijk Project</button><button class="nx-btn nx-ghost">＋ Mijn Lijst</button></div>
+                <h3 class="nx-h3">Over dit project</h3>
+                <p class="nx-body">Bauhaus geïnspireerde composities.</p>
+                <h3 class="nx-h3">Artistieke Visie</h3>
+                <p class="nx-body">Strakke lijnen en kleurvlakken.</p>
+                <div class="nx-taglist"><span class="nx-tag">Bauhaus</span><span class="nx-tag">Illustrator</span></div>
+              </div>
+              <aside class="nx-right">
+                <div class="nx-spec"><div class="nx-spec-title">SOFTWARE</div><ul class="nx-spec-list"><li>Adobe Illustrator</li></ul></div>
+                <div class="nx-spec"><div class="nx-spec-title">TECHNIEKEN</div><ul class="nx-spec-list"><li>Geometrie</li></ul></div>
+                <div class="nx-spec"><div class="nx-spec-title">EFFECT</div><ul class="nx-spec-list"><li>Minimalisme</li></ul></div>
+                <div class="nx-spec"><div class="nx-spec-title">FOCUS</div><ul class="nx-spec-list"><li>Vorm en kleur</li></ul></div>
+              </aside>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <!-- Sidekick Modal -->
+      <div id="sidekickModal" class="modal-overlay" style="display: none">
+        <div class="nx-card">
+          <button class="nx-close" id="closeSidekick" aria-label="Sluiten">×</button>
+          <div class="nx-hero-slider">
+            <div class="nx-slides">
+              <img src="images/sidekick_definitief_1.png" alt="Sidekick Design" class="nx-slide is-active" />
+            </div>
+          </div>
+          <section class="nx-panel">
+            <div class="nx-panel-inner">
+              <div class="nx-left">
+                <h2 class="nx-title">Sidekick</h2>
+                <div class="nx-meta"><span class="nx-badge">HD</span><span>Illustrator</span><span class="dot">•</span><span>Logo Design</span></div>
+                <p class="nx-desc">Logo ontwerp met karakter.</p>
+                <div class="nx-actions"><button class="nx-btn nx-primary"><span class="nx-ico-play">▶</span> Bekijk Project</button><button class="nx-btn nx-ghost">＋ Mijn Lijst</button></div>
+                <h3 class="nx-h3">Over dit project</h3>
+                <p class="nx-body">Uniek en herkenbaar logo.</p>
+                <h3 class="nx-h3">Artistieke Visie</h3>
+                <p class="nx-body">Speels en modern.</p>
+                <div class="nx-taglist"><span class="nx-tag">Sidekick</span><span class="nx-tag">Illustrator</span></div>
+              </div>
+              <aside class="nx-right">
+                <div class="nx-spec"><div class="nx-spec-title">SOFTWARE</div><ul class="nx-spec-list"><li>Adobe Illustrator</li></ul></div>
+                <div class="nx-spec"><div class="nx-spec-title">TECHNIEKEN</div><ul class="nx-spec-list"><li>Logo ontwerp</li></ul></div>
+                <div class="nx-spec"><div class="nx-spec-title">EFFECT</div><ul class="nx-spec-list"><li>Herkenbaarheid</li></ul></div>
+                <div class="nx-spec"><div class="nx-spec-title">FOCUS</div><ul class="nx-spec-list"><li>Karakter</li></ul></div>
+              </aside>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <!-- Kerstkaartjes Modal -->
+      <div id="kerstkaartjesModal" class="modal-overlay" style="display: none">
+        <div class="nx-card">
+          <button class="nx-close" id="closeKerstkaartjes" aria-label="Sluiten">×</button>
+          <div class="nx-hero-slider">
+            <div class="nx-slides">
+              <img src="images/Christmas_card-02.png" alt="Christmas Card 1" class="nx-slide is-active" />
+              <img src="images/Cristmas_card_1-03.png" alt="Christmas Card 2" class="nx-slide" />
+            </div>
+          </div>
+          <section class="nx-panel">
+            <div class="nx-panel-inner">
+              <div class="nx-left">
+                <h2 class="nx-title">Kerstkaartjes</h2>
+                <div class="nx-meta"><span class="nx-badge">HD</span><span>Illustrator</span><span class="dot">•</span><span>Holiday Design</span></div>
+                <p class="nx-desc">Feestelijke ontwerpen voor kerst.</p>
+                <div class="nx-actions"><button class="nx-btn nx-primary"><span class="nx-ico-play">▶</span> Bekijk Project</button><button class="nx-btn nx-ghost">＋ Mijn Lijst</button></div>
+                <h3 class="nx-h3">Over dit project</h3>
+                <p class="nx-body">Creatieve kaarten voor de feestdagen.</p>
+                <h3 class="nx-h3">Artistieke Visie</h3>
+                <p class="nx-body">Warmte en sfeer in design.</p>
+                <div class="nx-taglist"><span class="nx-tag">Kerstkaartjes</span><span class="nx-tag">Illustrator</span></div>
+              </div>
+              <aside class="nx-right">
+                <div class="nx-spec"><div class="nx-spec-title">SOFTWARE</div><ul class="nx-spec-list"><li>Adobe Illustrator</li></ul></div>
+                <div class="nx-spec"><div class="nx-spec-title">TECHNIEKEN</div><ul class="nx-spec-list"><li>Kaartontwerp</li></ul></div>
+                <div class="nx-spec"><div class="nx-spec-title">EFFECT</div><ul class="nx-spec-list"><li>Feestelijk</li></ul></div>
+                <div class="nx-spec"><div class="nx-spec-title">FOCUS</div><ul class="nx-spec-list"><li>Sfeer</li></ul></div>
+              </aside>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <!-- Skyline Modal -->
+      <div id="skylineModal" class="modal-overlay" style="display: none">
+        <div class="nx-card">
+          <button class="nx-close" id="closeSkyline" aria-label="Sluiten">×</button>
+          <div class="nx-hero-slider">
+            <div class="nx-slides">
+              <img src="Skyline/stad.jpg" alt="Skyline Design" class="nx-slide is-active" />
+            </div>
+          </div>
+          <section class="nx-panel">
+            <div class="nx-panel-inner">
+              <div class="nx-left">
+                <h2 class="nx-title">Skyline</h2>
+                <div class="nx-meta"><span class="nx-badge">HD</span><span>Illustrator</span><span class="dot">•</span><span>Urban Design</span></div>
+                <p class="nx-desc">Stadsgezicht in grafische stijl.</p>
+                <div class="nx-actions"><button class="nx-btn nx-primary"><span class="nx-ico-play">▶</span> Bekijk Project</button><button class="nx-btn nx-ghost">＋ Mijn Lijst</button></div>
+                <h3 class="nx-h3">Over dit project</h3>
+                <p class="nx-body">Grafische interpretatie van een stadssilhouet.</p>
+                <h3 class="nx-h3">Artistieke Visie</h3>
+                <p class="nx-body">Focus op vorm en ritme.</p>
+                <div class="nx-taglist"><span class="nx-tag">Skyline</span><span class="nx-tag">Illustrator</span></div>
+              </div>
+              <aside class="nx-right">
+                <div class="nx-spec"><div class="nx-spec-title">SOFTWARE</div><ul class="nx-spec-list"><li>Adobe Illustrator</li></ul></div>
+                <div class="nx-spec"><div class="nx-spec-title">TECHNIEKEN</div><ul class="nx-spec-list"><li>Vector</li></ul></div>
+                <div class="nx-spec"><div class="nx-spec-title">EFFECT</div><ul class="nx-spec-list"><li>Stadsgezicht</li></ul></div>
+                <div class="nx-spec"><div class="nx-spec-title">FOCUS</div><ul class="nx-spec-list"><li>Vorm en ritme</li></ul></div>
               </aside>
             </div>
           </section>
@@ -225,7 +362,7 @@
             </div>
           </div>
 
-          <div class="project-card">
+          <div class="project-card" id="selectiveColorCard">
             <div class="overlap-group">
               <div class="slideshow-container" id="slideshow2">
                 <div class="slides">
@@ -253,7 +390,7 @@
             </div>
           </div>
 
-          <div class="project-card">
+          <div class="project-card" id="unitedColorsCard">
             <div class="overlap-group">
               <div class="slideshow-container" id="slideshow3">
                 <div class="slides">
@@ -286,13 +423,9 @@
             </div>
           </div>
 
-          <div class="project-card">
+          <div class="project-card" id="smartwaterCard">
             <div class="overlap-group">
-              <img
-                class="image"
-                src="images/mock_up_smartwater.png"
-                alt="Smart Water Mockup"
-              />
+              <img class="image" src="images/mock_up_smartwater.png" alt="Smart Water Mockup" />
               <div class="gradient"></div>
               <div class="text">
                 <div class="div">Smart Water Mockup</div>
@@ -302,17 +435,12 @@
           </div>
         </div>
       </div>
-
       <div class="projects-section">
         <h2 class="section-title">Illustrator</h2>
         <div class="projects">
-          <div class="project-card">
+          <div class="project-card" id="bauhausCard">
             <div class="overlap-group">
-              <img
-                class="image"
-                src="images/bauhaus.png"
-                alt="Bauhaus Design"
-              />
+              <img class="image" src="images/bauhaus.png" alt="Bauhaus Design" />
               <div class="gradient"></div>
               <div class="text">
                 <div class="div">Bauhaus Style</div>
@@ -320,14 +448,9 @@
               </div>
             </div>
           </div>
-
-          <div class="project-card">
+          <div class="project-card" id="sidekickCard">
             <div class="overlap-group">
-              <img
-                class="image"
-                src="images/sidekick_definitief_1.png"
-                alt="Sidekick Design"
-              />
+              <img class="image" src="images/sidekick_definitief_1.png" alt="Sidekick Design" />
               <div class="gradient"></div>
               <div class="text">
                 <div class="div">Sidekick</div>
@@ -335,21 +458,12 @@
               </div>
             </div>
           </div>
-
-          <div class="project-card">
+          <div class="project-card" id="kerstkaartjesCard">
             <div class="overlap-group">
               <div class="slideshow-container" id="slideshow4">
                 <div class="slides">
-                  <img
-                    class="image slide active"
-                    src="images/Christmas_card-02.png"
-                    alt="Christmas Card 1"
-                  />
-                  <img
-                    class="image slide"
-                    src="images/Cristmas_card_1-03.png"
-                    alt="Christmas Card 2"
-                  />
+                  <img class="image slide active" src="images/Christmas_card-02.png" alt="Christmas Card 1" />
+                  <img class="image slide" src="images/Cristmas_card_1-03.png" alt="Christmas Card 2" />
                 </div>
                 <div class="slideshow-nav">
                   <button class="prev" onclick="changeSlide4(-1)">‹</button>
@@ -363,8 +477,7 @@
               </div>
             </div>
           </div>
-
-          <div class="project-card">
+          <div class="project-card" id="skylineCard">
             <div class="overlap-group">
               <img class="image" src="Skyline/stad.jpg" alt="Skyline Design" />
               <div class="gradient"></div>
@@ -376,144 +489,153 @@
           </div>
         </div>
       </div>
-    </div>
 
-    <script>
-      // Modal
-      document.addEventListener("DOMContentLoaded", function () {
-        const modal = document.getElementById("doubleExposureModal");
-        const card = document.getElementById("doubleExposureCard");
-        const closeBtn = document.getElementById("closeDoubleExposure");
-        card.addEventListener("click", (e) => {
-          if (
-            !e.target.classList.contains("prev") &&
-            !e.target.classList.contains("next")
-          ) {
-            modal.style.display = "flex";
+      <script>
+        // Dynamisch koppelen op basis van id
+        const cardModalMap = {
+          doubleExposureCard: 'doubleExposureModal',
+          selectiveColorCard: 'selectiveColorModal',
+          unitedColorsCard: 'unitedColorsModal',
+          smartwaterCard: 'smartwaterModal',
+          bauhausCard: 'bauhausModal',
+          sidekickCard: 'sidekickModal',
+          kerstkaartjesCard: 'kerstkaartjesModal',
+          skylineCard: 'skylineModal'
+        };
+        Object.entries(cardModalMap).forEach(([cardId, modalId]) => {
+          const cardEl = document.getElementById(cardId);
+          const modalEl = document.getElementById(modalId);
+          const closeBtn = modalEl ? modalEl.querySelector('.nx-close') : null;
+          if (cardEl && modalEl) {
+            cardEl.addEventListener('click', function(e) {
+              if (!e.target.classList.contains('prev') && !e.target.classList.contains('next')) {
+                modalEl.style.display = 'flex';
+              }
+            });
           }
+          if (closeBtn && modalEl) {
+            closeBtn.addEventListener('click', function() {
+              modalEl.style.display = 'none';
+            });
+          }
+          window.addEventListener('mousedown', function(ev) {
+            if (ev.target === modalEl) modalEl.style.display = 'none';
+          });
         });
-        closeBtn.addEventListener(
-          "click",
-          () => (modal.style.display = "none")
-        );
-        window.addEventListener("mousedown", (ev) => {
-          if (ev.target === modal) modal.style.display = "none";
-        });
-      });
 
-      // Slideshows
-      let slideIndex1 = 1,
-        slideIndex2 = 1,
-        slideIndex3 = 1,
-        slideIndex4 = 1,
-        currentSlideshow = 1;
-      function show(n, sel, set) {
-        const s = document.querySelectorAll(sel + " .slide");
-        if (!s.length) return;
-        if (n > s.length) set(1);
-        if (n < 1) set(s.length);
-        s.forEach((x) => x.classList.remove("active"));
-        const idx =
-          (sel === "#slideshow1"
-            ? slideIndex1
-            : sel === "#slideshow2"
-            ? slideIndex2
-            : sel === "#slideshow3"
-            ? slideIndex3
-            : slideIndex4) - 1;
-        s[idx]?.classList.add("active");
-      }
-      function changeSlide1(n) {
-        show((slideIndex1 += n), "#slideshow1", (v) => (slideIndex1 = v));
-      }
-      function changeSlide2(n) {
-        show((slideIndex2 += n), "#slideshow2", (v) => (slideIndex2 = v));
-      }
-      function changeSlide3(n) {
-        show((slideIndex3 += n), "#slideshow3", (v) => (slideIndex3 = v));
-      }
-      function changeSlide4(n) {
-        show((slideIndex4 += n), "#slideshow4", (v) => (slideIndex4 = v));
-      }
-      setInterval(() => {
-        if (currentSlideshow === 1) {
-          changeSlide1(1);
-          currentSlideshow = 2;
-        } else if (currentSlideshow === 2) {
-          changeSlide2(1);
-          currentSlideshow = 3;
-        } else if (currentSlideshow === 3) {
-          changeSlide3(1);
-          currentSlideshow = 4;
-        } else {
-          changeSlide4(1);
+        // Slideshows
+        let slideIndex1 = 1,
+          slideIndex2 = 1,
+          slideIndex3 = 1,
+          slideIndex4 = 1,
           currentSlideshow = 1;
+        function show(n, sel, set) {
+          const s = document.querySelectorAll(sel + " .slide");
+          if (!s.length) return;
+          if (n > s.length) set(1);
+          if (n < 1) set(s.length);
+          s.forEach((x) => x.classList.remove("active"));
+          const idx =
+            (sel === "#slideshow1"
+              ? slideIndex1
+              : sel === "#slideshow2"
+              ? slideIndex2
+              : sel === "#slideshow3"
+              ? slideIndex3
+              : slideIndex4) - 1;
+          s[idx]?.classList.add("active");
         }
-      }, 3000);
-
-      // --- DETAILMODAL SLIDESHOW ---
-      (function () {
-        const slider = document.getElementById("nxHeroSlider");
-        if (!slider) return;
-
-        const slides = slider.querySelectorAll(".nx-slide");
-        const prevBtn = document.getElementById("nxPrev");
-        const nextBtn = document.getElementById("nxNext");
-        const dotsWrap = document.getElementById("nxDots");
-        const dots = dotsWrap ? dotsWrap.querySelectorAll(".nx-dot") : [];
-
-        let idx = 0,
-          timer;
-
-        function show(i) {
-          if (!slides.length) return;
-          idx = (i + slides.length) % slides.length;
-          slides.forEach((s, k) => s.classList.toggle("is-active", k === idx));
-          dots.forEach((d, k) => d.classList.toggle("is-active", k === idx));
+        function changeSlide1(n) {
+          show((slideIndex1 += n), "#slideshow1", (v) => (slideIndex1 = v));
         }
-        function next() {
-          show(idx + 1);
+        function changeSlide2(n) {
+          show((slideIndex2 += n), "#slideshow2", (v) => (slideIndex2 = v));
         }
-        function prev() {
-          show(idx - 1);
+        function changeSlide3(n) {
+          show((slideIndex3 += n), "#slideshow3", (v) => (slideIndex3 = v));
         }
-
-        // controls
-        nextBtn?.addEventListener("click", next);
-        prevBtn?.addEventListener("click", prev);
-        dots.forEach((d, k) => d.addEventListener("click", () => show(k)));
-
-        // autoplay
-        function start() {
-          stop();
-          timer = setInterval(next, 3000);
+        function changeSlide4(n) {
+          show((slideIndex4 += n), "#slideshow4", (v) => (slideIndex4 = v));
         }
-        function stop() {
-          if (timer) clearInterval(timer);
-        }
+        setInterval(() => {
+          if (currentSlideshow === 1) {
+            changeSlide1(1);
+            currentSlideshow = 2;
+          } else if (currentSlideshow === 2) {
+            changeSlide2(1);
+            currentSlideshow = 3;
+          } else if (currentSlideshow === 3) {
+            changeSlide3(1);
+            currentSlideshow = 4;
+          } else {
+            changeSlide4(1);
+            currentSlideshow = 1;
+          }
+        }, 3000);
 
-        // pause on hover
-        slider.addEventListener("mouseenter", stop);
-        slider.addEventListener("mouseleave", start);
+        // --- DETAILMODAL SLIDESHOW ---
+        (function () {
+          const slider = document.getElementById("nxHeroSlider");
+          if (!slider) return;
 
-        // start when modal opens, stop when it closes
-        const modal = document.getElementById("doubleExposureModal");
-        const openCard = document.getElementById("doubleExposureCard");
-        const closeBtn = document.getElementById("closeDoubleExposure");
+          const slides = slider.querySelectorAll(".nx-slide");
+          const prevBtn = document.getElementById("nxPrev");
+          const nextBtn = document.getElementById("nxNext");
+          const dotsWrap = document.getElementById("nxDots");
+          const dots = dotsWrap ? dotsWrap.querySelectorAll(".nx-dot") : [];
 
-        // als je al listeners hebt, blijft dit extra licht
-        openCard?.addEventListener("click", () => {
+          let idx = 0,
+            timer;
+
+          function show(i) {
+            if (!slides.length) return;
+            idx = (i + slides.length) % slides.length;
+            slides.forEach((s, k) => s.classList.toggle("is-active", k === idx));
+            dots.forEach((d, k) => d.classList.toggle("is-active", k === idx));
+          }
+          function next() {
+            show(idx + 1);
+          }
+          function prev() {
+            show(idx - 1);
+          }
+
+          // controls
+          nextBtn?.addEventListener("click", next);
+          prevBtn?.addEventListener("click", prev);
+          dots.forEach((d, k) => d.addEventListener("click", () => show(k)));
+
+          // autoplay
+          function start() {
+            stop();
+            timer = setInterval(next, 3000);
+          }
+          function stop() {
+            if (timer) clearInterval(timer);
+          }
+
+          // pause on hover
+          slider.addEventListener("mouseenter", stop);
+          slider.addEventListener("mouseleave", start);
+
+          // start when modal opens, stop when it closes
+          const modal = document.getElementById("doubleExposureModal");
+          const openCard = document.getElementById("doubleExposureCard");
+          const closeBtn = document.getElementById("closeDoubleExposure");
+
+          // als je al listeners hebt, blijft dit extra licht
+          openCard?.addEventListener("click", () => {
+            show(0);
+            start();
+          });
+          closeBtn?.addEventListener("click", stop);
+          window.addEventListener("mousedown", (ev) => {
+            if (ev.target === modal) stop();
+          });
+
+          // init state (verborgen, maar alvast klaar)
           show(0);
-          start();
-        });
-        closeBtn?.addEventListener("click", stop);
-        window.addEventListener("mousedown", (ev) => {
-          if (ev.target === modal) stop();
-        });
-
-        // init state (verborgen, maar alvast klaar)
-        show(0);
-      })();
-    </script>
+        })();
+      </script>
   </body>
 </html>
