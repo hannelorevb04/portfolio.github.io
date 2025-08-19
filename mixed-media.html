@@ -9,30 +9,76 @@
   <body>
     <div class="designer-page">
         <script>
-          // Drag-to-scroll for all .projects containers
+          // Improved drag-to-scroll for all .projects containers, with click detection for modals
           document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('.projects').forEach(function(container) {
-              let isDown = false, startX, scrollLeft;
+              let isDown = false, startX, scrollLeft, dragMoved = false;
+              // Touch support
+              let isTouch = false, touchStartX = 0, touchScrollLeft = 0, touchMoved = false;
+              function setDragging(val) {
+                container.classList.toggle('dragging', val);
+                document.body.style.userSelect = val ? 'none' : '';
+              }
               container.addEventListener('mousedown', function(e) {
                 isDown = true;
-                container.classList.add('dragging');
+                dragMoved = false;
+                setDragging(true);
                 startX = e.pageX - container.offsetLeft;
                 scrollLeft = container.scrollLeft;
               });
               container.addEventListener('mouseleave', function() {
                 isDown = false;
-                container.classList.remove('dragging');
+                setDragging(false);
               });
-              container.addEventListener('mouseup', function() {
+              container.addEventListener('mouseup', function(e) {
                 isDown = false;
-                container.classList.remove('dragging');
+                setDragging(false);
               });
               container.addEventListener('mousemove', function(e) {
                 if (!isDown) return;
                 e.preventDefault();
                 const x = e.pageX - container.offsetLeft;
-                const walk = (x - startX) * 1.5; // scroll speed
+                const walk = (x - startX) * 3.5;
+                if (Math.abs(x - startX) > 5) dragMoved = true;
                 container.scrollLeft = scrollLeft - walk;
+              });
+              // Prevent modal opening if drag happened
+              container.querySelectorAll('.project-card').forEach(function(card) {
+                card.addEventListener('click', function(e) {
+                  if (isDown || dragMoved) {
+                    e.stopImmediatePropagation();
+                    e.preventDefault();
+                    return false;
+                  }
+                }, true);
+              });
+              // Touch events
+              container.addEventListener('touchstart', function(e) {
+                isTouch = true;
+                touchMoved = false;
+                setDragging(true);
+                touchStartX = e.touches[0].pageX - container.offsetLeft;
+                touchScrollLeft = container.scrollLeft;
+              }, {passive: true});
+              container.addEventListener('touchend', function(e) {
+                isTouch = false;
+                setDragging(false);
+              });
+              container.addEventListener('touchmove', function(e) {
+                if (!isTouch) return;
+                const x = e.touches[0].pageX - container.offsetLeft;
+                const walk = (x - touchStartX) * 3.5;
+                if (Math.abs(x - touchStartX) > 5) touchMoved = true;
+                container.scrollLeft = touchScrollLeft - walk;
+              }, {passive: false});
+              container.querySelectorAll('.project-card').forEach(function(card) {
+                card.addEventListener('touchend', function(e) {
+                  if (isTouch && touchMoved) {
+                    e.stopImmediatePropagation();
+                    e.preventDefault();
+                    return false;
+                  }
+                }, true);
               });
             });
           });

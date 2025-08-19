@@ -9,31 +9,57 @@
   <body>
     <div class="designer-page">
         <script>
-          // Drag-to-scroll for all .projects containers
+          // Improved drag-to-scroll for all .projects containers
           document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('.projects').forEach(function(container) {
               let isDown = false, startX, scrollLeft;
+              // Touch support
+              let isTouch = false, touchStartX = 0, touchScrollLeft = 0;
+              function setDragging(val) {
+                container.classList.toggle('dragging', val);
+                container.querySelectorAll('*').forEach(el => {
+                  el.style.pointerEvents = val ? 'none' : '';
+                });
+                document.body.style.userSelect = val ? 'none' : '';
+              }
               container.addEventListener('mousedown', function(e) {
                 isDown = true;
-                container.classList.add('dragging');
+                setDragging(true);
                 startX = e.pageX - container.offsetLeft;
                 scrollLeft = container.scrollLeft;
               });
               container.addEventListener('mouseleave', function() {
                 isDown = false;
-                container.classList.remove('dragging');
+                setDragging(false);
               });
               container.addEventListener('mouseup', function() {
                 isDown = false;
-                container.classList.remove('dragging');
+                setDragging(false);
               });
               container.addEventListener('mousemove', function(e) {
                 if (!isDown) return;
                 e.preventDefault();
                 const x = e.pageX - container.offsetLeft;
-                const walk = (x - startX) * 1.5; // scroll speed
+                const walk = (x - startX) * 3.5; // smoother, faster scroll
                 container.scrollLeft = scrollLeft - walk;
               });
+              // Touch events
+              container.addEventListener('touchstart', function(e) {
+                isTouch = true;
+                setDragging(true);
+                touchStartX = e.touches[0].pageX - container.offsetLeft;
+                touchScrollLeft = container.scrollLeft;
+              }, {passive: true});
+              container.addEventListener('touchend', function() {
+                isTouch = false;
+                setDragging(false);
+              });
+              container.addEventListener('touchmove', function(e) {
+                if (!isTouch) return;
+                const x = e.touches[0].pageX - container.offsetLeft;
+                const walk = (x - touchStartX) * 3.5;
+                container.scrollLeft = touchScrollLeft - walk;
+              }, {passive: false});
             });
           });
         </script>
