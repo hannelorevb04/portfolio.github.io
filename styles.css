@@ -1,3 +1,9 @@
+/* Info icon for Contact me button */
+.info-icon {
+  display: inline-block;
+  margin-right: 6px;
+  vertical-align: middle;
+}
 /* Prevent label shifting in project cards and modals */
 .text-wrapper-row {
   display: flex;
