@@ -72,20 +72,23 @@ body {
   font-size: 1.5rem;
   font-weight: 700;
 }
+/* Center het logo pixel‑precies in de cirkel */
 .nav-profile {
   width: 48px;
   height: 48px;
   border-radius: 50%;
   background: #102e4a;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: grid; /* i.p.v. flex: grid centreert perfect */
+  place-items: center; /* horizontaal + verticaal */
 }
+
 .profile-image {
-  width: 32px;
-  height: 32px;
-  object-fit: contain;
+  width: 30px; /* iets groter dan 26px zodat het optisch klopt */
+  height: 30px;
+  display: block; /* geen baseline-offset */
+  object-fit: contain; /* behoud verhoudingen */
 }
+
 .hero-content {
   position: absolute;
   top: 75%;
