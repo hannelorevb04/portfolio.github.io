@@ -77,17 +77,23 @@ body {
 .nav-profile {
   width: 48px;
   height: 48px;
-  border-radius: 50%;
   background: #102e4a;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .profile-image {
-  width: 32px;
+  width: auto;
   height: 32px;
-  object-fit: contain;
+  margin: 0;
+  display: block;
 }
+/* .profile-image {
+  width: auto;
+  height: 34px;
+  object-fit: contain;
+} */
 .hero-content {
   position: absolute;
   top: 75%;
@@ -1383,4 +1389,19 @@ body {
 .modal-overlay .nx-card,
 .modal-overlay .nx-card * {
   font-family: sans-serif;
+}
+
+/* Forceer perfecte centrering van .profile-image in .nav-profile, ook bij afwijkende hoogte */
+.nav-profile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+}
+.profile-image {
+  margin: 0;
+  display: block;
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
 }
