@@ -1,3 +1,17 @@
+/* Prevent label shifting in project cards and modals */
+.text-wrapper-row {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+  min-height: 32px;
+}
+.text-wrapper-row .text-wrapper {
+  min-width: 110px;
+  text-align: center;
+  white-space: nowrap;
+}
 /* Forceer overal standaard sans-serif font */
 h1,
 h2,
