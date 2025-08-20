@@ -215,7 +215,12 @@ body {
   flex-direction: column;
   gap: 6px;
 }
-.text-wrapper {
+.labels {
+  display: flex;
+  flex-wrap: wrap; /* zodat ze naar de volgende lijn springen als het niet past */
+  gap: 8px; /* ruimte tussen de labels */
+}
+.label {
   font-weight: 800;
   color: #fff;
   font-size: 10px;
