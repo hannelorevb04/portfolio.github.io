@@ -342,5 +342,92 @@
         </div>
       </div>
     </div>
+    <script>
+      // Click & drag / touch swipe over alle carousels met class .projects
+      (function () {
+        document.querySelectorAll(".projects").forEach(function (container) {
+          let isDown = false,
+            startX = 0,
+            scrollStart = 0,
+            moved = false;
+          let tDown = false,
+            tStart = 0,
+            tScroll = 0,
+            tMoved = false;
+
+          // Voorkom dat een klik (op een kaart) modals opent na drag
+          function swallowIfMoved(e) {
+            if (moved || tMoved) {
+              e.stopImmediatePropagation();
+              e.preventDefault();
+              return true;
+            }
+            return false;
+          }
+
+          // Mouse
+          container.addEventListener("mousedown", (e) => {
+            isDown = true;
+            moved = false;
+            container.classList.add("dragging");
+            startX = e.pageX - container.offsetLeft;
+            scrollStart = container.scrollLeft;
+          });
+          container.addEventListener("mousemove", (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - container.offsetLeft;
+            const walk = (x - startX) * 1.8; // snelheid
+            if (Math.abs(x - startX) > 3) moved = true;
+            container.scrollLeft = scrollStart - walk;
+          });
+          ["mouseleave", "mouseup"].forEach((evt) =>
+            container.addEventListener(evt, () => {
+              isDown = false;
+              container.classList.remove("dragging");
+              // korte timeout zodat klik direct na mouseup niet triggert
+              setTimeout(() => (moved = false), 0);
+            })
+          );
+
+          // Touch
+          container.addEventListener(
+            "touchstart",
+            (e) => {
+              tDown = true;
+              tMoved = false;
+              container.classList.add("dragging");
+              tStart = e.touches[0].pageX - container.offsetLeft;
+              tScroll = container.scrollLeft;
+            },
+            { passive: true }
+          );
+
+          container.addEventListener(
+            "touchmove",
+            (e) => {
+              if (!tDown) return;
+              const x = e.touches[0].pageX - container.offsetLeft;
+              const walk = (x - tStart) * 1.8;
+              if (Math.abs(x - tStart) > 3) tMoved = true;
+              container.scrollLeft = tScroll - walk;
+            },
+            { passive: false }
+          );
+
+          container.addEventListener("touchend", () => {
+            tDown = false;
+            container.classList.remove("dragging");
+            setTimeout(() => (tMoved = false), 0);
+          });
+
+          // Slik clicks op kaarten in als er net gesleept werd
+          container.querySelectorAll(".project-card").forEach((card) => {
+            card.addEventListener("click", swallowIfMoved, true);
+            card.addEventListener("touchend", swallowIfMoved, true);
+          });
+        });
+      })();
+    </script>
   </body>
 </html>
