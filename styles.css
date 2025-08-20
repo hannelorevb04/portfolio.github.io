@@ -1390,3 +1390,9 @@ body {
 .modal-overlay .nx-card * {
   font-family: sans-serif;
 }
+
+.projects.dragging {
+  cursor: grabbing;
+  cursor: -webkit-grabbing;
+  user-select: none;
+}
