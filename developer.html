@@ -5,17 +5,133 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles.css" />
     <title>Hannelore Van Buynderen - Developer Portfolio</title>
+
+    <!-- Alleen voor modals in DEVELOPMENT: grotere iframe -->
+    <style>
+      .nx-hero iframe {
+        width: min(1200px, 95vw);
+        height: min(780px, 82vh);
+        border: none;
+        background: #fff;
+      }
+      @media (max-width: 900px) {
+        .nx-hero iframe {
+          width: 95vw;
+          height: 70vh;
+        }
+      }
+    </style>
+
+    <script>
+      // Drag-to-scroll + click-suppress zoals op je andere pagina's
+      document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll(".projects").forEach(function (container) {
+          let isDown = false,
+            startX,
+            scrollLeft,
+            dragMoved = false;
+          // Touch support
+          let isTouch = false,
+            touchStartX = 0,
+            touchScrollLeft = 0,
+            touchMoved = false;
+
+          function setDragging(val) {
+            container.classList.toggle("dragging", val);
+            document.body.style.userSelect = val ? "none" : "";
+          }
+
+          // Mouse
+          container.addEventListener("mousedown", function (e) {
+            isDown = true;
+            dragMoved = false;
+            setDragging(true);
+            startX = e.pageX - container.offsetLeft;
+            scrollLeft = container.scrollLeft;
+          });
+          container.addEventListener("mouseleave", function () {
+            isDown = false;
+            setDragging(false);
+          });
+          container.addEventListener("mouseup", function () {
+            isDown = false;
+            setDragging(false);
+          });
+          container.addEventListener("mousemove", function (e) {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - container.offsetLeft;
+            const walk = (x - startX) * 3.5;
+            if (Math.abs(x - startX) > 5) dragMoved = true;
+            container.scrollLeft = scrollLeft - walk;
+          });
+          // Prevent modal opening if drag happened
+          container.querySelectorAll(".project-card").forEach(function (card) {
+            card.addEventListener(
+              "click",
+              function (e) {
+                if (isDown || dragMoved) {
+                  e.stopImmediatePropagation();
+                  e.preventDefault();
+                  return false;
+                }
+              },
+              true
+            );
+          });
+
+          // Touch
+          container.addEventListener(
+            "touchstart",
+            function (e) {
+              isTouch = true;
+              touchMoved = false;
+              setDragging(true);
+              touchStartX = e.touches[0].pageX - container.offsetLeft;
+              touchScrollLeft = container.scrollLeft;
+            },
+            { passive: true }
+          );
+          container.addEventListener("touchend", function () {
+            isTouch = false;
+            setDragging(false);
+          });
+          container.addEventListener(
+            "touchmove",
+            function (e) {
+              if (!isTouch) return;
+              const x = e.touches[0].pageX - container.offsetLeft;
+              const walk = (x - touchStartX) * 3.5;
+              if (Math.abs(x - touchStartX) > 5) touchMoved = true;
+              container.scrollLeft = touchScrollLeft - walk;
+            },
+            { passive: false }
+          );
+          container.querySelectorAll(".project-card").forEach(function (card) {
+            card.addEventListener(
+              "touchend",
+              function (e) {
+                if (isTouch && touchMoved) {
+                  e.stopImmediatePropagation();
+                  e.preventDefault();
+                  return false;
+                }
+              },
+              true
+            );
+          });
+        });
+      });
+    </script>
   </head>
   <body>
     <div class="designer-page">
-      <!-- Video Header Section -->
+      <!-- Header -->
       <div class="video-header">
         <video class="background-video" autoplay muted loop>
           <source src="images/beach_1.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
         </video>
 
-        <!-- Navigation -->
         <nav class="main-nav">
           <div class="nav-logo">Hannelore VB</div>
           <div class="nav-profile">
@@ -27,18 +143,8 @@
               />
             </a>
           </div>
-          <!-- <div class="nav-profile">
-            <a href="profiles.html">
-              <img
-                src="images/devicon_vscode.png"
-                alt="Profile"
-                class="profile-image"
-              />
-            </a>
-          </div> -->
         </nav>
 
-        <!-- Main Content -->
         <div class="hero-content">
           <h1 class="hero-title">Hannelore Van Buynderen</h1>
           <p class="hero-description">
@@ -46,32 +152,23 @@
             from interfaces and apps to animations and games, combining code
             with creativity to make digital ideas work.
           </p>
-
-          <!-- Action Buttons -->
           <div class="hero-buttons">
             <button class="btn-resume">
-              <span class="play-icon">▶</span>
-              Resume
+              <span class="play-icon">▶</span>Resume
             </button>
             <button class="btn-linkedin">
-              <!-- <span class="linkedin-icon">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                </svg>
-              </span> -->
-              <img src="images/linkedin.webp" alt="linkedin-icon" />
-              LinkedIn
+              <img src="images/linkedin.webp" alt="linkedin-icon" />LinkedIn
             </button>
           </div>
         </div>
       </div>
 
-      <!-- Project Cards Web Interface -->
+      <!-- =================== Web Interface =================== -->
       <div class="projects-section">
         <h2 class="section-title">Web Interface</h2>
         <div class="projects">
-          <!-- Project Card 1 -->
-          <div class="project-card">
+          <!-- Felicks -->
+          <div class="project-card" id="felicksCard">
             <div class="overlap-group">
               <iframe
                 class="image iframe-project"
@@ -88,8 +185,8 @@
             </div>
           </div>
 
-          <!-- Project Card 2 -->
-          <div class="project-card">
+          <!-- Hockey Shop -->
+          <div class="project-card" id="hockeyCard">
             <div class="overlap-group">
               <iframe
                 class="image iframe-project"
@@ -106,8 +203,8 @@
             </div>
           </div>
 
-          <!-- Project Card 3 -->
-          <div class="project-card">
+          <!-- Disney+ -->
+          <div class="project-card" id="disneyCard">
             <div class="overlap-group">
               <iframe
                 class="image iframe-project"
@@ -124,8 +221,8 @@
             </div>
           </div>
 
-          <!-- Project Card 4 -->
-          <div class="project-card">
+          <!-- Swear -->
+          <div class="project-card" id="swearCard">
             <div class="overlap-group">
               <iframe
                 class="image iframe-project"
@@ -142,8 +239,8 @@
             </div>
           </div>
 
-          <!-- Project Card 5 -->
-          <div class="project-card">
+          <!-- 2Check (extern) -->
+          <div class="project-card" id="checkCard">
             <div class="overlap-group">
               <iframe
                 class="image iframe-project"
@@ -160,8 +257,8 @@
             </div>
           </div>
 
-          <!-- Project Card 6 -->
-          <div class="project-card">
+          <!-- Dream House (extern) -->
+          <div class="project-card" id="dreamCard">
             <div class="overlap-group">
               <iframe
                 class="image iframe-project"
@@ -180,8 +277,8 @@
             </div>
           </div>
 
-          <!-- Project Card 7 -->
-          <div class="project-card">
+          <!-- Sneaker Configurator (extern) -->
+          <div class="project-card" id="sneakerCard">
             <div class="overlap-group">
               <iframe
                 class="image iframe-project"
@@ -202,12 +299,12 @@
         </div>
       </div>
 
-      <!-- Project Cards Motion & Animation -->
+      <!-- =================== Motion & Animation =================== -->
       <div class="projects-section">
         <h2 class="section-title">Motion & Animation</h2>
         <div class="projects">
-          <!-- Project Card 1 -->
-          <div class="project-card">
+          <!-- Google Doodle -->
+          <div class="project-card" id="doodleCard">
             <div class="overlap-group">
               <iframe
                 class="image iframe-project"
@@ -226,8 +323,8 @@
             </div>
           </div>
 
-          <!-- Project Card 2 -->
-          <div class="project-card">
+          <!-- Woordlogo -->
+          <div class="project-card" id="woordlogoCard">
             <div class="overlap-group">
               <iframe
                 class="image iframe-project"
@@ -244,8 +341,8 @@
             </div>
           </div>
 
-          <!-- Project Card 3 -->
-          <div class="project-card">
+          <!-- Useless Web -->
+          <div class="project-card" id="uselessCard">
             <div class="overlap-group">
               <iframe
                 class="image iframe-project"
@@ -262,8 +359,8 @@
             </div>
           </div>
 
-          <!-- Project Card 4 -->
-          <div class="project-card">
+          <!-- Dynamic Poster -->
+          <div class="project-card" id="posterCard">
             <div class="overlap-group">
               <iframe
                 class="image iframe-project"
@@ -282,12 +379,12 @@
         </div>
       </div>
 
-      <!-- Project Cards Microgames -->
+      <!-- =================== Microgames =================== -->
       <div class="projects-section">
         <h2 class="section-title">Microgames</h2>
         <div class="projects">
-          <!-- Project Card 1 -->
-          <div class="project-card">
+          <!-- Missile Game -->
+          <div class="project-card" id="missileCard">
             <div class="overlap-group">
               <iframe
                 class="image iframe-project"
@@ -304,8 +401,8 @@
             </div>
           </div>
 
-          <!-- Project Card 2 -->
-          <div class="project-card">
+          <!-- Arduino Piano (Huis) -->
+          <div class="project-card" id="pianoCard">
             <div class="overlap-group">
               <iframe
                 class="image iframe-project"
@@ -322,8 +419,8 @@
             </div>
           </div>
 
-          <!-- Project Card 3 -->
-          <div class="project-card">
+          <!-- Military Game (P5) -->
+          <div class="project-card" id="p5Card">
             <div class="overlap-group">
               <iframe
                 class="image iframe-project"
@@ -341,93 +438,648 @@
           </div>
         </div>
       </div>
+
+      <!-- =================== DETAIL MODALS (iframes) =================== -->
+      <!-- Zelfde NX-componentstructuur als Mixed-Media, maar met 1 grote iframe in .nx-hero -->
+
+      <!-- Web Interface Modals -->
+      <div id="felicksModal" class="modal-overlay" style="display: none">
+        <div class="nx-card">
+          <button class="nx-close" aria-label="Sluiten">×</button>
+          <div class="nx-hero">
+            <iframe
+              src="Felicks/iframe_index.html"
+              title="Felicks Website"
+            ></iframe>
+          </div>
+          <section class="nx-panel">
+            <div class="nx-panel-inner">
+              <div class="nx-left">
+                <h2 class="nx-title">Felicks</h2>
+                <div class="nx-meta">
+                  <span class="nx-badge">HD</span><span>Website</span
+                  ><span class="dot">•</span><span>HTML/CSS</span>
+                </div>
+                <p class="nx-desc">
+                  Adoption platform concept with clean structure and responsive
+                  layout.
+                </p>
+                <div class="nx-actions">
+                  <button
+                    class="nx-btn nx-primary"
+                    onclick="window.open('Felicks/iframe_index.html','_blank')"
+                  >
+                    Open Project
+                  </button>
+                </div>
+                <div class="nx-taglist">
+                  <span class="nx-tag">Responsive</span
+                  ><span class="nx-tag">Layout</span>
+                </div>
+              </div>
+              <aside class="nx-right">
+                <div class="nx-spec">
+                  <div class="nx-spec-title">TECH</div>
+                  <ul class="nx-spec-list">
+                    <li>HTML/CSS</li>
+                  </ul>
+                </div>
+              </aside>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <div id="hockeyModal" class="modal-overlay" style="display: none">
+        <div class="nx-card">
+          <button class="nx-close" aria-label="Sluiten">×</button>
+          <div class="nx-hero">
+            <iframe
+              src="Hockey_shop/iframe_sticks.html"
+              title="Hockey Shop - Sticks"
+            ></iframe>
+          </div>
+          <section class="nx-panel">
+            <div class="nx-panel-inner">
+              <div class="nx-left">
+                <h2 class="nx-title">Hockey Shop</h2>
+                <div class="nx-meta">
+                  <span class="nx-badge">HD</span><span>E-commerce</span
+                  ><span class="dot">•</span><span>UI</span>
+                </div>
+                <p class="nx-desc">
+                  Product grid & detail views with clear hierarchy.
+                </p>
+                <div class="nx-actions">
+                  <button
+                    class="nx-btn nx-primary"
+                    onclick="window.open('Hockey_shop/iframe_sticks.html','_blank')"
+                  >
+                    Open Project
+                  </button>
+                </div>
+              </div>
+              <aside class="nx-right">
+                <div class="nx-spec">
+                  <div class="nx-spec-title">TECH</div>
+                  <ul class="nx-spec-list">
+                    <li>HTML/CSS</li>
+                  </ul>
+                </div>
+              </aside>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <div id="disneyModal" class="modal-overlay" style="display: none">
+        <div class="nx-card">
+          <button class="nx-close" aria-label="Sluiten">×</button>
+          <div class="nx-hero">
+            <iframe
+              src="Disney+/index.html"
+              title="Disney+ Landing Page"
+            ></iframe>
+          </div>
+          <section class="nx-panel">
+            <div class="nx-panel-inner">
+              <div class="nx-left">
+                <h2 class="nx-title">Disney+ Landing</h2>
+                <div class="nx-meta">
+                  <span class="nx-badge">HD</span><span>Streaming UI</span
+                  ><span class="dot">•</span><span>Hero + Rows</span>
+                </div>
+                <p class="nx-desc">
+                  Landing page inspired layout with content rows and CTA focus.
+                </p>
+                <div class="nx-actions">
+                  <button
+                    class="nx-btn nx-primary"
+                    onclick="window.open('Disney+/index.html','_blank')"
+                  >
+                    Open Project
+                  </button>
+                </div>
+              </div>
+              <aside class="nx-right">
+                <div class="nx-spec">
+                  <div class="nx-spec-title">TECH</div>
+                  <ul class="nx-spec-list">
+                    <li>HTML/CSS</li>
+                  </ul>
+                </div>
+              </aside>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <div id="swearModal" class="modal-overlay" style="display: none">
+        <div class="nx-card">
+          <button class="nx-close" aria-label="Sluiten">×</button>
+          <div class="nx-hero">
+            <iframe
+              src="Swear/dist/index.html"
+              title="Swear 3D Sneaker Configurator"
+              allow="accelerometer; gyroscope; fullscreen"
+            ></iframe>
+          </div>
+          <section class="nx-panel">
+            <div class="nx-panel-inner">
+              <div class="nx-left">
+                <h2 class="nx-title">Swear Configurator</h2>
+                <div class="nx-meta">
+                  <span class="nx-badge">HD</span><span>3D</span
+                  ><span class="dot">•</span><span>Configurator</span>
+                </div>
+                <p class="nx-desc">
+                  Interactive 3D shoe customizer with real‑time updates.
+                </p>
+                <div class="nx-actions">
+                  <button
+                    class="nx-btn nx-primary"
+                    onclick="window.open('Swear/dist/index.html','_blank')"
+                  >
+                    Open Project
+                  </button>
+                </div>
+              </div>
+              <aside class="nx-right">
+                <div class="nx-spec">
+                  <div class="nx-spec-title">TECH</div>
+                  <ul class="nx-spec-list">
+                    <li>HTML/CSS/JS</li>
+                  </ul>
+                </div>
+              </aside>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <div id="checkModal" class="modal-overlay" style="display: none">
+        <div class="nx-card">
+          <button class="nx-close" aria-label="Sluiten">×</button>
+          <div class="nx-hero">
+            <iframe
+              src="https://lab2-render-qn86.onrender.com/"
+              title="2Check Web Application"
+            ></iframe>
+          </div>
+          <section class="nx-panel">
+            <div class="nx-panel-inner">
+              <div class="nx-left">
+                <h2 class="nx-title">2Check</h2>
+                <div class="nx-meta">
+                  <span class="nx-badge">HD</span><span>Web App</span
+                  ><span class="dot">•</span><span>Forms</span>
+                </div>
+                <p class="nx-desc">
+                  Flow‑based app with clear form steps and states.
+                </p>
+                <div class="nx-actions">
+                  <button
+                    class="nx-btn nx-primary"
+                    onclick="window.open('https://lab2-render-qn86.onrender.com/','_blank')"
+                  >
+                    Open Project
+                  </button>
+                </div>
+              </div>
+              <aside class="nx-right">
+                <div class="nx-spec">
+                  <div class="nx-spec-title">TECH</div>
+                  <ul class="nx-spec-list">
+                    <li>Web</li>
+                  </ul>
+                </div>
+              </aside>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <div id="dreamModal" class="modal-overlay" style="display: none">
+        <div class="nx-card">
+          <button class="nx-close" aria-label="Sluiten">×</button>
+          <div class="nx-hero">
+            <iframe
+              src="https://challenge51.vercel.app/"
+              title="Dream House 3D Experience"
+              allow="accelerometer; gyroscope; fullscreen"
+            ></iframe>
+          </div>
+          <section class="nx-panel">
+            <div class="nx-panel-inner">
+              <div class="nx-left">
+                <h2 class="nx-title">Dream House</h2>
+                <div class="nx-meta">
+                  <span class="nx-badge">HD</span><span>3D Experience</span
+                  ><span class="dot">•</span><span>Interactive</span>
+                </div>
+                <p class="nx-desc">
+                  Explorable scene demonstrating interaction and motion.
+                </p>
+                <div class="nx-actions">
+                  <button
+                    class="nx-btn nx-primary"
+                    onclick="window.open('https://challenge51.vercel.app/','_blank')"
+                  >
+                    Open Project
+                  </button>
+                </div>
+              </div>
+              <aside class="nx-right">
+                <div class="nx-spec">
+                  <div class="nx-spec-title">TECH</div>
+                  <ul class="nx-spec-list">
+                    <li>Three.js</li>
+                  </ul>
+                </div>
+              </aside>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <div id="sneakerModal" class="modal-overlay" style="display: none">
+        <div class="nx-card">
+          <button class="nx-close" aria-label="Sluiten">×</button>
+          <div class="nx-hero">
+            <iframe
+              src="https://sneaker-configurator-threejs.vercel.app/"
+              title="Sneaker Configurator Three.js"
+              allow="accelerometer; gyroscope; fullscreen"
+            ></iframe>
+          </div>
+          <section class="nx-panel">
+            <div class="nx-panel-inner">
+              <div class="nx-left">
+                <h2 class="nx-title">Sneaker Config</h2>
+                <div class="nx-meta">
+                  <span class="nx-badge">HD</span><span>Three.js</span
+                  ><span class="dot">•</span><span>Configurator</span>
+                </div>
+                <p class="nx-desc">
+                  Parametric sneaker customization with materials and colors.
+                </p>
+                <div class="nx-actions">
+                  <button
+                    class="nx-btn nx-primary"
+                    onclick="window.open('https://sneaker-configurator-threejs.vercel.app/','_blank')"
+                  >
+                    Open Project
+                  </button>
+                </div>
+              </div>
+              <aside class="nx-right">
+                <div class="nx-spec">
+                  <div class="nx-spec-title">TECH</div>
+                  <ul class="nx-spec-list">
+                    <li>Three.js</li>
+                  </ul>
+                </div>
+              </aside>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <!-- Motion & Animation Modals -->
+      <div id="doodleModal" class="modal-overlay" style="display: none">
+        <div class="nx-card">
+          <button class="nx-close" aria-label="Sluiten">×</button>
+          <div class="nx-hero">
+            <iframe
+              src="Google doodle/iframe_version.html"
+              title="Google Doodle Friends Anniversary"
+            ></iframe>
+          </div>
+          <section class="nx-panel">
+            <div class="nx-panel-inner">
+              <div class="nx-left">
+                <h2 class="nx-title">Google Doodle</h2>
+                <div class="nx-meta">
+                  <span class="nx-badge">HD</span><span>CSS Animation</span
+                  ><span class="dot">•</span><span>SVG</span>
+                </div>
+                <p class="nx-desc">
+                  Animated doodle with timing and easing experiments.
+                </p>
+                <div class="nx-actions">
+                  <button
+                    class="nx-btn nx-primary"
+                    onclick="window.open('Google doodle/iframe_version.html','_blank')"
+                  >
+                    Open Project
+                  </button>
+                </div>
+              </div>
+              <aside class="nx-right">
+                <div class="nx-spec">
+                  <div class="nx-spec-title">TECH</div>
+                  <ul class="nx-spec-list">
+                    <li>HTML/CSS</li>
+                  </ul>
+                </div>
+              </aside>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <div id="woordlogoModal" class="modal-overlay" style="display: none">
+        <div class="nx-card">
+          <button class="nx-close" aria-label="Sluiten">×</button>
+          <div class="nx-hero">
+            <iframe
+              src="Woordlogo/index_1.html"
+              title="Word Logo Animation"
+            ></iframe>
+          </div>
+          <section class="nx-panel">
+            <div class="nx-panel-inner">
+              <div class="nx-left">
+                <h2 class="nx-title">Woordlogo</h2>
+                <div class="nx-meta">
+                  <span class="nx-badge">HD</span><span>Logo Animation</span
+                  ><span class="dot">•</span><span>CSS</span>
+                </div>
+                <p class="nx-desc">
+                  Typography animation focused on rhythm and reveal.
+                </p>
+                <div class="nx-actions">
+                  <button
+                    class="nx-btn nx-primary"
+                    onclick="window.open('Woordlogo/index_1.html','_blank')"
+                  >
+                    Open Project
+                  </button>
+                </div>
+              </div>
+              <aside class="nx-right">
+                <div class="nx-spec">
+                  <div class="nx-spec-title">TECH</div>
+                  <ul class="nx-spec-list">
+                    <li>HTML/CSS</li>
+                  </ul>
+                </div>
+              </aside>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <div id="uselessModal" class="modal-overlay" style="display: none">
+        <div class="nx-card">
+          <button class="nx-close" aria-label="Sluiten">×</button>
+          <div class="nx-hero">
+            <iframe src="Useless web/index_2.html" title="Useless Web"></iframe>
+          </div>
+          <section class="nx-panel">
+            <div class="nx-panel-inner">
+              <div class="nx-left">
+                <h2 class="nx-title">Useless Web</h2>
+                <div class="nx-meta">
+                  <span class="nx-badge">HD</span><span>Interactive</span>
+                </div>
+                <p class="nx-desc">
+                  Micro interactions and playful UI behaviors.
+                </p>
+                <div class="nx-actions">
+                  <button
+                    class="nx-btn nx-primary"
+                    onclick="window.open('Useless web/index_2.html','_blank')"
+                  >
+                    Open Project
+                  </button>
+                </div>
+              </div>
+              <aside class="nx-right">
+                <div class="nx-spec">
+                  <div class="nx-spec-title">TECH</div>
+                  <ul class="nx-spec-list">
+                    <li>HTML/CSS/JS</li>
+                  </ul>
+                </div>
+              </aside>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <div id="posterModal" class="modal-overlay" style="display: none">
+        <div class="nx-card">
+          <button class="nx-close" aria-label="Sluiten">×</button>
+          <div class="nx-hero">
+            <iframe
+              src="Dynamic poster/alles_1.html"
+              title="Dynamic Poster"
+            ></iframe>
+          </div>
+          <section class="nx-panel">
+            <div class="nx-panel-inner">
+              <div class="nx-left">
+                <h2 class="nx-title">Dynamic Poster</h2>
+                <div class="nx-meta">
+                  <span class="nx-badge">HD</span><span>CSS/HTML</span
+                  ><span class="dot">•</span><span>Motion</span>
+                </div>
+                <p class="nx-desc">
+                  Generative motion layout with variables and transforms.
+                </p>
+                <div class="nx-actions">
+                  <button
+                    class="nx-btn nx-primary"
+                    onclick="window.open('Dynamic poster/alles_1.html','_blank')"
+                  >
+                    Open Project
+                  </button>
+                </div>
+              </div>
+              <aside class="nx-right">
+                <div class="nx-spec">
+                  <div class="nx-spec-title">TECH</div>
+                  <ul class="nx-spec-list">
+                    <li>CSS</li>
+                  </ul>
+                </div>
+              </aside>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <!-- Microgames Modals -->
+      <div id="missileModal" class="modal-overlay" style="display: none">
+        <div class="nx-card">
+          <button class="nx-close" aria-label="Sluiten">×</button>
+          <div class="nx-hero">
+            <iframe
+              src="Missile game/vierkant.html"
+              title="Missile Game"
+            ></iframe>
+          </div>
+          <section class="nx-panel">
+            <div class="nx-panel-inner">
+              <div class="nx-left">
+                <h2 class="nx-title">Missile Game</h2>
+                <div class="nx-meta">
+                  <span class="nx-badge">HD</span><span>JavaScript</span
+                  ><span class="dot">•</span><span>Arcade</span>
+                </div>
+                <p class="nx-desc">
+                  Simple collision and movement loop—fast, reactive, fun.
+                </p>
+                <div class="nx-actions">
+                  <button
+                    class="nx-btn nx-primary"
+                    onclick="window.open('Missile game/vierkant.html','_blank')"
+                  >
+                    Open Project
+                  </button>
+                </div>
+              </div>
+              <aside class="nx-right">
+                <div class="nx-spec">
+                  <div class="nx-spec-title">TECH</div>
+                  <ul class="nx-spec-list">
+                    <li>JS</li>
+                  </ul>
+                </div>
+              </aside>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <div id="pianoModal" class="modal-overlay" style="display: none">
+        <div class="nx-card">
+          <button class="nx-close" aria-label="Sluiten">×</button>
+          <div class="nx-hero">
+            <iframe src="Huis/index.html" title="Arduino Piano"></iframe>
+          </div>
+          <section class="nx-panel">
+            <div class="nx-panel-inner">
+              <div class="nx-left">
+                <h2 class="nx-title">Arduino Piano</h2>
+                <div class="nx-meta">
+                  <span class="nx-badge">HD</span><span>IoT/Audio</span
+                  ><span class="dot">•</span><span>Interface</span>
+                </div>
+                <p class="nx-desc">
+                  Browser‑based UI for a physical music controller.
+                </p>
+                <div class="nx-actions">
+                  <button
+                    class="nx-btn nx-primary"
+                    onclick="window.open('Huis/index.html','_blank')"
+                  >
+                    Open Project
+                  </button>
+                </div>
+              </div>
+              <aside class="nx-right">
+                <div class="nx-spec">
+                  <div class="nx-spec-title">TECH</div>
+                  <ul class="nx-spec-list">
+                    <li>Web</li>
+                  </ul>
+                </div>
+              </aside>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <div id="p5Modal" class="modal-overlay" style="display: none">
+        <div class="nx-card">
+          <button class="nx-close" aria-label="Sluiten">×</button>
+          <div class="nx-hero">
+            <iframe src="P5/index.html" title="Military Game (p5.js)"></iframe>
+          </div>
+          <section class="nx-panel">
+            <div class="nx-panel-inner">
+              <div class="nx-left">
+                <h2 class="nx-title">Military Game</h2>
+                <div class="nx-meta">
+                  <span class="nx-badge">HD</span><span>P5.js</span
+                  ><span class="dot">•</span><span>Mini‑game</span>
+                </div>
+                <p class="nx-desc">
+                  Simple mechanics with sprite movement and state.
+                </p>
+                <div class="nx-actions">
+                  <button
+                    class="nx-btn nx-primary"
+                    onclick="window.open('P5/index.html','_blank')"
+                  >
+                    Open Project
+                  </button>
+                </div>
+              </div>
+              <aside class="nx-right">
+                <div class="nx-spec">
+                  <div class="nx-spec-title">TECH</div>
+                  <ul class="nx-spec-list">
+                    <li>p5.js</li>
+                  </ul>
+                </div>
+              </aside>
+            </div>
+          </section>
+        </div>
+      </div>
     </div>
+    <!-- /designer-page -->
+
+    <!-- =================== MODAL OPEN/CLOSE (zoals Mixed‑Media) =================== -->
     <script>
-      // Click & drag / touch swipe over alle carousels met class .projects
-      (function () {
-        document.querySelectorAll(".projects").forEach(function (container) {
-          let isDown = false,
-            startX = 0,
-            scrollStart = 0,
-            moved = false;
-          let tDown = false,
-            tStart = 0,
-            tScroll = 0,
-            tMoved = false;
+      // 1) Koppeling kaart → modal (zelfde aanpak als Mixed‑Media)
+      const cardModalMap = {
+        // Web Interface
+        felicksCard: "felicksModal",
+        hockeyCard: "hockeyModal",
+        disneyCard: "disneyModal",
+        swearCard: "swearModal",
+        checkCard: "checkModal",
+        dreamCard: "dreamModal",
+        sneakerCard: "sneakerModal",
+        // Motion & Animation
+        doodleCard: "doodleModal",
+        woordlogoCard: "woordlogoModal",
+        uselessCard: "uselessModal",
+        posterCard: "posterModal",
+        // Microgames
+        missileCard: "missileModal",
+        pianoCard: "pianoModal",
+        p5Card: "p5Modal",
+      };
 
-          // Voorkom dat een klik (op een kaart) modals opent na drag
-          function swallowIfMoved(e) {
-            if (moved || tMoved) {
-              e.stopImmediatePropagation();
-              e.preventDefault();
-              return true;
+      Object.entries(cardModalMap).forEach(([cardId, modalId]) => {
+        const cardEl = document.getElementById(cardId);
+        const modalEl = document.getElementById(modalId);
+        const closeBtn = modalEl ? modalEl.querySelector(".nx-close") : null;
+
+        if (cardEl && modalEl) {
+          cardEl.addEventListener("click", function (e) {
+            if (
+              !e.target.classList.contains("prev") &&
+              !e.target.classList.contains("next")
+            ) {
+              modalEl.style.display = "flex";
             }
-            return false;
-          }
-
-          // Mouse
-          container.addEventListener("mousedown", (e) => {
-            isDown = true;
-            moved = false;
-            container.classList.add("dragging");
-            startX = e.pageX - container.offsetLeft;
-            scrollStart = container.scrollLeft;
           });
-          container.addEventListener("mousemove", (e) => {
-            if (!isDown) return;
-            e.preventDefault();
-            const x = e.pageX - container.offsetLeft;
-            const walk = (x - startX) * 1.8; // snelheid
-            if (Math.abs(x - startX) > 3) moved = true;
-            container.scrollLeft = scrollStart - walk;
+        }
+        if (closeBtn && modalEl) {
+          closeBtn.addEventListener("click", function () {
+            modalEl.style.display = "none";
           });
-          ["mouseleave", "mouseup"].forEach((evt) =>
-            container.addEventListener(evt, () => {
-              isDown = false;
-              container.classList.remove("dragging");
-              // korte timeout zodat klik direct na mouseup niet triggert
-              setTimeout(() => (moved = false), 0);
-            })
-          );
-
-          // Touch
-          container.addEventListener(
-            "touchstart",
-            (e) => {
-              tDown = true;
-              tMoved = false;
-              container.classList.add("dragging");
-              tStart = e.touches[0].pageX - container.offsetLeft;
-              tScroll = container.scrollLeft;
-            },
-            { passive: true }
-          );
-
-          container.addEventListener(
-            "touchmove",
-            (e) => {
-              if (!tDown) return;
-              const x = e.touches[0].pageX - container.offsetLeft;
-              const walk = (x - tStart) * 1.8;
-              if (Math.abs(x - tStart) > 3) tMoved = true;
-              container.scrollLeft = tScroll - walk;
-            },
-            { passive: false }
-          );
-
-          container.addEventListener("touchend", () => {
-            tDown = false;
-            container.classList.remove("dragging");
-            setTimeout(() => (tMoved = false), 0);
-          });
-
-          // Slik clicks op kaarten in als er net gesleept werd
-          container.querySelectorAll(".project-card").forEach((card) => {
-            card.addEventListener("click", swallowIfMoved, true);
-            card.addEventListener("touchend", swallowIfMoved, true);
-          });
+        }
+        window.addEventListener("mousedown", function (ev) {
+          if (ev.target === modalEl) modalEl.style.display = "none";
         });
-      })();
+      });
     </script>
   </body>
 </html>
