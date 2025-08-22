@@ -832,47 +832,6 @@
       </div>
     </div>
 
-    <div id="woordlogoModal" class="modal-overlay" style="display: none">
-      <div class="nx-card">
-        <button class="nx-close" aria-label="Sluiten">×</button>
-        <div class="nx-hero">
-          <iframe
-            src="Woordlogo/index_1.html"
-            title="Word Logo Animation"
-          ></iframe>
-        </div>
-        <section class="nx-panel">
-          <div class="nx-panel-inner">
-            <div class="nx-left">
-              <h2 class="nx-title">Woordlogo</h2>
-              <div class="nx-meta">
-                <span class="nx-badge">HD</span><span>Logo Animation</span
-                ><span class="dot">•</span><span>CSS</span>
-              </div>
-              <p class="nx-desc">
-                Typography animation focused on rhythm and reveal.
-              </p>
-              <div class="nx-actions">
-                <button
-                  class="nx-btn nx-primary"
-                  onclick="window.open('Woordlogo/index_1.html','_blank')"
-                >
-                  Open Project
-                </button>
-              </div>
-            </div>
-            <aside class="nx-right">
-              <div class="nx-spec">
-                <div class="nx-spec-title">TECH</div>
-                <ul class="nx-spec-list">
-                  <li>HTML/CSS</li>
-                </ul>
-              </div>
-            </aside>
-          </div>
-        </section>
-      </div>
-    </div>
 
     <div id="uselessModal" class="modal-overlay" style="display: none">
       <div class="nx-card">
@@ -1075,6 +1034,54 @@
       </div>
     </div>
 
+    <div id="woordlogoModal" class="modal-overlay" style="display: none">
+      <div class="nx-card">
+        <button class="nx-close" aria-label="Sluiten">×</button>
+        <div class="nx-hero">
+          <div class="nx-hero-slider" id="woordlogoHeroSlider" aria-label="Project slides">
+            <div class="nx-slides">
+              <iframe class="nx-slide is-active" src="Woordlogo/index_1.html" title="Originele Woordlogo" frameborder="0" scrolling="no"></iframe>
+              <iframe class="nx-slide" src="Woordlogo - groep/woordlogo's/Entertainment/entertainment.html" title="Woordlogo Entertainment" frameborder="0" scrolling="no"></iframe>
+              <iframe class="nx-slide" src="Woordlogo - groep/woordlogo's/fitness/index.html" title="Woordlogo Fitness" frameborder="0" scrolling="no"></iframe>
+              <iframe class="nx-slide" src="Woordlogo - groep/woordlogo's/timeline/index.html" title="Woordlogo Timeline" frameborder="0" scrolling="no"></iframe>
+            </div>
+            <button class="nx-nav prev" id="woordlogoModalPrev" aria-label="Vorige">‹</button>
+            <button class="nx-nav next" id="woordlogoModalNext" aria-label="Volgende">›</button>
+            <div class="nx-dots" id="woordlogoModalDots">
+              <button class="nx-dot is-active" aria-label="Ga naar slide 1"></button>
+              <button class="nx-dot" aria-label="Ga naar slide 2"></button>
+              <button class="nx-dot" aria-label="Ga naar slide 3"></button>
+              <button class="nx-dot" aria-label="Ga naar slide 4"></button>
+            </div>
+          </div>
+        </div>
+        <section class="nx-panel">
+          <div class="nx-panel-inner">
+            <div class="nx-left">
+              <h2 class="nx-title">Woordlogo</h2>
+              <div class="nx-meta">
+                <span class="nx-badge">HD</span><span>Logo Animation</span><span class="dot">•</span><span>CSS</span>
+              </div>
+              <p class="nx-desc">
+                Typography animation focused on rhythm and reveal.
+              </p>
+              <div class="nx-actions">
+                <button class="nx-btn nx-primary" onclick="window.open('Woordlogo/index_1.html','_blank')">Open Project</button>
+              </div>
+            </div>
+            <aside class="nx-right">
+              <div class="nx-spec">
+                <div class="nx-spec-title">TECH</div>
+                <ul class="nx-spec-list">
+                  <li>HTML/CSS</li>
+                </ul>
+              </div>
+            </aside>
+          </div>
+        </section>
+      </div>
+    </div>
+
     <!-- /designer-page -->
 
     <!-- =================== MODAL OPEN/CLOSE (zoals Mixed‑Media) =================== -->
@@ -1124,6 +1131,71 @@
           if (ev.target === modalEl) modalEl.style.display = "none";
         });
       });
+    </script>
+
+    <script>
+      // Woordlogo modal slideshow logic (arrows, dots, autoplay)
+      (function woordlogoModalSlider() {
+        const slider = document.getElementById("woordlogoHeroSlider");
+        if (!slider) return;
+        const slides = slider.querySelectorAll(".nx-slide");
+        const prevBtn = document.getElementById("woordlogoModalPrev");
+        const nextBtn = document.getElementById("woordlogoModalNext");
+        const dotsWrap = document.getElementById("woordlogoModalDots");
+        const dots = dotsWrap ? dotsWrap.querySelectorAll(".nx-dot") : [];
+        let idx = 0,
+          timer;
+
+        function show(i) {
+          if (!slides.length) return;
+          idx = (i + slides.length) % slides.length;
+          slides.forEach((s, k) => {
+            if (k === idx) {
+              s.classList.add("is-active");
+              s.style.zIndex = 2;
+              s.style.opacity = 1;
+            } else {
+              s.classList.remove("is-active");
+              s.style.zIndex = 1;
+              s.style.opacity = 0;
+            }
+          });
+          dots.forEach((d, k) => d.classList.toggle("is-active", k === idx));
+        }
+        function next() {
+          show(idx + 1);
+        }
+        function prev() {
+          show(idx - 1);
+        }
+        if (nextBtn) nextBtn.addEventListener("click", next);
+        if (prevBtn) prevBtn.addEventListener("click", prev);
+        dots.forEach((d, k) => d.addEventListener("click", () => show(k)));
+        function start() {
+          stop();
+          timer = setInterval(next, 3000);
+        }
+        function stop() {
+          if (timer) clearInterval(timer);
+        }
+        slider.addEventListener("mouseenter", stop);
+        slider.addEventListener("mouseleave", start);
+        // Start autoplay when modal opens, stop when closes
+        const modal = document.getElementById("woordlogoModal");
+        const openCard = document.getElementById("woordlogoCard");
+        const closeBtn = modal ? modal.querySelector(".nx-close") : null;
+        if (openCard)
+          openCard.addEventListener("click", () => {
+            show(0);
+            start();
+          });
+        if (closeBtn) closeBtn.addEventListener("click", stop);
+        window.addEventListener("mousedown", (ev) => {
+          if (ev.target === modal) stop();
+        });
+        // init state
+        show(0);
+      })();
     </script>
   </body>
 </html>

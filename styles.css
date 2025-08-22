@@ -1319,6 +1319,7 @@ body {
   justify-content: center;
   padding: 24px 0; /* ruimte boven/onder de slideshow */
   position: relative;
+  min-height: 400px;
 }
 
 .modal-overlay .nx-hero-slider .nx-slides {
@@ -1345,6 +1346,13 @@ body {
 .modal-overlay .nx-hero-slider .nx-slide.is-active {
   opacity: 1;
   position: relative;
+  pointer-events: auto;
+  visibility: visible;
+}
+
+.modal-overlay .nx-hero-slider .nx-slide {
+  pointer-events: none;
+  visibility: hidden;
 }
 
 /* pijlen */
@@ -1363,6 +1371,8 @@ body {
   cursor: pointer;
   display: grid;
   place-items: center;
+  z-index: 10;
+  opacity: 1;
 }
 .modal-overlay .nx-hero-slider .nx-nav:hover {
   background: #fff;
