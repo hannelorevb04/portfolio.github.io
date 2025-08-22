@@ -837,25 +837,35 @@
       <div class="nx-card">
         <button class="nx-close" aria-label="Sluiten">×</button>
         <div class="nx-hero">
-          <iframe src="Useless web/index_2.html" title="Useless Web"></iframe>
+          <div class="nx-hero-slider" id="uselessHeroSlider" aria-label="Project slides">
+            <div class="nx-slides">
+              <iframe class="nx-slide is-active" src="Useless web/index_3.html" title="Useless Web 1" frameborder="0" scrolling="no"></iframe>
+              <iframe class="nx-slide" src="Useless web - groep/Chicken_or_egg/index.html" title="Chicken or Egg" frameborder="0" scrolling="no"></iframe>
+              <iframe class="nx-slide" src="Useless web - groep/Never_ending_candle/index.html" title="Never Ending Candle" frameborder="0" scrolling="no"></iframe>
+              <iframe class="nx-slide" src="Useless web - groep/Valentine/index.html" title="Valentine" frameborder="0" scrolling="no"></iframe>
+            </div>
+            <button class="nx-nav prev" id="uselessModalPrev" aria-label="Vorige">‹</button>
+            <button class="nx-nav next" id="uselessModalNext" aria-label="Volgende">›</button>
+            <div class="nx-dots" id="uselessModalDots">
+              <button class="nx-dot is-active" aria-label="Ga naar slide 1"></button>
+              <button class="nx-dot" aria-label="Ga naar slide 2"></button>
+              <button class="nx-dot" aria-label="Ga naar slide 3"></button>
+              <button class="nx-dot" aria-label="Ga naar slide 4"></button>
+            </div>
+          </div>
         </div>
         <section class="nx-panel">
           <div class="nx-panel-inner">
             <div class="nx-left">
               <h2 class="nx-title">Useless Web</h2>
               <div class="nx-meta">
-                <span class="nx-badge">HD</span><span>Interactive</span>
+                <span class="nx-badge">HD</span><span>Web Fun</span><span class="dot">•</span><span>JS/CSS</span>
               </div>
               <p class="nx-desc">
-                Micro interactions and playful UI behaviors.
+                Verschillende micro-interacties en web experimenten.
               </p>
               <div class="nx-actions">
-                <button
-                  class="nx-btn nx-primary"
-                  onclick="window.open('Useless web/index_2.html','_blank')"
-                >
-                  Open Project
-                </button>
+                <button class="nx-btn nx-primary" onclick="window.open('Useless web/index_2.html','_blank')">Open Project</button>
               </div>
             </div>
             <aside class="nx-right">
@@ -1183,6 +1193,71 @@
         // Start autoplay when modal opens, stop when closes
         const modal = document.getElementById("woordlogoModal");
         const openCard = document.getElementById("woordlogoCard");
+        const closeBtn = modal ? modal.querySelector(".nx-close") : null;
+        if (openCard)
+          openCard.addEventListener("click", () => {
+            show(0);
+            start();
+          });
+        if (closeBtn) closeBtn.addEventListener("click", stop);
+        window.addEventListener("mousedown", (ev) => {
+          if (ev.target === modal) stop();
+        });
+        // init state
+        show(0);
+      })();
+    </script>
+
+    <script>
+      // Useless Web modal slideshow logic (identiek aan Woordlogo)
+      (function uselessModalSlider() {
+        const slider = document.getElementById("uselessHeroSlider");
+        if (!slider) return;
+        const slides = slider.querySelectorAll(".nx-slide");
+        const prevBtn = document.getElementById("uselessModalPrev");
+        const nextBtn = document.getElementById("uselessModalNext");
+        const dotsWrap = document.getElementById("uselessModalDots");
+        const dots = dotsWrap ? dotsWrap.querySelectorAll(".nx-dot") : [];
+        let idx = 0,
+          timer;
+
+        function show(i) {
+          if (!slides.length) return;
+          idx = (i + slides.length) % slides.length;
+          slides.forEach((s, k) => {
+            if (k === idx) {
+              s.classList.add("is-active");
+              s.style.zIndex = 2;
+              s.style.opacity = 1;
+            } else {
+              s.classList.remove("is-active");
+              s.style.zIndex = 1;
+              s.style.opacity = 0;
+            }
+          });
+          dots.forEach((d, k) => d.classList.toggle("is-active", k === idx));
+        }
+        function next() {
+          show(idx + 1);
+        }
+        function prev() {
+          show(idx - 1);
+        }
+        if (nextBtn) nextBtn.addEventListener("click", next);
+        if (prevBtn) prevBtn.addEventListener("click", prev);
+        dots.forEach((d, k) => d.addEventListener("click", () => show(k)));
+        function start() {
+          stop();
+          timer = setInterval(next, 3000);
+        }
+        function stop() {
+          if (timer) clearInterval(timer);
+        }
+        slider.addEventListener("mouseenter", stop);
+        slider.addEventListener("mouseleave", start);
+        // Start autoplay when modal opens, stop when closes
+        const modal = document.getElementById("uselessModal");
+        const openCard = document.getElementById("uselessCard");
         const closeBtn = modal ? modal.querySelector(".nx-close") : null;
         if (openCard)
           openCard.addEventListener("click", () => {
