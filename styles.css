@@ -118,6 +118,11 @@ body {
   display: flex;
   gap: 1rem;
 }
+
+.hero-buttons a {
+  text-decoration: none;
+}
+
 .btn-resume,
 .btn-linkedin {
   display: flex;
