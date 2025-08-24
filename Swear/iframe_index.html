@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <base href="./">
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Swear Sneaker Configurator</title>
+  </head>
+  <body>
+    <div id="app">
+      <div id="groen_vlak"></div>
+      <div id="header">
+        <nav>
+          <a id="logo" href="index.html">
+            <img src="public/logo.webp" alt="logo" />
+          </a>
+          <div class="nav-links">
+            <a href="">shop</a>
+            <a href="">about</a>
+            <a href="">vault</a>
+            <a href="">journal</a>
+            <a href="">sustainability</a>
+          </div>
+        </nav>
+      </div>
+      <div id="configurator-container">
+        <div id="shoe-viewer">
+          <canvas id="three-canvas"></canvas>
+        </div>
+        <div id="controls">
+          <div id="step-navigation">
+            <button id="prev-step">&larr; Vorige</button>
+            <span id="current-step">Onderdeel: inside</span>
+            <button id="next-step">Volgende &rarr;</button>
+          </div>
+
+          <!-- <div id="materials">
+            <button class="material-btn" data-material="Soepel leer">
+              Soepel leer
+            </button>
+            <button class="material-btn" data-material="Gegranuleerd leer">
+              Gegranuleerd leer
+            </button>
+          </div> -->
+
+          <div id="colors">
+            <div
+              class="color"
+              data-color="#000000"
+              style="background-color: #000000"
+            ></div>
+            <div
+              class="color"
+              data-color="#FFFFFF"
+              style="background-color: #ffffff"
+            ></div>
+            <div
+              class="color"
+              data-color="#C0C0C0"
+              style="background-color: #c0c0c0"
+            ></div>
+            <div
+              class="color"
+              data-color="#F5DEB3"
+              style="background-color: #f5deb3"
+            ></div>
+          </div>
+
+          <button id="submit-product" style="display: none">Bestellen</button>
+        </div>
+      </div>
+      <div id="order-form-container" style="display: none">
+        <h2>Bestelling Plaatsen</h2>
+        <form id="order-form">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required />
+
+          <label for="phone">Telefoonnummer:</label>
+          <input type="tel" id="phone" name="phone" required />
+
+          <h3>Adresgegevens:</h3>
+          <label for="street">Straat:</label>
+          <input type="text" id="street" name="street" required />
+
+          <label for="city">Stad:</label>
+          <input type="text" id="city" name="city" required />
+
+          <label for="zip">Postcode:</label>
+          <input type="text" id="zip" name="zip" required />
+
+          <label for="country">Land:</label>
+          <input type="text" id="country" name="country" required />
+
+          <button type="submit">Bestelling Plaatsen</button>
+        </form>
+      </div>
+    </div>
+    <script type="module" src="main.js"></script>
+    <script></script>
+  </body>
+</html>
