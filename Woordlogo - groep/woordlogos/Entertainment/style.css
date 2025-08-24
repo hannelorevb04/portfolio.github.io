@@ -48,8 +48,8 @@ body {
     translateY(50%) translateX(50%) translateY(-50%);
   position: absolute;
   top: -225px;
-  left: 50%;
-  width: 850px;
+  left: 25%;
+  width: 500px;
   height: 100px;
   background: linear-gradient(
     0.25turn,
@@ -63,7 +63,6 @@ body {
         top: -10px;
     } */
 .light1 {
-  left: 100px;
   animation-duration: 10s;
   animation-name: wave;
   animation-iteration-count: infinite;
