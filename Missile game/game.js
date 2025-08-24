@@ -21,7 +21,7 @@ var aantallevens = 3; // levens starten op 3
 var snelheid = 1;
 
 var leftPos = Math.random()*600; // zorgt dat de boot altijd op een andere plaats op de x-as begint
-var topPos=	-800; // zorgt dat de boot, onderaan het scherm staat
+var topPos = BOAT_TOP; // zorgt dat de boot, onderaan het scherm staat
 boat.style.top = topPos + "px"; // zorgt dat de waarde van hierboven, in de css geïmplementeerd kan worden
 boat.style.left = leftPos + "px"; // zorgt dat de random waarde van hierboven, in de css geïmplementeerd kan worden
 bg.style.visibility = "hidden"; // background-image is niet te zien as het scherm niet gestart is
@@ -31,12 +31,58 @@ shell.style.visibility = "hidden"; // shell is niet zichtbaar
 
 var teller = 0;
 
+// === Config ===
+var START_RESET_MS = 7000;   // <- na X milliseconden terug naar startscherm (7s = voorbeeld)
+var BOAT_TOP = 360;          // <- start-hoogte van de boot (lager getal = hoger op het scherm)
+
+// === Helpers ===
+var autoResetTimer = null;
+
+function resetToStart() {
+    // Stop evt. timers
+    if (autoResetTimer) { clearTimeout(autoResetTimer); autoResetTimer = null; }
+    if (id) { clearInterval(id); id = null; }
+
+    // Reset waarden
+    score = 0;
+    aantallevens = 3;
+    document.querySelector(".score").innerHTML = "";
+    document.querySelector(".levens").innerHTML = "";
+
+    // Herpositioneer elementen
+    leftPos = Math.random()*600;
+    topPos = BOAT_TOP;
+    boat.style.left = leftPos + "px";
+    boat.style.top = topPos + "px";
+
+    topShell = -1500;
+    leftShell = Math.random()*350;
+    shell.style.left = leftShell + "px";
+    shell.style.top = topShell + "px";
+
+    // UI terug naar startsituatie
+    bg.style.visibility = "hidden";
+    boat.style.visibility = "hidden";
+    shell.style.visibility = "hidden";
+    scoreboard.style.visibility = "hidden";
+    levenseinde.style.visibility = "hidden";
+    gameover.style.visibility = "hidden";
+    gameoverscore.style.visibility = "hidden";
+    startscreen.style.visibility = "visible";
+    center.style.backgroundColor = "lightblue";
+}
+
+
 var id;
 
 startgame.addEventListener("click", begin);     
 function begin(){
+    if (id) { clearInterval(id); id = null; }
+    if (autoResetTimer) { clearTimeout(autoResetTimer); autoResetTimer = null; }
     id = setInterval(move, 5) ;
     startscreen.style.visibility = "hidden"; //startscherm niet meer zichtbaar
+    gameover.style.visibility = "hidden";
+    gameoverscore.style.visibility = "hidden";
     bg.style.visibility = "visible"; // background tonen
     boat.style.visibility = "visible"; // boat tonen
     shell.style.visibility = "visible"; // shell tonen
@@ -57,7 +103,8 @@ function move() {
         shell.style.visibility = "hidden";
         boat.style.visibility = "hidden";
         scoreboard.style.visibility = "hidden"; 
-		stoppen();  
+		stoppen();
+        autoResetTimer = setTimeout(resetToStart, START_RESET_MS);
 		}
         // volgende code zorgt ervoor dat er telkens maar 1 punt af gaat
 		topShell = -10; 
@@ -74,14 +121,6 @@ function move() {
         
         document.querySelector(".score").innerHTML = "🐚 " + score;
 	}
-	
-
-    //zorgt dat boot niet uit het vlak gaat
-	if(topPos>750){
-		boat.style.left = leftPos + "px"; 
-		topPos=0;
-	}	
-    
 }
 
 // zorgt dat je met de pijltjes de boat kan besturen

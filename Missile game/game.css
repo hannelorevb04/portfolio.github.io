@@ -1,146 +1,144 @@
-*{
-    margin: 0;
-    padding: 0;
+* {
+  margin: 0;
+  padding: 0;
 }
-.center{
-    background-color: white;
+.center {
+  background-color: white;
 }
-#game{
-    height: 600px;
-    width: 600px;
-    position: relative;
-    margin: 0 auto;
-}
-
-.bg{
-    background-image: url('images/bg_650.png');
-    animation: bg 15s linear infinite ;
-    height: 1300px;
-    width: 1300px;
-    position: relative;
-    margin: 0 auto;
+#game {
+  height: 600px;
+  width: 600px;
+  position: relative;
+  margin: 0 auto;
 }
 
-@keyframes bg{
-    0%{
-        transform: translateY(-650px);
-    }
-    100%{
-        transform: translateY(0);
-    }
-}   
-
-.shell{
-    position: absolute; 
-    top: -1400px;
-    left: -100px;
-
+.bg {
+  background-image: url("images/bg_650.png");
+  animation: bg 15s linear infinite;
+  height: 1300px;
+  width: 1300px;
+  position: relative;
+  margin: 0 auto;
 }
 
-.boat{
-    width: 100px;
-    height: 100px;
-    background-image: url('images/boat.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    position: absolute;
-    top: -800px;
-    left: 250px;
+@keyframes bg {
+  0% {
+    transform: translateY(-650px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.shell {
+  position: absolute;
+  top: -1400px;
+  left: -100px;
+}
+
+.boat {
+  width: 100px;
+  height: 100px;
+  background-image: url("images/boat.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  bottom: 10px;
+  left: 250px;
 }
 
 div.startscreen h1 {
-    margin: 15px;
-    font-weight: bold;
-    font-size: 24px;
-    color: black;
-    margin-left: 290px;
-    position: relative;
-    left: -250px;
-    top: -1950px;
-    width: 500px;
+  margin: 15px;
+  font-weight: bold;
+  font-size: 24px;
+  color: black;
+  margin-left: 290px;
+  position: relative;
+  left: -250px;
+  top: -1950px;
+  width: 500px;
 }
 div.startscreen h2 {
-    margin: 15px;
-    font-weight: normal;
-    font-size: 18px;
-    color: black;
-    margin-left: 290px;
-    position: relative;
-    left: -140px;
-    top: -1900px;
+  margin: 15px;
+  font-weight: normal;
+  font-size: 18px;
+  color: black;
+  margin-left: 290px;
+  position: relative;
+  left: -140px;
+  top: -1900px;
 }
 
-
 div.startscreen p {
-    margin: 15px;
-    color: black;
-    margin-left: 320px;
-    line-height: 18px;
-    position: relative;
-    left: -150px;
-    top: -1900px;
+  margin: 15px;
+  color: black;
+  margin-left: 320px;
+  line-height: 18px;
+  position: relative;
+  left: -150px;
+  top: -1900px;
 }
 
 p {
-    margin: 15px;
-    color: black;  
-    line-height: 18px;
-    position: relative;
-    left: -150px;
-    top: -2000px;
+  margin: 15px;
+  color: black;
+  line-height: 18px;
+  position: relative;
+  left: -150px;
+  top: -2000px;
 }
 
 div.startscreen p.start {
-    margin:auto;
-    text-align: center;
-    text-decoration: none;
-    color: #ce3b28;
-    display: block;
-    background-color: white;
-    width: 100px;
-    height: 28px;
-    border-radius: 25px;
-    border: 4px solid #ce3b28;
-    font-size: 25px;
-    padding-top: 10px;
-    font-weight: bold;
-    cursor: pointer;
-    top: -1800px;
-    left: 0px;
+  margin: auto;
+  text-align: center;
+  text-decoration: none;
+  color: #ce3b28;
+  display: block;
+  background-color: white;
+  width: 100px;
+  height: 28px;
+  border-radius: 25px;
+  border: 4px solid #ce3b28;
+  font-size: 25px;
+  padding-top: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  top: -1860px;
+  left: 0px;
 }
 div.startscreen p.start:hover {
-    color: white;
-    background-color: #ce3b28;
+  color: white;
+  background-color: #ce3b28;
 }
 .startscreen {
-    color: black;
+  color: black;
 }
 .levens {
-    left: -270px;
-    top: -1900px;
+  left: -270px;
+  top: -1770px;
 }
 .score {
-    left: -270px;
-    top: -1900px;
+  left: -270px;
+  top: -1830px;
 }
 .gameover {
-    visibility:hidden;
-    color: #ce3b28;
-    text-align: center;
-    margin-top: 140px;
-    font-size: 32px;
-    position: relative;
-    left: 0px;
-    top: -1800px;
+  visibility: hidden;
+  color: #ce3b28;
+  text-align: center;
+  margin-top: 140px;
+  font-size: 32px;
+  position: relative;
+  left: 0px;
+  top: -1800px;
 }
 .gameoverscore {
-    visibility:visible;
-    color: black;
-    text-align: center;
-    line-height: 20px;
-    margin-top: 40px;
-    font-size: 16px;
-    position: relative;
-    left: 0px;
-    top: -1800px;
+  visibility: visible;
+  color: black;
+  text-align: center;
+  line-height: 20px;
+  margin-top: 40px;
+  font-size: 16px;
+  position: relative;
+  left: 0px;
+  top: -1800px;
 }
