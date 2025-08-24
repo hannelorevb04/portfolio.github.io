@@ -1,9 +1,9 @@
-*{
-    font-family: Arial, Helvetica, sans-serif;
+* {
+  font-family: Arial, Helvetica, sans-serif;
 }
-nav{
-    background-color: #30302e;
-    padding: 65px;
+nav {
+  background-color: #30302e;
+  padding: 65px;
 }
 /* #hockey_video {
     position: fixed;
@@ -13,81 +13,80 @@ nav{
     height: 500px;
    
   } */
-  
+
 header {
-    /* background: rgba(0, 0, 0, 0.5); */
-    /* color: #f1f1f1;
+  /* background: rgba(0, 0, 0, 0.5); */
+  /* color: #f1f1f1;
     width: 100%; */
-    /* padding: 20px; */
-    margin-top: 15%;
-}
-  
-h1{
-    text-align: center;
+  /* padding: 20px; */
+  margin-top: 15%;
 }
 
-nav a{
-    text-decoration: none;
-    color: white;
-    padding: 10px;
-    font-size: larger;
+h1 {
+  text-align: center;
 }
 
-.item img{
-    margin-left: 20px;
-    width: 180px;
-    height: 180px;
+nav a {
+  text-decoration: none;
+  color: white;
+  padding: 10px;
+  font-size: larger;
 }
 
-.item a{
-    text-decoration: none;
-    color: #30302e;
-    padding: 10px;
-    background-color: #c5d2cf;
-    border-radius: 25px;
-    width: 200px;
-    text-align: center;
+.item img {
+  margin-left: 20px;
+  width: 180px;
+  height: 180px;
 }
 
-.item h3{
-    width: 200px;
-    margin-left: 20px;
+.item a {
+  text-decoration: none;
+  color: #30302e;
+  padding: 10px;
+  background-color: #c5d2cf;
+  border-radius: 25px;
+  width: 200px;
+  text-align: center;
 }
 
-.item p{
-    margin-bottom: 25px;
-    margin-left: 20px;
-    justify-content: center;
+.item h3 {
+  width: 200px;
+  margin-left: 20px;
 }
 
-.item{
-    margin: 50px;
-    
+.item p {
+  margin-bottom: 25px;
+  margin-left: 20px;
+  justify-content: center;
 }
 
-.sticks{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+.item {
+  margin: 30px;
 }
 
-.prijs{
-    display: flex;
+.sticks {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
-.oude_prijs{
-    text-decoration: line-through;
-    color: grey;
+.prijs {
+  display: flex;
 }
 
-.kleding{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+.oude_prijs {
+  text-decoration: line-through;
+  color: grey;
 }
 
-.accessoires{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+.kleding {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.accessoires {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
