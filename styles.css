@@ -1,3 +1,27 @@
+/* Universele pijlen-knop styling */
+.arrow-btn {
+  background: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+  transition: background 0.2s;
+  padding: 0;
+}
+.arrow-btn:hover {
+  background: #f5f5f5;
+}
+/* SVG pijlen krijgen hun kleur via CSS, niet via het SVG element zelf */
+.arrow-btn svg {
+  width: 28px;
+  height: 28px;
+  display: block;
+  color: #1976d2;
+}
 /* Forceer overal standaard sans-serif font */
 h1,
 h2,
@@ -118,7 +142,6 @@ body {
   display: flex;
   gap: 1rem;
 }
-
 .hero-buttons a {
   text-decoration: none;
 }
@@ -284,8 +307,10 @@ body {
   background: rgba(255, 255, 255, 0.7);
   border: 0;
   border-radius: 50%;
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
   font-size: 18px;
   font-weight: 800;
   color: #102e4a;
@@ -503,31 +528,6 @@ body {
   top: 0;
   left: 0;
   background: #fff;
-}
-/* Woordlogo slideshow scaling for ALL slides (modal & non-modal) */
-.woordlogo-slide,
-.nx-slide {
-  object-fit: contain !important;
-  width: min(1200px, 95vw) !important;
-  height: min(780px, 82vh) !important;
-  background: #fff;
-  overflow: auto !important;
-  display: block;
-  margin: 0 auto;
-  box-sizing: border-box;
-}
-
-/* Scale img and div inside ALL Woordlogo slides */
-.woordlogo-slide img,
-.woordlogo-slide div,
-.nx-slide img,
-.nx-slide div {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-  transform: scale(0.95);
-  margin: 0 auto;
-  display: block;
 }
 .iframe-project::-webkit-scrollbar {
   display: none;
@@ -1324,13 +1324,12 @@ body {
   justify-content: center;
   padding: 24px 0; /* ruimte boven/onder de slideshow */
   position: relative;
-  min-height: 400px;
 }
 
 .modal-overlay .nx-hero-slider .nx-slides {
   width: 100%;
   max-width: 900px;
-  height: auto;
+  height: 50vh;
   display: block;
   position: relative;
 }
@@ -1350,14 +1349,7 @@ body {
 }
 .modal-overlay .nx-hero-slider .nx-slide.is-active {
   opacity: 1;
-  position: relative;
-  pointer-events: auto;
-  visibility: visible;
-}
-
-.modal-overlay .nx-hero-slider .nx-slide {
-  pointer-events: none;
-  visibility: hidden;
+  /* position: relative; */
 }
 
 /* pijlen */
@@ -1376,8 +1368,6 @@ body {
   cursor: pointer;
   display: grid;
   place-items: center;
-  z-index: 10;
-  opacity: 1;
 }
 .modal-overlay .nx-hero-slider .nx-nav:hover {
   background: #fff;
@@ -1435,4 +1425,17 @@ body {
   cursor: grabbing;
   cursor: -webkit-grabbing;
   user-select: none;
+}
+
+/* Hide dot row when empty */
+.nx-dots:empty {
+  display: none;
+}
+
+/* Prevent overlays from eating clicks */
+.project-card .gradient {
+  pointer-events: none;
+}
+.project-card .iframe-project {
+  pointer-events: none !important;
 }

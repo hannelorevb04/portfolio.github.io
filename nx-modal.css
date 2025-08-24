@@ -1,0 +1,72 @@
+
+/* NX Modal minimal, clean */
+:root {
+  --nx-overlay: rgba(5, 8, 15, 0.72);
+  --nx-card-bg: #0c1520;
+  --nx-panel-bg: #0e1a28;
+  --nx-text: #e9f0f7;
+  --nx-border: #1f3246;
+  --nx-hero-height: 380px;
+}
+
+#nxModal.modal-overlay {
+  position: fixed; inset: 0;
+  display: none;
+  align-items: center; justify-content: center;
+  padding: 16px;
+  background: var(--nx-overlay);
+  z-index: 999999;
+}
+
+.nx-card {
+  width: min(1100px, 100%);
+  background: var(--nx-card-bg);
+  color: var(--nx-text);
+  border: 1px solid var(--nx-border);
+  border-radius: 18px;
+  box-shadow: 0 10px 40px rgba(0,0,0,.35);
+  overflow: hidden; position: relative;
+}
+
+.nx-close {
+  position: absolute; top: 10px; right: 10px;
+  width: 36px; height: 36px; border-radius: 10px;
+  border: 1px solid var(--nx-border);
+  background: #233449; color: var(--nx-text);
+  font-size: 20px; cursor: pointer;
+}
+.nx-close:hover { filter: brightness(1.1); }
+
+/* Slider */
+.nx-hero-slider { position: relative; background: #0b121b; border-bottom: 1px solid var(--nx-border); }
+.nx-slides { position: relative; height: var(--nx-hero-height); overflow: hidden; }
+.nx-slide { position: absolute; inset: 0; opacity: 0; transition: opacity .25s ease; }
+.nx-slide.is-active { opacity: 1; }
+.nx-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.nx-slide iframe { width: 100%; height: 100%; border: 0; background: #fff; display: block; }
+
+/* Nav + dots */
+.nx-nav { position:absolute; top:50%; transform:translateY(-50%); z-index:3;
+  width:38px; height:38px; border-radius:10px; border:1px solid var(--nx-border);
+  background:#233449; color:var(--nx-text); cursor:pointer; }
+.nx-nav.prev { left:10px; } .nx-nav.next { right:10px; }
+.nx-nav:hover { filter:brightness(1.1); }
+.nx-dots { position:absolute; bottom:10px; left:0; right:0; display:flex; gap:6px; justify-content:center; z-index:3; }
+.nx-dot { width:10px; height:10px; border-radius:999px; border:0; background:#44576c; cursor:pointer; }
+.nx-dot.is-active { background:#7db1ff; }
+
+/* Info */
+.nx-panel { background: var(--nx-panel-bg); }
+.nx-panel-inner { display:grid; gap:22px; grid-template-columns:1fr; padding:16px 20px; }
+@media (min-width: 860px) { .nx-panel-inner { grid-template-columns:1.5fr 1fr; } }
+.nx-title { font-size: 24px; margin: 4px 0 6px; }
+.nx-meta { color:#b9c5d3; display:flex; gap:10px; align-items:center; }
+.nx-desc { margin: 12px 0 14px; }
+.nx-actions { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:10px; }
+.nx-btn { border:1px solid var(--nx-border); background:#233449; color:var(--nx-text); padding:10px 14px; border-radius:12px; cursor:pointer; }
+.nx-primary { background: linear-gradient(180deg,#2b66ff,#2452d6); border-color:#1c45b6; }
+.nx-taglist { display:flex; gap:8px; flex-wrap:wrap; }
+.nx-tag { font-size:12px; padding:6px 9px; border-radius:999px; background:#162436; border:1px solid var(--nx-border); }
+
+/* drag feedback */
+.projects.dragging { cursor:grabbing; }

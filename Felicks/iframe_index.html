@@ -1,97 +1,345 @@
 <!DOCTYPE html>
 <html lang="nl">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Felicks - Hondenadoptie</title>
-    <link rel="icon" type="image/png" href="images/Buttons.png" />
-    <link rel="stylesheet" href="https://use.typekit.net/yox8cse.css" />
-    <link rel="stylesheet" href="style/styles.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
-      rel="stylesheet"
-    />
-  </head>
 
-  <body>
-    <header class="navbar">
-      <a href="index.html" aria-label="Terug naar home">
-        <img class="logo" src="images/felicksLogo.png" alt="Logo van Felicks" />
-      </a>
-      <nav class="nav-links" id="nav-links">
-        <a href="#How">Aanpak</a>
-        <a href="#ForWho">Voor wie</a>
-        <a href="tips.html">Tips</a>
-        <a href="#Donations">Donaties</a>
-        <a class="download" href="#Download">Download</a>
-      </nav>
-      <svg
-        class="hamburger"
-        viewBox="-0.5 0 25 25"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        role="img"
-        aria-label="Open menu"
-      >
-        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-        <g
-          id="SVGRepo_tracerCarrier"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        ></g>
-        <g id="SVGRepo_iconCarrier">
-          <path
-            d="M2 12.32H22"
-            stroke="#183A36"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          ></path>
-          <path
-            d="M2 18.32H22"
-            stroke="#183A36"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          ></path>
-          <path
-            d="M2 6.32001H22"
-            stroke="#183A36"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          ></path>
-        </g>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Felicks - Hondenadoptie & tips voor verantwoord huisdierbezit</title>
+  <link rel="canonical" href="https://www.felicks.be/" />
+  <link rel="icon" type="image/png" href="images/Buttons.png" />
+
+  <link rel="stylesheet" href="https://use.typekit.net/yox8cse.css" />
+  <link rel="stylesheet" href="style/styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
+    rel="stylesheet" />
+
+  <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Felicks",
+        "url": "https://www.felicks.be",
+        "logo": "https://www.felicks.be/images/felicksLogo.png",
+        "sameAs": [
+          "https://www.facebook.com/felicks",
+          "https://www.instagram.com/felicks.be",
+          "https://www.tiktok.com/@felicks.be"
+        ],
+        "description": "Felicks helpt honden een nieuw thuis te vinden via educatie, tips en persoonlijke begeleiding voor adoptiebereide baasjes. Felicks biedt tips voor hondenbaasjes, begeleidt verantwoorde hondenadoptie en helpt bij verantwoord huisdierbezit met een educatieve app."
+      }
+    </script>
+
+  <title>Felicks - Hondenadoptie & tips voor verantwoord huisdierbezit</title>
+  <meta name="title" content="Felicks" />
+  <meta name="description"
+    content="Onze missie is om hondenadoptie te verbeteren door bewustwording over verantwoord huisdierbezit te vergroten. Zo helpen we het aantal asieldieren te verminderen en sterke relaties tussen mens en dier op te bouwen." />
+</head>
+
+<body>
+  <header class="navbar">
+    <a href="index.html" aria-label="Terug naar home">
+      <img class="logo" src="images/felicksLogo.png" alt="Logo van Felicks" />
+    </a>
+    <nav class="nav-links hidden" id="nav-links">
+      <a href="#How">Aanpak</a>
+      <a href="#ForWho">Voor wie</a>
+      <a href="iframe_tips.html">Tips</a>
+      <a href="#Donations">Donaties</a>
+      <a class="download" href="#Download">Download</a>
+    </nav>
+    <svg class="hamburger" viewBox="-0.5 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg" role="img"
+      aria-label="Open menu">
+      <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+      <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+      <g id="SVGRepo_iconCarrier">
+        <path d="M2 12.32H22" stroke="#183A36" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+        <path d="M2 18.32H22" stroke="#183A36" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+        <path d="M2 6.32001H22" stroke="#183A36" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        </path>
+      </g>
+    </svg>
+
+  </header>
+
+  <div class="video-container">
+    <h1 class="hero-line-1">Life's rough,</h1>
+    <h1 class="hero-line-2">adopt a fluff</h1>
+    <video autoplay muted loop playsinline class="video-bg">
+      <source src="videos/websiteVideo.mp4" type="video/mp4" />
+      <track kind="descriptions" label="Audio Descriptions" srclang="nl" src="video-description.vtt" />
+      <track kind="captions" label="Dutch Captions" srclang="nl" src="video-captions.vtt" default />
+    </video>
+
+    <div class="curve curve-video">
+      <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
+        <path d="M0,100 C480,0 960,100 1440,0 L1440,100 L0,100 Z" fill="#FFFDF9" />
       </svg>
-    </header>
+    </div>
+  </div>
 
-    <div class="video-container">
-      <h1 class="hero-line-1">Life's rough,</h1>
-      <h1 class="hero-line-2">adopt a fluff</h1>
-      <video autoplay muted loop playsinline class="video-bg">
-        <source src="videos/websiteVideo.mp4" type="video/mp4" />
-      </video>
+  <section class="how-section" id="How">
+    <h2 class="title">Hoe begeleiden wij u?</h2>
 
-      <div class="curve curve-video">
-        <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
-          <path
-            d="M0,100 C480,0 960,100 1440,0 L1440,100 L0,100 Z"
-            fill="#FFFDF9"
-          />
-        </svg>
+    <div class="how-grid">
+      <div class="how-grid-item">
+        <img src="images/interactiveEducation.png" alt="Hond in een brievenbus - foto van educatie" />
+        <p>Interactieve educatie</p>
+      </div>
+
+      <div class="how-grid-item reverse">
+        <img src="images/personalizedGuidanceAndPowerFormation.png"
+          alt="2 menselijke handen houden een hondenpoot vast - foto van persoonlijke begeleiding" />
+        <p>Gepersonaliseerde begeleiding & machtmaking</p>
+      </div>
+
+      <div class="how-grid-item">
+        <img src="images/tipsAndTricks.png"
+          alt="Hond krijgt een traktatie van een mensenhand - foto van tips en trucs" />
+        <p>Tips en tricks</p>
       </div>
     </div>
 
-    <section class="how-section" id="How">
-      <div class="container">
-        <h2>Hoe we werken</h2>
-        <p>
-          Felicks helpt honden een nieuw thuis te vinden via educatie, tips en
-          persoonlijke begeleiding voor adoptiebereide baasjes.
+    <p class="how-description">
+      Bij Felicks sta je er niet alleen voor. We bieden interactieve educatie
+      om je goed voor te bereiden op een hondenadoptie, persoonlijke
+      begeleiding om het ideale huisdier te vinden, en ondersteunen je met
+      praktische tips en tricks na de adoptie. Zo zorgen we samen voor een
+      sterke band tussen jou en je nieuwe beste vriend.
+    </p>
+  </section>
+
+  <section class="section bg-green" id="ForWho">
+    <div class="curve curve-top">
+      <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
+        <path d="M0,0 C480,100 960,0 1440,100 L1440,0 L0,0 Z" fill="#FFFDF9" />
+      </svg>
+    </div>
+
+    <div class="text-content">
+      <h2 class="title">Voor wie is de app?</h2>
+      <p class="section-text">
+        Deze app helpt iedereen die overweegt een hond te adopteren. Of je nu
+        een ervaren hondenliefhebber bent of net begint: Felicks begeleidt je
+        stap voor stap met kennis over verantwoord huisdierbezit.
+      </p>
+    </div>
+
+    <img src="images/forWho.png" alt="Hond die in de lucht in de armen van zijn baasje springt"
+      class="section-image" />
+
+    <div class="curve curve-bottom">
+      <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
+        <path d="M0,100 C480,0 960,100 1440,0 L1440,100 L0,100 Z" fill="#FFFDF9" />
+      </svg>
+    </div>
+  </section>
+
+  <section class="tips-section" id="Tips">
+    <h2 class="title">Handige tips voor je huisdier</h2>
+    <p class="section-text">
+      Ontdek eenvoudige en praktische tips die bijdragen aan verantwoord
+      huisdierbezit en een geslaagde hondenadoptie.
+    </p>
+
+    <div class="tips-list">
+      <a href="tips.html" class="tip-card" data-category="voeding">
+        <img src="images/nutrition.png" alt="pictogram van een voederbak" />
+        <p>Voeding</p>
+      </a>
+      <a href="tips.html" class="tip-card" data-category="veiligheid">
+        <img src="images/safety.png" alt="pictogram van een les voor honden" />
+        <p>Veiligheid</p>
+      </a>
+      <a href="tips.html" class="tip-card" data-category="training">
+        <img src="images/training.png" alt="pictogram van een medaille" />
+        <p>Training</p>
+      </a>
+      <a href="tips.html" class="tip-card" data-category="verzorging">
+        <img src="images/care.png" alt="pictogram van een tandenborstel" />
+        <p>Verzorging</p>
+      </a>
+      <a href="tips.html" class="tip-card" data-category="activiteit">
+        <img src="images/activity.png" alt="pictogram van een bot" />
+        <p>Activiteit</p>
+      </a>
+    </div>
+  </section>
+
+  <section class="donation-section" id="Donations">
+    <div class="curve curve-top">
+      <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
+        <path d="M0,0 C480,100 960,0 1440,100 L1440,0 L0,0 Z" fill="#FFFDF9" />
+      </svg>
+    </div>
+
+    <!-- MOBILE LAYOUT -->
+    <div class="donation-layout-mobile">
+      <h2 class="title">Donaties</h2>
+      <img src="images/donations.png" alt="Asielhond die op een stenen bank in het park ligt - foto van donaties"
+        class="donation-image" />
+
+      <div class="donation-counter">
+        <div class="donation-icon">
+          <img src="images/Paw Print.png" alt="pictogram van een hondenpoot" />
+        </div>
+        <div class="donation-numbers">
+          <span>1</span><span>3</span><span>2</span>
+        </div>
+      </div>
+
+      <p class="donation-subtitle">geholpen hondjes!</p>
+
+      <p class="section-text">
+        Help dieren in nood door een donatie te doen.<br />
+        Jouw steun maakt het verschil voor hun toekomst.
+      </p>
+
+      <a href="404.html" class="donation-button">Help mee!</a>
+    </div>
+
+    <!-- TABLET & DESKTOP LAYOUT -->
+    <div class="donation-layout-wide">
+      <img src="images/donations.png" alt="Asielhond die op een stenen bank in het park ligt - foto van donaties"
+        class="donation-image" />
+
+      <div class="donation-text-content">
+        <h2 class="title">Donaties</h2>
+
+        <div class="donationsweb">
+          <div class="donation-counter">
+            <div class="donation-icon">
+              <img src="images/Paw Print.png" alt="pictogram van een hondenpoot" />
+            </div>
+            <div class="donation-numbers">
+              <span>1</span><span>3</span><span>2</span>
+            </div>
+          </div>
+          <p class="donation-subtitle">geholpen hondjes!</p>
+        </div>
+
+        <p class="section-text">
+          Help honden in nood door een donatie te doen.<br />
+          Jouw steun maakt het verschil voor hun toekomst.
+        </p>
+
+        <a href="404.html" class="donation-button">Help mee!</a>
+      </div>
+    </div>
+
+    <div class="curve curve-bottom">
+      <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
+        <path d="M0,100 C480,0 960,100 1440,0 L1440,100 L0,100 Z" fill="#FFFDF9" />
+      </svg>
+    </div>
+  </section>
+
+  <section class="section" id="Download">
+    <div class="left-text">
+      <div class="text-content">
+        <h2 class="download-title">
+          Het is <span class="italic">jouw</span> moment
+        </h2>
+        <p class="section-text">
+          Klaar om je nieuwe beste vriend te ontmoeten? Ontdek tips voor
+          hondenbaasjes en leer alles over verantwoord huisdierbezit.
+          <br />
+          Download de app nu!
         </p>
       </div>
-    </section>
-  </body>
+
+      <div class="download-buttons-tablet">
+
+        <a href="#" aria-label="Download op de Google Play">
+          <img src="images/googleplay.png" alt="Download op de Google Play" />
+        </a>
+      </div>
+    </div>
+
+    <img src="images/mockup.png" alt="Mockup" class="section-image" />
+
+    <div class="download-buttons-mobile">
+      <a href="#" aria-label="Download op de Google Play">
+        <img src="images/googleplay.png" alt="Download op de Google Play" />
+      </a>
+    </div>
+  </section>
+
+  <footer class="footer">
+
+    <div class="footer-column links">
+      <a href="#How">Aanpak</a>
+      <a href="#ForWho">Voor wie</a>
+      <a href="#Tips">Tips</a>
+      <a href="#Donations">Donaties</a>
+    </div>
+    </div>
+
+
+    <div class="footer-column contact">
+      <p><strong>Contact:</strong></p>
+      <p>felicks@hotmail.com</p>
+
+      <p><strong>Volg ons:</strong></p>
+
+
+      <div class="social-icons">
+        <a href="https://www.instagram.com/felicks.be?igsh=NXRidW5zZ3QxNmE0&utm_source=qr" target="_blank"
+          rel="noopener noreferrer">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path
+              d="M14.168 1.66675H5.83464C3.53345 1.66675 1.66797 3.53223 1.66797 5.83341V14.1667C1.66797 16.4679 3.53345 18.3334 5.83464 18.3334H14.168C16.4692 18.3334 18.3346 16.4679 18.3346 14.1667V5.83341C18.3346 3.53223 16.4692 1.66675 14.168 1.66675Z"
+              stroke="#FFFDF9" stroke-linecap="round" stroke-linejoin="round" />
+            <path
+              d="M13.3337 9.47501C13.4366 10.1685 13.3181 10.8769 12.9952 11.4992C12.6723 12.1215 12.1614 12.6262 11.5351 12.9414C10.9088 13.2566 10.1991 13.3663 9.5069 13.255C8.81468 13.1436 8.17521 12.8167 7.67944 12.321C7.18367 11.8252 6.85685 11.1857 6.74546 10.4935C6.63408 9.8013 6.74379 9.09159 7.05901 8.46532C7.37423 7.83905 7.8789 7.32812 8.50123 7.00521C9.12356 6.68229 9.83187 6.56383 10.5254 6.66667C11.2328 6.77158 11.8878 7.10123 12.3935 7.60693C12.8992 8.11263 13.2288 8.76757 13.3337 9.47501Z"
+              stroke="#FFFDF9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M14.582 5.41675H14.5904" stroke="#FFFDF9" stroke-width="1.5" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+        </a>
+
+        <a href="https://www.tiktok.com/@felicks.be?_t=ZN-8vAr4xLfJqA&_r=1" target="_blank" rel="noopener noreferrer">
+          <svg xmlns="http://www.w3.org/2000/svg" width="17" height="20" viewBox="0 0 17 20" fill="none">
+            <path
+              d="M12.0579 1.68473L11.639 1H9.10449V7.16708L9.09585 13.191C9.10017 13.2357 9.10449 13.2849 9.10449 13.3297C9.10449 14.8379 7.92142 16.0686 6.462 16.0686C5.00259 16.0686 3.81952 14.8424 3.81952 13.3297C3.81952 11.8215 5.00259 10.5908 6.462 10.5908C6.76425 10.5908 7.05786 10.6489 7.32988 10.7474V7.73993C7.04922 7.6907 6.75993 7.66385 6.462 7.66385C3.4525 7.66832 1 10.2103 1 13.3342C1 16.458 3.4525 19 6.46632 19C9.48014 19 11.9326 16.458 11.9326 13.3342V6.16907C13.025 7.30134 14.437 8.40676 16 8.76032V5.68573C14.3031 4.90701 12.6149 2.60666 12.0579 1.68473Z"
+              stroke="#FFFDF9" />
+          </svg>
+        </a>
+      </div>
+
+    </div>
+
+
+
+
+    <div class="footer-column fdownload">
+      <p><strong>Download de app nu!</strong></p>
+      <a href="#" class="fdownload-button">
+        <img src="images/googleplay.png" alt="Ontdek het op Google Play">
+      </a>
+    </div>
+
+
+  </footer>
+
+  <script>
+    const hamburger = document.querySelector(".hamburger");
+    const menuList = document.querySelector("#nav-links");
+
+    hamburger.addEventListener("click", () => {
+      menuList.classList.toggle("hidden");
+      menuList.classList.toggle("flex");
+      menuList.classList.toggle("mobile-menu");
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.tip-card').forEach(card => {
+        const cat = card.dataset.category;
+        card.setAttribute('href', `/tips.html?category=${encodeURIComponent(cat)}`);
+      });
+    }); //verwijzing juiste tip cards
+  </script>
+</body>
+
 </html>
