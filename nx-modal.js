@@ -195,6 +195,61 @@
         tagsEl.appendChild(span);
       });
     }
+  /* === Comparison Slider (under tags) === */
+  (function buildComparisons(){
+    const raw = card.getAttribute('data-compare') || '[]';
+    let pairs = [];
+    try { const j = JSON.parse(raw); if (Array.isArray(j)) pairs = j; } catch {}
+    if (!pairs.length || !leftCol) return;
+    const host = DOC.createElement('div');
+    host.className = 'nx-compare-wrap';
+    if (tagsEl && tagsEl.parentNode === leftCol) {
+      tagsEl.insertAdjacentElement('afterend', host);
+    } else {
+      leftCol.appendChild(host);
+    }
+    pairs.forEach((p) => {
+      const parts = String(p||'').split('|');
+      const a = parts[0] || '';
+      const b = parts[1] || '';
+      const la = parts[2] || 'Before';
+      const lb = parts[3] || 'After';
+      const box = DOC.createElement('div');
+      box.className = 'nx-compare';
+      const bottom = DOC.createElement('img');
+      bottom.src = b; bottom.alt = lb; bottom.className = 'nx-cmp-img nx-cmp-bottom';
+      const top = DOC.createElement('img');
+      top.src = a; top.alt = la; top.className = 'nx-cmp-img nx-cmp-top';
+      const handle = DOC.createElement('div');
+      handle.className = 'nx-cmp-handle';
+      const range = DOC.createElement('input');
+      range.type = 'range'; range.min = '0'; range.max = '100'; range.value = '50';
+      range.className = 'nx-cmp-range';
+      range.setAttribute('aria-label','Image comparison slider');
+      const labelL = DOC.createElement('span'); labelL.className = 'nx-cmp-label left'; labelL.textContent = la;
+      const labelR = DOC.createElement('span'); labelR.className = 'nx-cmp-label right'; labelR.textContent = lb;
+      box.appendChild(bottom);
+      box.appendChild(top);
+      box.appendChild(handle);
+      box.appendChild(range);
+      box.appendChild(labelL);
+      box.appendChild(labelR);
+      function updateClip(pct){
+        pct = Math.max(0, Math.min(100, parseInt(pct||'50',10)));
+        top.style.clipPath = 'inset(0 ' + (100-pct) + '% 0 0)';
+        handle.style.left = pct + '%';
+      }
+      range.addEventListener('input', e => updateClip(e.target.value));
+      box.addEventListener('pointerdown', (e)=>{
+        const rect = box.getBoundingClientRect();
+        const pct = ((e.clientX - rect.left) / rect.width) * 100;
+        updateClip(pct);
+      });
+      updateClip(50);
+      host.appendChild(box);
+    });
+  })();
+
 
     addSpecBlock('YEAR',      card.getAttribute('data-year'));
     addSpecBlock('ROLE',      card.getAttribute('data-role'));
