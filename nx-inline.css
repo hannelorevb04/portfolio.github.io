@@ -1,0 +1,35 @@
+/* card-slideshow.css — in-card slideshow with REAL iframe downscaling */
+.project-card .slideshow-container{ position: relative; width: 100%; height: 100%; border-radius: inherit; overflow: hidden; }
+.project-card .slides{ position: absolute; inset: 0; }
+.project-card .slide{ position: absolute; inset: 0; opacity: 0; transition: opacity .35s ease; display: grid; place-items: center; }
+.project-card .slide.active{ opacity: 1; }
+
+/* common media */
+.project-card .image{ width: 100%; height: 100%; object-fit: cover; border: 0; display: block; }
+
+/* Iframe scaling with optional offset — now actually smaller when scale<1 */
+.project-card .iframe-scaler{ --scale: .80; --tx: 0px; --ty: 0px; position: relative; width: 100%; height: 100%; overflow: hidden; display: grid; place-items: center; }
+.project-card .iframe-scaler > iframe{
+  width: 100%;
+  height: 100%;
+  transform: translate(var(--tx), var(--ty)) scale(var(--scale));
+  transform-origin: center center;
+  border: 0; display: block; pointer-events: none;
+}
+
+/* Arrows & dots (Mixed‑Media alignment) */
+.project-card .slideshow-nav{ position: absolute; z-index: 3; left: 0; right: 0; top: 40%; display: flex; justify-content: space-between; padding: 0 .6rem; pointer-events: none; }
+.project-card .slideshow-nav .prev, .project-card .slideshow-nav .next{
+  pointer-events: auto; border: 0; width: 42px; height: 42px; border-radius: 50%;
+  background: rgba(255,255,255,.94); color: #1a2b3c; box-shadow: 0 6px 14px rgba(0,0,0,.18);
+  font-size: 22px; line-height: 42px; cursor: pointer;
+}
+.project-card .slideshow-nav .prev:hover, .project-card .slideshow-nav .next:hover{ background: #fff; }
+
+.project-card .slideshow-dots{ position: absolute; z-index: 3; left: 0; right: 0; bottom: 26%; display: flex; justify-content: center; gap: .45rem; }
+.project-card .slideshow-dots:empty{ display: none; }
+.project-card .slideshow-dots .dot{ width: 8px; height: 8px; border-radius: 50%; border: 0; background: rgba(255,255,255,.65); cursor: pointer; }
+.project-card .slideshow-dots .dot.active{ background: #fff; }
+
+/* ensure overlay doesn't block navigation */
+.project-card .gradient{ pointer-events: none; }
