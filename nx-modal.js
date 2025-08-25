@@ -1,9 +1,10 @@
-/* nx-modal.js — v21 with comparison support */
+/* nx-modal.js — v23 (single-image hero + comparisons) */
 (function(){
   const DOC = document;
   const modal = DOC.getElementById('nxModal');
   if (!modal) return;
 
+  // Modal UI refs
   const slidesEl = modal.querySelector('.nx-slides');
   const prevBtn  = modal.querySelector('.nx-nav.prev');
   const nextBtn  = modal.querySelector('.nx-nav.next');
@@ -18,8 +19,7 @@
   const actions  = modal.querySelector('.nx-actions');
   const leftCol  = modal.querySelector('.nx-left');
 
-  let idx=0, total=0, autoTimer=null;
-  const AUTO_MS = 4200;
+  let idx=0, total=0;
 
   function parseList(raw){
     if (!raw) return [];
@@ -35,17 +35,28 @@
 
   function buildSlidesFromCard(card){
     clearSlides();
-    // Prefer data-slides if present and valid
+
+    // 1) Prefer explicit data-slides
     let slides = parseList(card.getAttribute('data-slides'));
+
+    // 2) Fallback: small slideshow thumbnails inside the card
     if (!slides.length){
-      // Fallback: read <img> sources inside the card's small slideshow
-      const imgs = card.querySelectorAll('.slideshow-container .slides img');
-      slides = Array.from(imgs).map(img => img.getAttribute('src'));
+      const thumbs = card.querySelectorAll('.slideshow-container .slides img[src]');
+      slides = Array.from(thumbs).map(img => img.getAttribute('src'));
     }
+
+    // 3) Final fallback: the main card image (even if only 1)
+    if (!slides.length){
+      const mainImg = card.querySelector('img.image, .overlap-group img, img');
+      if (mainImg && mainImg.getAttribute('src')) slides = [ mainImg.getAttribute('src') ];
+    }
+
     total = slides.length;
+
     slides.forEach((src, i)=>{
-      let wrap = DOC.createElement('div');
+      const wrap = DOC.createElement('div');
       wrap.className = 'nx-slide' + (i===0 ? ' is-active' : '');
+
       if (src && String(src).startsWith('iframe:')){
         const ifr = DOC.createElement('iframe');
         ifr.src = src.replace(/^iframe:/,'');
@@ -62,6 +73,7 @@
       }
       slidesEl.appendChild(wrap);
     });
+
     if (total>1){
       for (let i=0;i<total;i++){
         const b = DOC.createElement('button');
@@ -81,19 +93,15 @@
     if (n<0) n = total-1;
     if (n>=total) n = 0;
     const slides = slidesEl.querySelectorAll('.nx-slide');
-    slides.forEach((el,i)=>{
-      el.classList.toggle('is-active', i===n);
-    });
+    slides.forEach((el,i)=> el.classList.toggle('is-active', i===n) );
     const dots = dotsEl.querySelectorAll('.nx-dot');
-    dots.forEach((el,i)=>{
-      el.classList.toggle('is-active', i===n);
-    });
+    dots.forEach((el,i)=> el.classList.toggle('is-active', i===n) );
     idx = n;
   }
   function next(){ goTo(idx+1); }
   function prev(){ goTo(idx-1); }
-  if (prevBtn) prevBtn.addEventListener('click', prev);
-  if (nextBtn) nextBtn.addEventListener('click', next);
+  prevBtn?.addEventListener('click', prev);
+  nextBtn?.addEventListener('click', next);
 
   // TAGS
   function renderTags(card){
@@ -123,7 +131,7 @@
     });
   }
 
-  // COMPARISON
+  // COMPARISONS
   function parseCompare(card){
     const raw = card.getAttribute('data-compare');
     const list = parseList(raw);
@@ -179,6 +187,7 @@
       cmp.appendChild(divider); cmp.appendChild(labL); cmp.appendChild(labR);
       wrap.appendChild(cmp);
 
+      // interactions
       let pct = 50;
       function setPct(v){
         pct = Math.max(0, Math.min(100, v));
@@ -198,7 +207,6 @@
       cmp.addEventListener('pointermove', e=>{ if (dragging) setPct(posFromEvent(e)); });
       cmp.addEventListener('pointerup',   e=>{ dragging=false; try{cmp.releasePointerCapture(e.pointerId);}catch{} });
       cmp.addEventListener('pointerleave',e=>{ dragging=false; });
-
       cmp.addEventListener('click', e=> setPct(posFromEvent(e)));
 
       cmp.tabIndex = 0;
