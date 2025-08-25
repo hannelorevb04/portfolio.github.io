@@ -71,36 +71,46 @@
 /* drag feedback */
 .projects.dragging { cursor:grabbing; }
 
+.modal-overlay .nx-cmp-range{display:none !important;}
 
-/* === Comparison slider under tags === */
-.modal-overlay .nx-compare-wrap{ display:flex; flex-direction:column; gap:16px; margin-top:14px; }
-.modal-overlay .nx-compare{
+.modal-overlay .nx-cmp-handle{position:absolute; top:0; bottom:0; left:50%; width:3px; background: rgba(0,0,0,.6);}
+.modal-overlay .nx-compare + .nx-compare{ margin-top: 32px; }
+
+
+/* === Image Comparison (nx) — swipe only === */
+.nx-compare-stack { margin-top: 12px; display: grid; gap: 28px; }
+@media (min-width: 860px){ .nx-compare-stack { gap: 32px; } }
+
+.nx-compare{
   position: relative;
   width: 100%;
   aspect-ratio: 16/10;
-  max-height: 360px;
-  border-radius: 10px;
   overflow: hidden;
-  background: #0a1b2a;
-  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 12px;
+  background: #0b121b;
+  border: 1px solid var(--nx-border);
+  user-select: none;
+  touch-action: none;
 }
-.modal-overlay .nx-cmp-img{ position:absolute; inset:0; width:100%; height:100%; object-fit:contain; }
-.modal-overlay .nx-cmp-top{ clip-path: inset(0 50% 0 0); }
-.modal-overlay .nx-cmp-handle{
-  position:absolute; top:0; bottom:0; left:50%; width:2px; background: rgba(255,255,255,.7);
-  box-shadow: 0 0 0 1px rgba(0,0,0,.1);
+.nx-cmp-img{ position:absolute; inset:0; width:100%; height:100%; object-fit:contain; }
+.nx-cmp-top{ clip-path: inset(0 50% 0 0); }
+
+.nx-cmp-handle{ position:absolute; top:0; bottom:0; left:50%; width:2px; background: rgba(255,255,255,.45); }
+.nx-cmp-knob{
+  position:absolute; top:50%; left:50%; transform: translate(-50%,-50%);
+  width:28px; height:28px; border-radius:50%;
+  background: rgba(15,25,38,.85); border:1px solid rgba(255,255,255,.5);
+  box-shadow: 0 2px 8px rgba(0,0,0,.35);
 }
-.modal-overlay .nx-cmp-range{
-  position:absolute; left:50%; transform:translateX(-50%); bottom:10px; width:60%;
-  -webkit-appearance:none; appearance:none; background:transparent;
+.nx-cmp-handle::before, .nx-cmp-handle::after{
+  content:''; position:absolute; top:50%; width:10px; height:10px; border-top:2px solid #fff; border-right:2px solid #fff;
 }
-.modal-overlay .nx-cmp-range::-webkit-slider-runnable-track{ height:4px; background:rgba(255,255,255,.35); border-radius:999px; }
-.modal-overlay .nx-cmp-range::-moz-range-track{ height:4px; background:rgba(255,255,255,.35); border-radius:999px; }
-.modal-overlay .nx-cmp-range::-webkit-slider-thumb{ -webkit-appearance:none; width:16px; height:16px; border-radius:50%; background:#fff; margin-top:-6px; border:1px solid rgba(0,0,0,.25); }
-.modal-overlay .nx-cmp-range::-moz-range-thumb{ width:16px; height:16px; border-radius:50%; background:#fff; border:1px solid rgba(0,0,0,.25); }
-.modal-overlay .nx-cmp-label{
-  position:absolute; bottom:12px; font-size:12px; padding:4px 8px; border-radius:6px;
-  background: rgba(0,0,0,.5); color:#fff; pointer-events:none;
+.nx-cmp-handle::before{ left:calc(50% - 20px); transform: translateY(-50%) rotate(225deg); }
+.nx-cmp-handle::after{ left:calc(50% + 10px); transform: translateY(-50%) rotate(45deg); }
+
+.nx-cmp-label{
+  position:absolute; bottom:10px; font-size:12px; padding:4px 8px;
+  background: rgba(0,0,0,.55); color:#fff; border-radius:6px;
 }
-.modal-overlay .nx-cmp-label.left{ left:12px; }
-.modal-overlay .nx-cmp-label.right{ right:12px; }
+.nx-cmp-label.left{ left:10px; }
+.nx-cmp-label.right{ right:10px; }
