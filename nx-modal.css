@@ -71,46 +71,50 @@
 /* drag feedback */
 .projects.dragging { cursor:grabbing; }
 
-.modal-overlay .nx-cmp-range{display:none !important;}
 
-.modal-overlay .nx-cmp-handle{position:absolute; top:0; bottom:0; left:50%; width:3px; background: rgba(0,0,0,.6);}
-.modal-overlay .nx-compare + .nx-compare{ margin-top: 32px; }
-
-
-/* === Image Comparison (nx) — swipe only === */
-.nx-compare-stack { margin-top: 12px; display: grid; gap: 28px; }
-@media (min-width: 860px){ .nx-compare-stack { gap: 32px; } }
-
+/* === Image Comparison (nx) === */
+.nx-compare-wrap{ margin-top: 18px; }
 .nx-compare{
   position: relative;
   width: 100%;
+  max-width: 720px;
   aspect-ratio: 16/10;
-  overflow: hidden;
-  border-radius: 12px;
   background: #0b121b;
   border: 1px solid var(--nx-border);
+  border-radius: 12px;
+  overflow: hidden;
   user-select: none;
   touch-action: none;
 }
-.nx-cmp-img{ position:absolute; inset:0; width:100%; height:100%; object-fit:contain; }
-.nx-cmp-top{ clip-path: inset(0 50% 0 0); }
+.nx-cmp-img{ position: absolute; inset:0; width:100%; height:100%; object-fit: cover; }
+.nx-cmp-img.a{ filter: none; }
+.nx-cmp-img.b{ clip-path: inset(0 0 0 50%); }
 
-.nx-cmp-handle{ position:absolute; top:0; bottom:0; left:50%; width:2px; background: rgba(255,255,255,.45); }
+.nx-cmp-divider{
+  position: absolute; top:0; bottom:0; left:50%; width:2px;
+  background: rgba(255,255,255,.75);
+  box-shadow: 0 0 0 1px rgba(0,0,0,.15);
+}
 .nx-cmp-knob{
-  position:absolute; top:50%; left:50%; transform: translate(-50%,-50%);
-  width:28px; height:28px; border-radius:50%;
-  background: rgba(15,25,38,.85); border:1px solid rgba(255,255,255,.5);
-  box-shadow: 0 2px 8px rgba(0,0,0,.35);
+  position: absolute; top:50%; left:50%; transform: translate(-50%, -50%);
+  width: 28px; height: 28px; border-radius: 999px;
+  background: #e9f0f7; color:#0c1520;
+  display:flex; align-items:center; justify-content:center;
+  box-shadow: 0 2px 12px rgba(0,0,0,.35), inset 0 0 0 2px rgba(12,21,32,.8);
 }
-.nx-cmp-handle::before, .nx-cmp-handle::after{
-  content:''; position:absolute; top:50%; width:10px; height:10px; border-top:2px solid #fff; border-right:2px solid #fff;
+.nx-cmp-knob::before{
+  content: '\2194'; /* ↔ */
+  font-size: 16px; line-height: 1;
 }
-.nx-cmp-handle::before{ left:calc(50% - 20px); transform: translateY(-50%) rotate(225deg); }
-.nx-cmp-handle::after{ left:calc(50% + 10px); transform: translateY(-50%) rotate(45deg); }
 
 .nx-cmp-label{
-  position:absolute; bottom:10px; font-size:12px; padding:4px 8px;
-  background: rgba(0,0,0,.55); color:#fff; border-radius:6px;
+  position: absolute; bottom: 10px; padding: 4px 8px; font-size: 12px;
+  background: rgba(0,0,0,.55); color: #fff; border-radius: 6px;
+  pointer-events: none;
 }
-.nx-cmp-label.left{ left:10px; }
-.nx-cmp-label.right{ right:10px; }
+.nx-cmp-label.left{ left: 10px; }
+.nx-cmp-label.right{ right: 10px; }
+
+@media (max-width: 640px){
+  .nx-compare{ aspect-ratio: 4/3; }
+}

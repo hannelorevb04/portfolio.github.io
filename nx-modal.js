@@ -1,258 +1,252 @@
-/* nx-modal.js — rebuilt clean v15 */
+/* nx-modal.js — v21 with comparison support */
 (function(){
   const DOC = document;
   const modal = DOC.getElementById('nxModal');
   if (!modal) return;
+
   const slidesEl = modal.querySelector('.nx-slides');
   const prevBtn  = modal.querySelector('.nx-nav.prev');
   const nextBtn  = modal.querySelector('.nx-nav.next');
   const dotsEl   = modal.querySelector('.nx-dots');
+
   const titleEl  = modal.querySelector('.nx-title');
-  const metaEl   = modal.querySelector('.nx-meta .nx-meta-text') || modal.querySelector('.nx-meta');
+  const metaTxt  = modal.querySelector('.nx-meta .nx-meta-text');
   const descEl   = modal.querySelector('.nx-desc');
   const tagsEl   = modal.querySelector('.nx-taglist');
+  const discEl   = modal.querySelector('.nx-discipline');
+  const toolsEl  = modal.querySelector('.nx-tools');
+  const actions  = modal.querySelector('.nx-actions');
   const leftCol  = modal.querySelector('.nx-left');
 
-  let current = 0;
-  let total = 0;
-  let slideNodes = [];
+  let idx=0, total=0, autoTimer=null;
+  const AUTO_MS = 4200;
 
-  function wipeDynamic(){
-    if (slidesEl) slidesEl.innerHTML = '';
-    if (dotsEl) dotsEl.innerHTML = '';
-    // remove any previously injected comparison blocks
-    modal.querySelectorAll('[data-dynamic]').forEach(el => el.remove());
+  function parseList(raw){
+    if (!raw) return [];
+    try { const j = JSON.parse(raw); if (Array.isArray(j)) return j; } catch {}
+    return String(raw).split(',').map(s=>s.trim()).filter(Boolean);
   }
 
-  function collectCardSlides(card){
-    const imgs = Array.from(card.querySelectorAll('.slides img'));
-    if (imgs.length) return imgs.map(img => ({src: img.getAttribute('src'), alt: img.getAttribute('alt')||''}));
-    // fallback: data-slides attribute (string array or simple csv), tolerant
-    let raw = card.getAttribute('data-slides') || '[]';
-    try {
-      const arr = JSON.parse(raw);
-      return arr.filter(x => typeof x === 'string' && !x.startsWith('iframe:')).map(src => ({src, alt:''}));
-    } catch(e){
-      return [];
+  function clearSlides(){
+    slidesEl.innerHTML='';
+    dotsEl.innerHTML='';
+    idx=0; total=0;
+  }
+
+  function buildSlidesFromCard(card){
+    clearSlides();
+    // Prefer data-slides if present and valid
+    let slides = parseList(card.getAttribute('data-slides'));
+    if (!slides.length){
+      // Fallback: read <img> sources inside the card's small slideshow
+      const imgs = card.querySelectorAll('.slideshow-container .slides img');
+      slides = Array.from(imgs).map(img => img.getAttribute('src'));
     }
-  }
-
-  function baseDirFrom(src){
-    if (!src) return '';
-    const i = src.lastIndexOf('/');
-    return i >= 0 ? src.slice(0, i+1) : '';
-  }
-
-  function buildSlides(sources){
-    if (!slidesEl) return;
-    slideNodes = sources.map((s, idx) => {
-      const img = DOC.createElement('img');
-      img.className = 'nx-slide';
-      img.alt = s.alt || '';
-      img.src = s.src;
-      img.style.opacity = idx === 0 ? '1' : '0';
-      slidesEl.appendChild(img);
-      return img;
+    total = slides.length;
+    slides.forEach((src, i)=>{
+      let wrap = DOC.createElement('div');
+      wrap.className = 'nx-slide' + (i===0 ? ' is-active' : '');
+      if (src && String(src).startsWith('iframe:')){
+        const ifr = DOC.createElement('iframe');
+        ifr.src = src.replace(/^iframe:/,'');
+        ifr.setAttribute('frameborder','0');
+        ifr.loading = 'eager';
+        ifr.style.width='100%'; ifr.style.height='100%';
+        wrap.appendChild(ifr);
+      } else {
+        const img = DOC.createElement('img');
+        img.src = src;
+        img.alt = 'Slide '+(i+1);
+        img.className = 'nx-hero-img';
+        wrap.appendChild(img);
+      }
+      slidesEl.appendChild(wrap);
     });
-    total = slideNodes.length;
-    if (dotsEl && total > 1){
+    if (total>1){
       for (let i=0;i<total;i++){
         const b = DOC.createElement('button');
-        b.className = 'nx-dot' + (i===0?' active':'');
-        b.setAttribute('type','button');
-        b.addEventListener('click', ()=>go(i));
+        b.type='button'; b.className='nx-dot'+(i===0?' is-active':'');
+        b.addEventListener('click', ()=>goTo(i));
         dotsEl.appendChild(b);
       }
-    }
-    if (prevBtn) prevBtn.onclick = ()=>go(current-1);
-    if (nextBtn) nextBtn.onclick = ()=>go(current+1);
-  }
-
-  function go(i){
-    if (!slideNodes.length) return;
-    const n = (i + slideNodes.length) % slideNodes.length;
-    slideNodes[current].style.opacity = '0';
-    slideNodes[n].style.opacity = '1';
-    if (dotsEl){
-      const ds = dotsEl.querySelectorAll('.nx-dot');
-      ds[current]?.classList.remove('active');
-      ds[n]?.classList.add('active');
-    }
-    current = n;
-  }
-
-  /** Image Comparison (swipe / drag only) */
-  function createCompareSlider(spec){
-    const wrap = DOC.createElement('div');
-    wrap.className = 'nx-compare';
-    wrap.setAttribute('data-dynamic','');
-    // images
-    const imgB = DOC.createElement('img'); // bottom (after)
-    imgB.className = 'nx-cmp-img nx-cmp-bottom';
-    imgB.src = spec.b; imgB.alt = spec.lb || 'After';
-    const imgA = DOC.createElement('img'); // top (before)
-    imgA.className = 'nx-cmp-img nx-cmp-top';
-    imgA.src = spec.a; imgA.alt = spec.la || 'Before';
-    // handle
-    const handle = DOC.createElement('div');
-    handle.className = 'nx-cmp-handle';
-    const knob = DOC.createElement('div');
-    knob.className = 'nx-cmp-knob';
-    knob.setAttribute('aria-label','Drag to compare');
-    knob.setAttribute('role','separator');
-    handle.appendChild(knob);
-    // labels (optional)
-    if (spec.la || spec.lb){
-      const la = DOC.createElement('span');
-      la.className = 'nx-cmp-label left'; la.textContent = spec.la||'';
-      const lb = DOC.createElement('span');
-      lb.className = 'nx-cmp-label right'; lb.textContent = spec.lb||'';
-      wrap.appendChild(la); wrap.appendChild(lb);
-    }
-    wrap.appendChild(imgB);
-    wrap.appendChild(imgA);
-    wrap.appendChild(handle);
-
-    let pct = 50;
-    function apply(){
-      imgA.style.clipPath = 'inset(0 ' + (100-pct) + '% 0 0)';
-      handle.style.left = pct + '%';
-    }
-    apply();
-
-    function setFromX(clientX){
-      const rect = wrap.getBoundingClientRect();
-      const x = Math.max(rect.left, Math.min(clientX, rect.right));
-      pct = Math.round(((x - rect.left) / rect.width) * 100);
-      apply();
-    }
-    let dragging = false;
-    function down(ev){
-      dragging = true;
-      const c = ('touches' in ev ? ev.touches[0].clientX : ev.clientX);
-      setFromX(c);
-      ev.preventDefault();
-    }
-    function move(ev){
-      if (!dragging) return;
-      const c = ('touches' in ev ? ev.touches[0].clientX : ev.clientX);
-      setFromX(c);
-    }
-    function up(){ dragging = false; }
-
-    wrap.addEventListener('mousedown', down);
-    DOC.addEventListener('mousemove', move);
-    DOC.addEventListener('mouseup', up);
-    wrap.addEventListener('touchstart', down, {passive:false});
-    DOC.addEventListener('touchmove', move, {passive:false});
-    DOC.addEventListener('touchend', up);
-
-    // Click to jump
-    wrap.addEventListener('click', (e)=>{
-      if (dragging) return;
-      setFromX(e.clientX);
-    });
-
-    return wrap;
-  }
-
-  function injectComparisons(card){
-    if (!leftCol) return;
-    // Decide comparisons: prefer data-compare JSON; else known fallback for united colors
-    let list = [];
-    // Try attribute first
-    const raw = card.getAttribute('data-compare');
-    if (raw && raw.indexOf('...') === -1){ // ignore truncated
-      try {
-        const arr = JSON.parse(raw);
-        if (Array.isArray(arr)){
-          list = arr.map(it => Array.isArray(it) ? {a: it[0], b: it[1], la: it[2]||'', lb: it[3]||''} : it);
-        }
-      } catch(e){ /* ignore */ }
-    }
-    // Fallback for united colors
-    if (!list.length && (card.id === 'unitedColorsCard' || /United colors/i.test(card.getAttribute('data-title')||''))){
-      // base dir from first slide
-      const slides = collectCardSlides(card);
-      const base = baseDirFrom(slides[0]?.src || '');
-      function p(name){ return base ? (base + name) : name; }
-      list = [
-        { a: p('court_1_brown_eyes.jpg'), b: p('CourtneyCox.webp'), la:'Brown eyes', lb:'Blue eyes' },
-        { a: p('JenniferAnistonHWoFFeb2012.jpg'), b: p('jen_2_hair_pink.png'), la:'Original', lb:'Pink hair' },
-        { a: p('Smurf_grey.jpg'), b: p('Smurf_grey - kopie.jpg'), la:'Grey', lb:'Blue' },
-      ];
-    }
-    if (!list.length) return;
-
-    const stack = DOC.createElement('div');
-    stack.className = 'nx-compare-stack';
-    stack.setAttribute('data-dynamic','');
-    list.forEach(spec => stack.appendChild(createCompareSlider(spec)));
-
-    // insert after taglist (if present), else at end of left column
-    if (tagsEl && tagsEl.parentNode){
-      tagsEl.parentNode.insertBefore(stack, tagsEl.nextSibling);
+      prevBtn.style.display = nextBtn.style.display = '';
+      dotsEl.style.display='';
     } else {
-      leftCol.appendChild(stack);
+      prevBtn.style.display = nextBtn.style.display = 'none';
+      dotsEl.style.display='none';
     }
+  }
+
+  function goTo(n){
+    if (n<0) n = total-1;
+    if (n>=total) n = 0;
+    const slides = slidesEl.querySelectorAll('.nx-slide');
+    slides.forEach((el,i)=>{
+      el.classList.toggle('is-active', i===n);
+    });
+    const dots = dotsEl.querySelectorAll('.nx-dot');
+    dots.forEach((el,i)=>{
+      el.classList.toggle('is-active', i===n);
+    });
+    idx = n;
+  }
+  function next(){ goTo(idx+1); }
+  function prev(){ goTo(idx-1); }
+  if (prevBtn) prevBtn.addEventListener('click', prev);
+  if (nextBtn) nextBtn.addEventListener('click', next);
+
+  // TAGS
+  function renderTags(card){
+    if (!tagsEl) return;
+    tagsEl.innerHTML='';
+    parseList(card.getAttribute('data-tags')).forEach(t=>{
+      const span = DOC.createElement('span');
+      span.className = 'nx-tag';
+      span.textContent = t;
+      tagsEl.appendChild(span);
+    });
+  }
+
+  // ACTION BUTTONS
+  function renderActions(card){
+    Array.from(actions.querySelectorAll('[data-dynamic]')).forEach(n=>n.remove());
+    const links = parseList(card.getAttribute('data-links'));
+    if (!links.length) return;
+    links.forEach(json => {
+      let data=null; try{ data = JSON.parse(json); }catch{}
+      const a = DOC.createElement('a');
+      a.className='nx-btn nx-ghost'; a.setAttribute('data-dynamic','');
+      a.target='_blank'; a.rel='noopener';
+      a.href = data?.url || data?.href || '#';
+      a.textContent = data?.label || data?.title || 'Open';
+      actions.appendChild(a);
+    });
+  }
+
+  // COMPARISON
+  function parseCompare(card){
+    const raw = card.getAttribute('data-compare');
+    const list = parseList(raw);
+    const pairs = [];
+    list.forEach(s=>{
+      if (!s) return;
+      s = String(s).replace(/^compare:/,'');
+      const parts = s.split('|');
+      if (parts.length >= 2){
+        pairs.push({
+          a: parts[0].trim(),
+          b: parts[1].trim(),
+          la: (parts[2]||'Before').trim(),
+          lb: (parts[3]||'After').trim(),
+        });
+      }
+    });
+    return pairs;
+  }
+
+  function renderComparisons(card){
+    if (!leftCol) return;
+    // remove previous
+    Array.from(leftCol.querySelectorAll('.nx-compare-wrap')).forEach(n=>n.remove());
+    const taglist = leftCol.querySelector('.nx-taglist');
+
+    const pairs = parseCompare(card);
+    if (!pairs.length) return;
+
+    pairs.forEach((p, i)=>{
+      const wrap = DOC.createElement('div');
+      wrap.className = 'nx-compare-wrap';
+      const cmp = DOC.createElement('div');
+      cmp.className = 'nx-compare'; cmp.setAttribute('role','region');
+      cmp.setAttribute('aria-label', (titleEl?.textContent || 'Comparison') + ' ' + (i+1));
+
+      const imgA = DOC.createElement('img');
+      imgA.src = p.a; imgA.alt = p.la; imgA.className = 'nx-cmp-img a';
+      const imgB = DOC.createElement('img');
+      imgB.src = p.b; imgB.alt = p.lb; imgB.className = 'nx-cmp-img b';
+      const divider = DOC.createElement('div');
+      divider.className = 'nx-cmp-divider';
+      const knob = DOC.createElement('div');
+      knob.className = 'nx-cmp-knob';
+      divider.appendChild(knob);
+
+      const labL = DOC.createElement('span');
+      labL.className = 'nx-cmp-label left'; labL.textContent = p.la;
+      const labR = DOC.createElement('span');
+      labR.className = 'nx-cmp-label right'; labR.textContent = p.lb;
+
+      cmp.appendChild(imgA); cmp.appendChild(imgB);
+      cmp.appendChild(divider); cmp.appendChild(labL); cmp.appendChild(labR);
+      wrap.appendChild(cmp);
+
+      let pct = 50;
+      function setPct(v){
+        pct = Math.max(0, Math.min(100, v));
+        imgB.style.clipPath = 'inset(0 0 0 ' + pct + '%)';
+        divider.style.left = pct + '%';
+      }
+      setPct(50);
+
+      function posFromEvent(e){
+        const rect = cmp.getBoundingClientRect();
+        const x = (e.clientX ?? (e.touches && e.touches[0]?.clientX) ?? rect.left);
+        return ((x - rect.left) / rect.width) * 100;
+      }
+
+      let dragging=false;
+      cmp.addEventListener('pointerdown', e=>{ dragging=true; cmp.setPointerCapture(e.pointerId); setPct(posFromEvent(e)); });
+      cmp.addEventListener('pointermove', e=>{ if (dragging) setPct(posFromEvent(e)); });
+      cmp.addEventListener('pointerup',   e=>{ dragging=false; try{cmp.releasePointerCapture(e.pointerId);}catch{} });
+      cmp.addEventListener('pointerleave',e=>{ dragging=false; });
+
+      cmp.addEventListener('click', e=> setPct(posFromEvent(e)));
+
+      cmp.tabIndex = 0;
+      cmp.addEventListener('keydown', e=>{
+        if (e.key === 'ArrowLeft')  { setPct(pct - 2); e.preventDefault(); }
+        else if (e.key === 'ArrowRight'){ setPct(pct + 2); e.preventDefault(); }
+        else if (e.key === 'Home')  { setPct(0); e.preventDefault(); }
+        else if (e.key === 'End')   { setPct(100); e.preventDefault(); }
+        else if (e.key === ' ' || e.key === 'Spacebar'){ setPct(50); e.preventDefault(); }
+      });
+
+      if (taglist && taglist.parentNode){
+        taglist.parentNode.insertBefore(wrap, taglist.nextSibling);
+      } else {
+        leftCol.appendChild(wrap);
+      }
+    });
   }
 
   function openModal(card){
-    wipeDynamic();
-    // Fill basics
-    if (titleEl) titleEl.textContent = card.getAttribute('data-title') || (card.querySelector('.text .div') && card.querySelector('.text .div').textContent) || 'Project';
-    if (metaEl){
-      const disc = card.getAttribute('data-discipline') || 'Project';
-      metaEl.textContent = disc;
-    }
-    if (descEl) descEl.textContent = card.getAttribute('data-desc') || '';
+    // Fill meta
+    if (titleEl) titleEl.textContent = card.getAttribute('data-title') || card.querySelector('.text .div')?.textContent || 'Untitled';
+    if (metaTxt) metaTxt.textContent = card.getAttribute('data-meta') || '';
+    if (descEl)  descEl.textContent  = card.getAttribute('data-desc') || '';
+    if (discEl)  discEl.textContent  = card.getAttribute('data-discipline') || '—';
+    if (toolsEl) toolsEl.textContent = card.getAttribute('data-tools') || '';
 
-    // Slides (from images inside card)
-    const sources = collectCardSlides(card);
-    buildSlides(sources);
-    current = 0;
-    go(0);
+    renderTags(card);
+    renderActions(card);
+    buildSlidesFromCard(card);
+    renderComparisons(card);
 
-    // Tags: read from data-tags (comma or JSON) if present
-    const tagsRaw = card.getAttribute('data-tags') || '[]';
-    if (tagsEl){
-      tagsEl.innerHTML = '';
-      let tags = [];
-      try { const arr = JSON.parse(tagsRaw); if (Array.isArray(arr)) tags = arr; } catch(e){
-        tags = tagsRaw.split(',').map(s => s.trim()).filter(Boolean);
-      }
-      tags.forEach(t => {
-        const span = DOC.createElement('span');
-        span.className = 'nx-chip';
-        span.textContent = t;
-        tagsEl.appendChild(span);
-      });
-    }
-
-    // Comparisons
-    injectComparisons(card);
-
-    // Show modal
-    modal.style.display = 'block';
+    modal.style.display = 'flex';
     DOC.body.style.overflow = 'hidden';
   }
 
   function closeModal(){
     modal.style.display = 'none';
     DOC.body.style.overflow = '';
+    clearSlides();
+    if (leftCol) Array.from(leftCol.querySelectorAll('.nx-compare-wrap')).forEach(n=>n.remove());
   }
 
-  const closeBtn = modal.querySelector('.nx-close');
-  if (closeBtn) closeBtn.addEventListener('click', closeModal);
+  modal.querySelector('.nx-close')?.addEventListener('click', closeModal);
   modal.addEventListener('click', (e)=>{ if (e.target === modal) closeModal(); });
 
-  // Delegate clicks on .project-card (ignore links/buttons)
   DOC.addEventListener('click', (e)=>{
-    const t = e.target;
-    if (!t.closest) return;
-    if (t.closest('a,button')) return;
-    const card = t.closest('.project-card');
-    if (!card) return;
-    openModal(card);
+    const t = e.target.closest?.('.project-card');
+    if (t && !e.target.closest('a,button')) openModal(t);
   });
 })();
