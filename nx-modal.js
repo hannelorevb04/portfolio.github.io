@@ -1,358 +1,267 @@
-/* nx-modal.js — v12.1: class‑based selectors to match markup */
-(function () {
+/* nx-modal.js — v29: robust modal, slides + comparisons, tags at bottom */
+(function(){
   const DOC = document;
   const modal = DOC.getElementById('nxModal');
   if (!modal) return;
 
-  // Elements (use CLASSES, not IDs, to match the HTML)
+  // Modal elements
   const slidesEl = modal.querySelector('.nx-slides');
+  const dotsEl   = modal.querySelector('.nx-dots');
   const prevBtn  = modal.querySelector('.nx-nav.prev');
   const nextBtn  = modal.querySelector('.nx-nav.next');
-  const dotsEl   = modal.querySelector('.nx-dots');
-
   const titleEl  = modal.querySelector('.nx-title') || modal.querySelector('#nxTitle');
-  const metaTxt  = modal.querySelector('.nx-meta') || modal.querySelector('#nxMeta');
+  const metaTxt  = modal.querySelector('.nx-meta .nx-meta-text') || modal.querySelector('#nxMeta');
   const descEl   = modal.querySelector('.nx-desc') || modal.querySelector('#nxDesc');
   const tagsEl   = modal.querySelector('.nx-taglist') || modal.querySelector('#nxTags');
-  const discEl   = modal.querySelector('.nx-discipline') || modal.querySelector('#nxDiscipline');
-  const toolsEl  = modal.querySelector('.nx-tools') || modal.querySelector('#nxTools');
-  const primary  = modal.querySelector('.nx-primary');
-  const actions  = modal.querySelector('.nx-actions');
-  const rightCol = modal.querySelector('.nx-right');
   const leftCol  = modal.querySelector('.nx-left');
+  const rightDis = modal.querySelector('.nx-discipline') || modal.querySelector('#nxDiscipline');
+  const rightTools = modal.querySelector('.nx-tools') || modal.querySelector('#nxTools');
+  const cmpContainer = modal.querySelector('.nx-comparisons') || null;
 
-  let idx = 0, total = 0, autoTimer = null;
-  const AUTO_MS = 3800;
+  const closeBtn = modal.querySelector('.nx-close');
+  let idx = 0, total = 0;
 
-  function setNavVisible(show) {
+  // Utility
+  function wipe(el){ if (el) el.innerHTML = ''; }
+  function tryJSON(s){
+    try { return JSON.parse(s); } catch { return null; }
+  }
+
+  // Build SLIDES from card
+  function extractSlides(card){
+    // 1) data-slides
+    const raw = card.getAttribute('data-slides');
+    if (raw){
+      const arr = tryJSON(raw);
+      if (Array.isArray(arr) && arr.length) return arr;
+    }
+    // 2) inline slideshow images
+    const inlineImgs = card.querySelectorAll('.slideshow-container .slides img');
+    if (inlineImgs.length){
+      return Array.from(inlineImgs).map(img => img.getAttribute('src'));
+    }
+    // 3) fallback first image in card
+    const firstImg = card.querySelector('img');
+    if (firstImg) return [ firstImg.getAttribute('src') ];
+    return [];
+  }
+
+  function buildSlides(arr){
+    wipe(slidesEl); if (dotsEl) wipe(dotsEl);
+    total = Array.isArray(arr) ? arr.length : 0;
+    arr.forEach((src, i) => {
+      const wrap = DOC.createElement('div');
+      wrap.className = 'nx-slide' + (i===0 ? ' is-active' : '');
+      const img = DOC.createElement('img');
+      img.loading = 'lazy';
+      img.alt = titleEl ? (titleEl.textContent || 'Slide') : 'Slide';
+      img.src = src;
+      wrap.appendChild(img);
+      slidesEl.appendChild(wrap);
+      if (dotsEl && total > 1){
+        const dot = DOC.createElement('button');
+        dot.type = 'button';
+        dot.className = 'nx-dot' + (i===0 ? ' is-active' : '');
+        dot.addEventListener('click', ()=> goTo(i));
+        dotsEl.appendChild(dot);
+      }
+    });
+    setNavVisible(total > 1);
+    idx = 0;
+  }
+
+  function setNavVisible(show){
     if (prevBtn) prevBtn.style.display = show ? '' : 'none';
     if (nextBtn) nextBtn.style.display = show ? '' : 'none';
     if (dotsEl)  dotsEl.style.display  = show ? '' : 'none';
   }
-  function clearAuto() { if (autoTimer) { clearInterval(autoTimer); autoTimer = null; } }
-  function startAuto() { clearAuto(); if (total > 1) autoTimer = setInterval(next, AUTO_MS); }
 
-  function tryJSON(s, fallback){
-    if (!s) return fallback;
-    try { const x = JSON.parse(s); return x; } catch { return fallback; }
-  }
-  function parseList(raw){
-    if (!raw) return [];
-    const j = tryJSON(raw, null);
-    if (Array.isArray(j)) return j;
-    return String(raw).split(',').map(t=>t.trim()).filter(Boolean);
-  }
-  function parseSlides(card) {
-    const raw = card.getAttribute('data-slides') || '[]';
-    try {
-      const arr = JSON.parse(raw);
-      return Array.isArray(arr) ? arr : [];
-    } catch { return []; }
-  }
-  function wipe(el){ if (el) el.innerHTML = ''; }
-
-  function buildSlides(sources) {
-    if (!slidesEl) return;
-    slidesEl.innerHTML = '';
-    if (dotsEl) dotsEl.innerHTML = '';
-    total = Math.max(1, sources.length);
-
-    sources.forEach((src, i) => {
-      const s = String(src || '');
-      const wrap = DOC.createElement('div');
-      wrap.className = 'nx-slide' + (i === 0 ? ' is-active' : '');
-
-      if (s.startsWith('iframe:')) {
-        const ifr = DOC.createElement('iframe');
-        ifr.src = s.replace('iframe:', '');
-        ifr.title = 'Project';
-        ifr.setAttribute('frameborder','0');
-        ifr.setAttribute('loading','eager');
-        ifr.style.width = '100%';
-        ifr.style.height = '100%';
-        wrap.appendChild(ifr);
-      } else if (s) {
-        const img = DOC.createElement('img');
-        img.src = s;
-        img.alt = 'Slide ' + (i + 1);
-        img.className = 'nx-hero-img';
-        wrap.appendChild(img);
-      }
-      slidesEl.appendChild(wrap);
-    });
-
-    if (dotsEl && total > 1) {
-      for (let i = 0; i < total; i++) {
-        const dot = DOC.createElement('button');
-        dot.className = 'nx-dot' + (i === 0 ? ' is-active' : '');
-        dot.type = 'button';
-        dot.addEventListener('click', () => { goTo(i); startAuto(); });
-        dotsEl.appendChild(dot);
-      }
-    }
-    setNavVisible(total > 1);
-    idx = 0;
-    startAuto();
-  }
-
-  function goTo(n) {
+  function goTo(n){
     if (!slidesEl) return;
     const slides = Array.from(slidesEl.children);
     const dots   = dotsEl ? Array.from(dotsEl.children) : [];
     if (!slides.length) return;
-    if (slides[idx]) slides[idx].classList.remove('is-active');
-    if (dots[idx])   dots[idx].classList.remove('is-active');
+    slides[idx] && slides[idx].classList.remove('is-active');
+    dots[idx]   && dots[idx].classList.remove('is-active');
     idx = (n + total) % total;
-    if (slides[idx]) slides[idx].classList.add('is-active');
-    if (dots[idx])   dots[idx].classList.add('is-active');
+    slides[idx] && slides[idx].classList.add('is-active');
+    dots[idx]   && dots[idx].classList.add('is-active');
   }
-  function next(){ goTo(idx + 1); }
-  function prev(){ goTo(idx - 1); }
+  function next(){ goTo(idx+1); }
+  function prev(){ goTo(idx-1); }
 
-  if (prevBtn) prevBtn.addEventListener('click', () => { prev(); startAuto(); });
-  if (nextBtn) nextBtn.addEventListener('click', () => { next(); startAuto(); });
+  if (prevBtn) prevBtn.addEventListener('click', next);
+  if (nextBtn) nextBtn.addEventListener('click', next);
 
-  const slider = modal.querySelector('.nx-hero-slider') || modal;
-  slider.addEventListener('mouseenter', clearAuto);
-  slider.addEventListener('mouseleave', startAuto);
+  // Build INFO (title, meta, desc, tags, right specs)
+  function fillInfo(card){
+    const title = card.getAttribute('data-title') || card.querySelector('.project-title')?.textContent || '';
+    const meta  = card.getAttribute('data-meta')  || '';
+    const desc  = card.getAttribute('data-desc')  || '';
+    const tags  = card.getAttribute('data-tags');
+    const tools = card.getAttribute('data-tools') || '';
+    const disc  = card.getAttribute('data-discipline') || '';
 
-  function addSpecBlock(title, value){
-    if (!value || !rightCol) return null;
-    const spec = DOC.createElement('div');
-    spec.className = 'nx-spec';
-    spec.setAttribute('data-dynamic','');
-    const h = DOC.createElement('div');
-    h.className = 'nx-spec-title';
-    h.textContent = title;
-    const ul = DOC.createElement('ul');
-    ul.className = 'nx-spec-list';
-    const li = DOC.createElement('li');
-    li.textContent = value;
-    ul.appendChild(li);
-    spec.appendChild(h); spec.appendChild(ul);
-    rightCol.appendChild(spec);
-    return spec;
-  }
+    if (titleEl) titleEl.textContent = title || 'Project';
+    if (metaTxt) metaTxt.textContent = meta || '';
+    if (descEl)  descEl.textContent  = desc || '';
 
-  function addListSection(title, items){
-    if (!items || !items.length || !leftCol) return null;
-    const h = DOC.createElement('h3');
-    h.className = 'nx-h3';
-    h.textContent = title;
-    h.setAttribute('data-dynamic','');
+    if (rightDis) rightDis.textContent = disc || '—';
+    if (rightTools) rightTools.textContent = tools || '—';
 
-    const ul = DOC.createElement('ul');
-    ul.className = 'nx-list';
-    ul.setAttribute('data-dynamic','');
-    items.forEach(t => {
-      const li = DOC.createElement('li');
-      li.textContent = (typeof t === 'string') ? t : (t.label || '');
-      ul.appendChild(li);
-    });
-    leftCol.appendChild(h);
-    leftCol.appendChild(ul);
-    return ul;
+    // Tags
+    if (tagsEl){
+      wipe(tagsEl);
+      let arr = [];
+      const parsed = tryJSON(tags);
+      if (Array.isArray(parsed)) arr = parsed;
+      else if (typeof tags === 'string' && tags) arr = tags.split(',').map(s=>s.trim()).filter(Boolean);
+      arr.forEach(t => {
+        const s = DOC.createElement('span');
+        s.className = 'nx-tag';
+        s.textContent = t;
+        tagsEl.appendChild(s);
+      });
+    }
   }
 
-  function addLinks(links){
-    if (!actions) return;
-    Array.from(actions.querySelectorAll('[data-dynamic]')).forEach(n=>n.remove());
-    if (!Array.isArray(links) || !links.length) return;
-    links.forEach(l => {
-      const a = DOC.createElement('a');
-      a.className = 'nx-btn nx-ghost';
-      a.setAttribute('data-dynamic','');
-      a.target = '_blank';
-      a.rel = 'noopener';
-      a.href = l.url || l.href || '#';
-      a.textContent = l.label || l.title || 'Link';
-      actions.appendChild(a);
-    });
-  }
-
-  
+  // Build COMPARISON sliders under .nx-comparisons (or after tags if container missing)
   function buildComparisons(card){
-    if (!card || (!leftCol && !tagsEl)) return;
-    // remove old comparisons
-    const old = modal.querySelectorAll('.nx-compare[data-dynamic]');
-    old.forEach(n => n.remove());
     const raw = card.getAttribute('data-compare');
-    if (!raw) return;
-    let arr = [];
-    try { arr = JSON.parse(raw); } catch(e){ arr = []; }
-    if (!Array.isArray(arr) || !arr.length) return;
+    const arr = raw ? tryJSON(raw) : null;
+    const list = Array.isArray(arr) ? arr : [];
+    const target = cmpContainer || tagsEl || leftCol;
+    if (!target) return;
 
-    function makeOne(spec){
-      const parts = String(spec||'').split('|');
-      const leftSrc  = parts[0] || '';
-      const rightSrc = parts[1] || '';
-      const leftLbl  = parts[2] || '';
-      const rightLbl = parts[3] || '';
+    // Remove existing dynamic comparisons
+    const old = target.querySelectorAll('.nx-compare[data-dynamic]');
+    old.forEach(n => n.remove());
 
-      const wrap = DOC.createElement('div');
-      wrap.className = 'nx-compare';
-      wrap.setAttribute('data-dynamic','');
+    list.forEach(spec => {
+      const parts = String(spec).split('|');
+      const left  = (parts[0] || '').trim();
+      const right = (parts[1] || '').trim();
+      const lLab  = (parts[2] || '').trim();
+      const rLab  = (parts[3] || '').trim();
+      if (!left || !right) return;
 
-      const imgR = DOC.createElement('img');
-      imgR.className = 'nx-cmp-img nx-cmp-right';
-      imgR.src = rightSrc; imgR.alt = rightLbl || 'After';
+      const w = DOC.createElement('div');
+      w.className = 'nx-compare';
+      w.setAttribute('data-dynamic','');
 
-      const imgL = DOC.createElement('img');
-      imgL.className = 'nx-cmp-img nx-cmp-left';
-      imgL.src = leftSrc; imgL.alt = leftLbl || 'Before';
+      const imgR = DOC.createElement('img'); // bottom (right)
+      imgR.className = 'nx-cmp-img right';
+      imgR.src = right; imgR.alt = rLab || 'After';
+
+      const imgL = DOC.createElement('img'); // top (left)
+      imgL.className = 'nx-cmp-img left';
+      imgL.src = left; imgL.alt = lLab || 'Before';
+      imgL.style.clipPath = 'inset(0 50% 0 0)';
 
       const handle = DOC.createElement('div');
       handle.className = 'nx-cmp-handle';
       const knob = DOC.createElement('div');
       knob.className = 'nx-cmp-knob';
-      knob.setAttribute('aria-hidden','true');
       handle.appendChild(knob);
 
-      const lLabel = DOC.createElement('span');
-      lLabel.className = 'nx-cmp-label left';
-      lLabel.textContent = leftLbl;
+      if (lLab){
+        const lbl = DOC.createElement('span');
+        lbl.className = 'nx-cmp-label left';
+        lbl.textContent = lLab;
+        w.appendChild(lbl);
+      }
+      if (rLab){
+        const lbl = DOC.createElement('span');
+        lbl.className = 'nx-cmp-label right';
+        lbl.textContent = rLab;
+        w.appendChild(lbl);
+      }
 
-      const rLabel = DOC.createElement('span');
-      rLabel.className = 'nx-cmp-label right';
-      rLabel.textContent = rightLbl;
+      w.appendChild(imgR);
+      w.appendChild(imgL);
+      w.appendChild(handle);
 
-      wrap.appendChild(imgR);
-      wrap.appendChild(imgL);
-      wrap.appendChild(handle);
-      if (leftLbl) wrap.appendChild(lLabel);
-      if (rightLbl) wrap.appendChild(rLabel);
-
-      // interaction
-      let dragging = false;
+      // interactions (swipe / click)
+      let pct = 50, dragging = false;
       function setPct(p){
-        const pct = Math.max(0, Math.min(100, p));
+        pct = Math.max(0, Math.min(100, p));
         imgL.style.clipPath = 'inset(0 ' + (100 - pct) + '% 0 0)';
         handle.style.left = pct + '%';
-        wrap.setAttribute('data-pct', pct.toFixed(2));
+        w.setAttribute('data-pct', pct.toFixed(2));
       }
-      function eventPct(ev){
-        const rect = wrap.getBoundingClientRect();
-        const x = (ev.touches && ev.touches[0] ? ev.touches[0].clientX : ev.clientX) - rect.left;
-        return (x / rect.width) * 100;
+      function xyPct(clientX){
+        const rect = w.getBoundingClientRect();
+        return ((clientX - rect.left) / rect.width) * 100;
       }
-      wrap.addEventListener('mousedown', (e)=>{ dragging=true; setPct(eventPct(e)); });
-      wrap.addEventListener('mousemove', (e)=>{ if(dragging) setPct(eventPct(e)); });
-      wrap.addEventListener('mouseup',   ()=> dragging=false);
-      wrap.addEventListener('mouseleave',()=> dragging=false);
-      wrap.addEventListener('touchstart',(e)=>{ dragging=true; setPct(eventPct(e)); }, {passive:true});
-      wrap.addEventListener('touchmove', (e)=>{ if(dragging) setPct(eventPct(e)); }, {passive:true});
-      wrap.addEventListener('touchend',  ()=> dragging=false);
-      wrap.addEventListener('dblclick',  ()=> setPct(50));
+      function onDown(e){ dragging = true; const x = e.touches ? e.touches[0].clientX : e.clientX; setPct(xyPct(x)); }
+      function onMove(e){ if(!dragging) return; const x = e.touches ? e.touches[0].clientX : e.clientX; setPct(xyPct(x)); }
+      function onUp(){ dragging = false; }
 
-      wrap.tabIndex = 0;
-      wrap.addEventListener('keydown', (e)=>{
-        if (e.key === 'ArrowLeft')  { setPct((+wrap.getAttribute('data-pct')||50) - 2); e.preventDefault(); }
-        if (e.key === 'ArrowRight') { setPct((+wrap.getAttribute('data-pct')||50) + 2); e.preventDefault(); }
+      w.addEventListener('mousedown', onDown);
+      w.addEventListener('mousemove', onMove);
+      w.addEventListener('mouseup', onUp);
+      w.addEventListener('mouseleave', onUp);
+      w.addEventListener('touchstart', onDown, {passive:true});
+      w.addEventListener('touchmove', onMove, {passive:true});
+      w.addEventListener('touchend', onUp);
+      w.addEventListener('dblclick', ()=> setPct(50));
+      w.tabIndex = 0;
+      w.addEventListener('keydown', (e)=>{
+        if (e.key === 'ArrowLeft')  { setPct(pct - 2); e.preventDefault(); }
+        if (e.key === 'ArrowRight') { setPct(pct + 2); e.preventDefault(); }
         if (e.key === 'Home') { setPct(0); e.preventDefault(); }
         if (e.key === 'End')  { setPct(100); e.preventDefault(); }
         if (e.key === ' ' || e.key === 'Spacebar') { setPct(50); e.preventDefault(); }
       });
 
-      setPct(50);
-      return wrap;
-    }
-
-    // insert each comparison directly after tags, or at end of left column
-    let anchor = tagsEl || leftCol;
-    if (!anchor) return;
-    let last = tagsEl;
-    arr.forEach(spec => {
-      const node = makeOne(spec);
-      if (!node) return;
-      if (last) {
-        last.insertAdjacentElement('afterend', node);
-      } else {
-        anchor.appendChild(node);
-      }
-      last = node;
+      (cmpContainer || leftCol || tagsEl).appendChild(w);
+      // ensure tags end up below comparisons (your HTML already places nx-comparisons above nx-taglist)
     });
   }
 
-  function openModal(card) {
-    if (!modal) return;
-
-    if (rightCol) Array.from(rightCol.querySelectorAll('[data-dynamic]')).forEach(n=>n.remove());
-    if (leftCol)  Array.from(leftCol.querySelectorAll('[data-dynamic]')).forEach(n=>n.remove());
-
-    if (titleEl) titleEl.textContent = card.getAttribute('data-title') || 'Untitled';
-    const meta = card.getAttribute('data-meta') || '';
-    if (metaTxt) {
-      const metaSpan = metaTxt.querySelector('.nx-meta-text') || metaTxt.querySelectorAll('span')[1];
-      if (metaSpan) metaSpan.textContent = meta;
-    }
-    if (descEl)  descEl.textContent  = card.getAttribute('data-desc') || '';
-    const __discVal = card.getAttribute('data-discipline') || '—';
-    if (discEl) discEl.textContent = __discVal; else addSpecBlock('DISCIPLINE', __discVal);
-    const __toolsVal = card.getAttribute('data-tools') || '';
-    if (toolsEl) toolsEl.textContent = __toolsVal; else addSpecBlock('TOOLS', __toolsVal);
-
+  // OPEN / CLOSE
+  function openFromCard(card){
+    // Fill content
+    fillInfo(card);
+    buildSlides(extractSlides(card));
     buildComparisons(card);
-
-    if (tagsEl) {
-      tagsEl.innerHTML = '';
-      parseList(card.getAttribute('data-tags')).forEach(t => {
-        const span = DOC.createElement('span');
-        span.className = 'nx-tag';
-        span.textContent = t;
-        tagsEl.appendChild(span);
-      });
-    }
-
-    addSpecBlock('YEAR',      card.getAttribute('data-year'));
-    addSpecBlock('ROLE',      card.getAttribute('data-role'));
-    addSpecBlock('TEAM',      card.getAttribute('data-team'));
-    addSpecBlock('CLIENT',    card.getAttribute('data-client'));
-    addSpecBlock('DURATION',  card.getAttribute('data-duration'));
-
-    addListSection('Highlights', parseList(card.getAttribute('data-highlights')));
-    addListSection('Outcomes',   parseList(card.getAttribute('data-outcomes')));
-
-    const links = tryJSON(card.getAttribute('data-links') || '[]', []);
-    addLinks(links);
-
-    const slides = parseSlides(card);
-    if (primary) {
-      const first = slides[0] || '';
-      primary.onclick = () => {
-        const live = (Array.isArray(links) ? links.find(l => /live|demo|site/i.test(l.label||'')) : null) || null;
-        if (live && live.url) { window.open(live.url, '_blank', 'noopener'); return; }
-        if (typeof first === 'string' && first.startsWith('iframe:')) {
-          window.open(first.replace('iframe:', ''), '_blank', 'noopener');
-        }
-      };
-    }
-
-    buildSlides(slides);
-
-    modal.style.display = 'flex';
+    // Show modal
+    modal.style.display = 'block';
     DOC.body.style.overflow = 'hidden';
+    idx = 0; // ensure first slide
+    goTo(0);
   }
-
-  function closeModal() {
-    if (!modal) return;
+  function closeModal(){
     modal.style.display = 'none';
     DOC.body.style.overflow = '';
-    if (slidesEl) slidesEl.innerHTML = '';
-    if (dotsEl) dotsEl.innerHTML = '';
-    clearAuto();
+    // cleanup dynamic slides/comparisons
+    wipe(slidesEl);
+    if (dotsEl) wipe(dotsEl);
+    if (cmpContainer){
+      const old = cmpContainer.querySelectorAll('.nx-compare[data-dynamic]');
+      old.forEach(n => n.remove());
+    }
   }
-
-  const closeBtn = modal.querySelector('.nx-close');
   if (closeBtn) closeBtn.addEventListener('click', closeModal);
-  modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
-
-  // Delegated open on any .project-card click (avoid links/buttons)
-  DOC.addEventListener('click', (e) => {
-    const t = e.target;
-    if (!t.closest) return;
-    if (t.closest('a,button')) return;
-    const card = t.closest('.project-card');
-    if (!card) return;
-    openModal(card);
+  modal.addEventListener('click', (e)=>{
+    if (e.target === modal) closeModal();
   });
+  window.addEventListener('keydown', (e)=>{
+    if (e.key === 'Escape' && modal.style.display !== 'none') closeModal();
+  });
+
+  // Bind all project cards
+  function bindCards(){
+    const cards = Array.from(DOC.querySelectorAll('.project-card'));
+    cards.forEach(card => {
+      card.style.cursor = 'pointer';
+      card.addEventListener('click', (e)=>{
+        // ignore clicks on inline slideshow arrows (if any)
+        const target = e.target;
+        if (target.closest('.slideshow-container .prev') || target.closest('.slideshow-container .next')) return;
+        openFromCard(card);
+      });
+    });
+  }
+  bindCards();
 })();
