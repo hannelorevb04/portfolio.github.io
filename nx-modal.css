@@ -72,49 +72,36 @@
 .projects.dragging { cursor:grabbing; }
 
 
-/* === Image Comparison (nx) === */
-.nx-compare-wrap{ margin-top: 18px; }
-.nx-compare{
+/* === Image Comparison (modal) === */
+.modal-overlay .nx-compare{
   position: relative;
   width: 100%;
-  max-width: 720px;
   aspect-ratio: 16/10;
-  background: #0b121b;
-  border: 1px solid var(--nx-border);
-  border-radius: 12px;
+  max-height: 420px;
   overflow: hidden;
-  user-select: none;
-  touch-action: none;
+  border-radius: 10px;
+  background: #0b0b0b10;
+  margin-top: 14px;
 }
-.nx-cmp-img{ position: absolute; inset:0; width:100%; height:100%; object-fit: cover; }
-.nx-cmp-img.a{ filter: none; }
-.nx-cmp-img.b{ clip-path: inset(0 0 0 50%); }
-
-.nx-cmp-divider{
-  position: absolute; top:0; bottom:0; left:50%; width:2px;
-  background: rgba(255,255,255,.75);
-  box-shadow: 0 0 0 1px rgba(0,0,0,.15);
+.modal-overlay .nx-cmp-img{
+  position:absolute; inset:0; width:100%; height:100%; object-fit:contain;
+  user-select:none; -webkit-user-drag: none;
 }
-.nx-cmp-knob{
-  position: absolute; top:50%; left:50%; transform: translate(-50%, -50%);
-  width: 28px; height: 28px; border-radius: 999px;
-  background: #e9f0f7; color:#0c1520;
-  display:flex; align-items:center; justify-content:center;
-  box-shadow: 0 2px 12px rgba(0,0,0,.35), inset 0 0 0 2px rgba(12,21,32,.8);
+.modal-overlay .nx-cmp-left{ clip-path: inset(0 50% 0 0); }
+.modal-overlay .nx-cmp-handle{
+  position:absolute; top:0; bottom:0; left:50%; width:2px;
+  background: rgba(255,255,255,.6);
+  box-shadow: 0 0 0 1px rgba(0,0,0,.2);
 }
-.nx-cmp-knob::before{
-  content: '\2194'; /* ↔ */
-  font-size: 16px; line-height: 1;
+.modal-overlay .nx-cmp-knob{
+  position:absolute; top:50%; left:50%; transform: translate(-50%,-50%);
+  width:28px; height:28px; border-radius:50%;
+  background: rgba(255,255,255,.9);
+  box-shadow: 0 2px 8px rgba(0,0,0,.25), inset 0 0 0 1px rgba(0,0,0,.1);
 }
-
-.nx-cmp-label{
-  position: absolute; bottom: 10px; padding: 4px 8px; font-size: 12px;
-  background: rgba(0,0,0,.55); color: #fff; border-radius: 6px;
-  pointer-events: none;
+.modal-overlay .nx-cmp-label{
+  position:absolute; bottom:10px; font-size:12px; padding:4px 8px;
+  background: rgba(0,0,0,.55); color:#fff; border-radius:6px;
 }
-.nx-cmp-label.left{ left: 10px; }
-.nx-cmp-label.right{ right: 10px; }
-
-@media (max-width: 640px){
-  .nx-compare{ aspect-ratio: 4/3; }
-}
+.modal-overlay .nx-cmp-label.left{ left:10px; }
+.modal-overlay .nx-cmp-label.right{ right:10px; }

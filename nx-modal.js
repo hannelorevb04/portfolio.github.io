@@ -1,260 +1,358 @@
-/* nx-modal.js — v23 (single-image hero + comparisons) */
-(function(){
+/* nx-modal.js — v12.1: class‑based selectors to match markup */
+(function () {
   const DOC = document;
   const modal = DOC.getElementById('nxModal');
   if (!modal) return;
 
-  // Modal UI refs
+  // Elements (use CLASSES, not IDs, to match the HTML)
   const slidesEl = modal.querySelector('.nx-slides');
   const prevBtn  = modal.querySelector('.nx-nav.prev');
   const nextBtn  = modal.querySelector('.nx-nav.next');
   const dotsEl   = modal.querySelector('.nx-dots');
 
-  const titleEl  = modal.querySelector('.nx-title');
-  const metaTxt  = modal.querySelector('.nx-meta .nx-meta-text');
-  const descEl   = modal.querySelector('.nx-desc');
-  const tagsEl   = modal.querySelector('.nx-taglist');
-  const discEl   = modal.querySelector('.nx-discipline');
-  const toolsEl  = modal.querySelector('.nx-tools');
+  const titleEl  = modal.querySelector('.nx-title') || modal.querySelector('#nxTitle');
+  const metaTxt  = modal.querySelector('.nx-meta') || modal.querySelector('#nxMeta');
+  const descEl   = modal.querySelector('.nx-desc') || modal.querySelector('#nxDesc');
+  const tagsEl   = modal.querySelector('.nx-taglist') || modal.querySelector('#nxTags');
+  const discEl   = modal.querySelector('.nx-discipline') || modal.querySelector('#nxDiscipline');
+  const toolsEl  = modal.querySelector('.nx-tools') || modal.querySelector('#nxTools');
+  const primary  = modal.querySelector('.nx-primary');
   const actions  = modal.querySelector('.nx-actions');
+  const rightCol = modal.querySelector('.nx-right');
   const leftCol  = modal.querySelector('.nx-left');
 
-  let idx=0, total=0;
+  let idx = 0, total = 0, autoTimer = null;
+  const AUTO_MS = 3800;
 
+  function setNavVisible(show) {
+    if (prevBtn) prevBtn.style.display = show ? '' : 'none';
+    if (nextBtn) nextBtn.style.display = show ? '' : 'none';
+    if (dotsEl)  dotsEl.style.display  = show ? '' : 'none';
+  }
+  function clearAuto() { if (autoTimer) { clearInterval(autoTimer); autoTimer = null; } }
+  function startAuto() { clearAuto(); if (total > 1) autoTimer = setInterval(next, AUTO_MS); }
+
+  function tryJSON(s, fallback){
+    if (!s) return fallback;
+    try { const x = JSON.parse(s); return x; } catch { return fallback; }
+  }
   function parseList(raw){
     if (!raw) return [];
-    try { const j = JSON.parse(raw); if (Array.isArray(j)) return j; } catch {}
-    return String(raw).split(',').map(s=>s.trim()).filter(Boolean);
+    const j = tryJSON(raw, null);
+    if (Array.isArray(j)) return j;
+    return String(raw).split(',').map(t=>t.trim()).filter(Boolean);
   }
-
-  function clearSlides(){
-    slidesEl.innerHTML='';
-    dotsEl.innerHTML='';
-    idx=0; total=0;
+  function parseSlides(card) {
+    const raw = card.getAttribute('data-slides') || '[]';
+    try {
+      const arr = JSON.parse(raw);
+      return Array.isArray(arr) ? arr : [];
+    } catch { return []; }
   }
+  function wipe(el){ if (el) el.innerHTML = ''; }
 
-  function buildSlidesFromCard(card){
-    clearSlides();
+  function buildSlides(sources) {
+    if (!slidesEl) return;
+    slidesEl.innerHTML = '';
+    if (dotsEl) dotsEl.innerHTML = '';
+    total = Math.max(1, sources.length);
 
-    // 1) Prefer explicit data-slides
-    let slides = parseList(card.getAttribute('data-slides'));
-
-    // 2) Fallback: small slideshow thumbnails inside the card
-    if (!slides.length){
-      const thumbs = card.querySelectorAll('.slideshow-container .slides img[src]');
-      slides = Array.from(thumbs).map(img => img.getAttribute('src'));
-    }
-
-    // 3) Final fallback: the main card image (even if only 1)
-    if (!slides.length){
-      const mainImg = card.querySelector('img.image, .overlap-group img, img');
-      if (mainImg && mainImg.getAttribute('src')) slides = [ mainImg.getAttribute('src') ];
-    }
-
-    total = slides.length;
-
-    slides.forEach((src, i)=>{
+    sources.forEach((src, i) => {
+      const s = String(src || '');
       const wrap = DOC.createElement('div');
-      wrap.className = 'nx-slide' + (i===0 ? ' is-active' : '');
+      wrap.className = 'nx-slide' + (i === 0 ? ' is-active' : '');
 
-      if (src && String(src).startsWith('iframe:')){
+      if (s.startsWith('iframe:')) {
         const ifr = DOC.createElement('iframe');
-        ifr.src = src.replace(/^iframe:/,'');
+        ifr.src = s.replace('iframe:', '');
+        ifr.title = 'Project';
         ifr.setAttribute('frameborder','0');
-        ifr.loading = 'eager';
-        ifr.style.width='100%'; ifr.style.height='100%';
+        ifr.setAttribute('loading','eager');
+        ifr.style.width = '100%';
+        ifr.style.height = '100%';
         wrap.appendChild(ifr);
-      } else {
+      } else if (s) {
         const img = DOC.createElement('img');
-        img.src = src;
-        img.alt = 'Slide '+(i+1);
+        img.src = s;
+        img.alt = 'Slide ' + (i + 1);
         img.className = 'nx-hero-img';
         wrap.appendChild(img);
       }
       slidesEl.appendChild(wrap);
     });
 
-    if (total>1){
-      for (let i=0;i<total;i++){
-        const b = DOC.createElement('button');
-        b.type='button'; b.className='nx-dot'+(i===0?' is-active':'');
-        b.addEventListener('click', ()=>goTo(i));
-        dotsEl.appendChild(b);
+    if (dotsEl && total > 1) {
+      for (let i = 0; i < total; i++) {
+        const dot = DOC.createElement('button');
+        dot.className = 'nx-dot' + (i === 0 ? ' is-active' : '');
+        dot.type = 'button';
+        dot.addEventListener('click', () => { goTo(i); startAuto(); });
+        dotsEl.appendChild(dot);
       }
-      prevBtn.style.display = nextBtn.style.display = '';
-      dotsEl.style.display='';
-    } else {
-      prevBtn.style.display = nextBtn.style.display = 'none';
-      dotsEl.style.display='none';
     }
+    setNavVisible(total > 1);
+    idx = 0;
+    startAuto();
   }
 
-  function goTo(n){
-    if (n<0) n = total-1;
-    if (n>=total) n = 0;
-    const slides = slidesEl.querySelectorAll('.nx-slide');
-    slides.forEach((el,i)=> el.classList.toggle('is-active', i===n) );
-    const dots = dotsEl.querySelectorAll('.nx-dot');
-    dots.forEach((el,i)=> el.classList.toggle('is-active', i===n) );
-    idx = n;
+  function goTo(n) {
+    if (!slidesEl) return;
+    const slides = Array.from(slidesEl.children);
+    const dots   = dotsEl ? Array.from(dotsEl.children) : [];
+    if (!slides.length) return;
+    if (slides[idx]) slides[idx].classList.remove('is-active');
+    if (dots[idx])   dots[idx].classList.remove('is-active');
+    idx = (n + total) % total;
+    if (slides[idx]) slides[idx].classList.add('is-active');
+    if (dots[idx])   dots[idx].classList.add('is-active');
   }
-  function next(){ goTo(idx+1); }
-  function prev(){ goTo(idx-1); }
-  prevBtn?.addEventListener('click', prev);
-  nextBtn?.addEventListener('click', next);
+  function next(){ goTo(idx + 1); }
+  function prev(){ goTo(idx - 1); }
 
-  // TAGS
-  function renderTags(card){
-    if (!tagsEl) return;
-    tagsEl.innerHTML='';
-    parseList(card.getAttribute('data-tags')).forEach(t=>{
-      const span = DOC.createElement('span');
-      span.className = 'nx-tag';
-      span.textContent = t;
-      tagsEl.appendChild(span);
+  if (prevBtn) prevBtn.addEventListener('click', () => { prev(); startAuto(); });
+  if (nextBtn) nextBtn.addEventListener('click', () => { next(); startAuto(); });
+
+  const slider = modal.querySelector('.nx-hero-slider') || modal;
+  slider.addEventListener('mouseenter', clearAuto);
+  slider.addEventListener('mouseleave', startAuto);
+
+  function addSpecBlock(title, value){
+    if (!value || !rightCol) return null;
+    const spec = DOC.createElement('div');
+    spec.className = 'nx-spec';
+    spec.setAttribute('data-dynamic','');
+    const h = DOC.createElement('div');
+    h.className = 'nx-spec-title';
+    h.textContent = title;
+    const ul = DOC.createElement('ul');
+    ul.className = 'nx-spec-list';
+    const li = DOC.createElement('li');
+    li.textContent = value;
+    ul.appendChild(li);
+    spec.appendChild(h); spec.appendChild(ul);
+    rightCol.appendChild(spec);
+    return spec;
+  }
+
+  function addListSection(title, items){
+    if (!items || !items.length || !leftCol) return null;
+    const h = DOC.createElement('h3');
+    h.className = 'nx-h3';
+    h.textContent = title;
+    h.setAttribute('data-dynamic','');
+
+    const ul = DOC.createElement('ul');
+    ul.className = 'nx-list';
+    ul.setAttribute('data-dynamic','');
+    items.forEach(t => {
+      const li = DOC.createElement('li');
+      li.textContent = (typeof t === 'string') ? t : (t.label || '');
+      ul.appendChild(li);
     });
+    leftCol.appendChild(h);
+    leftCol.appendChild(ul);
+    return ul;
   }
 
-  // ACTION BUTTONS
-  function renderActions(card){
+  function addLinks(links){
+    if (!actions) return;
     Array.from(actions.querySelectorAll('[data-dynamic]')).forEach(n=>n.remove());
-    const links = parseList(card.getAttribute('data-links'));
-    if (!links.length) return;
-    links.forEach(json => {
-      let data=null; try{ data = JSON.parse(json); }catch{}
+    if (!Array.isArray(links) || !links.length) return;
+    links.forEach(l => {
       const a = DOC.createElement('a');
-      a.className='nx-btn nx-ghost'; a.setAttribute('data-dynamic','');
-      a.target='_blank'; a.rel='noopener';
-      a.href = data?.url || data?.href || '#';
-      a.textContent = data?.label || data?.title || 'Open';
+      a.className = 'nx-btn nx-ghost';
+      a.setAttribute('data-dynamic','');
+      a.target = '_blank';
+      a.rel = 'noopener';
+      a.href = l.url || l.href || '#';
+      a.textContent = l.label || l.title || 'Link';
       actions.appendChild(a);
     });
   }
 
-  // COMPARISONS
-  function parseCompare(card){
+  
+  function buildComparisons(card){
+    if (!card || (!leftCol && !tagsEl)) return;
+    // remove old comparisons
+    const old = modal.querySelectorAll('.nx-compare[data-dynamic]');
+    old.forEach(n => n.remove());
     const raw = card.getAttribute('data-compare');
-    const list = parseList(raw);
-    const pairs = [];
-    list.forEach(s=>{
-      if (!s) return;
-      s = String(s).replace(/^compare:/,'');
-      const parts = s.split('|');
-      if (parts.length >= 2){
-        pairs.push({
-          a: parts[0].trim(),
-          b: parts[1].trim(),
-          la: (parts[2]||'Before').trim(),
-          lb: (parts[3]||'After').trim(),
-        });
-      }
-    });
-    return pairs;
-  }
+    if (!raw) return;
+    let arr = [];
+    try { arr = JSON.parse(raw); } catch(e){ arr = []; }
+    if (!Array.isArray(arr) || !arr.length) return;
 
-  function renderComparisons(card){
-    if (!leftCol) return;
-    // remove previous
-    Array.from(leftCol.querySelectorAll('.nx-compare-wrap')).forEach(n=>n.remove());
-    const taglist = leftCol.querySelector('.nx-taglist');
+    function makeOne(spec){
+      const parts = String(spec||'').split('|');
+      const leftSrc  = parts[0] || '';
+      const rightSrc = parts[1] || '';
+      const leftLbl  = parts[2] || '';
+      const rightLbl = parts[3] || '';
 
-    const pairs = parseCompare(card);
-    if (!pairs.length) return;
-
-    pairs.forEach((p, i)=>{
       const wrap = DOC.createElement('div');
-      wrap.className = 'nx-compare-wrap';
-      const cmp = DOC.createElement('div');
-      cmp.className = 'nx-compare'; cmp.setAttribute('role','region');
-      cmp.setAttribute('aria-label', (titleEl?.textContent || 'Comparison') + ' ' + (i+1));
+      wrap.className = 'nx-compare';
+      wrap.setAttribute('data-dynamic','');
 
-      const imgA = DOC.createElement('img');
-      imgA.src = p.a; imgA.alt = p.la; imgA.className = 'nx-cmp-img a';
-      const imgB = DOC.createElement('img');
-      imgB.src = p.b; imgB.alt = p.lb; imgB.className = 'nx-cmp-img b';
-      const divider = DOC.createElement('div');
-      divider.className = 'nx-cmp-divider';
+      const imgR = DOC.createElement('img');
+      imgR.className = 'nx-cmp-img nx-cmp-right';
+      imgR.src = rightSrc; imgR.alt = rightLbl || 'After';
+
+      const imgL = DOC.createElement('img');
+      imgL.className = 'nx-cmp-img nx-cmp-left';
+      imgL.src = leftSrc; imgL.alt = leftLbl || 'Before';
+
+      const handle = DOC.createElement('div');
+      handle.className = 'nx-cmp-handle';
       const knob = DOC.createElement('div');
       knob.className = 'nx-cmp-knob';
-      divider.appendChild(knob);
+      knob.setAttribute('aria-hidden','true');
+      handle.appendChild(knob);
 
-      const labL = DOC.createElement('span');
-      labL.className = 'nx-cmp-label left'; labL.textContent = p.la;
-      const labR = DOC.createElement('span');
-      labR.className = 'nx-cmp-label right'; labR.textContent = p.lb;
+      const lLabel = DOC.createElement('span');
+      lLabel.className = 'nx-cmp-label left';
+      lLabel.textContent = leftLbl;
 
-      cmp.appendChild(imgA); cmp.appendChild(imgB);
-      cmp.appendChild(divider); cmp.appendChild(labL); cmp.appendChild(labR);
-      wrap.appendChild(cmp);
+      const rLabel = DOC.createElement('span');
+      rLabel.className = 'nx-cmp-label right';
+      rLabel.textContent = rightLbl;
 
-      // interactions
-      let pct = 50;
-      function setPct(v){
-        pct = Math.max(0, Math.min(100, v));
-        imgB.style.clipPath = 'inset(0 0 0 ' + pct + '%)';
-        divider.style.left = pct + '%';
+      wrap.appendChild(imgR);
+      wrap.appendChild(imgL);
+      wrap.appendChild(handle);
+      if (leftLbl) wrap.appendChild(lLabel);
+      if (rightLbl) wrap.appendChild(rLabel);
+
+      // interaction
+      let dragging = false;
+      function setPct(p){
+        const pct = Math.max(0, Math.min(100, p));
+        imgL.style.clipPath = 'inset(0 ' + (100 - pct) + '% 0 0)';
+        handle.style.left = pct + '%';
+        wrap.setAttribute('data-pct', pct.toFixed(2));
       }
-      setPct(50);
-
-      function posFromEvent(e){
-        const rect = cmp.getBoundingClientRect();
-        const x = (e.clientX ?? (e.touches && e.touches[0]?.clientX) ?? rect.left);
-        return ((x - rect.left) / rect.width) * 100;
+      function eventPct(ev){
+        const rect = wrap.getBoundingClientRect();
+        const x = (ev.touches && ev.touches[0] ? ev.touches[0].clientX : ev.clientX) - rect.left;
+        return (x / rect.width) * 100;
       }
+      wrap.addEventListener('mousedown', (e)=>{ dragging=true; setPct(eventPct(e)); });
+      wrap.addEventListener('mousemove', (e)=>{ if(dragging) setPct(eventPct(e)); });
+      wrap.addEventListener('mouseup',   ()=> dragging=false);
+      wrap.addEventListener('mouseleave',()=> dragging=false);
+      wrap.addEventListener('touchstart',(e)=>{ dragging=true; setPct(eventPct(e)); }, {passive:true});
+      wrap.addEventListener('touchmove', (e)=>{ if(dragging) setPct(eventPct(e)); }, {passive:true});
+      wrap.addEventListener('touchend',  ()=> dragging=false);
+      wrap.addEventListener('dblclick',  ()=> setPct(50));
 
-      let dragging=false;
-      cmp.addEventListener('pointerdown', e=>{ dragging=true; cmp.setPointerCapture(e.pointerId); setPct(posFromEvent(e)); });
-      cmp.addEventListener('pointermove', e=>{ if (dragging) setPct(posFromEvent(e)); });
-      cmp.addEventListener('pointerup',   e=>{ dragging=false; try{cmp.releasePointerCapture(e.pointerId);}catch{} });
-      cmp.addEventListener('pointerleave',e=>{ dragging=false; });
-      cmp.addEventListener('click', e=> setPct(posFromEvent(e)));
-
-      cmp.tabIndex = 0;
-      cmp.addEventListener('keydown', e=>{
-        if (e.key === 'ArrowLeft')  { setPct(pct - 2); e.preventDefault(); }
-        else if (e.key === 'ArrowRight'){ setPct(pct + 2); e.preventDefault(); }
-        else if (e.key === 'Home')  { setPct(0); e.preventDefault(); }
-        else if (e.key === 'End')   { setPct(100); e.preventDefault(); }
-        else if (e.key === ' ' || e.key === 'Spacebar'){ setPct(50); e.preventDefault(); }
+      wrap.tabIndex = 0;
+      wrap.addEventListener('keydown', (e)=>{
+        if (e.key === 'ArrowLeft')  { setPct((+wrap.getAttribute('data-pct')||50) - 2); e.preventDefault(); }
+        if (e.key === 'ArrowRight') { setPct((+wrap.getAttribute('data-pct')||50) + 2); e.preventDefault(); }
+        if (e.key === 'Home') { setPct(0); e.preventDefault(); }
+        if (e.key === 'End')  { setPct(100); e.preventDefault(); }
+        if (e.key === ' ' || e.key === 'Spacebar') { setPct(50); e.preventDefault(); }
       });
 
-      if (taglist && taglist.parentNode){
-        taglist.parentNode.insertBefore(wrap, taglist.nextSibling);
+      setPct(50);
+      return wrap;
+    }
+
+    // insert each comparison directly after tags, or at end of left column
+    let anchor = tagsEl || leftCol;
+    if (!anchor) return;
+    let last = tagsEl;
+    arr.forEach(spec => {
+      const node = makeOne(spec);
+      if (!node) return;
+      if (last) {
+        last.insertAdjacentElement('afterend', node);
       } else {
-        leftCol.appendChild(wrap);
+        anchor.appendChild(node);
       }
+      last = node;
     });
   }
 
-  function openModal(card){
-    // Fill meta
-    if (titleEl) titleEl.textContent = card.getAttribute('data-title') || card.querySelector('.text .div')?.textContent || 'Untitled';
-    if (metaTxt) metaTxt.textContent = card.getAttribute('data-meta') || '';
-    if (descEl)  descEl.textContent  = card.getAttribute('data-desc') || '';
-    if (discEl)  discEl.textContent  = card.getAttribute('data-discipline') || '—';
-    if (toolsEl) toolsEl.textContent = card.getAttribute('data-tools') || '';
+  function openModal(card) {
+    if (!modal) return;
 
-    renderTags(card);
-    renderActions(card);
-    buildSlidesFromCard(card);
-    renderComparisons(card);
+    if (rightCol) Array.from(rightCol.querySelectorAll('[data-dynamic]')).forEach(n=>n.remove());
+    if (leftCol)  Array.from(leftCol.querySelectorAll('[data-dynamic]')).forEach(n=>n.remove());
+
+    if (titleEl) titleEl.textContent = card.getAttribute('data-title') || 'Untitled';
+    const meta = card.getAttribute('data-meta') || '';
+    if (metaTxt) {
+      const metaSpan = metaTxt.querySelector('.nx-meta-text') || metaTxt.querySelectorAll('span')[1];
+      if (metaSpan) metaSpan.textContent = meta;
+    }
+    if (descEl)  descEl.textContent  = card.getAttribute('data-desc') || '';
+    const __discVal = card.getAttribute('data-discipline') || '—';
+    if (discEl) discEl.textContent = __discVal; else addSpecBlock('DISCIPLINE', __discVal);
+    const __toolsVal = card.getAttribute('data-tools') || '';
+    if (toolsEl) toolsEl.textContent = __toolsVal; else addSpecBlock('TOOLS', __toolsVal);
+
+    buildComparisons(card);
+
+    if (tagsEl) {
+      tagsEl.innerHTML = '';
+      parseList(card.getAttribute('data-tags')).forEach(t => {
+        const span = DOC.createElement('span');
+        span.className = 'nx-tag';
+        span.textContent = t;
+        tagsEl.appendChild(span);
+      });
+    }
+
+    addSpecBlock('YEAR',      card.getAttribute('data-year'));
+    addSpecBlock('ROLE',      card.getAttribute('data-role'));
+    addSpecBlock('TEAM',      card.getAttribute('data-team'));
+    addSpecBlock('CLIENT',    card.getAttribute('data-client'));
+    addSpecBlock('DURATION',  card.getAttribute('data-duration'));
+
+    addListSection('Highlights', parseList(card.getAttribute('data-highlights')));
+    addListSection('Outcomes',   parseList(card.getAttribute('data-outcomes')));
+
+    const links = tryJSON(card.getAttribute('data-links') || '[]', []);
+    addLinks(links);
+
+    const slides = parseSlides(card);
+    if (primary) {
+      const first = slides[0] || '';
+      primary.onclick = () => {
+        const live = (Array.isArray(links) ? links.find(l => /live|demo|site/i.test(l.label||'')) : null) || null;
+        if (live && live.url) { window.open(live.url, '_blank', 'noopener'); return; }
+        if (typeof first === 'string' && first.startsWith('iframe:')) {
+          window.open(first.replace('iframe:', ''), '_blank', 'noopener');
+        }
+      };
+    }
+
+    buildSlides(slides);
 
     modal.style.display = 'flex';
     DOC.body.style.overflow = 'hidden';
   }
 
-  function closeModal(){
+  function closeModal() {
+    if (!modal) return;
     modal.style.display = 'none';
     DOC.body.style.overflow = '';
-    clearSlides();
-    if (leftCol) Array.from(leftCol.querySelectorAll('.nx-compare-wrap')).forEach(n=>n.remove());
+    if (slidesEl) slidesEl.innerHTML = '';
+    if (dotsEl) dotsEl.innerHTML = '';
+    clearAuto();
   }
 
-  modal.querySelector('.nx-close')?.addEventListener('click', closeModal);
-  modal.addEventListener('click', (e)=>{ if (e.target === modal) closeModal(); });
+  const closeBtn = modal.querySelector('.nx-close');
+  if (closeBtn) closeBtn.addEventListener('click', closeModal);
+  modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
 
-  DOC.addEventListener('click', (e)=>{
-    const t = e.target.closest?.('.project-card');
-    if (t && !e.target.closest('a,button')) openModal(t);
+  // Delegated open on any .project-card click (avoid links/buttons)
+  DOC.addEventListener('click', (e) => {
+    const t = e.target;
+    if (!t.closest) return;
+    if (t.closest('a,button')) return;
+    const card = t.closest('.project-card');
+    if (!card) return;
+    openModal(card);
   });
 })();
