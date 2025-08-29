@@ -226,7 +226,7 @@
     buildSlides(extractSlides(card));
     buildComparisons(card);
     // Show modal
-    modal.style.display = 'block';
+    modal.style.display = 'flex';
     DOC.body.style.overflow = 'hidden';
     idx = 0; // ensure first slide
     goTo(0);

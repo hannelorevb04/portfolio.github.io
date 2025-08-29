@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About – Hannelore Van Buynderen</title>
+    <link rel="stylesheet" href="styles.css" />
+    <!-- Devicon CDN voor echte logo-icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+    <style>
+      .about-wrap {
+        padding: 3rem clamp(1.2rem, 4vw, 3rem);
+        background: #ffffff;
+      }
+      .about-content {
+        display: grid;
+        grid-template-columns: min(320px, 32vw) 1fr;
+        grid-template-areas:
+          "photo timeline"
+          "skills skills";
+        gap: clamp(20px, 4vw, 56px);
+        align-items: start;
+        max-width: 1080px;
+        margin: 0 auto;
+      }
+      figure.photo { grid-area: photo; margin: 0; }
+      .about-photo { width: 100%; height: auto; border-radius: 12px; display: block; }
+      .timeline-wrap { grid-area: timeline; }
+      .skills-wrap { grid-area: skills; }
+
+      @media (max-width: 900px) {
+        .about-content {
+          grid-template-columns: 1fr;
+          grid-template-areas:
+            "photo"
+            "timeline"
+            "skills";
+        }
+      }
+
+      /* Timeline */
+      .timeline h2 { color: #102e4a; font-weight: 800; font-size: 1.6rem; margin: 0 0 1.2rem; }
+      .tl { --line-x: 20px; --dot-size: 18px; --dot-offset: 10px; position: relative; margin: 0; padding: 0; list-style: none; }
+      .tl::before { content: ""; position: absolute; left: var(--line-x); top: calc(var(--dot-offset) + var(--dot-size) / 2); bottom: calc(var(--dot-offset) + var(--dot-size) / 2); width: 3px; background: #12324e; }
+      .tl-item { position: relative; margin: 0 0 2rem 0; padding-left: 60px; }
+      .tl-item:last-child { margin-bottom: 0; }
+      .tl-item::before { content: ""; position: absolute; left: calc(var(--line-x) - var(--dot-size) / 2); top: var(--dot-offset); width: var(--dot-size); height: var(--dot-size); border-radius: 50%; background: #12324e; z-index: 1; }
+      .tl-head { font-weight: 800; color: #102e4a; margin-bottom: 0.35rem; }
+      .tl-meta { font-size: 0.95rem; color: #40698a; }
+      .tl-meta .sep { display: inline-block; width: 8px; height: 8px; margin: 0 10px; background: #40698a; border-radius: 50%; }
+
+      /* Skills met Devicon */
+      .skills-wrap h2 { color: #102e4a; font-weight: 800; font-size: 1.6rem; margin: 1.2rem 0 0.8rem; }
+      .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; margin-top: 0.5rem; }
+      .skill-card { background: #fff; border: 1px solid rgba(16,46,74,0.1); border-radius: 16px; padding: 16px; box-shadow: 0 6px 20px rgba(16,46,74,0.06); transition: transform .15s ease, box-shadow .15s ease; }
+      .skill-card:hover { transform: translateY(-2px); box-shadow: 0 10px 26px rgba(16,46,74,0.09); }
+      .skill-head { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+      .skill-head h3 { margin: 0; font-size: 1.05rem; color: #102e4a; }
+      .tags { display: flex; flex-wrap: wrap; gap: 10px; }
+      .tag { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; font-size: 0.9rem; color: #0f2f49; background: #eef5fb; border: 1px solid rgba(16,46,74,0.15); border-radius: 999px; padding: 6px 12px; }
+      .tag i { font-size: 1.1rem; }
+    </style>
+  </head>
+  <body class="about-page">
+    <!-- HERO -->
+    <div class="video-header">
+      <video class="background-video" autoplay muted loop>
+        <source src="images/beach_1.mp4" type="video/mp4" />
+      </video>
+      <nav class="main-nav">
+        <div class="nav-logo">Hannelore VB</div>
+        <div class="nav-profile">
+          <a href="profiles.html"><img class="profile-image" src="images/logos_adobe-icon.png" alt="Profile" /></a>
+        </div>
+      </nav>
+      <div class="hero-content">
+        <h1 class="hero-title">About me</h1>
+        <p class="hero-description">Ik ben Hannelore Van Buynderen, een UX/UI designer en front‑end developer uit de regio Antwerpen. Ik vertaal ideeën naar duidelijke, gebruiksvriendelijke interfaces – van user flows en wireframes tot pixel‑preciese UI en werkende prototypes.</p>
+        <div class="hero-buttons">
+          <a class="btn-resume" href="CV_Hannelore_Van_Buynderen.pdf" target="_blank"><span class="play-icon">▶</span>Resume</a>
+          <a class="btn-linkedin btn-info" href="profiles.html" target="_blank"><span class="info-icon">in</span>LinkedIn</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTENT -->
+    <section class="about-wrap">
+      <div class="about-content">
+        <!-- Foto -->
+        <figure class="photo"><img class="about-photo" src="images/double_exposure.png" alt="Portret van Hannelore Van Buynderen" /></figure>
+
+        <!-- Tijdlijn -->
+        <div class="timeline-wrap">
+          <div class="timeline">
+            <h2>Tijdlijn</h2>
+            <ul class="tl">
+              <li class="tl-item"><div class="tl-head">Stage</div><div class="tl-meta">JStack, Kontich <span class="sep"></span> 2025</div></li>
+              <li class="tl-item"><div class="tl-head">Digital Experience Design — Bachelor</div><div class="tl-meta">Thomas More, Mechelen <span class="sep"></span> 2022–2025</div></li>
+              <li class="tl-item"><div class="tl-head">IT & Netwerken</div><div class="tl-meta">Sint‑Ursula, Lier <span class="sep"></span> 2020–2022</div></li>
+              <li class="tl-item"><div class="tl-head">Grafische media</div><div class="tl-meta">Stedelijk Lyceum Cadix, Antwerpen <span class="sep"></span> 2018–2020</div></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Skills -->
+        <div class="skills-wrap">
+          <h2>Skills</h2>
+          <div class="skills-grid">
+            <div class="skill-card">
+              <div class="skill-head"><h3>Frontend</h3></div>
+              <div class="tags">
+                <span class="tag"><i class="devicon-html5-plain colored"></i>HTML5</span>
+                <span class="tag"><i class="devicon-css3-plain colored"></i>CSS3</span>
+                <span class="tag"><i class="devicon-tailwindcss-original colored"></i>Tailwind</span>
+                <span class="tag"><i class="devicon-javascript-plain colored"></i>JavaScript</span>
+                <span class="tag"><i class="devicon-threejs-original"></i>Three.js</span>
+                <span class="tag"><i class="devicon-react-original colored"></i>React Native</span>
+                <span class="tag"><i class="devicon-vuejs-plain colored"></i>Vue</span>
+              </div>
+            </div>
+
+            <div class="skill-card">
+              <div class="skill-head"><h3>Backend</h3></div>
+              <div class="tags">
+                <span class="tag"><i class="devicon-php-plain colored"></i>PHP</span>
+                <span class="tag"><i class="devicon-python-plain colored"></i>Python</span>
+                <span class="tag"><i class="devicon-mysql-plain colored"></i>MySQL</span>
+                <span class="tag"><i class="devicon-nodejs-plain colored"></i>Node.js</span>
+              </div>
+            </div>
+
+            <div class="skill-card">
+              <div class="skill-head"><h3>Design tools</h3></div>
+              <div class="tags">
+                <span class="tag"><i class="devicon-figma-plain colored"></i>Figma</span>
+                <span class="tag"><i class="devicon-illustrator-plain colored"></i>Illustrator</span>
+                <span class="tag"><i class="devicon-photoshop-plain colored"></i>Photoshop</span>
+              </div>
+            </div>
+
+            <div class="skill-card">
+              <div class="skill-head"><h3>Soft skills</h3></div>
+              <div class="tags">
+                <span class="tag">🤝 Empathisch</span>
+                <span class="tag">👥 Teamspeler</span>
+                <span class="tag">🎯 Detail‑gericht</span>
+                <span class="tag">💡 Behulpzaam</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
