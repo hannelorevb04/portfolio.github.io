@@ -8,9 +8,9 @@
 }
 .profiles-title {
   color: #18304b;
-  font-size: 2.8rem;
-  font-weight: 500;
-  margin-bottom: 48px;
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 35px;
 }
 .profiles-container {
   display: flex;
@@ -38,8 +38,8 @@
 
 .profile-label {
   color: #18304b;
-  font-size: 1.3rem;
-  font-weight: 400;
+  font-size: 1.7rem;
+  font-weight: medium;
 }
 
 .profile-icon {
