@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Portfolio Clapper — Three.js</title>
+    <title>Klapper met vulplaat (scharnierplaat) + 45° animatie</title>
     <style>
       html,
       body {
@@ -14,30 +14,63 @@
       canvas {
         display: block;
       }
+      .hint {
+        position: fixed;
+        left: 50%;
+        bottom: 14px;
+        transform: translateX(-50%);
+        font: 600 12px/1.2 system-ui, -apple-system, Segoe UI, Roboto, Helvetica,
+          Arial;
+        color: #cfe7ff;
+        letter-spacing: 0.04em;
+        opacity: 0.9;
+        user-select: none;
+        background: rgba(0, 0, 0, 0.25);
+        padding: 8px 10px;
+        border-radius: 999px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2),
+          inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+      }
     </style>
   </head>
   <body>
+    <div class="hint">
+      Klik of druk <b>SPATIE</b> om te zwenken • Linkerkant blijft op hoogte •
+      Met vulplaat & schroeven
+    </div>
+
     <script type="importmap">
       {
         "imports": {
-          "three": "https://unpkg.com/three@0.161.0/build/three.module.js"
+          "three": "https://unpkg.com/three@0.161.0/build/three.module.js",
+          "three/addons/": "https://unpkg.com/three@0.161.0/examples/jsm/"
         }
       }
     </script>
+
     <script type="module">
       import * as THREE from "three";
-      import { OrbitControls } from "https://unpkg.com/three@0.161.0/examples/jsm/controls/OrbitControls.js";
+      import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 
-      // renderer
+      /* ==== maten ==== */
+      const boardW = 1.4,
+        boardH = 0.8,
+        boardD = 0.04;
+      const topH = 0.16,
+        topD = 0.04;
+      const EPS = 0.001;
+
+      /* ==== renderer/scene/camera ==== */
       const renderer = new THREE.WebGLRenderer({ antialias: true });
       renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
       renderer.setSize(innerWidth, innerHeight);
       renderer.outputColorSpace = THREE.SRGBColorSpace;
+      renderer.shadowMap.enabled = true;
       document.body.appendChild(renderer.domElement);
 
-      // scene & camera
       const scene = new THREE.Scene();
       scene.background = new THREE.Color(0x0c1e2f);
+
       const camera = new THREE.PerspectiveCamera(
         50,
         innerWidth / innerHeight,
@@ -45,78 +78,80 @@
         100
       );
       camera.position.set(2.2, 1.3, 3.2);
+
       const controls = new OrbitControls(camera, renderer.domElement);
       controls.enableDamping = true;
       controls.target.set(0, 0.65, 0);
 
-      // lights
-      scene.add(new THREE.HemisphereLight(0xddeeff, 0x223344, 0.8));
-      const key = new THREE.DirectionalLight(0xffffff, 1.6);
+      /* ==== licht & vloer ==== */
+      scene.add(new THREE.HemisphereLight(0xddeeff, 0x223344, 0.85));
+      const key = new THREE.DirectionalLight(0xffffff, 1.8);
       key.position.set(3, 6, 4);
       key.castShadow = true;
       scene.add(key);
 
-      // ground
       const ground = new THREE.Mesh(
         new THREE.PlaneGeometry(20, 20),
-        new THREE.MeshStandardMaterial({ color: 0x0e2740, roughness: 0.9 })
+        new THREE.MeshStandardMaterial({ color: 0x0e2740, roughness: 0.92 })
       );
       ground.rotation.x = -Math.PI / 2;
       ground.receiveShadow = true;
       scene.add(ground);
 
-      // === Helper textures ===
-      function noiseTex(w = 256, h = 256, c = 1.4) {
-        const cnv = document.createElement("canvas");
-        cnv.width = w;
-        cnv.height = h;
-        const ctx = cnv.getContext("2d"),
-          img = ctx.createImageData(w, h);
-        for (let i = 0; i < img.data.length; i += 4) {
-          const v = Math.pow(Math.random(), c) * 255;
-          img.data[i] = img.data[i + 1] = img.data[i + 2] = v;
-          img.data[i + 3] = 255;
-        }
-        ctx.putImageData(img, 0, 0);
-        return new THREE.CanvasTexture(cnv);
-      }
+      /* ==== helpers ==== */
+      const grid = new THREE.GridHelper(12, 24, 0x5a79a3, 0x2b4661);
+      grid.material.transparent = true;
+      grid.material.opacity = 0.28;
+      grid.position.y = 0.001;
+      scene.add(grid);
+      scene.add(new THREE.AxesHelper(1.4));
 
-      // === Chevron texture (minder fel) ===
-      function chevronsTex(w = 1024, h = 256) {
+      /* ==== texture helpers ==== */
+      function noiseTex(w = 256, h = 256, pow = 1.4) {
+        const c = document.createElement("canvas");
+        c.width = w;
+        c.height = h;
+        const g = c.getContext("2d");
+        const id = g.createImageData(w, h);
+        for (let i = 0; i < id.data.length; i += 4) {
+          const v = (Math.pow(Math.random(), pow) * 255) | 0;
+          id.data[i] = id.data[i + 1] = id.data[i + 2] = v;
+          id.data[i + 3] = 255;
+        }
+        g.putImageData(id, 0, 0);
+        return new THREE.CanvasTexture(c);
+      }
+      function chevronsTex(w = 2048, h = 360) {
         const c = document.createElement("canvas");
         c.width = w;
         c.height = h;
         const ctx = c.getContext("2d");
-        ctx.fillStyle = "#444"; // donkergrijs als achtergrond
-        ctx.fillRect(0, 0, w, h);
-
+        ctx.fillStyle = "#444";
+        ctx.fillRect(0, 0, w, h); // subtiele donkere basis
+        // minder felle, maar duidelijke kleuren
         const colors = [
-          "#cc2b2b", // rood (donkerder)
-          "#e6b800", // geel (zachter)
-          "#2fa64a", // groen (rustiger)
-          "#1c90d4", // blauw
-          "#4527a0", // paars
-          "#f2f2f2", // wit
+          "#cc2b2b",
+          "#e6b800",
+          "#2fa64a",
+          "#1c90d4",
+          "#4527a0",
+          "#f2f2f2",
         ];
         const sw = w / colors.length;
         for (let i = 0; i < colors.length; i++) {
           ctx.save();
           ctx.fillStyle = colors[i];
           ctx.setTransform(1, 0, -0.5, 1, i * sw, 0);
-          ctx.fillRect(0, 0, sw + 60, h);
+          ctx.fillRect(0, 0, sw + 80, h);
           ctx.restore();
         }
-
         ctx.strokeStyle = "rgba(0,0,0,.35)";
-        ctx.lineWidth = 5;
+        ctx.lineWidth = 6;
         ctx.strokeRect(0, 0, w, h);
-
         const t = new THREE.CanvasTexture(c);
         t.colorSpace = THREE.SRGBColorSpace;
         return t;
       }
-
-      // === Board texture (met tekst placeholders) ===
       function boardTex(info, w = 2048, h = 1024) {
         const c = document.createElement("canvas");
         c.width = w;
@@ -124,7 +159,6 @@
         const ctx = c.getContext("2d");
         ctx.fillStyle = "#f6f8fb";
         ctx.fillRect(0, 0, w, h);
-
         ctx.fillStyle = "#0b2236";
         ctx.font = "700 64px system-ui";
         ctx.fillText("Portfolio:", 90, 200);
@@ -133,24 +167,17 @@
         ctx.fillText(info.contact, 420, 320);
         ctx.fillText("Tech:", 90, 440);
         ctx.fillText(info.tech, 420, 440);
-
-        const tex = new THREE.CanvasTexture(c);
-        tex.colorSpace = THREE.SRGBColorSpace;
-        return tex;
+        const t = new THREE.CanvasTexture(c);
+        t.colorSpace = THREE.SRGBColorSpace;
+        return t;
       }
 
-      // === Clapper ===
-      const clapper = new THREE.Group();
-      scene.add(clapper);
-      clapper.position.set(0, 0.6, 0);
+      /* ==== groep ==== */
+      const group = new THREE.Group();
+      scene.add(group);
+      group.position.set(0, 0.6, 0);
 
-      const boardW = 1.4,
-        boardH = 0.8,
-        boardD = 0.04;
-      const topH = 0.16,
-        topD = 0.04;
-
-      // board mesh
+      /* ==== bord ==== */
       const board = new THREE.Mesh(
         new THREE.BoxGeometry(boardW, boardH, boardD),
         new THREE.MeshStandardMaterial({
@@ -161,46 +188,166 @@
           }),
           roughnessMap: noiseTex(512, 256, 1.6),
           roughness: 0.55,
-          metalness: 0.02,
+          metalness: 0.03,
         })
       );
       board.castShadow = true;
       board.receiveShadow = true;
-      clapper.add(board);
+      group.add(board);
 
-      // hinge + klep (zelfde breedte als board)
-      const hinge = new THREE.Group();
-      hinge.position.set(0, boardH / 2 + topH / 2, 0);
-      clapper.add(hinge);
+      /* ==== VULPLAAT (scharnierplaat) om het gat op te vullen ==== */
+      /* Vorm: trapezium met een schuine (afgeschuinde) rechterzijde + kleine afrondingen */
+      {
+        const plateW = boardW * 0.27; // breedte van plaat
+        const plateH = topH * 1.2; // hoogte
+        const cut = plateW * 0.32; // hoeveelheid afschuining rechts
+        const r = 0.025; // mini afronding in vorm
+        const depth = 0.012;
 
+        // 2D shape met schuine kant rechts
+        const s = new THREE.Shape();
+        // begin links-boven met kleine afronding
+        s.moveTo(-plateW / 2 + r, -plateH / 2);
+        s.lineTo(plateW / 2 - cut - r, -plateH / 2);
+        s.quadraticCurveTo(
+          plateW / 2 - cut,
+          -plateH / 2,
+          plateW / 2 - cut,
+          -plateH / 2 + r
+        );
+        s.lineTo(plateW / 2, plateH / 2 - r);
+        s.quadraticCurveTo(plateW / 2, plateH / 2, plateW / 2 - r, plateH / 2);
+        s.lineTo(-plateW / 2 + r, plateH / 2);
+        s.quadraticCurveTo(
+          -plateW / 2,
+          plateH / 2,
+          -plateW / 2,
+          plateH / 2 - r
+        );
+        s.lineTo(-plateW / 2, -plateH / 2 + r);
+        s.quadraticCurveTo(
+          -plateW / 2,
+          -plateH / 2,
+          -plateW / 2 + r,
+          -plateH / 2
+        );
+        const plateGeo = new THREE.ExtrudeGeometry(s, {
+          depth,
+          bevelEnabled: false,
+        });
+        plateGeo.computeVertexNormals();
+
+        const plateMat = new THREE.MeshStandardMaterial({
+          color: 0xd4d7dd,
+          roughness: 0.6,
+          metalness: 0.2,
+        });
+        const plate = new THREE.Mesh(plateGeo, plateMat);
+        // positioneer linksboven, net voor het bord
+        plate.position.set(
+          -boardW / 2 + plateW / 2 - 0.01, // iets naar links
+          boardH / 2 + topH / 2 - 0.002, // gecentreerd in hoogte v/d klep
+          boardD / 2 + depth / 2 + 0.002
+        ); // net vooraan
+        plate.castShadow = true;
+        plate.receiveShadow = true;
+        group.add(plate);
+
+        // vier schroeven
+        const screwMat = new THREE.MeshStandardMaterial({
+          color: 0x888,
+          metalness: 0.85,
+          roughness: 0.35,
+        });
+        const addScrew = (sx, sy) => {
+          const sMesh = new THREE.Mesh(
+            new THREE.CylinderGeometry(0.012, 0.012, 0.006, 18),
+            screwMat
+          );
+          sMesh.rotation.x = Math.PI / 2;
+          sMesh.position.set(
+            plate.position.x + sx,
+            plate.position.y + sy,
+            plate.position.z + depth / 2 + 0.002
+          );
+          group.add(sMesh);
+        };
+        const offX = plateW * 0.33,
+          offY = plateH * 0.33;
+        addScrew(-offX, -offY);
+        addScrew(offX * 0.25, -offY);
+        addScrew(-offX, offY);
+        addScrew(offX * 0.25, offY);
+      }
+
+      /* ==== KLEP die rond LINKERBOVENHOEK draait (Z-as) ==== */
+      const hingeZ = new THREE.Group();
+      // pivot exact op linkerbovenhoek van bord
+      hingeZ.position.set(-boardW / 2, boardH / 2 + topH / 2 + EPS, 0);
+      group.add(hingeZ);
+
+      // klep exact even breed als het bord; verplaats +boardW/2 zodat linkerrand op pivot ligt
       const top = new THREE.Mesh(
-        new THREE.BoxGeometry(boardW, topH, topD), // exact even breed
+        new THREE.BoxGeometry(boardW, topH, topD),
         new THREE.MeshStandardMaterial({
+          color: 0x111111,
           map: chevronsTex(),
           roughnessMap: noiseTex(512, 128, 1.5),
           roughness: 0.45,
-          metalness: 0.05,
+          metalness: 0.06,
         })
       );
-      top.position.set(0, 0, 0);
+      top.position.set(boardW / 2, 0, 0);
       top.castShadow = true;
       top.receiveShadow = true;
-      hinge.add(top);
+      hingeZ.add(top);
 
-      // helpers
-      const grid = new THREE.GridHelper(10, 20, 0x6666ff, 0x333333);
-      scene.add(grid);
-      const axes = new THREE.AxesHelper(2);
-      scene.add(axes);
+      /* ==== animatie: 0° ↔ 45° rond Z ==== */
+      let targetZ = 0; // 0 = vlak
+      const OPEN_Z = 0;
+      const ANGLE_45 = Math.PI / 4; // 45°
+      let angleZ = OPEN_Z;
 
-      // animate
+      function toggle() {
+        targetZ = Math.abs(targetZ - ANGLE_45) < 1e-4 ? OPEN_Z : ANGLE_45;
+        // klein klikje
+        try {
+          const ac = new (window.AudioContext || window.webkitAudioContext)();
+          const o = ac.createOscillator(),
+            g = ac.createGain();
+          o.type = "square";
+          o.frequency.value = 760;
+          g.gain.value = 0.05;
+          o.connect(g).connect(ac.destination);
+          o.start();
+          setTimeout(() => {
+            g.gain.exponentialRampToValueAtTime(0.0001, ac.currentTime + 0.06);
+            o.stop(ac.currentTime + 0.08);
+          }, 10);
+        } catch (_) {}
+      }
+      renderer.domElement.addEventListener("click", toggle);
+      addEventListener("keydown", (e) => {
+        if (e.code === "Space") {
+          e.preventDefault();
+          toggle();
+        }
+      });
+
+      /* ==== loop ==== */
+      const clock = new THREE.Clock();
       function animate() {
         requestAnimationFrame(animate);
+        const dt = Math.min(clock.getDelta(), 0.033);
+        // veer/lerp
+        angleZ += (targetZ - angleZ) * 12 * dt;
+        hingeZ.rotation.set(0, 0, angleZ);
         controls.update();
         renderer.render(scene, camera);
       }
       animate();
 
+      /* ==== resize ==== */
       addEventListener("resize", () => {
         renderer.setSize(innerWidth, innerHeight);
         camera.aspect = innerWidth / innerHeight;
