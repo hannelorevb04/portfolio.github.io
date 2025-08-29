@@ -14,30 +14,9 @@
       canvas {
         display: block;
       }
-      .hint {
-        position: fixed;
-        left: 50%;
-        bottom: 14px;
-        transform: translateX(-50%);
-        font: 600 12px/1.2 system-ui, -apple-system, Segoe UI, Roboto, Helvetica,
-          Arial;
-        color: #cfe7ff;
-        letter-spacing: 0.04em;
-        opacity: 0.9;
-        user-select: none;
-        background: rgba(0, 0, 0, 0.25);
-        padding: 8px 10px;
-        border-radius: 999px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2),
-          inset 0 0 0 1px rgba(255, 255, 255, 0.08);
-      }
     </style>
   </head>
   <body>
-    <div class="hint">
-      Klik of druk <b>SPATIE</b> om te klappen • Sleep om rond te draaien
-    </div>
-    <!-- map 'three' -> CDN pad -->
     <script type="importmap">
       {
         "imports": {
@@ -45,26 +24,20 @@
         }
       }
     </script>
-
     <script type="module">
-      import * as THREE from "https://unpkg.com/three@0.161.0/build/three.module.js";
+      import * as THREE from "three";
       import { OrbitControls } from "https://unpkg.com/three@0.161.0/examples/jsm/controls/OrbitControls.js";
 
-      const renderer = new THREE.WebGLRenderer({
-        antialias: true,
-        alpha: false,
-      });
+      // renderer
+      const renderer = new THREE.WebGLRenderer({ antialias: true });
       renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
       renderer.setSize(innerWidth, innerHeight);
       renderer.outputColorSpace = THREE.SRGBColorSpace;
-      renderer.shadowMap.enabled = true;
-      renderer.shadowMap.type = THREE.PCFSoftShadowMap;
       document.body.appendChild(renderer.domElement);
 
+      // scene & camera
       const scene = new THREE.Scene();
       scene.background = new THREE.Color(0x0c1e2f);
-
-      // Camera
       const camera = new THREE.PerspectiveCamera(
         50,
         innerWidth / innerHeight,
@@ -72,427 +45,167 @@
         100
       );
       camera.position.set(2.2, 1.3, 3.2);
-
-      // Controls
       const controls = new OrbitControls(camera, renderer.domElement);
       controls.enableDamping = true;
       controls.target.set(0, 0.65, 0);
 
-      // Lights
-      const hemi = new THREE.HemisphereLight(0xddeeff, 0x223344, 0.8);
-      scene.add(hemi);
-
-      const key = new THREE.DirectionalLight(0xffffff, 2.0);
+      // lights
+      scene.add(new THREE.HemisphereLight(0xddeeff, 0x223344, 0.8));
+      const key = new THREE.DirectionalLight(0xffffff, 1.6);
       key.position.set(3, 6, 4);
       key.castShadow = true;
-      key.shadow.mapSize.set(1024, 1024);
-      key.shadow.radius = 4;
-      key.shadow.camera.near = 1;
-      key.shadow.camera.far = 20;
       scene.add(key);
 
-      // Ground
-      const groundMat = new THREE.MeshStandardMaterial({
-        color: 0x0e2740,
-        roughness: 0.9,
-        metalness: 0.0,
-      });
-      const ground = new THREE.Mesh(new THREE.PlaneGeometry(20, 20), groundMat);
+      // ground
+      const ground = new THREE.Mesh(
+        new THREE.PlaneGeometry(20, 20),
+        new THREE.MeshStandardMaterial({ color: 0x0e2740, roughness: 0.9 })
+      );
       ground.rotation.x = -Math.PI / 2;
-      ground.position.y = 0;
       ground.receiveShadow = true;
       scene.add(ground);
 
-      // ---------- Utility: tiny noise canvas for roughness/normal-ish ----------
-      function makeNoiseCanvas(w = 256, h = 256, contrast = 1.4) {
-        const c = document.createElement("canvas");
-        c.width = w;
-        c.height = h;
-        const ctx = c.getContext("2d");
-        const img = ctx.createImageData(w, h);
+      // === Helper textures ===
+      function noiseTex(w = 256, h = 256, c = 1.4) {
+        const cnv = document.createElement("canvas");
+        cnv.width = w;
+        cnv.height = h;
+        const ctx = cnv.getContext("2d"),
+          img = ctx.createImageData(w, h);
         for (let i = 0; i < img.data.length; i += 4) {
-          const v = Math.pow(Math.random(), contrast) * 255;
+          const v = Math.pow(Math.random(), c) * 255;
           img.data[i] = img.data[i + 1] = img.data[i + 2] = v;
           img.data[i + 3] = 255;
         }
         ctx.putImageData(img, 0, 0);
-        return new THREE.CanvasTexture(c);
+        return new THREE.CanvasTexture(cnv);
       }
 
-      // ---------- Textures: chevrons for the slate top ----------
-      function makeChevronsTexture(width = 1024, height = 256) {
-        const c = document.createElement("canvas");
-        c.width = width;
-        c.height = height;
-        const ctx = c.getContext("2d");
-        ctx.fillStyle = "#1c1f22";
-        ctx.fillRect(0, 0, width, height);
-
-        const colors = [
-          "#e23d28",
-          "#f7b500",
-          "#39b54a",
-          "#00adef",
-          "#2e3192",
-          "#ffffff",
-        ];
-        const stripeW = width / colors.length;
-        ctx.save();
-        ctx.translate(0, 0);
-        ctx.beginPath();
-        ctx.rect(0, 0, width, height);
-        ctx.clip();
-
-        // Diagonal stripes
-        for (let i = 0; i < colors.length; i++) {
-          ctx.fillStyle = colors[i];
-          ctx.save();
-          ctx.translate(i * stripeW, 0);
-          ctx.transform(1, 0, -0.5, 1, 0, 0); // shear voor hoek
-          ctx.fillRect(0, 0, stripeW + 30, height);
-          ctx.restore();
-        }
-        ctx.restore();
-
-        // Subtle edge wear
-        ctx.globalAlpha = 0.25;
-        ctx.fillStyle = "#000";
-        ctx.fillRect(0, 0, width, 10); // top vignette
-        ctx.fillRect(0, height - 10, width, 10);
-        ctx.globalAlpha = 1;
-
-        const tex = new THREE.CanvasTexture(c);
-        tex.colorSpace = THREE.SRGBColorSpace;
-        tex.wrapS = tex.wrapT = THREE.ClampToEdgeWrapping;
-        return tex;
-      }
-
-      // ---------- Textures: front board with portfolio text ----------
-      function drawBoardTexture(info, width = 2048, height = 1024) {
-        const c = document.createElement("canvas");
-        c.width = width;
-        c.height = height;
-        const ctx = c.getContext("2d");
-
-        // base
-        ctx.fillStyle = "#f6f8fb";
-        ctx.fillRect(0, 0, width, height);
-
-        // subtle paper noise
-        ctx.globalAlpha = 0.08;
-        const noise = document.createElement("canvas");
-        noise.width = 256;
-        noise.height = 256;
-        const nctx = noise.getContext("2d");
-        const id = nctx.createImageData(256, 256);
-        for (let i = 0; i < id.data.length; i += 4) {
-          const v = (Math.random() * 255) | 0;
-          id.data[i] = id.data[i + 1] = id.data[i + 2] = v;
-          id.data[i + 3] = 255;
-        }
-        nctx.putImageData(id, 0, 0);
-        const ntex = ctx.createPattern(noise, "repeat");
-        ctx.fillStyle = ntex;
-        ctx.fillRect(0, 0, width, height);
-        ctx.globalAlpha = 1;
-
-        // lines
-        const margin = 90;
-        const lineY = [240, 380, 520, 660, 800];
-        ctx.strokeStyle = "#cfd7e3";
-        ctx.lineWidth = 6;
-        lineY.forEach((y) => {
-          ctx.beginPath();
-          ctx.moveTo(margin, y);
-          ctx.lineTo(width - margin, y);
-          ctx.stroke();
-        });
-
-        // labels (left)
-        ctx.fillStyle = "#0b2236";
-        ctx.font =
-          "700 64px system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial";
-        ctx.fillText("Scene", margin, 210);
-        ctx.fillText("Director", margin, 350);
-        ctx.fillText("Portfolio", margin, 490);
-        ctx.fillText("Contact", margin, 630);
-        ctx.fillText("Tech", margin, 770);
-
-        // right column content
-        ctx.font =
-          "800 84px ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto";
-        ctx.fillStyle = "#152c43";
-        ctx.fillText(info.scene, margin + 420, 210);
-        ctx.fillText(info.director, margin + 420, 350);
-        ctx.fillText(info.portfolio, margin + 420, 490);
-
-        ctx.font =
-          "700 56px ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto";
-        ctx.fillStyle = "#203a57";
-        ctx.fillText(info.contact, margin + 420, 630);
-
-        ctx.font =
-          "700 56px ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto";
-        ctx.fillStyle = "#203a57";
-        ctx.fillText(info.tech, margin + 420, 770);
-
-        // tiny FPS/DATE boxes like real slates
-        ctx.strokeStyle = "#8aa1b8";
-        ctx.lineWidth = 4;
-        ctx.strokeRect(width - 540, 70, 140, 80);
-        ctx.strokeRect(width - 380, 70, 140, 80);
-        ctx.strokeRect(width - 220, 70, 140, 80);
-        ctx.fillStyle = "#203a57";
-        ctx.font = "600 34px system-ui";
-        ctx.fillText("FPS", width - 520, 120);
-        ctx.fillText("ISO", width - 360, 120);
-        ctx.fillText("DATE", width - 210, 120);
-
-        // soft shadow border
-        const grd = ctx.createLinearGradient(0, 0, 0, height);
-        grd.addColorStop(0, "rgba(0,0,0,.08)");
-        grd.addColorStop(1, "rgba(0,0,0,.0)");
-        ctx.fillStyle = grd;
-        ctx.fillRect(0, 0, width, 30);
-
-        const tex = new THREE.CanvasTexture(c);
-        tex.colorSpace = THREE.SRGBColorSpace;
-        return tex;
-      }
-
-      // ---------- Textures: LED time display (animated) ----------
-      function makeLedTexture() {
-        const w = 1024,
-          h = 180;
+      // === Chevron texture (minder fel) ===
+      function chevronsTex(w = 1024, h = 256) {
         const c = document.createElement("canvas");
         c.width = w;
         c.height = h;
         const ctx = c.getContext("2d");
-        const tex = new THREE.CanvasTexture(c);
-        tex.colorSpace = THREE.SRGBColorSpace;
+        ctx.fillStyle = "#444"; // donkergrijs als achtergrond
+        ctx.fillRect(0, 0, w, h);
 
-        function draw() {
-          ctx.clearRect(0, 0, w, h);
-          ctx.fillStyle = "#0b0b0f";
-          ctx.fillRect(0, 0, w, h);
-
-          const t = new Date();
-          const pad = (n) => String(n).padStart(2, "0");
-          const text = `${pad(t.getHours())}:${pad(t.getMinutes())}:${pad(
-            t.getSeconds()
-          )}.${String(t.getMilliseconds()).padStart(3, "0").slice(0, 2)}`;
-
-          // glow
-          ctx.shadowBlur = 18;
-          ctx.shadowColor = "rgba(255,40,40,.9)";
-          ctx.fillStyle = "#ff2a2a";
-          ctx.font = '900 120px "Roboto Mono", ui-monospace, monospace';
-          ctx.textAlign = "center";
-          ctx.textBaseline = "middle";
-          ctx.fillText(text, w / 2, h / 2 + 5);
-
-          ctx.shadowBlur = 0;
-          tex.needsUpdate = true;
+        const colors = [
+          "#cc2b2b", // rood (donkerder)
+          "#e6b800", // geel (zachter)
+          "#2fa64a", // groen (rustiger)
+          "#1c90d4", // blauw
+          "#4527a0", // paars
+          "#f2f2f2", // wit
+        ];
+        const sw = w / colors.length;
+        for (let i = 0; i < colors.length; i++) {
+          ctx.save();
+          ctx.fillStyle = colors[i];
+          ctx.setTransform(1, 0, -0.5, 1, i * sw, 0);
+          ctx.fillRect(0, 0, sw + 60, h);
+          ctx.restore();
         }
-        return { texture: tex, draw };
+
+        ctx.strokeStyle = "rgba(0,0,0,.35)";
+        ctx.lineWidth = 5;
+        ctx.strokeRect(0, 0, w, h);
+
+        const t = new THREE.CanvasTexture(c);
+        t.colorSpace = THREE.SRGBColorSpace;
+        return t;
       }
 
-      // ---------- Build the clapper ----------
+      // === Board texture (met tekst placeholders) ===
+      function boardTex(info, w = 2048, h = 1024) {
+        const c = document.createElement("canvas");
+        c.width = w;
+        c.height = h;
+        const ctx = c.getContext("2d");
+        ctx.fillStyle = "#f6f8fb";
+        ctx.fillRect(0, 0, w, h);
+
+        ctx.fillStyle = "#0b2236";
+        ctx.font = "700 64px system-ui";
+        ctx.fillText("Portfolio:", 90, 200);
+        ctx.fillText(info.portfolio, 420, 200);
+        ctx.fillText("Contact:", 90, 320);
+        ctx.fillText(info.contact, 420, 320);
+        ctx.fillText("Tech:", 90, 440);
+        ctx.fillText(info.tech, 420, 440);
+
+        const tex = new THREE.CanvasTexture(c);
+        tex.colorSpace = THREE.SRGBColorSpace;
+        return tex;
+      }
+
+      // === Clapper ===
       const clapper = new THREE.Group();
       scene.add(clapper);
       clapper.position.set(0, 0.6, 0);
 
-      // Measures (meters)
       const boardW = 1.4,
         boardH = 0.8,
         boardD = 0.04;
       const topH = 0.16,
         topD = 0.04;
 
-      // Board
-      const boardGeo = new THREE.BoxGeometry(boardW, boardH, boardD);
-      const infoCanvas = drawBoardTexture({
-        scene: "PORTFOLIO / 2025",
-        director: "Hannelore Van Buynderen",
-        portfolio: "hannelore.design",
-        contact: "mail@hannelore.design  •  @hannelorev",
-        tech: "HTML/CSS • JS/Three.js • Figma",
-      });
-      const boardMat = new THREE.MeshStandardMaterial({
-        color: 0xffffff,
-        map: infoCanvas,
-        roughnessMap: makeNoiseCanvas(512, 256, 1.6),
-        roughness: 0.55,
-        metalness: 0.02,
-      });
-      const board = new THREE.Mesh(boardGeo, boardMat);
+      // board mesh
+      const board = new THREE.Mesh(
+        new THREE.BoxGeometry(boardW, boardH, boardD),
+        new THREE.MeshStandardMaterial({
+          map: boardTex({
+            portfolio: "hannelore.design",
+            contact: "mail@hannelore.design • @hannelorev",
+            tech: "HTML/CSS • JS/Three.js • Figma",
+          }),
+          roughnessMap: noiseTex(512, 256, 1.6),
+          roughness: 0.55,
+          metalness: 0.02,
+        })
+      );
       board.castShadow = true;
       board.receiveShadow = true;
       clapper.add(board);
 
-      // LED panel strip (inset)
-      const { texture: ledTex, draw: drawLED } = makeLedTexture();
-      const ledMat = new THREE.MeshStandardMaterial({
-        color: 0xffffff,
-        map: ledTex,
-        emissive: new THREE.Color(0x770000),
-        emissiveIntensity: 0.35,
-      });
-      const led = new THREE.Mesh(
-        new THREE.BoxGeometry(boardW * 0.86, topH * 0.95, 0.01),
-        ledMat
-      );
-      led.position.set(0, boardH * 0.23, boardD / 2 + 0.005);
-      led.castShadow = false;
-      led.receiveShadow = false;
-      clapper.add(led);
-
-      // Slate top (hinged)
-      const chevrons = makeChevronsTexture();
-      const topGeo = new THREE.BoxGeometry(boardW * 0.92, topH, topD);
-      const topMat = new THREE.MeshStandardMaterial({
-        color: 0x22262a,
-        map: chevrons,
-        roughnessMap: makeNoiseCanvas(512, 128, 1.5),
-        roughness: 0.45,
-        metalness: 0.05,
-      });
-      const top = new THREE.Mesh(topGeo, topMat);
-      top.castShadow = true;
-      top.receiveShadow = true;
-
-      // Hinge pivot (so it rotates around its long edge)
+      // hinge + klep (zelfde breedte als board)
       const hinge = new THREE.Group();
-      hinge.position.set(
-        0,
-        boardH / 2 + topH / 2 - 0.01,
-        boardD / 2 - topD / 2
-      );
+      hinge.position.set(0, boardH / 2 + topH / 2, 0);
       clapper.add(hinge);
 
-      // shift top back so the pivot is at its back edge
-      top.position.z = -topD / 2;
-      hinge.add(top);
-
-      // Hinge metal cylinders
-      const pinMat = new THREE.MeshStandardMaterial({
-        color: 0x8a9bab,
-        roughness: 0.25,
-        metalness: 0.9,
-      });
-      const pin = new THREE.Mesh(
-        new THREE.CylinderGeometry(0.02, 0.02, boardW * 0.92, 24),
-        pinMat
-      );
-      pin.rotation.z = Math.PI / 2;
-      pin.position.set(0, -topH / 2, 0.02);
-      hinge.add(pin);
-
-      // Small screw heads
-      for (let i = -4; i <= 4; i += 2) {
-        const screw = new THREE.Mesh(
-          new THREE.CylinderGeometry(0.008, 0.008, 0.01, 16),
-          pinMat
-        );
-        screw.rotation.x = Math.PI / 2;
-        screw.position.set(i * 0.12, -topH * 0.15, 0.01);
-        hinge.add(screw);
-      }
-
-      // Subtle back plate (black)
-      const backPlate = new THREE.Mesh(
-        new THREE.BoxGeometry(boardW * 0.95, boardH * 0.96, 0.01),
+      const top = new THREE.Mesh(
+        new THREE.BoxGeometry(boardW, topH, topD), // exact even breed
         new THREE.MeshStandardMaterial({
-          color: 0x0f1114,
-          roughness: 0.9,
-          metalness: 0,
+          map: chevronsTex(),
+          roughnessMap: noiseTex(512, 128, 1.5),
+          roughness: 0.45,
+          metalness: 0.05,
         })
       );
-      backPlate.position.set(0, 0, -boardD / 2 - 0.001);
-      backPlate.receiveShadow = true;
-      clapper.add(backPlate);
+      top.position.set(0, 0, 0);
+      top.castShadow = true;
+      top.receiveShadow = true;
+      hinge.add(top);
 
-      // Tilt whole clapper a bit
-      clapper.rotation.x = -0.12;
+      // helpers
+      const grid = new THREE.GridHelper(10, 20, 0x6666ff, 0x333333);
+      scene.add(grid);
+      const axes = new THREE.AxesHelper(2);
+      scene.add(axes);
 
-      // Animation state
-      let isClosing = false;
-      let angle = 0.9; // radians (open)
-      const CLOSED = 0.02;
-      const OPEN = 0.9;
-
-      // Click / Space to clap
-      function toggleClap() {
-        isClosing = true;
-        // tiny “click” via WebAudio
-        try {
-          const ac = new (window.AudioContext || window.webkitAudioContext)();
-          const o = ac.createOscillator();
-          const g = ac.createGain();
-          o.type = "square";
-          o.frequency.value = 780;
-          g.gain.value = 0.06;
-          o.connect(g).connect(ac.destination);
-          o.start();
-          setTimeout(() => {
-            g.gain.exponentialRampToValueAtTime(0.0001, ac.currentTime + 0.06);
-            o.stop(ac.currentTime + 0.08);
-          }, 10);
-        } catch (_) {}
-      }
-      renderer.domElement.addEventListener("click", toggleClap);
-      addEventListener("keydown", (e) => {
-        if (e.code === "Space") {
-          e.preventDefault();
-          toggleClap();
-        }
-      });
-
-      // Resize
-      addEventListener("resize", () => {
-        renderer.setSize(innerWidth, innerHeight);
-        camera.aspect = innerWidth / innerHeight;
-        camera.updateProjectionMatrix();
-      });
-
-      // Animate
-      const clock = new THREE.Clock();
+      // animate
       function animate() {
         requestAnimationFrame(animate);
-        const dt = Math.min(clock.getDelta(), 0.033);
-
-        // LED refresh
-        drawLED();
-
-        // Damped hinge motion
-        const target = isClosing ? CLOSED : OPEN;
-        const vel = (target - angle) * 10; // spring like
-        angle += vel * dt;
-        if (isClosing && Math.abs(angle - target) < 0.01) {
-          isClosing = false; // bounce back automatically
-        } else if (!isClosing && angle > OPEN) {
-          angle = OPEN;
-        }
-        // small bounce
-        if (!isClosing && angle < OPEN) {
-          angle += (OPEN - angle) * 6 * dt;
-        }
-        hinge.rotation.x = -angle;
-
         controls.update();
         renderer.render(scene, camera);
       }
       animate();
 
-      // --------- Portfolio text you can tweak quickly ----------
-      const PORTFOLIO = {
-        scene: "PORTFOLIO / 2025",
-        director: "Hannelore Van Buynderen",
-        portfolio: "hannelore.design",
-        contact: "mail@hannelore.design  •  @hannelorev",
-        tech: "HTML/CSS • JS/Three.js • Figma",
-      };
-      // (Als je PORTFOLIO wijzigt tijdens dev, roep opnieuw drawBoardTexture aan)
+      addEventListener("resize", () => {
+        renderer.setSize(innerWidth, innerHeight);
+        camera.aspect = innerWidth / innerHeight;
+        camera.updateProjectionMatrix();
+      });
     </script>
   </body>
 </html>
