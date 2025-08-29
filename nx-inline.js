@@ -1,4 +1,4 @@
-/* nx-card-slideshow.js — in-card slideshow with iframe scaling + per-slide tuning */
+/* nx-card-slideshow.js — in-card slideshow zonder dots (pijlen + autoplay) */
 (function () {
   const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
 
@@ -42,7 +42,7 @@
 
   function buildCard(card) {
     const list = parseSlides(card.getAttribute("data-slides")).filter(Boolean);
-    if (list.length <= 1) return;
+    if (list.length <= 1) return; // geen slideshow nodig
 
     const host = card.querySelector(".overlap-group") || card;
     if (!host) return;
@@ -102,7 +102,7 @@
       }
     });
 
-    // Nav + dots
+    // Alleen pijlen (geen dots)
     const nav = make("div", "slideshow-nav", container);
     const prev = make("button", "prev", nav);
     prev.type = "button";
@@ -110,14 +110,6 @@
     const next = make("button", "next", nav);
     next.type = "button";
     next.textContent = "›";
-
-    // const dotsWrap = make('div', 'slideshow-dots', container);
-    // for (let d=0; d<list.length; d++){
-    //   const dot = make('button', 'dot' + (d===0?' active':''), dotsWrap);
-    //   dot.type='button';
-    //   dot.setAttribute('aria-label','Ga naar slide ' + (d+1));
-    //   dot.addEventListener('click', (ev)=>{ ev.stopPropagation(); show(d); restart(); });
-    // }
 
     let idx = 0,
       total = list.length,
@@ -127,12 +119,9 @@
 
     function show(n) {
       const slides = $$(".slide", slidesWrap);
-      const dots = $$(".dot", dotsWrap);
       slides[idx]?.classList.remove("active");
-      dots[idx]?.classList.remove("active");
       idx = (n + total) % total;
       slides[idx]?.classList.add("active");
-      dots[idx]?.classList.add("active");
     }
     function step(d) {
       show(idx + d);
@@ -171,6 +160,18 @@
     container.addEventListener("mouseleave", () => {
       hovering = false;
       start();
+    });
+
+    // Toetsenbord-ondersteuning (optioneel, handig)
+    container.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowLeft") {
+        step(-1);
+        restart();
+      }
+      if (e.key === "ArrowRight") {
+        step(1);
+        restart();
+      }
     });
 
     start();
