@@ -1,127 +1,185 @@
 /* nx-card-slideshow.js — in-card slideshow with iframe scaling + per-slide tuning */
-(function(){
-  const $$ = (sel, ctx=document) => Array.from(ctx.querySelectorAll(sel));
+(function () {
+  const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
 
-  function parseSlides(raw){
+  function parseSlides(raw) {
     if (!raw) return [];
-    try { const arr = JSON.parse(raw); return Array.isArray(arr) ? arr : []; }
-    catch { return []; }
+    try {
+      const arr = JSON.parse(raw);
+      return Array.isArray(arr) ? arr : [];
+    } catch {
+      return [];
+    }
   }
 
-  function make(tag, cls, parent, before){
+  function make(tag, cls, parent, before) {
     const el = document.createElement(tag);
     if (cls) el.className = cls;
-    if (parent){
+    if (parent) {
       if (before) parent.insertBefore(el, before);
       else parent.appendChild(el);
     }
     return el;
   }
 
-  function parseIframeDef(def){
+  function parseIframeDef(def) {
     // "iframe:URL|scale=0.8|x=-10px|y=8px"
     const out = { url: "", scale: null, x: null, y: null };
-    if (typeof def !== 'string') return out;
-    if (!def.startsWith('iframe:')) return out;
+    if (typeof def !== "string") return out;
+    if (!def.startsWith("iframe:")) return out;
     const rest = def.slice(7);
-    const parts = rest.split('|');
-    out.url = (parts.shift() || '').trim();
-    parts.forEach(p => {
-      const [k,v] = p.split('=').map(s=> (s||'').trim());
+    const parts = rest.split("|");
+    out.url = (parts.shift() || "").trim();
+    parts.forEach((p) => {
+      const [k, v] = p.split("=").map((s) => (s || "").trim());
       if (!k) return;
-      if (k === 'scale') out.scale = parseFloat(v);
-      if (k === 'x') out.x = v;
-      if (k === 'y') out.y = v;
+      if (k === "scale") out.scale = parseFloat(v);
+      if (k === "x") out.x = v;
+      if (k === "y") out.y = v;
     });
     return out;
   }
 
-  function buildCard(card){
-    const list = parseSlides(card.getAttribute('data-slides')).filter(Boolean);
+  function buildCard(card) {
+    const list = parseSlides(card.getAttribute("data-slides")).filter(Boolean);
     if (list.length <= 1) return;
 
-    const host = card.querySelector('.overlap-group') || card;
+    const host = card.querySelector(".overlap-group") || card;
     if (!host) return;
-    if (host.querySelector('.slideshow-container')) return;
+    if (host.querySelector(".slideshow-container")) return;
 
     // clear single preview
-    host.querySelectorAll('img.image, iframe.image').forEach(el => el.remove());
+    host
+      .querySelectorAll("img.image, iframe.image")
+      .forEach((el) => el.remove());
 
     // Insert first
-    const container = make('div', 'slideshow-container', host, host.firstChild);
-    const slidesWrap = make('div', 'slides', container);
+    const container = make("div", "slideshow-container", host, host.firstChild);
+    const slidesWrap = make("div", "slides", container);
 
     // Per-card defaults
-    const dScale = parseFloat(card.getAttribute('data-iframe-scale') || '0.82');
-    const dX  = card.getAttribute('data-iframe-offset-x') || '0px';
-    const dY  = card.getAttribute('data-iframe-offset-y') || '0px';
+    const dScale = parseFloat(card.getAttribute("data-iframe-scale") || "0.82");
+    const dX = card.getAttribute("data-iframe-offset-x") || "0px";
+    const dY = card.getAttribute("data-iframe-offset-y") || "0px";
 
     // Build slides
     list.forEach((src, idx) => {
-      const isIframe = typeof src === 'string' && src.indexOf('iframe:') === 0;
-      const slide = make('div', 'slide' + (idx===0?' active':''), slidesWrap);
+      const isIframe = typeof src === "string" && src.indexOf("iframe:") === 0;
+      const slide = make(
+        "div",
+        "slide" + (idx === 0 ? " active" : ""),
+        slidesWrap
+      );
 
-      if (isIframe){
+      if (isIframe) {
         const info = parseIframeDef(src);
-        const scaler = make('div', 'iframe-scaler', slide);
-        scaler.style.setProperty('--scale', String((info.scale && info.scale>0 && info.scale<=1) ? info.scale : dScale));
-        scaler.style.setProperty('--tx', (info.x!=null) ? info.x : dX);
-        scaler.style.setProperty('--ty', (info.y!=null) ? info.y : dY);
+        const scaler = make("div", "iframe-scaler", slide);
+        scaler.style.setProperty(
+          "--scale",
+          String(
+            info.scale && info.scale > 0 && info.scale <= 1
+              ? info.scale
+              : dScale
+          )
+        );
+        scaler.style.setProperty("--tx", info.x != null ? info.x : dX);
+        scaler.style.setProperty("--ty", info.y != null ? info.y : dY);
 
-        const ifr = make('iframe', 'image', scaler);
+        const ifr = make("iframe", "image", scaler);
         ifr.src = info.url;
-        ifr.setAttribute('frameborder','0');
-        ifr.setAttribute('scrolling','no');
-        ifr.setAttribute('loading','eager');
-        ifr.title = (card.getAttribute('data-title') || 'Project') + ' – ' + (idx+1);
-        ifr.style.pointerEvents = 'none';
+        ifr.setAttribute("frameborder", "0");
+        ifr.setAttribute("scrolling", "no");
+        ifr.setAttribute("loading", "eager");
+        ifr.title =
+          (card.getAttribute("data-title") || "Project") + " – " + (idx + 1);
+        ifr.style.pointerEvents = "none";
       } else {
-        const img = make('img', 'image', slide);
+        const img = make("img", "image", slide);
         img.src = src;
-        img.alt = (card.getAttribute('data-title') || 'Project') + ' – ' + (idx+1);
-        img.decoding = 'async';
+        img.alt =
+          (card.getAttribute("data-title") || "Project") + " – " + (idx + 1);
+        img.decoding = "async";
       }
     });
 
     // Nav + dots
-    const nav = make('div', 'slideshow-nav', container);
-    const prev = make('button', 'prev', nav); prev.type='button'; prev.textContent = '‹';
-    const next = make('button', 'next', nav); next.type='button'; next.textContent = '›';
+    const nav = make("div", "slideshow-nav", container);
+    const prev = make("button", "prev", nav);
+    prev.type = "button";
+    prev.textContent = "‹";
+    const next = make("button", "next", nav);
+    next.type = "button";
+    next.textContent = "›";
 
-    const dotsWrap = make('div', 'slideshow-dots', container);
-    for (let d=0; d<list.length; d++){
-      const dot = make('button', 'dot' + (d===0?' active':''), dotsWrap);
-      dot.type='button';
-      dot.setAttribute('aria-label','Ga naar slide ' + (d+1));
-      dot.addEventListener('click', (ev)=>{ ev.stopPropagation(); show(d); restart(); });
-    }
+    // const dotsWrap = make('div', 'slideshow-dots', container);
+    // for (let d=0; d<list.length; d++){
+    //   const dot = make('button', 'dot' + (d===0?' active':''), dotsWrap);
+    //   dot.type='button';
+    //   dot.setAttribute('aria-label','Ga naar slide ' + (d+1));
+    //   dot.addEventListener('click', (ev)=>{ ev.stopPropagation(); show(d); restart(); });
+    // }
 
-    let idx = 0, total = list.length, timer=null, hovering=false;
+    let idx = 0,
+      total = list.length,
+      timer = null,
+      hovering = false;
     const AUTO_MS = 3800;
 
-    function show(n){
-      const slides = $$('.slide', slidesWrap);
-      const dots   = $$('.dot', dotsWrap);
-      slides[idx]?.classList.remove('active');
-      dots[idx]?.classList.remove('active');
+    function show(n) {
+      const slides = $$(".slide", slidesWrap);
+      const dots = $$(".dot", dotsWrap);
+      slides[idx]?.classList.remove("active");
+      dots[idx]?.classList.remove("active");
       idx = (n + total) % total;
-      slides[idx]?.classList.add('active');
-      dots[idx]?.classList.add('active');
+      slides[idx]?.classList.add("active");
+      dots[idx]?.classList.add("active");
     }
-    function step(d){ show(idx + d); }
-    function stop(){ if (timer){ clearInterval(timer); timer=null; } }
-    function start(){ if (total>1 && !hovering){ timer = setInterval(()=>step(1), AUTO_MS); } }
-    function restart(){ stop(); start(); }
+    function step(d) {
+      show(idx + d);
+    }
+    function stop() {
+      if (timer) {
+        clearInterval(timer);
+        timer = null;
+      }
+    }
+    function start() {
+      if (total > 1 && !hovering) {
+        timer = setInterval(() => step(1), AUTO_MS);
+      }
+    }
+    function restart() {
+      stop();
+      start();
+    }
 
-    prev.addEventListener('click', (ev)=>{ ev.stopPropagation(); step(-1); restart(); });
-    next.addEventListener('click', (ev)=>{ ev.stopPropagation(); step(1);  restart(); });
+    prev.addEventListener("click", (ev) => {
+      ev.stopPropagation();
+      step(-1);
+      restart();
+    });
+    next.addEventListener("click", (ev) => {
+      ev.stopPropagation();
+      step(1);
+      restart();
+    });
 
-    container.addEventListener('mouseenter', ()=>{ hovering=true; stop(); });
-    container.addEventListener('mouseleave', ()=>{ hovering=false; start(); });
+    container.addEventListener("mouseenter", () => {
+      hovering = true;
+      stop();
+    });
+    container.addEventListener("mouseleave", () => {
+      hovering = false;
+      start();
+    });
 
     start();
   }
 
-  function init(){ document.querySelectorAll('.project-card').forEach(buildCard); }
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+  function init() {
+    document.querySelectorAll(".project-card").forEach(buildCard);
+  }
+  if (document.readyState === "loading")
+    document.addEventListener("DOMContentLoaded", init);
+  else init();
 })();
