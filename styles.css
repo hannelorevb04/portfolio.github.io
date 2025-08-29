@@ -866,7 +866,7 @@ body {
 }
 .modal-overlay .nx-primary {
   background: #ffffff;
-  color: #0c0c0c;
+  color: #0f2f49;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -1418,11 +1418,29 @@ body {
 .modal-overlay .nx-card * {
   font-family: sans-serif;
 }
+.projects {
+  cursor: grab;
+  user-select: none;
+  white-space: nowrap; /* als je inline-cards gebruikt */
+  overflow-x: hidden; /* zoals je voorbeeld; of auto als je wil */
+  will-change: transform;
+  transition: transform 0.2s ease;
+  -webkit-user-drag: none;
+  touch-action: pan-x;
+}
+
+.projects img {
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
+.projects.active {
+  cursor: grabbing;
+  transform: scale(1); /* zet op 1.0/0.98 naar smaak */
+}
 
 .projects.dragging {
   cursor: grabbing;
-  cursor: -webkit-grabbing;
-  user-select: none;
 }
 
 /* Hide dot row when empty */
