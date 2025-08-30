@@ -84,18 +84,15 @@ body {
   opacity: 0.7;
 }
 .main-nav {
-  position: relative;
+  position: absolute; /* los van de flow, bovenop de video */
+  top: 24px;
+  right: 24px;
+  left: auto;
+  padding: 0; /* geen extra marge rond de knop */
   z-index: 10;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 2rem 3rem;
+  display: block; /* geen space-between die hem weer naar links duwt */
 }
-.nav-logo {
-  color: #102e4a;
-  font-size: 1.5rem;
-  font-weight: 700;
-}
+
 /* Center het logo pixel‑precies in de cirkel */
 .nav-profile {
   width: 48px;
