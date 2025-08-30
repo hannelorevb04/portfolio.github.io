@@ -116,7 +116,7 @@ body {
   left: 3rem;
   transform: translateY(-50%);
   z-index: 10;
-  max-width: 600px;
+  max-width: 545px;
 }
 .hero-title {
   color: #102e4a;
