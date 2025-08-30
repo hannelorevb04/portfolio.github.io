@@ -36,6 +36,22 @@
   align-items: center;
   cursor: pointer;
   transition: transform 0.15s ease, filter 0.15s ease;
+  border-radius: 50%;
+}
+
+.profile-card:hover {
+  transform: scale(1.05);
+  box-shadow: none;
+}
+/* verplaats de glow naar .profile-circle */
+.profile-card.designer:hover .profile-circle {
+  box-shadow: 0 0 25px 6px rgba(242, 78, 137, 0.6);
+}
+.profile-card.developer:hover .profile-circle {
+  box-shadow: 0 0 25px 6px rgba(0, 122, 255, 0.6);
+}
+.profile-card.mixed:hover .profile-circle {
+  box-shadow: 0 0 25px 6px rgba(237, 28, 36, 0.6);
 }
 
 .profile-label {
