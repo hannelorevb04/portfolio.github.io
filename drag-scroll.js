@@ -1,7 +1,6 @@
-// Click & Drag zoals in je voorbeeld – voor alle .projects rails
 (function () {
-  const selector = ".projects"; // pas aan indien nodig
-  const DRAG_MULTIPLIER = 2; // zoals in je voorbeeld: *2
+  const selector = ".projects";
+  const DRAG_MULTIPLIER = 2;
 
   function makeDrag(slider) {
     let isDown = false;
@@ -9,12 +8,17 @@
     let scrollStart = 0;
     let moved = false;
 
-    // helpers
     const addActive = () => slider.classList.add("active");
     const remActive = () => slider.classList.remove("active");
 
+    // ----- helpers -----
+    function canDrag() {
+      return slider.dataset.mode === "rail"; // alleen drag op desktop/rail
+    }
+
     // MOUSE
     slider.addEventListener("mousedown", (e) => {
+      if (!canDrag()) return;
       isDown = true;
       moved = false;
       addActive();
@@ -23,29 +27,26 @@
     });
 
     slider.addEventListener("mousemove", (e) => {
-      if (!isDown) return;
-      e.preventDefault(); // voorkomt text select/ghost drag
+      if (!canDrag() || !isDown) return;
+      e.preventDefault();
       const x = e.pageX - slider.offsetLeft;
       const walk = (x - startX) * DRAG_MULTIPLIER;
       slider.scrollLeft = scrollStart - walk;
-      if (Math.abs(walk) > 3) moved = true; // drempel
+      if (Math.abs(walk) > 3) moved = true;
     });
 
-    slider.addEventListener("mouseup", () => {
-      isDown = false;
-      remActive();
-    });
-
-    slider.addEventListener("mouseleave", () => {
-      isDown = false;
-      remActive();
-    });
+    ["mouseup", "mouseleave"].forEach((ev) =>
+      slider.addEventListener(ev, () => {
+        isDown = false;
+        remActive();
+      })
+    );
 
     // TOUCH
     slider.addEventListener(
       "touchstart",
       (e) => {
-        if (!e.touches || !e.touches[0]) return;
+        if (!canDrag() || !e.touches[0]) return;
         isDown = true;
         moved = false;
         addActive();
@@ -58,9 +59,7 @@
     slider.addEventListener(
       "touchmove",
       (e) => {
-        if (!isDown || !e.touches || !e.touches[0]) return;
-        // niet preventDefault zodat native momentum blijft, maar je kan het inschakelen:
-        // e.preventDefault();
+        if (!canDrag() || !isDown || !e.touches[0]) return;
         const x = e.touches[0].pageX - slider.offsetLeft;
         const walk = (x - startX) * DRAG_MULTIPLIER;
         slider.scrollLeft = scrollStart - walk;
@@ -69,17 +68,14 @@
       { passive: true }
     );
 
-    slider.addEventListener("touchend", () => {
-      isDown = false;
-      remActive();
-    });
+    ["touchend", "touchcancel"].forEach((ev) =>
+      slider.addEventListener(ev, () => {
+        isDown = false;
+        remActive();
+      })
+    );
 
-    slider.addEventListener("touchcancel", () => {
-      isDown = false;
-      remActive();
-    });
-
-    // voorkom “klik” (bijv. modal openen) als je eigenlijk sleepte
+    // klik annuleren na drag
     slider.addEventListener(
       "click",
       (e) => {
@@ -93,7 +89,7 @@
     );
   }
 
-  // Init voor alle rails
+  // Init
   function init() {
     document.querySelectorAll(selector).forEach(makeDrag);
   }
@@ -104,6 +100,7 @@
   }
 })();
 
+// ------- mode toggler -------
 const rails = document.querySelectorAll(".projects");
 const mq = matchMedia("(max-width: 900px)");
 

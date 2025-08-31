@@ -1608,3 +1608,24 @@ body {
 .profile-card {
   cursor: pointer;
 }
+
+/* desktop/rail: horizontaal slepen */
+.projects {
+  touch-action: pan-x;
+  -webkit-overflow-scrolling: touch; /* lekkere inertie op iOS */
+}
+
+/* mobiel/grid: verticaal scrollen over de kaarten */
+@media (max-width: 900px) {
+  .projects {
+    touch-action: pan-y; /* laat verticale pan toe */
+    overflow-x: visible; /* we gebruiken geen horizontale rail meer */
+    overflow-y: visible; /* scrollen gaat via de pagina */
+  }
+
+  /* laat kinderen de touch-action van de container erven */
+  .project-card,
+  .project-card * {
+    touch-action: inherit;
+  }
+}
