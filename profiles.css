@@ -65,3 +65,36 @@
   height: 80px;
   object-fit: contain;
 }
+/* ===== Responsive fix voor profiles ===== */
+@media (max-width: 700px) {
+  .profiles-title {
+    font-size: 1.6rem; /* kleinere titel */
+    margin-bottom: 1.5rem;
+  }
+
+  .profiles-container {
+    flex-direction: row; /* horizontaal */
+    justify-content: center; /* centreren */
+    gap: 16px; /* ruimte tussen cirkels */
+    flex-wrap: nowrap; /* forceer naast elkaar */
+  }
+
+  .profile-card {
+    flex: 0 0 auto; /* voorkomt stretchen */
+  }
+
+  .profile-circle {
+    width: 90px; /* kleiner maken */
+    height: 90px;
+  }
+
+  .profile-icon {
+    width: 44px; /* icon ook kleiner */
+    height: 44px;
+  }
+
+  .profile-label {
+    font-size: 0.85rem; /* kleinere tekst */
+    margin-top: 0.4rem;
+  }
+}
