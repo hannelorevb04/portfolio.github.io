@@ -138,6 +138,8 @@ body {
 .hero-buttons {
   display: flex;
   gap: 1rem;
+  margin-bottom: 2rem; /* standaard ruimte */
+  padding-bottom: 2rem; /* extra buffer */
 }
 .hero-buttons a {
   text-decoration: none;
@@ -1451,4 +1453,158 @@ body {
 }
 .project-card .iframe-project {
   pointer-events: none !important;
+}
+
+/* =========================
+   RESPONSIVE ENHANCEMENTS
+   ========================= */
+
+/* Fluid typografie en spacing */
+:root {
+  --padX: clamp(1rem, 4vw, 3rem);
+}
+.main-nav {
+  padding: 1.25rem var(--padX);
+}
+.projects-section {
+  padding: 0 var(--padX);
+}
+
+/* Hero schaalt mee */
+.hero-title {
+  font-size: clamp(1.8rem, 3.5vw + 0.5rem, 3rem);
+  line-height: 1.1;
+}
+.hero-description {
+  font-size: clamp(0.95rem, 0.7vw + 0.7rem, 1.05rem);
+}
+.video-header {
+  height: clamp(56vh, 68vh, 75vh);
+}
+
+/* Project cards: houd verhouding netjes */
+.project-card {
+  aspect-ratio: 16 / 12; /* hoogte volgt breedte */
+  height: auto; /* i.p.v. vaste 227px */
+}
+.project-card .image {
+  width: 100%;
+  height: 70%; /* bovenste media stuk */
+  object-fit: contain;
+}
+.project-card .text {
+  bottom: 12px;
+}
+
+/* Desktop ≥1200px — zoals je had (rail) */
+@media (min-width: 1200px) {
+  .projects {
+    /* gap: 3rem 1.5rem; */
+    overflow-x: auto;
+    flex-wrap: nowrap;
+  }
+  .project-card {
+    width: 303px;
+    margin-bottom: 3rem; /* extra marge onder elke kaart */
+  } /* exact kaartformaat van je design */
+}
+
+/* Tablet (900–1199px) — iets breder, rail blijft */
+@media (max-width: 1199px) {
+  .projects {
+    gap: 0.6rem;
+  }
+  .project-card {
+    width: min(300px, 42vw);
+  }
+}
+
+/* Kleine tablets/landscape phones (≤900px) */
+@media (max-width: 900px) {
+  .video-header {
+    height: 60vh;
+  }
+  .hero-content {
+    left: var(--padX);
+    right: var(--padX);
+  }
+  .hero-buttons {
+    gap: 0.75rem;
+  }
+
+  /* Rail -> tegelraster; makkelijker scrollen op mobiel */
+  .projects {
+    overflow-x: visible;
+    overflow-y: visible;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+  .project-card {
+    width: calc(50% - 7px); /* 2 naast elkaar */
+    max-width: 520px;
+    aspect-ratio: 16 / 11;
+  }
+  .image {
+    height: 66%;
+  }
+}
+
+/* Phones (≤600px) — 1 kaart per rij + grotere tap targets */
+@media (max-width: 600px) {
+  .main-nav {
+    padding: 0.9rem var(--padX);
+  }
+  .hero-title {
+    font-size: clamp(1.6rem, 7vw, 2.2rem);
+  }
+  .hero-description {
+    font-size: 0.98rem;
+  }
+  .hero-buttons .btn-resume,
+  .hero-buttons .btn-linkedin {
+    padding: 0.7rem 1.1rem;
+    margin-bottom: 3rem; /* meer marge op kleine schermen */
+    /* padding-bottom: 3rem; */
+  }
+
+  .projects {
+    gap: 12px;
+  }
+  .project-card {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+  }
+  .project-card .div {
+    font-size: 15px;
+  }
+  .label {
+    font-size: 9.5px;
+  }
+}
+
+/* ===== Modals/iframes globaal wat flexibeler ===== */
+.modal-overlay .nx-card {
+  width: min(1000px, 96vw);
+  max-height: 90vh;
+}
+.modal-overlay .nx-hero,
+.modal-overlay .nx-hero-slider {
+  padding: 16px 0;
+}
+.modal-overlay .nx-hero-slider .nx-slides {
+  height: min(50vh, 420px);
+}
+.modal-overlay .nx-hero iframe {
+  width: min(1200px, 95vw);
+  height: min(70vh, 780px);
+  border: none;
+  background: #fff;
+}
+
+/* ===== Profiles pagina: stack & grotere touch targets ===== */
+.profiles-container {
+  flex-wrap: wrap;
+}
+.profile-card {
+  cursor: pointer;
 }
