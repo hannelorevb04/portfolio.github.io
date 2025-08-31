@@ -103,3 +103,12 @@
     init();
   }
 })();
+
+const rails = document.querySelectorAll(".projects");
+const mq = matchMedia("(max-width: 900px)");
+
+function setMode() {
+  rails.forEach((r) => (r.dataset.mode = mq.matches ? "grid" : "rail"));
+}
+setMode();
+mq.addEventListener("change", setMode);
