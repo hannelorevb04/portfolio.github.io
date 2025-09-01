@@ -1616,20 +1616,42 @@ body {
 }
 
 /* mobiel/grid: verticaal scrollen over de kaarten */
+/* @media (max-width: 900px) { */
+.projects {
+  touch-action: pan-y; /* laat verticale pan toe */
+  overflow-x: visible; /* we gebruiken geen horizontale rail meer */
+  overflow-y: visible; /* scrollen gaat via de pagina */
+}
+
+/* laat kinderen de touch-action van de container erven */
+.project-card,
+.project-card * {
+  touch-action: inherit;
+}
+.project-card .overlap-group > img,
+.project-card .overlap-group > .image {
+  width: 100%;
+}
+/* } */
+/* BASIS (desktop/rail) */
+.projects {
+  display: flex;
+  gap: 0.45rem;
+  overflow-x: auto; /* horizontaal scrollen/slepen toegestaan */
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  padding-bottom: 1rem;
+  touch-action: pan-x; /* horizontale gestures */
+  -webkit-overflow-scrolling: touch;
+}
+
+/* MOBIEL & TABLET (grid; verticaal scrollen via pagina) */
 @media (max-width: 900px) {
   .projects {
-    touch-action: pan-y; /* laat verticale pan toe */
-    overflow-x: visible; /* we gebruiken geen horizontale rail meer */
-    overflow-y: visible; /* scrollen gaat via de pagina */
-  }
-
-  /* laat kinderen de touch-action van de container erven */
-  .project-card,
-  .project-card * {
-    touch-action: inherit;
-  }
-  .project-card .overlap-group > img,
-  .project-card .overlap-group > .image {
-    width: 100%;
+    flex-wrap: wrap;
+    gap: 14px;
+    overflow-x: visible; /* geen horizontale rail */
+    overflow-y: visible;
+    touch-action: pan-y; /* verticale gestures */
   }
 }
