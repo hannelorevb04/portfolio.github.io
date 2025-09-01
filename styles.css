@@ -1628,4 +1628,8 @@ body {
   .project-card * {
     touch-action: inherit;
   }
+  .project-card .overlap-group > img,
+  .project-card .overlap-group > .image {
+    width: 100%;
+  }
 }
