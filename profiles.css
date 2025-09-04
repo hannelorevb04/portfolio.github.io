@@ -98,3 +98,20 @@
     margin-top: 0.4rem;
   }
 }
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+span,
+button,
+.profile-label,
+.hero-title,
+.hero-description {
+  font-family: "Montserrat", sans-serif !important;
+}

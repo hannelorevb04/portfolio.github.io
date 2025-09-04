@@ -1655,3 +1655,19 @@ body {
     touch-action: pan-y; /* verticale gestures */
   }
 }
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+span,
+button,
+.profile-label,
+.hero-title,
+.hero-description {
+  font-family: "Montserrat", sans-serif !important;
+}
