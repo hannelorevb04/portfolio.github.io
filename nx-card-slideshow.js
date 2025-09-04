@@ -215,3 +215,57 @@
     document.addEventListener("DOMContentLoaded", init);
   else init();
 })();
+
+(function () {
+  let currentLink = null;
+
+  // Hulpfunctie: pak link uit data-link of uit "iframe:" slide
+  function getLinkFromCard(card) {
+    if (card.dataset.link && card.dataset.link !== "#")
+      return card.dataset.link;
+    try {
+      const slides = JSON.parse(card.dataset.slides || "[]");
+      const iframeSlide = slides.find(
+        (s) => typeof s === "string" && s.startsWith("iframe:")
+      );
+      if (iframeSlide) return iframeSlide.replace(/^iframe:/, "").trim();
+    } catch (e) {}
+    return null;
+  }
+
+  // Als je op een project-card klikt (modal gaat open via jouw bestaande script),
+  // onthouden we de link en zetten we de knop-status.
+  document.addEventListener(
+    "click",
+    (e) => {
+      const card = e.target.closest(".project-card");
+      if (!card) return;
+
+      currentLink = getLinkFromCard(card);
+
+      const btn = document.getElementById("nxView");
+      if (btn) {
+        const enabled = !!currentLink;
+        btn.disabled = !enabled;
+        btn.setAttribute("aria-disabled", String(!enabled));
+        btn.style.opacity = enabled ? "1" : "0.5";
+        btn.style.pointerEvents = enabled ? "auto" : "none";
+      }
+    },
+    true // capture: vóór bubbling scripts van je modal
+  );
+
+  // Klik op “View Project” => open in nieuw tabblad
+  window.addEventListener("DOMContentLoaded", () => {
+    const btn = document.getElementById("nxView");
+    if (!btn) return;
+    btn.addEventListener("click", (e) => {
+      if (!currentLink) {
+        e.preventDefault();
+        return;
+      }
+      // open veilig in een nieuwe tab
+      window.open(currentLink, "_blank", "noopener");
+    });
+  });
+})();
