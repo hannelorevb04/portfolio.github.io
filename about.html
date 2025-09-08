@@ -612,31 +612,53 @@
       const popup = document.getElementById("popup");
       const closeBtn = document.getElementById("closePopup");
 
-      function encode(data) {
-        return new URLSearchParams(data).toString();
+      // robuust encoden (URL-encoded, incl. form-name)
+      function encodeForm(form) {
+        const fd = new FormData(form);
+        if (!fd.get("form-name"))
+          fd.set("form-name", form.getAttribute("name") || "contact");
+        // honeypot leegmaken als browsers die per ongeluk invullen
+        if (fd.get("bot-field") && fd.get("bot-field").trim() !== "") {
+          // bot: doe alsof het ok is maar stuur niets
+          return null;
+        }
+        const params = new URLSearchParams();
+        for (const [k, v] of fd.entries()) params.append(k, v);
+        return params.toString();
       }
 
       form.addEventListener("submit", async (e) => {
         e.preventDefault();
-        const data = new FormData(form);
 
-        // Zorg dat 'form-name' sowieso mee verstuurd wordt
-        if (!data.get("form-name"))
-          data.set("form-name", form.getAttribute("name"));
+        const body = encodeForm(e.target);
+        if (body === null) {
+          // honeypot gevuld: quietly slagen (geen fout tonen aan gebruiker)
+          e.target.reset();
+          popup.style.display = "flex";
+          return;
+        }
+
+        const endpoint = form.getAttribute("action") || "/";
 
         try {
-          const res = await fetch("/", {
+          const res = await fetch(endpoint, {
             method: "POST",
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: encode(data),
+            body,
           });
 
-          if (!res.ok) throw new Error("Network response was not ok");
-          form.reset();
-          popup.style.display = "flex";
+          // Netlify kan 200, 302 of 303 teruggeven -> allemaal ok
+          if ([200, 201, 202, 204, 302, 303].includes(res.status)) {
+            form.reset();
+            popup.style.display = "flex";
+          } else {
+            const txt = await res.text().catch(() => "");
+            console.error("Netlify submit failed:", res.status, txt);
+            alert("Er ging iets mis, probeer later opnieuw.");
+          }
         } catch (err) {
+          console.error("Network/JS error:", err);
           alert("Er ging iets mis, probeer later opnieuw.");
-          console.error(err);
         }
       });
 
