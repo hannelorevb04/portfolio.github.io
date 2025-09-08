@@ -1845,3 +1845,207 @@ button,
   font-weight: 600;
   cursor: pointer;
 }
+/* ========== Polishing: ritme, typografie, spacing, hover, responsive ========== */
+
+/* 1) Consistente sectieruimte + subtiele onderstreep voor titels */
+.section-title {
+  margin: 0 0 12px; /* korter bij title */
+  line-height: 1.15;
+}
+.section-title + * {
+  margin-top: 10px; /* net wat lucht na titel */
+}
+.about-wrap > * {
+  /* consistente verticale flow */
+  margin-bottom: clamp(20px, 3.2vw, 36px);
+}
+
+/* 2) Hero-paragraaf leesbaarder */
+.hero-content .hero-description {
+  max-width: 840px;
+  line-height: 1.65;
+  opacity: 0.98;
+}
+
+/* 3) Timeline finetune: eind-lijn mooie margins, compactere items */
+.tl {
+  padding-top: 14px;
+  padding-bottom: 18px;
+}
+.tl::before {
+  top: 22px;
+  bottom: 30px;
+}
+.tl-item {
+  padding-left: 48px;
+}
+.tl-head {
+  font-size: 1.02rem;
+}
+.tl-meta {
+  font-size: 0.94rem;
+}
+
+/* 4) Cards: iets meer adem + zachtere hover */
+.xp-card,
+.skill-card,
+.certificate-card {
+  padding: 18px 18px 16px;
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(16, 46, 74, 0.08);
+}
+.xp-card:hover,
+.skill-card:hover,
+.certificate-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 26px rgba(16, 46, 74, 0.12);
+}
+
+/* 5) Tags: netjes afbreken, niet proppen */
+.tags,
+.xp-tags {
+  gap: 8px 10px;
+}
+.tag,
+.xp-tags li {
+  white-space: nowrap;
+}
+@media (max-width: 420px) {
+  .tag,
+  .xp-tags li {
+    white-space: normal;
+  }
+}
+
+/* 6) Grids: betere responsieve breekpunten */
+.skills-grid {
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+@media (max-width: 1024px) {
+  .xp-grid {
+    gap: 16px;
+  }
+}
+@media (max-width: 720px) {
+  .about-top {
+    gap: 16px;
+  }
+  .xp-card {
+    padding: 16px;
+  }
+}
+
+/* 7) Buttons: subtiele micro-interactie die bij je stijl past */
+.btn-resume,
+.btn-linkedin {
+  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+}
+.btn-resume:hover,
+.btn-linkedin:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
+}
+.btn-resume:active,
+.btn-linkedin:active {
+  transform: translateY(0);
+  opacity: 0.9;
+}
+
+/* 8) Contactformulier: velden consistent + focus state netter */
+.contact-form label {
+  margin-bottom: 4px;
+}
+.contact-form input,
+.contact-form textarea {
+  line-height: 1.4;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+.contact-form input:focus,
+.contact-form textarea:focus {
+  box-shadow: 0 0 0 3px rgba(64, 105, 138, 0.18);
+}
+
+/* 9) Popup: nette max-breedte op mobiel */
+.popup-card {
+  width: min(92vw, 360px);
+}
+
+/* 10) Afbeeldingen/certificaten: nette uitlijning en spacing */
+.certificate-card img {
+  display: block;
+  margin: 6px auto 12px;
+  max-width: 100%;
+  height: auto;
+}
+.site-footer {
+  background: #f8fbfd;
+  border-top: 1px solid var(--border);
+  margin-top: 60px;
+  padding: 32px 16px;
+  font-size: 0.92rem;
+  color: var(--muted);
+}
+
+.footer-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+  text-align: center;
+}
+
+.footer-name {
+  margin: 0;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.footer-links {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.footer-links a {
+  color: var(--muted);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+.footer-links a:hover {
+  color: var(--ink);
+}
+
+/* Contact form in footer */
+.footer-contact {
+  max-width: 500px;
+  width: 100%;
+}
+.footer-contact h3 {
+  margin-bottom: 12px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+.footer-contact .contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.footer-contact input,
+.footer-contact textarea {
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font: inherit;
+}
+.footer-contact input:focus,
+.footer-contact textarea:focus {
+  border-color: var(--muted);
+  box-shadow: 0 0 0 2px rgba(64, 105, 138, 0.15);
+}
+.footer-contact button {
+  align-self: flex-end;
+}

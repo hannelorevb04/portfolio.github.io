@@ -663,4 +663,62 @@
       })();
     </script>
   </body>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p class="footer-name">© 2025 Hannelore Van Buynderen</p>
+
+      <nav class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="profiles.html">Profiles</a>
+        <a
+          href="https://www.linkedin.com/in/hannelore-van-buynderen-056783225/"
+          target="_blank"
+          >LinkedIn</a
+        >
+      </nav>
+
+      <!-- Contact formulier in footer -->
+      <div class="footer-contact">
+        <h3>Contact me</h3>
+        <form
+          class="contact-form"
+          id="footerContactForm"
+          name="contact"
+          method="POST"
+          data-netlify="true"
+          netlify-honeypot="bot-field"
+          accept-charset="UTF-8"
+        >
+          <input type="hidden" name="form-name" value="contact" />
+          <p style="display: none">
+            <label>Don’t fill this out: <input name="bot-field" /></label>
+          </p>
+
+          <input type="text" name="name" placeholder="Your name" required />
+          <input type="email" name="email" placeholder="Your email" required />
+          <textarea
+            name="message"
+            rows="4"
+            placeholder="Your message"
+            required
+          ></textarea>
+
+          <button type="submit" class="btn-linkedin">
+            <span class="play-icon">✉</span> Send
+          </button>
+        </form>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Popup -->
+  <div id="popup" class="popup-overlay">
+    <div class="popup-card">
+      <h3>✅ Message sent!</h3>
+      <p>Thank you for contacting me. I’ll get back to you soon.</p>
+      <button id="closePopup" class="btn-linkedin" type="button">Close</button>
+    </div>
+  </div>
+  <script src="footer.js"></script>
 </html>
