@@ -299,6 +299,13 @@
     </style>
   </head>
   <body class="about-page">
+    <!-- NETLIFY FORM DETECTION (verborgen, maar in de HTML aanwezig bij deploy) -->
+<form name="contact" netlify data-netlify="true" style="display:none">
+  <input type="text" name="name" />
+  <input type="email" name="email" />
+  <textarea name="message"></textarea>
+</form>
+
     <!-- HERO -->
     <div class="video-header">
       <video class="background-video" autoplay muted loop>
@@ -532,14 +539,6 @@
     <div class="contact-section">
       <h2 class="section-title">Contact</h2>
 
-<!-- Hidden detection form: laat staan/voeg toe zodat Netlify je form registreert -->
-<form name="contact" netlify data-netlify="true" style="display:none">
-  <input type="text" name="name" />
-  <input type="email" name="email" />
-  <textarea name="message"></textarea>
-</form>
-
-<!-- Zichtbare form: GEEN action! -->
 <form
   class="contact-form xp-card"
   id="contactForm"
@@ -554,25 +553,19 @@
     <label>Don’t fill this out: <input name="bot-field" /></label>
   </p>
 
-  <div class="form-group">
-    <label for="name">Name</label>
-    <input id="name" name="name" type="text" placeholder="Your name" required />
-  </div>
+  <!-- jouw velden -->
+  <label for="name">Name</label>
+  <input id="name" name="name" type="text" required />
 
-  <div class="form-group">
-    <label for="email">Email</label>
-    <input id="email" name="email" type="email" placeholder="Your email" required />
-  </div>
+  <label for="email">Email</label>
+  <input id="email" name="email" type="email" required />
 
-  <div class="form-group">
-    <label for="message">Message</label>
-    <textarea id="message" name="message" rows="5" placeholder="Your message" required></textarea>
-  </div>
+  <label for="message">Message</label>
+  <textarea id="message" name="message" rows="5" required></textarea>
 
-  <button type="submit" class="btn-linkedin">
-    <span class="play-icon">✉</span> Send
-  </button>
+  <button type="submit" class="btn-linkedin"><span class="play-icon">✉</span> Send</button>
 </form>
+
 
 <!-- Popup -->
 <div id="popup" class="popup-overlay" style="display:none">
@@ -588,7 +581,8 @@
 
     </div>
   </body>
-  <script>
+  
+ <script>
 (function () {
   const form = document.getElementById("contactForm");
   const popup = document.getElementById("popup");
@@ -605,11 +599,11 @@
 
     const fd = new FormData(form);
     if (!fd.get("form-name")) fd.set("form-name", form.getAttribute("name") || "contact");
-    if ((fd.get("bot-field") || "").trim() !== "") { // honeypot
+    if ((fd.get("bot-field") || "").trim() !== "") { // honeypot -> stilletjes "succes"
       form.reset(); popup.style.display = "flex"; return;
     }
 
-    // >>> belangrijkste regel: post naar huidige path (bv. /about), NIET /about.html
+    // Post naar de huidige URL (bv. /about), niet naar /about.html
     const endpoint = window.location.pathname || "/";
 
     try {
@@ -619,7 +613,8 @@
         body: toURLEncoded(fd),
       });
 
-      if ([200, 201, 202, 204, 302, 303].includes(res.status)) {
+      // Netlify geeft vaak 302/303 terug; dat is OK
+      if ([200,201,202,204,302,303].includes(res.status)) {
         form.reset();
         popup.style.display = "flex";
       } else {
@@ -636,5 +631,6 @@
   closeBtn?.addEventListener("click", () => (popup.style.display = "none"));
 })();
 </script>
+
 
 </html>
