@@ -1756,3 +1756,92 @@ button,
 .modal-overlay .nx-hero-slider .nx-nav.next {
   right: 16px !important;
 }
+/* Contact (sluit aan bij about-cards) */
+.contact-section {
+  margin: 32px 0 0;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 520px;
+  /* xp-card geeft al: wit, border, radius, shadow, padding, hover */
+}
+
+/* Labels + velden consistent met site */
+.contact-form label {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--ink);
+  margin-bottom: 4px;
+  display: inline-block;
+}
+.contact-form input,
+.contact-form textarea {
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font: inherit;
+  color: var(--ink);
+  background: #fff;
+  transition: border 0.2s, box-shadow 0.2s, background 0.2s;
+}
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: #9bb1c6;
+}
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: var(--muted);
+  box-shadow: 0 0 0 3px rgba(64, 105, 138, 0.18);
+  background: #fff;
+}
+
+/* Knop: hergebruik je donkere CTA-stijl */
+.contact-form .btn-linkedin {
+  align-self: flex-start;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Kleine tweak zodat xp-card-hover niet “springt” bij focussen */
+.contact-form.xp-card:hover {
+  transform: translateY(-2px);
+}
+
+.popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: none; /* verborgen */
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.popup-card {
+  background: #fff;
+  color: var(--ink);
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+  text-align: center;
+  max-width: 320px;
+}
+
+.popup-card h3 {
+  margin: 0 0 12px;
+}
+
+.popup-card button {
+  margin-top: 16px;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(180deg, #2b66ff, #2452d6);
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
