@@ -233,18 +233,23 @@
   background: rgba(255, 255, 255, 0.9);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25), inset 0 0 0 1px rgba(0, 0, 0, 0.1);
 }
-.modal-overlay .nx-cmp-label {
+.nx-cmp-label {
   position: absolute;
-  bottom: 10px;
-  font-size: 12px;
-  padding: 4px 8px;
-  background: rgba(0, 0, 0, 0.55);
+  bottom: 8px; /* afstand van boven */
+  z-index: 10; /* altijd boven de foto */
+  background: #162436;
+  border: 1px solid var(--nx-border);
   color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 6px 10px;
   border-radius: 6px;
+  pointer-events: none;
 }
-.modal-overlay .nx-cmp-label.left {
-  left: 10px;
+.nx-cmp-label.left {
+  left: 10px; /* linksboven */
 }
-.modal-overlay .nx-cmp-label.right {
-  right: 10px;
+
+.nx-cmp-label.right {
+  right: 10px; /* rechtsboven */
 }
