@@ -532,94 +532,115 @@
     <div class="contact-section">
       <h2 class="section-title">Contact</h2>
 
-      <form
-        class="contact-form xp-card"
-        name="contact"
-        method="POST"
-        data-netlify="true"
-        netlify-honeypot="bot-field"
-        id="contactForm"
-      >
-        <input type="hidden" name="form-name" value="contact" />
-        <p style="display: none">
-          <label>Don’t fill this out: <input name="bot-field" /></label>
-        </p>
-
-        <div class="form-group">
-          <label for="name">Name</label>
-          <input
-            id="name"
-            name="name"
-            type="text"
-            placeholder="Your name"
-            required
-          />
-        </div>
-
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input
-            id="email"
-            name="email"
-            type="email"
-            placeholder="Your email"
-            required
-          />
-        </div>
-
-        <div class="form-group">
-          <label for="message">Message</label>
-          <textarea
-            id="message"
-            name="message"
-            rows="5"
-            placeholder="Your message"
-            required
-          ></textarea>
-        </div>
-
-        <button type="submit" class="btn-linkedin">
-          <span class="play-icon">✉</span> Send
-        </button>
+      <!-- 0) HIDDEN DETECTION FORM (Netlify moet dit bij deploy kunnen lezen) -->
+      <form name="contact" netlify data-netlify="true" style="display: none">
+        <input type="text" name="name" />
+        <input type="email" name="email" />
+        <textarea name="message"></textarea>
       </form>
-    </div>
 
-    <!-- Popup (standaard hidden) -->
-    <div id="popup" class="popup-overlay">
-      <div class="popup-card">
-        <h3>✅ Message sent!</h3>
-        <p>Thank you for contacting me. I’ll get back to you soon.</p>
-        <button id="closePopup">Close</button>
+      <!-- 1) ZICHTBAAR FORMULIER -->
+      <div class="contact-section">
+        <h2 class="section-title">Contact</h2>
+
+        <form
+          class="contact-form xp-card"
+          id="contactForm"
+          name="contact"
+          method="POST"
+          netlify-honeypot="bot-field"
+        >
+          <input type="hidden" name="form-name" value="contact" />
+          <p style="display: none">
+            <label>Don’t fill this out: <input name="bot-field" /></label>
+          </p>
+
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input
+              id="name"
+              name="name"
+              type="text"
+              placeholder="Your name"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              placeholder="Your email"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea
+              id="message"
+              name="message"
+              rows="5"
+              placeholder="Your message"
+              required
+            ></textarea>
+          </div>
+
+          <button type="submit" class="btn-linkedin">
+            <span class="play-icon">✉</span> Send
+          </button>
+        </form>
+      </div>
+
+      <!-- 2) POPUP -->
+      <div id="popup" class="popup-overlay" style="display: none">
+        <div class="popup-card">
+          <h3>✅ Message sent!</h3>
+          <p>Thank you for contacting me. I’ll get back to you soon.</p>
+          <button id="closePopup" class="btn-linkedin" type="button">
+            Close
+          </button>
+        </div>
       </div>
     </div>
   </body>
   <script>
-    document
-      .getElementById("contactForm")
-      .addEventListener("submit", async function (e) {
-        e.preventDefault();
+    (function () {
+      const form = document.getElementById("contactForm");
+      const popup = document.getElementById("popup");
+      const closeBtn = document.getElementById("closePopup");
 
-        const form = e.target;
+      function encode(data) {
+        return new URLSearchParams(data).toString();
+      }
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
         const data = new FormData(form);
 
+        // Zorg dat 'form-name' sowieso mee verstuurd wordt
+        if (!data.get("form-name"))
+          data.set("form-name", form.getAttribute("name"));
+
         try {
-          await fetch("/", {
+          const res = await fetch("/", {
             method: "POST",
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: new URLSearchParams(data).toString(),
+            body: encode(data),
           });
 
+          if (!res.ok) throw new Error("Network response was not ok");
           form.reset();
-          document.getElementById("popup").style.display = "flex";
+          popup.style.display = "flex";
         } catch (err) {
           alert("Er ging iets mis, probeer later opnieuw.");
+          console.error(err);
         }
       });
 
-    document
-      .getElementById("closePopup")
-      .addEventListener("click", function () {
-        document.getElementById("popup").style.display = "none";
-      });
+      closeBtn.addEventListener("click", () => (popup.style.display = "none"));
+    })();
   </script>
 </html>
