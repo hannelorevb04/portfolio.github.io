@@ -1801,7 +1801,7 @@ button,
 
 /* Knop: hergebruik je donkere CTA-stijl */
 .contact-form .btn-linkedin {
-  align-self: flex-start;
+  /* align-self: flex-start; */
   text-decoration: none;
   cursor: pointer;
 }
@@ -2047,5 +2047,5 @@ button,
   box-shadow: 0 0 0 2px rgba(64, 105, 138, 0.15);
 }
 .footer-contact button {
-  align-self: flex-end;
+  align-self: center; /* knop in het midden */
 }
