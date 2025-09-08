@@ -2,193 +2,213 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About – Hannelore Van Buynderen</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link href="styles.css" rel="stylesheet" />
-    <title>About — Hannelore Van Buynderen</title>
-
-    <!-- Page-specific styles kept (zoals in je huidige file) -->
+    <link rel="stylesheet" href="styles.css" />
+    <!-- Devicon CDN voor echte logo-icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
+    />
     <style>
+      /* ===== Base ===== */
       :root {
-        --ink: #0b2740;
+        --ink: #102e4a;
+        --ink-2: #2a4a66;
         --muted: #40698a;
-        --border: #deebf4;
-        --gap: 16px;
+        --bg: #ffffff;
+        --border: rgba(16, 46, 74, 0.1);
+        --chip: #eef5fb;
+        --r: 16px;
+        --gap-lg: 32px;
         --gap-md: 20px;
-        --gap-lg: 28px;
-        --r: 14px;
-        --shadow-1: 0 8px 26px rgba(9, 30, 66, 0.08);
+        --gap-sm: 12px;
+        --shadow-1: 0 6px 20px rgba(16, 46, 74, 0.06);
+        --shadow-2: 0 12px 28px rgba(16, 46, 74, 0.1);
+      }
+      html,
+      body {
+        margin: 0;
+      }
+      body {
+        font-family: "Montserrat", sans-serif;
+        background: var(--bg);
+        color: var(--ink);
       }
 
-      .about-page .video-header {
-        position: relative;
-        height: 380px;
-        border-bottom: 1px solid var(--border);
-        overflow: hidden;
-      }
-      .about-page .background-video {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        filter: saturate(0.9) contrast(0.95) brightness(0.9);
-      }
-      .about-page .main-nav {
-        position: relative;
-        z-index: 2;
-        display: flex;
-        justify-content: flex-start;
-        padding: 16px;
-      }
-      .about-page .nav-profile .profile-image {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        object-fit: cover;
-        border: 2px solid rgba(255, 255, 255, 0.8);
-        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
-      }
-      .about-page .hero-content {
-        position: relative;
-        z-index: 2;
-        color: #fff;
-        text-shadow: 0 2px 18px rgba(0, 0, 0, 0.3);
-        max-width: 920px;
-        margin: 80px auto 0;
-        padding: 0 16px;
-      }
-      .about-page .hero-title {
-        font-size: clamp(32px, 5vw, 52px);
-        margin: 0 0 10px;
-        font-weight: 800;
-      }
-      .about-page .hero-description {
-        font-size: clamp(16px, 2.2vw, 18px);
-        line-height: 1.6;
-        opacity: 0.95;
-        max-width: 860px;
-      }
-      .about-page .hero-buttons {
-        margin-top: 18px;
-        display: flex;
-        gap: 12px;
-      }
-
+      /* ===== Section wrapper ===== */
       .about-wrap {
-        max-width: 1100px;
-        margin: 28px auto 64px;
-        padding: 0 16px;
+        padding: 3rem clamp(1.2rem, 4vw, 3rem);
+        max-width: 1080px;
+        margin: 0 auto;
       }
-      .about-content {
-        display: flex;
-        flex-direction: column;
-        gap: 28px;
-      }
+
+      /* ===== Row 1: Photo + Education (flex) ===== */
       .about-top {
-        display: grid;
-        grid-template-columns: 320px 1fr;
+        display: flex;
+        align-items: center;
         gap: var(--gap-lg);
-        align-items: start;
+        margin: 0 0 40px;
       }
+
       figure.photo {
+        flex: 0 0 300px;
         margin: 0;
       }
       .about-photo {
+        display: block;
         width: 100%;
         height: auto;
-        border-radius: var(--r);
+        border-radius: 14px;
+        object-fit: cover;
         box-shadow: var(--shadow-1);
+      }
+
+      .education-wrap {
+        flex: 1;
+        min-width: 0;
       }
       .section-title {
+        margin: 0 0 1rem;
+        font-size: 1.6rem;
         font-weight: 800;
         color: var(--ink);
-        letter-spacing: 0.02em;
-        margin: 0 0 12px;
+        letter-spacing: 0.2px;
       }
 
-      /* Timeline */
+      /* TIMELINE — lijn stopt mooi ín de bollen */
       .tl {
-        list-style: none;
+        --line-x: 18px;
+        --dot: 14px;
+        --dot-off: 6px;
+        position: relative;
         margin: 0;
-        padding: 0;
-        display: grid;
-        gap: 10px;
+        padding: calc(var(--dot-off) + var(--dot) / 2) 0;
+        list-style: none;
+      }
+      .tl::before {
+        content: "";
+        position: absolute;
+        left: var(--line-x);
+        top: 20.5px;
+        bottom: 35.5px;
+        width: 2px;
+        background: #12324e;
+        border-radius: 1px;
       }
       .tl-item {
-        padding: 12px 14px;
-        border: 1px solid var(--border);
-        border-radius: var(--r);
-        background: #fff;
-        box-shadow: var(--shadow-1);
+        position: relative;
+        margin: 0 0 1.25rem;
+        padding-left: 50px;
+      }
+      .tl-item:last-child {
+        margin-bottom: 0;
+      }
+      .tl-item::before {
+        content: "";
+        position: absolute;
+        left: calc(var(--line-x) - var(--dot) / 2);
+        top: var(--dot-off);
+        width: var(--dot);
+        height: var(--dot);
+        border-radius: 50%;
+        background: #12324e;
       }
       .tl-head {
-        font-weight: 700;
-        color: var(--ink);
-        margin-bottom: 4px;
+        margin: 0 0 0.25rem;
+        font-weight: 800;
+        color: #102e4a;
+        line-height: 1.25;
       }
       .tl-meta {
-        color: #5d7a95;
+        margin: 0;
         font-size: 0.95rem;
+        color: #40698a;
       }
-      .sep::before {
-        content: "•";
-        margin: 0 6px;
-        color: #9bb1c6;
+      .tl-meta .sep {
+        display: inline-block;
+        width: 6px;
+        height: 6px;
+        margin: 0 8px;
+        background: #40698a;
+        border-radius: 50%;
       }
 
-      /* Experience */
-      .experience-wrap .xp-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: var(--gap-lg);
+      /* ===== Experience ===== */
+      .experience-wrap {
+        margin: 8px 0 40px;
+      }
+      .xp-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--gap-md);
       }
       .xp-card {
+        flex: 1 1 300px;
         background: #fff;
-        padding: 16px;
         border: 1px solid var(--border);
         border-radius: var(--r);
+        padding: 18px;
         box-shadow: var(--shadow-1);
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+      }
+      .xp-card:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-2);
       }
       .xp-title {
-        margin: 0 0 6px;
-        font-size: 1.15rem;
+        margin: 0;
+        font-size: 1.08rem;
+        font-weight: 800;
         color: var(--ink);
+        line-height: 1.3;
       }
       .xp-meta {
-        margin: 0 0 8px;
-        color: #5d7a95;
-        font-size: 0.95rem;
+        margin: 0.25rem 0 0;
+        font-size: 0.92rem;
+        color: var(--muted);
+        font-weight: 600;
       }
       .xp-note {
-        margin: 0 0 10px;
+        margin: 0.6rem 0 0.9rem;
+        color: var(--ink-2);
+        font-size: 0.95rem;
+        line-height: 1.5;
       }
       .xp-tags {
         display: flex;
-        gap: 8px;
-        padding: 0;
-        margin: 0;
-        list-style: none;
         flex-wrap: wrap;
+        gap: 8px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
       }
       .xp-tags li {
-        padding: 4px 8px;
-        border-radius: 999px;
-        background: #f1f7fb;
-        color: var(--muted);
+        font-weight: 700;
+        font-size: 0.8rem;
+        color: #0f2f49;
+        background: var(--chip);
         border: 1px solid var(--border);
-        font-size: 0.85rem;
-        font-weight: 600;
+        border-radius: 999px;
+        padding: 4px 10px;
       }
 
-      /* Skills / Certificates grid */
+      /* ===== Skills & Certificates ===== */
+      .skills-wrap,
+      .certificates-wrap {
+        margin: 0 0 24px;
+      }
       .skills-grid {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: var(--gap-lg);
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: var(--gap-md);
       }
       .skill-card,
       .certificate-card {
@@ -197,68 +217,73 @@
         border-radius: var(--r);
         padding: 16px;
         box-shadow: var(--shadow-1);
+        min-height: 0;
+      }
+      .skill-head {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 0 0 12px;
       }
       .skill-head h3 {
-        margin: 0 0 10px;
+        margin: 0;
+        font-size: 1.02rem;
+        color: var(--ink);
       }
-      .tag-cloud {
+      .tags {
         display: flex;
-        gap: 8px;
         flex-wrap: wrap;
+        gap: 10px;
+        margin: 0;
       }
       .tag {
-        background: #f1f7fb;
-        color: var(--muted);
-        border: 1px solid var(--border);
-        padding: 4px 8px;
-        border-radius: 999px;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
         font-weight: 600;
-        font-size: 0.85rem;
+        font-size: 0.9rem;
+        color: #0f2f49;
+        background: var(--chip);
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        padding: 6px 12px;
+      }
+      .certificate-card {
+        text-align: center;
       }
       .certificate-card img {
-        width: 100%;
-        height: auto;
-        border-radius: 10px;
-        margin: 10px 0;
-      }
-
-      /* Contact */
-      .contact-section {
-        margin-top: 36px;
-      }
-      .contact-form {
-        display: flex;
-        flex-direction: column;
-        gap: 14px;
-        max-width: 520px;
-      }
-      .contact-form label {
-        font-weight: 700;
-        font-size: 0.95rem;
-        color: var(--ink);
-      }
-      .contact-form input,
-      .contact-form textarea {
-        padding: 12px 14px;
-        border: 1px solid var(--border);
+        max-height: 150px;
         border-radius: 8px;
-        font: inherit;
-        color: var(--ink);
-        background: #fff;
-        transition: border 0.2s, box-shadow 0.2s;
-      }
-      .contact-form input::placeholder,
-      .contact-form textarea::placeholder {
-        color: #9bb1c6;
-      }
-      .contact-form input:focus,
-      .contact-form textarea:focus {
-        outline: none;
-        border-color: var(--muted);
-        box-shadow: 0 0 0 3px rgba(64, 105, 138, 0.18);
+        margin: 0 0 12px;
       }
 
-      /* Popup */
+      .about-wrap > *:first-child {
+        margin-top: 0;
+      }
+      .about-wrap > *:last-child {
+        margin-bottom: 0;
+      }
+
+      @media (max-width: 900px) {
+        .about-top {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: var(--gap-md);
+          margin-bottom: 28px;
+        }
+        figure.photo {
+          flex: 0 0 auto;
+          width: 100%;
+        }
+        .about-photo {
+          width: 100%;
+        }
+        .experience-wrap {
+          margin: 4px 0 32px;
+        }
+      }
+
+      /* mini popup styles (losstaand, beïnvloedt niets anders) */
       .popup-overlay {
         position: fixed;
         inset: 0;
@@ -270,7 +295,7 @@
       }
       .popup-card {
         background: #fff;
-        color: var(--ink);
+        color: #0b2740;
         padding: 24px;
         border-radius: 12px;
         box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
@@ -283,42 +308,16 @@
       .popup-card .btn-linkedin {
         margin-top: 14px;
       }
-
-      /* Responsive */
-      @media (max-width: 1024px) {
-        .experience-wrap .xp-grid {
-          grid-template-columns: repeat(2, 1fr);
-        }
-        .skills-grid {
-          grid-template-columns: repeat(2, 1fr);
-        }
-      }
-      @media (max-width: 720px) {
-        .about-top {
-          grid-template-columns: 1fr;
-          align-items: flex-start;
-          gap: var(--gap-md);
-        }
-        figure.photo {
-          width: 100%;
-        }
-        .about-photo {
-          width: 100%;
-        }
-        .experience-wrap {
-          margin: 4px 0 32px;
-        }
-        .experience-wrap .xp-grid {
-          grid-template-columns: 1fr;
-        }
-        .skills-grid {
-          grid-template-columns: 1fr;
-        }
-      }
     </style>
   </head>
-
   <body class="about-page">
+    <!-- (1) VERBORGEN NETLIFY-DETECTIEFORM: MOET letterlijk in de HTML staan -->
+    <form name="contact" netlify data-netlify="true" style="display: none">
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <textarea name="message"></textarea>
+    </form>
+
     <!-- HERO -->
     <div class="video-header">
       <video class="background-video" autoplay muted loop>
@@ -340,7 +339,7 @@
         <p class="hero-description">
           I'm Hannelore Van Buynderen, a UX/UI designer and front-end developer
           based in Boechout (Antwerp). I translate ideas into clear,
-          user-friendly interfaces—from user flows and wireframes to
+          user-friendly interfaces from user flows and wireframes to
           pixel-perfect UI and working prototypes.
         </p>
         <div class="hero-buttons">
@@ -366,7 +365,6 @@
     <section class="about-wrap">
       <div class="about-content">
         <div class="about-top">
-          <!-- Photo -->
           <figure class="photo">
             <img
               class="about-photo"
@@ -410,8 +408,8 @@
               <h3 class="xp-title">Internship — Jstack</h3>
               <p class="xp-meta">Kontich · 2025</p>
               <p class="xp-note">
-                Branding & UX/UI for a tokenized real-estate platform · Next.js,
-                Tailwind, web performance.
+                Branding &amp; UX/UI for a tokenized real-estate platform ·
+                Next.js, Tailwind, web performance.
               </p>
               <ul class="xp-tags">
                 <li>UX/UI</li>
@@ -435,16 +433,15 @@
             <article class="xp-card">
               <h3 class="xp-title">GSL Classroom</h3>
               <p class="xp-meta">
-                Tecnológico de Monterrey & Thomas More · 2024
+                Tecnológico de Monterrey &amp; Thomas More · 2024
               </p>
               <p class="xp-note">
-                International collaboration on global challenges &
+                International collaboration on global challenges &amp;
                 problem-solving.
               </p>
               <ul class="xp-tags">
                 <li>Collaboration</li>
                 <li>Problem-solving</li>
-                <li>Global</li>
               </ul>
             </article>
           </div>
@@ -455,30 +452,74 @@
           <h2 class="section-title">Skills</h2>
           <div class="skills-grid">
             <div class="skill-card">
-              <div class="skill-head"><h3>UX / Strategy</h3></div>
-              <div class="tag-cloud">
-                <span class="tag">User flows</span
-                ><span class="tag">Wireframes</span>
-                <span class="tag">Usability</span
-                ><span class="tag">Content design</span>
-              </div>
-            </div>
-            <div class="skill-card">
-              <div class="skill-head"><h3>UI / Visual</h3></div>
-              <div class="tag-cloud">
-                <span class="tag">Design systems</span
-                ><span class="tag">Accessibility</span>
-                <span class="tag">Branding</span
-                ><span class="tag">Prototyping</span>
-              </div>
-            </div>
-            <div class="skill-card">
               <div class="skill-head"><h3>Frontend</h3></div>
-              <div class="tag-cloud">
-                <span class="tag">HTML/CSS</span
-                ><span class="tag">JavaScript</span>
-                <span class="tag">React basics</span
-                ><span class="tag">Performance</span>
+              <div class="tags">
+                <span class="tag"
+                  ><i class="devicon-html5-plain colored"></i>HTML5</span
+                >
+                <span class="tag"
+                  ><i class="devicon-css3-plain colored"></i>CSS3</span
+                >
+                <span class="tag"
+                  ><i class="devicon-tailwindcss-original colored"></i
+                  >Tailwind</span
+                >
+                <span class="tag"
+                  ><i class="devicon-javascript-plain colored"></i
+                  >JavaScript</span
+                >
+                <span class="tag"
+                  ><i class="devicon-threejs-original"></i>Three.js</span
+                >
+                <span class="tag"
+                  ><i class="devicon-react-original colored"></i>React
+                  Native</span
+                >
+                <span class="tag"
+                  ><i class="devicon-vuejs-plain colored"></i>Vue</span
+                >
+              </div>
+            </div>
+            <div class="skill-card">
+              <div class="skill-head"><h3>Backend</h3></div>
+              <div class="tags">
+                <span class="tag"
+                  ><i class="devicon-php-plain colored"></i>PHP</span
+                >
+                <span class="tag"
+                  ><i class="devicon-python-plain colored"></i>Python</span
+                >
+                <span class="tag"
+                  ><i class="devicon-mysql-plain colored"></i>MySQL</span
+                >
+                <span class="tag"
+                  ><i class="devicon-nodejs-plain colored"></i>Node.js</span
+                >
+              </div>
+            </div>
+            <div class="skill-card">
+              <div class="skill-head"><h3>Design tools</h3></div>
+              <div class="tags">
+                <span class="tag"
+                  ><i class="devicon-figma-plain colored"></i>Figma</span
+                >
+                <span class="tag"
+                  ><i class="devicon-illustrator-plain colored"></i
+                  >Illustrator</span
+                >
+                <span class="tag"
+                  ><i class="devicon-photoshop-plain colored"></i
+                  >Photoshop</span
+                >
+              </div>
+            </div>
+            <div class="skill-card">
+              <div class="skill-head"><h3>Soft skills</h3></div>
+              <div class="tags">
+                <span class="tag">🤝 Empathic</span>
+                <span class="tag">👥 Team player</span>
+                <span class="tag">🎯 Detail-oriented</span>
+                <span class="tag">💡 Helpful</span>
               </div>
             </div>
           </div>
@@ -494,7 +535,7 @@
                 src="images/GLS_certificaat.png"
                 alt="GSL Classroom Certificate"
               />
-              <p>Tecnológico de Monterrey & Thomas More — 2024</p>
+              <p>Tecnológico de Monterrey &amp; Thomas More — 2024</p>
             </div>
             <div class="certificate-card">
               <div class="skill-head"><h3>Bachelor's degree</h3></div>
@@ -504,19 +545,11 @@
           </div>
         </div>
 
-        <!-- ========== CONTACT (Netlify Forms + Popup) ========== -->
-
-        <!-- Verborgen detectieformulier: zo ziet Netlify je form bij deploy -->
-        <form name="contact" netlify data-netlify="true" style="display: none">
-          <input type="text" name="name" />
-          <input type="email" name="email" />
-          <textarea name="message"></textarea>
-        </form>
-
+        <!-- (2) CONTACT -->
         <div class="contact-section">
           <h2 class="section-title">Contact</h2>
 
-          <!-- Zichtbaar formulier -->
+          <!-- Zichtbaar Netlify-form -->
           <form
             class="contact-form xp-card"
             id="contactForm"
@@ -564,7 +597,7 @@
           </form>
 
           <!-- Popup -->
-          <div id="popup" class="popup-overlay" style="display: none">
+          <div id="popup" class="popup-overlay">
             <div class="popup-card">
               <h3>✅ Message sent!</h3>
               <p>Thank you for contacting me. I’ll get back to you soon.</p>
@@ -574,15 +607,16 @@
             </div>
           </div>
         </div>
+        <!-- /CONTACT -->
       </div>
     </section>
 
-    <!-- JS: Ajax submit naar ROOT (/) + popup -->
+    <!-- (3) Script: URL-encoded POST naar root + popup -->
     <script>
       (function () {
         const form = document.getElementById("contactForm");
         const popup = document.getElementById("popup");
-        const closeBtn = document.getElementById("closePopup");
+        const close = document.getElementById("closePopup");
 
         function toURLEncoded(fd) {
           const p = new URLSearchParams();
@@ -592,10 +626,12 @@
 
         form.addEventListener("submit", async (e) => {
           e.preventDefault();
-
           const fd = new FormData(form);
+
           if (!fd.get("form-name"))
             fd.set("form-name", form.getAttribute("name") || "contact");
+
+          // Honeypot → stilletjes “succes”
           if ((fd.get("bot-field") || "").trim() !== "") {
             form.reset();
             popup.style.display = "flex";
@@ -603,7 +639,6 @@
           }
 
           try {
-            // Belangrijk: post altijd naar ROOT zodat Netlify 'm accepteert
             const res = await fetch("/", {
               method: "POST",
               headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -624,10 +659,7 @@
           }
         });
 
-        closeBtn?.addEventListener(
-          "click",
-          () => (popup.style.display = "none")
-        );
+        close?.addEventListener("click", () => (popup.style.display = "none"));
       })();
     </script>
   </body>
