@@ -144,8 +144,37 @@
                   />
                 </div>
                 <div class="slideshow-nav">
-                  <button class="prev">‹</button>
-                  <button class="next">›</button>
+                  <!-- Vorige knop -->
+                  <button class="slideshow-prev" aria-label="Vorige">
+                    <svg
+                      viewBox="0 0 24 24"
+                      width="20"
+                      height="20"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="3"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <polyline points="15 18 9 12 15 6" />
+                    </svg>
+                  </button>
+
+                  <!-- Volgende knop -->
+                  <button class="slideshow-next" aria-label="Volgende">
+                    <svg
+                      viewBox="0 0 24 24"
+                      width="20"
+                      height="20"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="3"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <polyline points="9 18 15 12 9 6" />
+                    </svg>
+                  </button>
                 </div>
               </div>
               <div class="gradient"></div>
@@ -192,8 +221,8 @@
                   />
                 </div>
                 <div class="slideshow-nav">
-                  <button class="prev">‹</button>
-                  <button class="next">›</button>
+                  <button class="prev"></button>
+                  <button class="next"></button>
                 </div>
               </div>
               <div class="gradient"></div>
@@ -414,8 +443,37 @@
         <button aria-label="Close" class="nx-close">×</button>
         <div aria-label="Project media" class="nx-hero-slider">
           <div class="nx-slides"></div>
-          <button aria-label="Previous" class="nx-nav prev">‹</button>
-          <button aria-label="Next" class="nx-nav next">›</button>
+          <!-- Vorige knop -->
+          <button aria-label="Previous" class="nx-nav prev">
+            <svg
+              viewBox="0 0 24 24"
+              width="20"
+              height="20"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="3"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="15 18 9 12 15 6" />
+            </svg>
+          </button>
+
+          <!-- Volgende knop -->
+          <button aria-label="Next" class="nx-nav next">
+            <svg
+              viewBox="0 0 24 24"
+              width="20"
+              height="20"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="3"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+          </button>
           <div aria-label="Slide indicators" class="nx-dots"></div>
         </div>
         <section class="nx-panel">
@@ -459,5 +517,43 @@
     <script defer="defer" src="nx-modal.js?v=29"></script>
     <script src="drag-scroll.js"></script>
     <script src="nx-card-slideshow.js"></script>
+    <script>
+      (function () {
+        const svg = (dir) => `
+    <svg viewBox="0 0 24 24" width="20" height="20"
+         fill="none" stroke="currentColor" stroke-width="3"
+         stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      ${
+        dir === "prev"
+          ? '<polyline points="15 18 9 12 15 6" />'
+          : '<polyline points="9 18 15 12 9 6" />'
+      }
+    </svg>`;
+
+        document
+          .querySelectorAll(".slideshow-nav .prev, .slideshow-nav .next")
+          .forEach((btn) => {
+            // maak type + aria goed
+            btn.setAttribute("type", "button");
+            const dir = btn.classList.contains("prev") ? "prev" : "next";
+            btn.setAttribute(
+              "aria-label",
+              dir === "prev" ? "Previous" : "Next"
+            );
+
+            // als er nog geen SVG in zit (of er stond '‹ ›'), zet de SVG
+            if (!btn.querySelector("svg")) {
+              btn.innerHTML = svg(dir);
+            } else {
+              const s = btn.querySelector("svg");
+              s.setAttribute("stroke", "currentColor");
+              s.setAttribute("fill", "none");
+              s.setAttribute("stroke-width", "3");
+              s.setAttribute("stroke-linecap", "round");
+              s.setAttribute("stroke-linejoin", "round");
+            }
+          });
+      })();
+    </script>
   </body>
 </html>

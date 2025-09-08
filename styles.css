@@ -1671,3 +1671,88 @@ button,
 .hero-description {
   font-family: "Montserrat", sans-serif !important;
 }
+/* === Forceer overal dezelfde pijltjesstijl === */
+.slideshow-nav button,
+.slideshow-nav button:focus {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid rgba(16, 46, 74, 0.25);
+  background: rgba(16, 46, 74, 0.9) !important; /* donkerblauw */
+  color: #fff !important; /* witte pijl */
+  font-size: 20px;
+  font-weight: 700;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+}
+
+.slideshow-nav button:hover {
+  background: rgba(16, 46, 74, 1) !important;
+  transform: scale(1.05);
+}
+/* === Unified Arrow Style (inline + modal) === */
+:root {
+  --arrow-size: 44px;
+  --arrow-bg: #fff; /* cirkel wit */
+  --arrow-bg-hover: #f0f4f8; /* lichte hover */
+  --arrow-border: 1px solid rgba(16, 46, 74, 0.25);
+  --arrow-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  --arrow-color: #102e4a; /* pijl donkerblauw */
+}
+
+/* Buttons used in inline sliders */
+.slideshow-nav button,
+.nx-inline .slideshow-nav button,
+/* Buttons used in modal slider */
+.modal-overlay .nx-hero-slider .nx-nav,
+.modal-overlay .nx-hero-slider button.nx-nav {
+  width: var(--arrow-size) !important;
+  height: var(--arrow-size) !important;
+  border-radius: 50% !important;
+  border: var(--arrow-border) !important;
+  background: var(--arrow-bg) !important;
+  color: var(
+    --arrow-fg
+  ) !important; /* werkt voor glyphs en SVG met currentColor */
+  display: grid !important;
+  place-items: center !important;
+  font-size: 20px !important;
+  font-weight: 700 !important;
+  box-shadow: var(--arrow-shadow) !important;
+  cursor: pointer !important;
+}
+
+.slideshow-nav button:focus,
+.nx-inline .slideshow-nav button:focus,
+.modal-overlay .nx-hero-slider .nx-nav:focus,
+.modal-overlay .nx-hero-slider button.nx-nav:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 3px rgba(16, 46, 74, 0.18), var(--arrow-shadow) !important;
+}
+
+/* Als er SVG-pijlen binnenin zitten, maak ze wit via currentColor */
+.slideshow-prev svg,
+.slideshow-next svg,
+.modal-overlay .nx-hero-slider .nx-nav svg {
+  width: 1em;
+  height: 1em;
+  stroke: currentColor; /* neemt de kleur van de knop aan */
+  stroke-width: 3;
+  stroke-linecap: round; /* afgeronde uiteinden */
+  stroke-linejoin: round; /* afgeronde hoeken */
+  fill: none;
+}
+
+/* Optioneel: centreren/posities – pas aan indien nodig */
+.nx-inline .slideshow-nav {
+  padding: 0 8px;
+}
+.modal-overlay .nx-hero-slider .nx-nav.prev {
+  left: 16px !important;
+}
+.modal-overlay .nx-hero-slider .nx-nav.next {
+  right: 16px !important;
+}

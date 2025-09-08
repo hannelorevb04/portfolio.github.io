@@ -85,13 +85,29 @@
       }
     });
 
+    // Alleen pijlen (geen dots) — met afgeronde SVG-pijlen
     const nav = make("div", "slideshow-nav", container);
+
+    const svgArrow = (dir) => `
+  <svg viewBox="0 0 24 24" width="20" height="20"
+       fill="none" stroke="currentColor" stroke-width="3"
+       stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    ${
+      dir === "prev"
+        ? '<polyline points="15 18 9 12 15 6" />'
+        : '<polyline points="9 18 15 12 9 6" />'
+    }
+  </svg>`;
+
     const prev = make("button", "prev", nav);
     prev.type = "button";
-    prev.textContent = "‹";
+    prev.setAttribute("aria-label", "Previous");
+    prev.innerHTML = svgArrow("prev");
+
     const next = make("button", "next", nav);
     next.type = "button";
-    next.textContent = "›";
+    next.setAttribute("aria-label", "Next");
+    next.innerHTML = svgArrow("next");
 
     return { container, slidesWrap, prev, next };
   }

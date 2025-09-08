@@ -9,6 +9,31 @@
   const dotsEl = modal.querySelector(".nx-dots");
   const prevBtn = modal.querySelector(".nx-nav.prev");
   const nextBtn = modal.querySelector(".nx-nav.next");
+  // Zorg voor afgeronde SVG-pijlen in de modal-knoppen
+  (function ensureModalArrows() {
+    const svgArrow = (dir) => `
+    <svg viewBox="0 0 24 24" width="20" height="20"
+         fill="none" stroke="currentColor" stroke-width="3"
+         stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      ${
+        dir === "prev"
+          ? '<polyline points="15 18 9 12 15 6" />'
+          : '<polyline points="9 18 15 12 9 6" />'
+      }
+    </svg>`;
+
+    if (prevBtn) {
+      prevBtn.setAttribute("type", "button");
+      prevBtn.setAttribute("aria-label", "Previous");
+      if (!prevBtn.querySelector("svg")) prevBtn.innerHTML = svgArrow("prev");
+    }
+    if (nextBtn) {
+      nextBtn.setAttribute("type", "button");
+      nextBtn.setAttribute("aria-label", "Next");
+      if (!nextBtn.querySelector("svg")) nextBtn.innerHTML = svgArrow("next");
+    }
+  })();
+
   const titleEl =
     modal.querySelector(".nx-title") || modal.querySelector("#nxTitle");
   const metaTxt =

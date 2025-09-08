@@ -1,4 +1,3 @@
-/* nx-card-slideshow.js — in-card slideshow zonder dots (pijlen + autoplay) */
 (function () {
   const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
 
@@ -39,6 +38,18 @@
     });
     return out;
   }
+
+  /* afgeronde pijlen als SVG, kleuren via CSS (currentColor) */
+  const svgArrow = (dir) => `
+    <svg viewBox="0 0 24 24" width="20" height="20"
+         fill="none" stroke="currentColor" stroke-width="3"
+         stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      ${
+        dir === "prev"
+          ? '<polyline points="15 18 9 12 15 6" />'
+          : '<polyline points="9 18 15 12 9 6" />'
+      }
+    </svg>`;
 
   function buildCard(card) {
     const list = parseSlides(card.getAttribute("data-slides")).filter(Boolean);
@@ -102,14 +113,18 @@
       }
     });
 
-    // Alleen pijlen (geen dots)
+    // Alleen pijlen (geen dots) — SVG inside
     const nav = make("div", "slideshow-nav", container);
+
     const prev = make("button", "prev", nav);
     prev.type = "button";
-    prev.textContent = "‹";
+    prev.setAttribute("aria-label", "Previous");
+    prev.innerHTML = svgArrow("prev");
+
     const next = make("button", "next", nav);
     next.type = "button";
-    next.textContent = "›";
+    next.setAttribute("aria-label", "Next");
+    next.innerHTML = svgArrow("next");
 
     let idx = 0,
       total = list.length,
