@@ -278,7 +278,7 @@ body {
   height: 100%;
 }
 .slide {
-  position: relative;
+  position: absolute;
   width: 303px;
   height: 170px;
   top: 0;
@@ -288,28 +288,6 @@ body {
   transition: opacity 0.4s;
   background: #f8f8f8;
 }
-.slide .label {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  background: rgba(16, 46, 74, 0.85); /* donkerblauw met transparantie */
-  color: #fff;
-  font-size: 12px;
-  font-weight: 600;
-  padding: 6px 10px;
-  border-radius: 6px;
-  pointer-events: none; /* klik gaat door naar foto */
-}
-
-.slide .labels {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
 .slide.active {
   opacity: 1;
 }
