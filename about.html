@@ -4,18 +4,19 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>About – Hannelore Van Buynderen</title>
+
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
-    <!-- Devicon CDN voor echte logo-icons -->
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
     />
+
     <style>
-      /* ===== Base ===== */
+      /* ===== Base uit je bestaande pagina (alleen wat je al had) ===== */
       :root {
         --ink: #102e4a;
         --ink-2: #2a4a66;
@@ -40,21 +41,17 @@
         color: var(--ink);
       }
 
-      /* ===== Section wrapper ===== */
       .about-wrap {
         padding: 3rem clamp(1.2rem, 4vw, 3rem);
         max-width: 1080px;
         margin: 0 auto;
       }
-
-      /* ===== Row 1: Photo + Education (flex) ===== */
       .about-top {
         display: flex;
         align-items: center;
         gap: var(--gap-lg);
         margin: 0 0 40px;
       }
-
       figure.photo {
         flex: 0 0 300px;
         margin: 0;
@@ -67,7 +64,6 @@
         object-fit: cover;
         box-shadow: var(--shadow-1);
       }
-
       .education-wrap {
         flex: 1;
         min-width: 0;
@@ -80,7 +76,6 @@
         letter-spacing: 0.2px;
       }
 
-      /* TIMELINE — lijn stopt mooi ín de bollen */
       .tl {
         --line-x: 18px;
         --dot: 14px;
@@ -138,7 +133,6 @@
         border-radius: 50%;
       }
 
-      /* ===== Experience ===== */
       .experience-wrap {
         margin: 8px 0 40px;
       }
@@ -154,7 +148,7 @@
         border-radius: var(--r);
         padding: 18px;
         box-shadow: var(--shadow-1);
-        transition: transform 0.15s ease, box-shadow 0.15s ease;
+        transition: transform 0.15s, box-shadow 0.15s;
         display: flex;
         flex-direction: column;
         min-height: 0;
@@ -200,7 +194,6 @@
         padding: 4px 10px;
       }
 
-      /* ===== Skills & Certificates ===== */
       .skills-wrap,
       .certificates-wrap {
         margin: 0 0 24px;
@@ -283,7 +276,7 @@
         }
       }
 
-      /* mini popup styles (losstaand, beïnvloedt niets anders) */
+      /* ===== Popup & footer: klein, losstaand en portfolio-consistent ===== */
       .popup-overlay {
         position: fixed;
         inset: 0;
@@ -295,13 +288,12 @@
       }
       .popup-card {
         background: #fff;
-        color: var(--ink);
-        padding: 28px 24px;
-        border-radius: var(--r);
-        box-shadow: var(--shadow-2);
+        color: #0b2740;
+        padding: 24px;
+        border-radius: 12px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
         text-align: center;
-        max-width: 360px;
-        width: 90%;
+        max-width: 320px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -309,30 +301,104 @@
       .popup-card h3 {
         margin: 0 0 8px;
       }
-      .popup-card .btn-contact {
-        margin-top: 16px;
+
+      /* Zelfde blauwe knopstijl als je portfolio-knoppen */
+      .btn-linkedin {
         background: linear-gradient(90deg, #40698a, #2a4a66);
         color: #fff;
-        font-weight: 600;
         border: none;
-        border-radius: 999px; /* afgerond zoals in portfolio */
+        border-radius: 999px;
         padding: 10px 22px;
+        font-weight: 600;
         cursor: pointer;
-        transition: background 0.2s ease, transform 0.15s ease;
+        transition: background 0.2s ease, transform 0.15s ease,
+          box-shadow 0.15s ease;
+        box-shadow: 0 6px 18px rgba(16, 46, 74, 0.18);
       }
-      .popup-card .btn-contact:hover {
+      .btn-linkedin:hover {
         background: linear-gradient(90deg, #2a4a66, #102e4a);
         transform: translateY(-2px);
+        box-shadow: 0 10px 24px rgba(16, 46, 74, 0.22);
+      }
+      .btn-linkedin:active {
+        transform: translateY(0);
+        opacity: 0.92;
       }
 
-      .popup-card .btn-contact:active {
-        transform: translateY(0);
-        opacity: 0.9;
+      /* Footer basics */
+      .site-footer {
+        background: #f8fbfd;
+        border-top: 1px solid var(--border);
+        margin-top: 60px;
+        padding: 32px 16px;
+        font-size: 0.92rem;
+        color: var(--muted);
       }
+      .footer-inner {
+        max-width: 1080px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        align-items: center;
+        text-align: center;
+      }
+      .footer-name {
+        margin: 0;
+        font-weight: 600;
+        color: var(--ink);
+      }
+      .footer-links {
+        display: flex;
+        gap: 18px;
+        flex-wrap: wrap;
+      }
+      .footer-links a {
+        color: var(--muted);
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.2s;
+      }
+      .footer-links a:hover {
+        color: var(--ink);
+      }
+
+      .footer-contact {
+        max-width: 500px;
+        width: 100%;
+      }
+      .footer-contact h3 {
+        margin-bottom: 12px;
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--ink);
+      }
+      .footer-contact .contact-form {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .footer-contact input,
+      .footer-contact textarea {
+        padding: 12px 14px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        font: inherit;
+      }
+      .footer-contact input:focus,
+      .footer-contact textarea:focus {
+        border-color: var(--muted);
+        box-shadow: 0 0 0 2px rgba(64, 105, 138, 0.15);
+        outline: none;
+      }
+      .footer-contact button {
+        align-self: center;
+      } /* Send in het midden */
     </style>
   </head>
+
   <body class="about-page">
-    <!-- (1) VERBORGEN NETLIFY-DETECTIEFORM: MOET letterlijk in de HTML staan -->
+    <!-- Verplicht voor Netlify-detectie (staat letterlijk in de HTML) -->
     <form name="contact" netlify data-netlify="true" style="display: none">
       <input type="text" name="name" />
       <input type="email" name="email" />
@@ -368,21 +434,19 @@
             class="btn-resume"
             href="CV_Hannelore_Van_Buynderen.pdf"
             target="_blank"
+            ><span class="play-icon">▶</span>Resume</a
           >
-            <span class="play-icon">▶</span>Resume
-          </a>
           <a
             class="btn-linkedin btn-info"
             href="https://www.linkedin.com/in/hannelore-van-buynderen-056783225/"
             target="_blank"
+            ><span class="info-icon">in</span>LinkedIn</a
           >
-            <span class="info-icon">in</span>LinkedIn
-          </a>
         </div>
       </div>
     </div>
 
-    <!-- CONTENT -->
+    <!-- CONTENT (ongewijzigd) -->
     <section class="about-wrap">
       <div class="about-content">
         <div class="about-top">
@@ -393,8 +457,6 @@
               alt="Portrait of Hannelore Van Buynderen"
             />
           </figure>
-
-          <!-- Education -->
           <div class="education-wrap">
             <h2 class="section-title">Education</h2>
             <ul class="tl">
@@ -421,7 +483,6 @@
           </div>
         </div>
 
-        <!-- Experience -->
         <div class="experience-wrap">
           <h2 class="section-title">Experience</h2>
           <div class="xp-grid">
@@ -468,7 +529,6 @@
           </div>
         </div>
 
-        <!-- Skills -->
         <div class="skills-wrap">
           <h2 class="section-title">Skills</h2>
           <div class="skills-grid">
@@ -546,7 +606,6 @@
           </div>
         </div>
 
-        <!-- Certificates -->
         <div class="certificates-wrap">
           <h2 class="section-title">Certificates</h2>
           <div class="skills-grid">
@@ -568,10 +627,74 @@
       </div>
     </section>
 
-    <!-- (3) Script: URL-encoded POST naar root + popup -->
+    <!-- Footer met contact -->
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <p class="footer-name">© 2025 Hannelore Van Buynderen</p>
+        <nav class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="profiles.html">Profiles</a>
+          <a
+            href="https://www.linkedin.com/in/hannelore-van-buynderen-056783225/"
+            target="_blank"
+            >LinkedIn</a
+          >
+        </nav>
+
+        <div class="footer-contact">
+          <h3>Contact me</h3>
+          <form
+            class="contact-form"
+            id="footerContactForm"
+            name="contact"
+            method="POST"
+            data-netlify="true"
+            netlify-honeypot="bot-field"
+            accept-charset="UTF-8"
+          >
+            <input type="hidden" name="form-name" value="contact" />
+            <p style="display: none">
+              <label>Don’t fill this out: <input name="bot-field" /></label>
+            </p>
+
+            <input type="text" name="name" placeholder="Your name" required />
+            <input
+              type="email"
+              name="email"
+              placeholder="Your email"
+              required
+            />
+            <textarea
+              name="message"
+              rows="4"
+              placeholder="Your message"
+              required
+            ></textarea>
+
+            <button type="submit" class="btn-linkedin">
+              <span class="play-icon">✉</span> Send
+            </button>
+          </form>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Popup -->
+    <div id="popup" class="popup-overlay">
+      <div class="popup-card">
+        <h3>✅ Message sent!</h3>
+        <p>Thank you for contacting me. I’ll get back to you soon.</p>
+        <button id="closePopup" class="btn-linkedin" type="button">
+          Close
+        </button>
+      </div>
+    </div>
+
+    <!-- Script: form submit (footerContactForm) + popup -->
     <script>
       (function () {
-        const form = document.getElementById("contactForm");
+        const form = document.getElementById("footerContactForm");
         const popup = document.getElementById("popup");
         const close = document.getElementById("closePopup");
 
@@ -585,10 +708,9 @@
           e.preventDefault();
           const fd = new FormData(form);
 
-          if (!fd.get("form-name"))
-            fd.set("form-name", form.getAttribute("name") || "contact");
+          if (!fd.get("form-name")) fd.set("form-name", "contact");
 
-          // Honeypot → stilletjes “succes”
+          // Honeypot → stil “succes”
           if ((fd.get("bot-field") || "").trim() !== "") {
             form.reset();
             popup.style.display = "flex";
@@ -606,8 +728,11 @@
               form.reset();
               popup.style.display = "flex";
             } else {
-              const txt = await res.text().catch(() => "");
-              console.error("Netlify submit failed:", res.status, txt);
+              console.error(
+                "Netlify submit failed:",
+                res.status,
+                await res.text().catch(() => "")
+              );
               alert("Er ging iets mis, probeer later opnieuw.");
             }
           } catch (err) {
@@ -620,62 +745,4 @@
       })();
     </script>
   </body>
-  <footer class="site-footer">
-    <div class="footer-inner">
-      <p class="footer-name">© 2025 Hannelore Van Buynderen</p>
-
-      <nav class="footer-links">
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="profiles.html">Profiles</a>
-        <a
-          href="https://www.linkedin.com/in/hannelore-van-buynderen-056783225/"
-          target="_blank"
-          >LinkedIn</a
-        >
-      </nav>
-
-      <!-- Contact formulier in footer -->
-      <div class="footer-contact">
-        <h3>Contact me</h3>
-        <form
-          class="contact-form"
-          id="footerContactForm"
-          name="contact"
-          method="POST"
-          data-netlify="true"
-          netlify-honeypot="bot-field"
-          accept-charset="UTF-8"
-        >
-          <input type="hidden" name="form-name" value="contact" />
-          <p style="display: none">
-            <label>Don’t fill this out: <input name="bot-field" /></label>
-          </p>
-
-          <input type="text" name="name" placeholder="Your name" required />
-          <input type="email" name="email" placeholder="Your email" required />
-          <textarea
-            name="message"
-            rows="4"
-            placeholder="Your message"
-            required
-          ></textarea>
-
-          <button type="submit" class=".btn-contact">
-            <span class="play-icon">✉</span> Send
-          </button>
-        </form>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Popup -->
-  <div id="popup" class="popup-overlay">
-    <div class="popup-card">
-      <h3>✅ Message sent!</h3>
-      <p>Thank you for contacting me. I’ll get back to you soon.</p>
-      <button id="closePopup" class=".btn-contact" type="button">Close</button>
-    </div>
-  </div>
-  <script src="footer.js"></script>
 </html>
