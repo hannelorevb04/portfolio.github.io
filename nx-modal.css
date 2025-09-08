@@ -253,3 +253,66 @@
 .nx-cmp-label.right {
   right: 10px; /* rechtsboven */
 }
+
+/* Contributors-blok (chips onder 'Tags') */
+.modal-overlay .nx-contributors {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.modal-overlay .nx-contrib-title {
+  margin-top: 18px; /* ruimte boven sectie */
+  font-size: 20px;
+  color: #eaf4ff;
+}
+
+.modal-overlay .nx-contributors .contributor {
+  text-decoration: none;
+  cursor: pointer;
+  background: rgba(16, 46, 74, 0.9);
+  color: #fff;
+  border-radius: 999px;
+  padding: 8px 12px;
+  font-size: 14px;
+  font-weight: 700;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  transition: background 0.2s;
+}
+.modal-overlay .nx-contributors .contributor:hover {
+  background: rgba(16, 46, 74, 1);
+}
+
+.modal-overlay .nx-contrib-spec .nx-spec-title {
+  letter-spacing: 0.04em;
+  color: #c8d6e6;
+}
+
+.modal-overlay .nx-contrib-spec .nx-spec-list {
+  list-style: none;
+  margin: 6px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px; /* compacte verticale gap */
+}
+
+.modal-overlay .nx-contrib-spec .nx-spec-list a {
+  text-decoration: none; /* geen standaard underline */
+  color: #e9f0f7; /* zelfde tekstkleur als modal */
+  font-family: sans-serif;
+  border-bottom: 1px solid transparent;
+  transition: color 0.15s ease, border-color 0.15s ease, opacity 0.15s ease;
+  opacity: 0.9;
+}
+
+.modal-overlay .nx-contrib-spec .nx-spec-list a:hover,
+.modal-overlay .nx-contrib-spec .nx-spec-list a:focus {
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.25); /* subtiele underline on hover */
+  opacity: 1;
+}
+
+.modal-overlay .nx-contrib-spec .nx-spec-list a:active {
+  opacity: 0.8;
+}

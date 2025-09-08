@@ -9,6 +9,7 @@
   const dotsEl = modal.querySelector(".nx-dots");
   const prevBtn = modal.querySelector(".nx-nav.prev");
   const nextBtn = modal.querySelector(".nx-nav.next");
+
   // Zorg voor afgeronde SVG-pijlen in de modal-knoppen
   (function ensureModalArrows() {
     const svgArrow = (dir) => `
@@ -44,6 +45,7 @@
   const tagsEl =
     modal.querySelector(".nx-taglist") || modal.querySelector("#nxTags");
   const leftCol = modal.querySelector(".nx-left");
+  const rightAside = modal.querySelector(".nx-right");
   const rightDis =
     modal.querySelector(".nx-discipline") ||
     modal.querySelector("#nxDiscipline");
@@ -69,20 +71,17 @@
 
   // Build SLIDES from card
   function extractSlides(card) {
-    // 1) data-slides
     const raw = card.getAttribute("data-slides");
     if (raw) {
       const arr = tryJSON(raw);
       if (Array.isArray(arr) && arr.length) return arr;
     }
-    // 2) inline slideshow images
     const inlineImgs = card.querySelectorAll(
       ".slideshow-container .slides img"
     );
     if (inlineImgs.length) {
       return Array.from(inlineImgs).map((img) => img.getAttribute("src"));
     }
-    // 3) fallback first image in card
     const firstImg = card.querySelector("img");
     if (firstImg) return [firstImg.getAttribute("src")];
     return [];
@@ -99,16 +98,13 @@
 
       let node;
       if (typeof src === "string" && src.startsWith("iframe:")) {
-        // ▶ iframe slide
         const url = src.slice(7);
         node = DOC.createElement("iframe");
         node.src = url;
         node.setAttribute("frameborder", "0");
         node.setAttribute("loading", "lazy");
         node.setAttribute("allowfullscreen", "");
-        // styling gebeurt via .nx-slide iframe in nx-modal.css
       } else {
-        // ▶ image slide (bestaand gedrag)
         node = DOC.createElement("img");
         node.loading = "lazy";
         node.alt = titleEl ? titleEl.textContent || "Slide" : "Slide";
@@ -158,7 +154,6 @@
   if (prevBtn) prevBtn.addEventListener("click", prev);
   if (nextBtn) nextBtn.addEventListener("click", next);
 
-  // Build INFO (title, meta, desc, tags, right specs)
   function fillInfo(card) {
     const title =
       card.getAttribute("data-title") ||
@@ -177,7 +172,6 @@
     if (rightDis) rightDis.textContent = disc || "—";
     if (rightTools) rightTools.textContent = tools || "—";
 
-    // Tags
     if (tagsEl) {
       wipe(tagsEl);
       let arr = [];
@@ -197,7 +191,6 @@
     }
   }
 
-  // Build COMPARISON sliders under .nx-comparisons (or after tags if container missing)
   function buildComparisons(card) {
     const raw = card.getAttribute("data-compare");
     const arr = raw ? tryJSON(raw) : null;
@@ -205,7 +198,6 @@
     const target = cmpContainer || tagsEl || leftCol;
     if (!target) return;
 
-    // Remove existing dynamic comparisons
     const old = target.querySelectorAll(".nx-compare[data-dynamic]");
     old.forEach((n) => n.remove());
 
@@ -221,12 +213,12 @@
       w.className = "nx-compare";
       w.setAttribute("data-dynamic", "");
 
-      const imgR = DOC.createElement("img"); // bottom (right)
+      const imgR = DOC.createElement("img");
       imgR.className = "nx-cmp-img right";
       imgR.src = right;
       imgR.alt = rLab || "After";
 
-      const imgL = DOC.createElement("img"); // top (left)
+      const imgL = DOC.createElement("img");
       imgL.className = "nx-cmp-img left";
       imgL.src = left;
       imgL.alt = lLab || "Before";
@@ -238,110 +230,96 @@
       knob.className = "nx-cmp-knob";
       handle.appendChild(knob);
 
-      if (lLab) {
-        const lbl = DOC.createElement("span");
-        lbl.className = "nx-cmp-label left";
-        lbl.textContent = lLab;
-        w.appendChild(lbl);
-      }
-      if (rLab) {
-        const lbl = DOC.createElement("span");
-        lbl.className = "nx-cmp-label right";
-        lbl.textContent = rLab;
-        w.appendChild(lbl);
-      }
-
       w.appendChild(imgR);
       w.appendChild(imgL);
       w.appendChild(handle);
 
-      // interactions (swipe / click)
-      let pct = 50,
-        dragging = false;
-      function setPct(p) {
-        pct = Math.max(0, Math.min(100, p));
-        imgL.style.clipPath = "inset(0 " + (100 - pct) + "% 0 0)";
-        handle.style.left = pct + "%";
-        w.setAttribute("data-pct", pct.toFixed(2));
-      }
-      function xyPct(clientX) {
-        const rect = w.getBoundingClientRect();
-        return ((clientX - rect.left) / rect.width) * 100;
-      }
-      function onDown(e) {
-        dragging = true;
-        const x = e.touches ? e.touches[0].clientX : e.clientX;
-        setPct(xyPct(x));
-      }
-      function onMove(e) {
-        if (!dragging) return;
-        const x = e.touches ? e.touches[0].clientX : e.clientX;
-        setPct(xyPct(x));
-      }
-      function onUp() {
-        dragging = false;
-      }
-
-      w.addEventListener("mousedown", onDown);
-      w.addEventListener("mousemove", onMove);
-      w.addEventListener("mouseup", onUp);
-      w.addEventListener("mouseleave", onUp);
-      w.addEventListener("touchstart", onDown, { passive: true });
-      w.addEventListener("touchmove", onMove, { passive: true });
-      w.addEventListener("touchend", onUp);
-      w.addEventListener("dblclick", () => setPct(50));
-      w.tabIndex = 0;
-      w.addEventListener("keydown", (e) => {
-        if (e.key === "ArrowLeft") {
-          setPct(pct - 2);
-          e.preventDefault();
-        }
-        if (e.key === "ArrowRight") {
-          setPct(pct + 2);
-          e.preventDefault();
-        }
-        if (e.key === "Home") {
-          setPct(0);
-          e.preventDefault();
-        }
-        if (e.key === "End") {
-          setPct(100);
-          e.preventDefault();
-        }
-        if (e.key === " " || e.key === "Spacebar") {
-          setPct(50);
-          e.preventDefault();
-        }
-      });
-
       (cmpContainer || leftCol || tagsEl).appendChild(w);
-      // ensure tags end up below comparisons (your HTML already places nx-comparisons above nx-taglist)
     });
   }
 
   // OPEN / CLOSE
   function openFromCard(card) {
-    // Fill content
     fillInfo(card);
     buildSlides(extractSlides(card));
     buildComparisons(card);
-    // Show modal
+
+    // CONTRIBUTORS rechts onder TOOLS
+    (function () {
+      const raw = card.getAttribute("data-contributors");
+      let arr = [];
+      try {
+        arr = JSON.parse(raw || "[]");
+      } catch {}
+
+      const oldSpec = rightAside?.querySelector(".nx-contrib-spec");
+      if (oldSpec) oldSpec.remove();
+
+      if (rightAside && arr.length) {
+        const toolsSpec = rightTools
+          ? rightTools.closest(".nx-spec")
+          : rightAside.querySelector(".nx-spec:last-of-type");
+
+        const spec = document.createElement("div");
+        spec.className = "nx-spec nx-contrib-spec";
+
+        const title = document.createElement("div");
+        title.className = "nx-spec-title";
+        title.textContent = "CONTRIBUTORS";
+
+        const list = document.createElement("ul");
+        list.className = "nx-spec-list";
+
+        arr.forEach((c) => {
+          const li = document.createElement("li");
+          const a = document.createElement("a");
+
+          if (typeof c === "string") {
+            // fallback: enkel naam
+            a.href = "#";
+            a.textContent = c;
+          } else {
+            // object met naam + url
+            a.href = c.url || "#";
+            a.textContent = c.name || "Contributor";
+          }
+
+          a.target = "_blank"; // opent in nieuw tabblad
+          a.rel = "noopener"; // veilig openen
+          li.appendChild(a);
+          list.appendChild(li);
+        });
+
+        spec.appendChild(title);
+        spec.appendChild(list);
+
+        if (toolsSpec && toolsSpec.parentNode) {
+          toolsSpec.parentNode.insertBefore(spec, toolsSpec.nextSibling);
+        } else {
+          rightAside.appendChild(spec);
+        }
+      }
+    })();
+
     modal.style.display = "flex";
     DOC.body.style.overflow = "hidden";
-    idx = 0; // ensure first slide
+    idx = 0;
     goTo(0);
   }
+
   function closeModal() {
     modal.style.display = "none";
     DOC.body.style.overflow = "";
-    // cleanup dynamic slides/comparisons
     wipe(slidesEl);
     if (dotsEl) wipe(dotsEl);
     if (cmpContainer) {
       const old = cmpContainer.querySelectorAll(".nx-compare[data-dynamic]");
       old.forEach((n) => n.remove());
     }
+    const oldSpec = rightAside?.querySelector(".nx-contrib-spec");
+    if (oldSpec) oldSpec.remove();
   }
+
   if (closeBtn) closeBtn.addEventListener("click", closeModal);
   modal.addEventListener("click", (e) => {
     if (e.target === modal) closeModal();
@@ -350,13 +328,11 @@
     if (e.key === "Escape" && modal.style.display !== "none") closeModal();
   });
 
-  // Bind all project cards
   function bindCards() {
     const cards = Array.from(DOC.querySelectorAll(".project-card"));
     cards.forEach((card) => {
       card.style.cursor = "pointer";
       card.addEventListener("click", (e) => {
-        // ignore clicks on inline slideshow arrows (if any)
         const target = e.target;
         if (
           target.closest(".slideshow-container .prev") ||
