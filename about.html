@@ -532,67 +532,40 @@
     <div class="contact-section">
       <h2 class="section-title">Contact</h2>
 
-      <!-- 0) HIDDEN DETECTION FORM (Netlify moet dit bij deploy kunnen lezen) -->
-      <form name="contact" netlify data-netlify="true" style="display: none">
-        <input type="text" name="name" />
-        <input type="email" name="email" />
-        <textarea name="message"></textarea>
-      </form>
+     <form
+  class="contact-form xp-card"
+  id="contactForm"
+  name="contact"
+  method="POST"
+  data-netlify="true"
+  netlify-honeypot="bot-field"
+  accept-charset="UTF-8"
+>
+  <input type="hidden" name="form-name" value="contact" />
+  <p style="display:none">
+    <label>Don’t fill this out: <input name="bot-field" /></label>
+  </p>
 
-      <!-- 1) ZICHTBAAR FORMULIER -->
-      <div class="contact-section">
-        <h2 class="section-title">Contact</h2>
-        <form
-          class="contact-form xp-card"
-          id="contactForm"
-          name="contact"
-          method="POST"
-          data-netlify="true"
-          netlify-honeypot="bot-field"
-          action="/about.html"
-        >
-          <input type="hidden" name="form-name" value="contact" />
-          <p style="display: none">
-            <label>Don’t fill this out: <input name="bot-field" /></label>
-          </p>
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input id="name" name="name" type="text" placeholder="Your name" required />
+  </div>
 
-          <div class="form-group">
-            <label for="name">Name</label>
-            <input
-              id="name"
-              name="name"
-              type="text"
-              placeholder="Your name"
-              required
-            />
-          </div>
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input id="email" name="email" type="email" placeholder="Your email" required />
+  </div>
 
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              placeholder="Your email"
-              required
-            />
-          </div>
+  <div class="form-group">
+    <label for="message">Message</label>
+    <textarea id="message" name="message" rows="5" placeholder="Your message" required></textarea>
+  </div>
 
-          <div class="form-group">
-            <label for="message">Message</label>
-            <textarea
-              id="message"
-              name="message"
-              rows="5"
-              placeholder="Your message"
-              required
-            ></textarea>
-          </div>
+  <button type="submit" class="btn-linkedin">
+    <span class="play-icon">✉</span> Send
+  </button>
+</form>
 
-          <button type="submit" class="btn-linkedin">
-            <span class="play-icon">✉</span> Send
-          </button>
-        </form>
       </div>
 
       <!-- 2) POPUP -->
@@ -608,67 +581,57 @@
     </div>
   </body>
   <script>
-    (function () {
-      const form = document.getElementById("contactForm");
-      const popup = document.getElementById("popup");
-      const closeBtn = document.getElementById("closePopup");
+(function () {
+  const form = document.getElementById("contactForm");
+  const popup = document.getElementById("popup");
+  const closeBtn = document.getElementById("closePopup");
 
-      // robuust encoden (URL-encoded, incl. form-name)
-      function encodeForm(form) {
-        const fd = new FormData(form);
-        if (!fd.get("form-name"))
-          fd.set("form-name", form.getAttribute("name") || "contact");
-        // honeypot leegmaken als browsers die per ongeluk invullen
-        if (fd.get("bot-field") && fd.get("bot-field").trim() !== "") {
-          // bot: doe alsof het ok is maar stuur niets
-          return null;
-        }
-        const params = new URLSearchParams();
-        for (const [k, v] of fd.entries()) params.append(k, v);
-        return params.toString();
-      }
+  function toURLEncoded(fd) {
+    const p = new URLSearchParams();
+    for (const [k, v] of fd.entries()) p.append(k, v);
+    return p.toString();
+  }
 
-      form.addEventListener("submit", async (e) => {
-        e.preventDefault();
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-        const body = encodeForm(e.target);
-        if (body === null) {
-          // honeypot gevuld: quietly slagen (geen fout tonen aan gebruiker)
-          e.target.reset();
-          popup.style.display = "flex";
-          return;
-        }
+    const fd = new FormData(form);
+    // zorg dat form-name zeker mee is
+    if (!fd.get("form-name")) fd.set("form-name", form.getAttribute("name") || "contact");
+    // honeypot
+    if ((fd.get("bot-field") || "").trim() !== "") {
+      form.reset();
+      popup.style.display = "flex";
+      return;
+    }
 
-        const endpoint =
-          form.getAttribute("action") ||
-          (location.pathname.endsWith("/")
-            ? location.pathname
-            : location.pathname + "");
-        // => met de action hierboven wordt dit gewoon "/about.html"
+    // post naar de huidige pagina (bv. /about), niet naar /about.html
+    const endpoint = window.location.pathname || "/";
 
-        try {
-          const res = await fetch(endpoint, {
-            method: "POST",
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body,
-          });
-
-          // Netlify kan 200, 302 of 303 teruggeven -> allemaal ok
-          if ([200, 201, 202, 204, 302, 303].includes(res.status)) {
-            form.reset();
-            popup.style.display = "flex";
-          } else {
-            const txt = await res.text().catch(() => "");
-            console.error("Netlify submit failed:", res.status, txt);
-            alert("Er ging iets mis, probeer later opnieuw.");
-          }
-        } catch (err) {
-          console.error("Network/JS error:", err);
-          alert("Er ging iets mis, probeer later opnieuw.");
-        }
+    try {
+      const res = await fetch(endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: toURLEncoded(fd),
       });
 
-      closeBtn.addEventListener("click", () => (popup.style.display = "none"));
-    })();
-  </script>
+      // Netlify kan 200/204/302/303 teruggeven
+      if ([200, 201, 202, 204, 302, 303].includes(res.status)) {
+        form.reset();
+        popup.style.display = "flex";
+      } else {
+        const txt = await res.text().catch(() => "");
+        console.error("Netlify submit failed:", res.status, txt);
+        alert("Er ging iets mis, probeer later opnieuw.");
+      }
+    } catch (err) {
+      console.error("Network/JS error:", err);
+      alert("Er ging iets mis, probeer later opnieuw.");
+    }
+  });
+
+  closeBtn?.addEventListener("click", () => (popup.style.display = "none"));
+})();
+</script>
+
 </html>
