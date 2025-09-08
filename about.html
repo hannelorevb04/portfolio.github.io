@@ -294,16 +294,40 @@
         z-index: 9999;
       }
       .popup-card {
+        background: #fff;
+        color: var(--ink);
+        padding: 28px 24px;
+        border-radius: var(--r);
+        box-shadow: var(--shadow-2);
+        text-align: center;
+        max-width: 360px;
+        width: 90%;
         display: flex;
         flex-direction: column;
-        align-items: center; /* centreert de knop */
-        justify-content: center;
+        align-items: center;
       }
       .popup-card h3 {
         margin: 0 0 8px;
       }
-      .popup-card .btn-linkedin {
-        margin-top: 14px;
+      .popup-card .btn-contact {
+        margin-top: 16px;
+        background: linear-gradient(90deg, #40698a, #2a4a66);
+        color: #fff;
+        font-weight: 600;
+        border: none;
+        border-radius: 999px; /* afgerond zoals in portfolio */
+        padding: 10px 22px;
+        cursor: pointer;
+        transition: background 0.2s ease, transform 0.15s ease;
+      }
+      .popup-card .btn-contact:hover {
+        background: linear-gradient(90deg, #2a4a66, #102e4a);
+        transform: translateY(-2px);
+      }
+
+      .popup-card .btn-contact:active {
+        transform: translateY(0);
+        opacity: 0.9;
       }
     </style>
   </head>
@@ -637,7 +661,7 @@
             required
           ></textarea>
 
-          <button type="submit" class="btn-linkedin">
+          <button type="submit" class=".btn-contact">
             <span class="play-icon">✉</span> Send
           </button>
         </form>
@@ -650,7 +674,7 @@
     <div class="popup-card">
       <h3>✅ Message sent!</h3>
       <p>Thank you for contacting me. I’ll get back to you soon.</p>
-      <button id="closePopup" class="btn-linkedin" type="button">Close</button>
+      <button id="closePopup" class=".btn-contact" type="button">Close</button>
     </div>
   </div>
   <script src="footer.js"></script>
