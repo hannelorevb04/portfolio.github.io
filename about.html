@@ -532,7 +532,15 @@
     <div class="contact-section">
       <h2 class="section-title">Contact</h2>
 
-     <form
+<!-- Hidden detection form: laat staan/voeg toe zodat Netlify je form registreert -->
+<form name="contact" netlify data-netlify="true" style="display:none">
+  <input type="text" name="name" />
+  <input type="email" name="email" />
+  <textarea name="message"></textarea>
+</form>
+
+<!-- Zichtbare form: GEEN action! -->
+<form
   class="contact-form xp-card"
   id="contactForm"
   name="contact"
@@ -566,18 +574,18 @@
   </button>
 </form>
 
+<!-- Popup -->
+<div id="popup" class="popup-overlay" style="display:none">
+  <div class="popup-card">
+    <h3>✅ Message sent!</h3>
+    <p>Thank you for contacting me. I’ll get back to you soon.</p>
+    <button id="closePopup" class="btn-linkedin" type="button">Close</button>
+  </div>
+</div>
+
+
       </div>
 
-      <!-- 2) POPUP -->
-      <div id="popup" class="popup-overlay" style="display: none">
-        <div class="popup-card">
-          <h3>✅ Message sent!</h3>
-          <p>Thank you for contacting me. I’ll get back to you soon.</p>
-          <button id="closePopup" class="btn-linkedin" type="button">
-            Close
-          </button>
-        </div>
-      </div>
     </div>
   </body>
   <script>
@@ -596,16 +604,12 @@
     e.preventDefault();
 
     const fd = new FormData(form);
-    // zorg dat form-name zeker mee is
     if (!fd.get("form-name")) fd.set("form-name", form.getAttribute("name") || "contact");
-    // honeypot
-    if ((fd.get("bot-field") || "").trim() !== "") {
-      form.reset();
-      popup.style.display = "flex";
-      return;
+    if ((fd.get("bot-field") || "").trim() !== "") { // honeypot
+      form.reset(); popup.style.display = "flex"; return;
     }
 
-    // post naar de huidige pagina (bv. /about), niet naar /about.html
+    // >>> belangrijkste regel: post naar huidige path (bv. /about), NIET /about.html
     const endpoint = window.location.pathname || "/";
 
     try {
@@ -615,7 +619,6 @@
         body: toURLEncoded(fd),
       });
 
-      // Netlify kan 200/204/302/303 teruggeven
       if ([200, 201, 202, 204, 302, 303].includes(res.status)) {
         form.reset();
         popup.style.display = "flex";
