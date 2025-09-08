@@ -542,13 +542,14 @@
       <!-- 1) ZICHTBAAR FORMULIER -->
       <div class="contact-section">
         <h2 class="section-title">Contact</h2>
-
         <form
           class="contact-form xp-card"
           id="contactForm"
           name="contact"
           method="POST"
+          data-netlify="true"
           netlify-honeypot="bot-field"
+          action="/about.html"
         >
           <input type="hidden" name="form-name" value="contact" />
           <p style="display: none">
@@ -638,7 +639,12 @@
           return;
         }
 
-        const endpoint = form.getAttribute("action") || "/";
+        const endpoint =
+          form.getAttribute("action") ||
+          (location.pathname.endsWith("/")
+            ? location.pathname
+            : location.pathname + "");
+        // => met de action hierboven wordt dit gewoon "/about.html"
 
         try {
           const res = await fetch(endpoint, {
