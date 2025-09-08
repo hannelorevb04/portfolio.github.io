@@ -16,7 +16,7 @@
         pointer-events: none;
       }
     </style>
-    <link href="nx-modal.css?v=11" rel="stylesheet" />
+    <link href="nx-modal.css" rel="stylesheet" />
   </head>
   <body>
     <div class="designer-page">
@@ -392,7 +392,7 @@
           >
             <div class="nx-slides" id="nxSlides"></div>
             <!-- Vorige knop -->
-            <button class="slideshow-prev" aria-label="Vorige">
+            <!-- <button aria-label="Previous" class="nx-nav prev">
               <svg
                 viewBox="0 0 24 24"
                 width="20"
@@ -405,10 +405,10 @@
               >
                 <polyline points="15 18 9 12 15 6" />
               </svg>
-            </button>
+            </button> -->
 
             <!-- Volgende knop -->
-            <button class="slideshow-next" aria-label="Volgende">
+            <!-- <button aria-label="Next" class="nx-nav next">
               <svg
                 viewBox="0 0 24 24"
                 width="20"
@@ -421,7 +421,7 @@
               >
                 <polyline points="9 18 15 12 9 6" />
               </svg>
-            </button>
+            </button> -->
 
             <div class="nx-dots" id="nxDots"></div>
           </div>
@@ -439,7 +439,7 @@
                     <span class="nx-ico-play">▶</span> View Project
                   </button>
 
-                  <button class="nx-btn nx-ghost">＋ Save</button>
+                  <button class="nx-btn nx-ghost">Contact</button>
                 </div>
                 <h3 class="nx-h3">Tags</h3>
                 <div class="nx-taglist" id="nxTags"></div>
@@ -464,7 +464,8 @@
       </div>
     </div>
     <!-- ============ JS: one modal for all cards ============ -->
-    <script defer="defer" src="nx-modal.js?v=25"></script>
+    <script defer="" src="nx-inline.js"></script>
+    <script defer="defer" src="nx-modal.js"></script>
     <script src="drag-scroll.js"></script>
     <script src="nx-card-slideshow.js"></script>
   </body>
