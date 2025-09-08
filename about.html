@@ -294,13 +294,14 @@
         z-index: 9999;
       }
       .popup-card {
-        background: #fff;
-        color: #0b2740;
-        padding: 24px;
-        border-radius: 12px;
-        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
-        text-align: center;
-        max-width: 320px;
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* centreert de knop */
+        justify-content: center;
+      }
+      .popup-card button {
+        margin-top: 16px; /* beetje ruimte boven de knop */
+        align-self: center; /* extra zekerheid */
       }
       .popup-card h3 {
         margin: 0 0 8px;
