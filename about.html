@@ -605,20 +605,17 @@
         try {
           await fetch("/", {
             method: "POST",
-            body: data,
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: new URLSearchParams(data).toString(),
           });
 
-          // Form resetten
           form.reset();
-
-          // Popup tonen
           document.getElementById("popup").style.display = "flex";
         } catch (err) {
           alert("Er ging iets mis, probeer later opnieuw.");
         }
       });
 
-    // Close-knop
     document
       .getElementById("closePopup")
       .addEventListener("click", function () {
