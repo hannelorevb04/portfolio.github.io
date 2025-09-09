@@ -405,14 +405,14 @@
   </head>
 
   <body class="about-page">
-    <!-- Verplicht voor Netlify-detectie (staat letterlijk in de HTML) -->
+    <!-- Hidden Netlify detect (1x per pagina is prima) -->
     <form name="contact" netlify data-netlify="true" style="display: none">
       <input type="text" name="name" />
       <input type="email" name="email" />
       <textarea name="message"></textarea>
     </form>
 
-    <!-- HERO -->
+    <!-- ======= HERO ======= -->
     <div class="video-header">
       <video class="background-video" autoplay muted loop>
         <source src="images/beach_1.mp4" type="video/mp4" />
@@ -634,122 +634,7 @@
       </div>
     </section>
 
-    <!-- Footer met contact -->
-    <footer class="site-footer">
-      <div class="footer-inner">
-        <nav class="footer-links">
-          <a href="index.html">Home</a>
-          <a href="about.html">About</a>
-          <a href="profiles.html">Profiles</a>
-          <a
-            href="https://www.linkedin.com/in/hannelore-van-buynderen-056783225/"
-            target="_blank"
-            >LinkedIn</a
-          >
-        </nav>
-
-        <div class="footer-contact">
-          <h3>Contact me</h3>
-          <form
-            class="contact-form"
-            id="footerContactForm"
-            name="contact"
-            method="POST"
-            data-netlify="true"
-            netlify-honeypot="bot-field"
-            accept-charset="UTF-8"
-          >
-            <input type="hidden" name="form-name" value="contact" />
-            <p style="display: none">
-              <label>Don’t fill this out: <input name="bot-field" /></label>
-            </p>
-
-            <input type="text" name="name" placeholder="Your name" required />
-            <input
-              type="email"
-              name="email"
-              placeholder="Your email"
-              required
-            />
-            <textarea
-              name="message"
-              rows="4"
-              placeholder="Your message"
-              required
-            ></textarea>
-
-            <button type="submit" class="btn-contact">
-              <span class="play-icon">✉</span> Send
-            </button>
-          </form>
-          <p class="footer-name">© 2025 Hannelore Van Buynderen</p>
-        </div>
-      </div>
-    </footer>
-
-    <!-- Popup -->
-    <div id="popup" class="popup-overlay">
-      <div class="popup-card">
-        <h3>Message sent!</h3>
-        <p>Thank you for contacting me. I’ll get back to you soon.</p>
-        <button id="closePopup" class="btn-linkedin" type="button">
-          Close
-        </button>
-      </div>
-    </div>
-
-    <!-- Script: form submit (footerContactForm) + popup -->
-    <script>
-      (function () {
-        const form = document.getElementById("footerContactForm");
-        const popup = document.getElementById("popup");
-        const close = document.getElementById("closePopup");
-
-        function toURLEncoded(fd) {
-          const p = new URLSearchParams();
-          for (const [k, v] of fd.entries()) p.append(k, v);
-          return p.toString();
-        }
-
-        form.addEventListener("submit", async (e) => {
-          e.preventDefault();
-          const fd = new FormData(form);
-
-          if (!fd.get("form-name")) fd.set("form-name", "contact");
-
-          // Honeypot → stil “succes”
-          if ((fd.get("bot-field") || "").trim() !== "") {
-            form.reset();
-            popup.style.display = "flex";
-            return;
-          }
-
-          try {
-            const res = await fetch("/", {
-              method: "POST",
-              headers: { "Content-Type": "application/x-www-form-urlencoded" },
-              body: toURLEncoded(fd),
-            });
-
-            if ([200, 201, 202, 204, 302, 303].includes(res.status)) {
-              form.reset();
-              popup.style.display = "flex";
-            } else {
-              console.error(
-                "Netlify submit failed:",
-                res.status,
-                await res.text().catch(() => "")
-              );
-              alert("Er ging iets mis, probeer later opnieuw.");
-            }
-          } catch (err) {
-            console.error("Network/JS error:", err);
-            alert("Er ging iets mis, probeer later opnieuw.");
-          }
-        });
-
-        close?.addEventListener("click", () => (popup.style.display = "none"));
-      })();
-    </script>
+    <div data-include="components/footer.html"></div>
+    <script src="assets/js/insert-components.js" defer></script>
   </body>
 </html>
