@@ -26,6 +26,7 @@
 }
 
 /* Footer blok */
+
 .site-footer {
   background: #f8fbfd;
   border-top: 1px solid var(--border);
@@ -34,6 +35,7 @@
   font-size: 0.92rem;
   color: var(--muted);
 }
+
 .footer-inner {
   max-width: 1080px;
   margin: 0 auto;
@@ -46,7 +48,7 @@
 .footer-name {
   margin: 0;
   font-weight: 600;
-  color: var(--ink);
+  color: var(--arrow-color);
 }
 .footer-links {
   display: flex;
@@ -54,13 +56,10 @@
   flex-wrap: wrap;
 }
 .footer-links a {
-  color: var(--muted);
+  color: var(--arrow-color);
   text-decoration: none;
   font-weight: 500;
   transition: color 0.2s;
-}
-.footer-links a:hover {
-  color: var(--ink);
 }
 
 .footer-contact {
@@ -71,7 +70,7 @@
   margin-bottom: 12px;
   font-size: 1.1rem;
   font-weight: 700;
-  color: var(--ink);
+  color: var(--arrow-color);
 }
 .footer-contact .contact-form {
   display: flex;
