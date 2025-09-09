@@ -1,22 +1,22 @@
 <!DOCTYPE html>
-
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Hannelore Van Buynderen - Designer Portfolio</title>
+
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-
     <link href="styles.css?v=11" rel="stylesheet" />
-    <title>Hannelore Van Buynderen - Designer Portfolio</title>
+    <link href="nx-modal.css" rel="stylesheet" />
+    <!-- (optioneel) <link rel="stylesheet" href="css/contact.css" /> -->
     <style>
       .project-card .gradient {
         pointer-events: none;
       }
     </style>
-    <link href="nx-modal.css" rel="stylesheet" />
   </head>
   <body>
     <div class="designer-page">
@@ -469,77 +469,13 @@
         </div>
       </div>
     </div>
-    <footer class="site-footer">
-      <div class="footer-inner">
-        <p class="footer-name">© 2025 Hannelore Van Buynderen</p>
-
-        <nav class="footer-links">
-          <a href="index.html">Home</a>
-          <a href="about.html">About</a>
-          <a href="profiles.html">Profiles</a>
-          <a
-            href="https://www.linkedin.com/in/hannelore-van-buynderen-056783225/"
-            target="_blank"
-            >LinkedIn</a
-          >
-        </nav>
-
-        <!-- Contactformulier -->
-        <div class="footer-contact">
-          <h3>Contact me</h3>
-          <form
-            class="contact-form"
-            id="footerContactForm"
-            name="contact"
-            method="POST"
-            data-netlify="true"
-            netlify-honeypot="bot-field"
-            accept-charset="UTF-8"
-          >
-            <input type="hidden" name="form-name" value="contact" />
-            <p style="display: none">
-              <label>Don’t fill this out: <input name="bot-field" /></label>
-            </p>
-
-            <input type="text" name="name" placeholder="Your name" required />
-            <input
-              type="email"
-              name="email"
-              placeholder="Your email"
-              required
-            />
-            <textarea
-              name="message"
-              rows="4"
-              placeholder="Your message"
-              required
-            ></textarea>
-
-            <button type="submit" class="btn-linkedin">
-              <span class="play-icon">✉</span> Send
-            </button>
-          </form>
-        </div>
-      </div>
-    </footer>
-
-    <!-- Popup voor bevestiging -->
-    <div id="popup" class="popup-overlay">
-      <div class="popup-card">
-        <h3>✅ Message sent!</h3>
-        <p>Thank you for contacting me. I’ll get back to you soon.</p>
-        <button id="closePopup" class="btn-linkedin" type="button">
-          Close
-        </button>
-      </div>
-    </div>
-
-    <script src="footer.js"></script>
-
-    <!-- ============ JS: one modal for all cards ============ -->
-    <script defer="" src="nx-inline.js"></script>
-    <script defer="defer" src="nx-modal.js"></script>
+    <script defer src="nx-inline.js"></script>
+    <script defer src="nx-modal.js"></script>
     <script src="drag-scroll.js"></script>
     <script src="nx-card-slideshow.js"></script>
+
+    <!-- Footer component injectie -->
+    <div data-include="components/footer.html"></div>
+    <script src="assets/js/insert-components.js" defer></script>
   </body>
 </html>
