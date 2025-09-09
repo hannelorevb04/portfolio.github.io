@@ -1,4 +1,4 @@
-// Netlify submit + popup
+// assets/js/contact.js
 (function () {
   function toURLEncoded(fd) {
     const p = new URLSearchParams();
@@ -17,7 +17,7 @@
       const fd = new FormData(form);
       if (!fd.get("form-name")) fd.set("form-name", "contact");
 
-      // Honeypot => doe alsof gelukt
+      // Honeypot -> doe alsof ok
       if ((fd.get("bot-field") || "").trim() !== "") {
         form.reset();
         if (popup) popup.style.display = "flex";
@@ -52,5 +52,10 @@
       close.addEventListener("click", () => (popup.style.display = "none"));
   }
 
-  document.addEventListener("DOMContentLoaded", init);
+  // <<< BELANGRIJK: init altijd, ook als DOMContentLoaded al geweest is
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
 })();

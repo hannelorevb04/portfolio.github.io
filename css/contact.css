@@ -116,3 +116,8 @@
   transform: translateY(0);
   opacity: 0.92;
 }
+/* hogere specificiteit dan generieke button regels */
+.site-footer .footer-contact .contact-form button {
+  align-self: center !important; /* safe override als styles.css iets anders afdwingt */
+  display: inline-block;
+}
