@@ -93,9 +93,9 @@
 }
 .footer-contact button {
   align-self: center;
-}
+} /* <<< knop in het midden */
 
-/* Knop (zelfde blauw als rest) */
+/* Knopstijl */
 .btn-linkedin {
   background: linear-gradient(90deg, #40698a, #2a4a66);
   color: #fff;

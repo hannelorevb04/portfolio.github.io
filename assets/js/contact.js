@@ -17,10 +17,10 @@
       const fd = new FormData(form);
       if (!fd.get("form-name")) fd.set("form-name", "contact");
 
-      // Honeypot => stil "ok"
+      // Honeypot => doe alsof gelukt
       if ((fd.get("bot-field") || "").trim() !== "") {
         form.reset();
-        popup && (popup.style.display = "flex");
+        if (popup) popup.style.display = "flex";
         return;
       }
 
@@ -33,7 +33,7 @@
 
         if ([200, 201, 202, 204, 302, 303].includes(res.status)) {
           form.reset();
-          popup && (popup.style.display = "flex");
+          if (popup) popup.style.display = "flex";
         } else {
           console.error(
             "Netlify submit failed:",
@@ -48,7 +48,7 @@
       }
     });
 
-    close &&
+    if (close)
       close.addEventListener("click", () => (popup.style.display = "none"));
   }
 

@@ -10,8 +10,10 @@
       rel="stylesheet"
     />
     <link href="styles.css?v=11" rel="stylesheet" />
-    <link href="nx-modal.css?v=27" rel="stylesheet" />
     <link rel="stylesheet" href="css/contact.css" />
+
+    <link href="nx-modal.css?v=27" rel="stylesheet" />
+
     <style>
       .project-card .gradient {
         pointer-events: none;
@@ -19,6 +21,12 @@
     </style>
   </head>
   <body>
+    <form name="contact" netlify data-netlify="true" style="display: none">
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <textarea name="message"></textarea>
+    </form>
+
     <div class="designer-page">
       <!-- Header -->
       <div class="video-header">

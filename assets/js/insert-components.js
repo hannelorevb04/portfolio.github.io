@@ -1,4 +1,5 @@
-// Injecteert componenten in elementen met [data-include="..."] en laadt contact.js één keer.
+// Injecteert componenten in elementen met [data-include="..."]
+// en laadt daarna contact.js exact één keer.
 (function () {
   async function includeInto(el) {
     const url = el.getAttribute("data-include");
@@ -23,6 +24,7 @@
   window.addEventListener("DOMContentLoaded", async () => {
     const includes = document.querySelectorAll("[data-include]");
     await Promise.all([...includes].map(includeInto));
+    // >>> Belangrijk: pad komt overeen met jouw map
     loadScriptOnce("assets/js/contact.js");
   });
 })();
