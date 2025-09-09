@@ -2040,3 +2040,58 @@ button,
 .footer-contact button {
   align-self: center; /* knop in het midden */
 }
+
+/* ===== Unified Buttons ===== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4em;
+  padding: 0.7rem 1.5rem;
+  border: none;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+/* Primaire actieknop (Resume, Send, View Project) */
+.btn-primary {
+  background: linear-gradient(90deg, #40698a, #2a4a66);
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(16, 46, 74, 0.18);
+}
+.btn-primary:hover {
+  background: linear-gradient(90deg, #2a4a66, #102e4a);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(16, 46, 74, 0.22);
+}
+.btn-primary:active {
+  transform: translateY(0);
+  opacity: 0.92;
+}
+
+/* Secundair (Info, LinkedIn, Close popup) */
+.btn-secondary {
+  background: #eef5fb;
+  color: #102e4a;
+  border: 1px solid rgba(16, 46, 74, 0.2);
+}
+.btn-secondary:hover {
+  background: #dceaf5;
+}
+.btn-secondary:active {
+  opacity: 0.9;
+}
+
+/* Ghost / outline */
+.btn-ghost {
+  background: transparent;
+  color: #40698a;
+  border: 1px solid rgba(16, 46, 74, 0.3);
+}
+.btn-ghost:hover {
+  background: rgba(16, 46, 74, 0.05);
+}
