@@ -1,4 +1,4 @@
-// Netlify submit + popup — werkt overal waar footer.html is ingevoegd
+// Netlify submit + popup
 (function () {
   function toURLEncoded(fd) {
     const p = new URLSearchParams();
@@ -10,14 +10,14 @@
     const form = document.getElementById("footerContactForm");
     const popup = document.getElementById("popup");
     const close = document.getElementById("closePopup");
-    if (!form) return; // geen footer op deze pagina
+    if (!form) return;
 
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
       const fd = new FormData(form);
       if (!fd.get("form-name")) fd.set("form-name", "contact");
 
-      // Honeypot => doe alsof OK
+      // Honeypot => stil "ok"
       if ((fd.get("bot-field") || "").trim() !== "") {
         form.reset();
         popup && (popup.style.display = "flex");
@@ -52,9 +52,5 @@
       close.addEventListener("click", () => (popup.style.display = "none"));
   }
 
-  // Init na injectie
-  document.addEventListener("DOMContentLoaded", () => {
-    // init kan direct, insert-components laadt dit script pas na injecties
-    init();
-  });
+  document.addEventListener("DOMContentLoaded", init);
 })();

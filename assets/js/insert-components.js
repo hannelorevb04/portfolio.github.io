@@ -1,5 +1,4 @@
-// Injecteert HTML "componenten" in elementen met [data-include="pad/naar/file.html"]
-// en laadt vervolgens contact.js één keer.
+// Injecteert componenten in elementen met [data-include="..."] en laadt contact.js één keer.
 (function () {
   async function includeInto(el) {
     const url = el.getAttribute("data-include");
@@ -7,8 +6,7 @@
     try {
       const resp = await fetch(url, { credentials: "same-origin" });
       if (!resp.ok) throw new Error("HTTP " + resp.status);
-      const html = await resp.text();
-      el.innerHTML = html;
+      el.innerHTML = await resp.text();
     } catch (e) {
       console.error("Include failed:", url, e);
     }
@@ -25,7 +23,6 @@
   window.addEventListener("DOMContentLoaded", async () => {
     const includes = document.querySelectorAll("[data-include]");
     await Promise.all([...includes].map(includeInto));
-    // Na injecties: laad contact.js precies één keer (zo werkt popup+submit overal)
     loadScriptOnce("assets/js/contact.js");
   });
 })();
