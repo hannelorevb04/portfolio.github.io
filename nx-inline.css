@@ -2,7 +2,7 @@
 .project-card .slideshow-container {
   position: relative;
   width: 100%;
-  height: 100%;
+  height: var(--card-media-h, 220px); /* was: 100%  ->  begrensd */
   border-radius: inherit;
   overflow: hidden;
 }
@@ -24,9 +24,9 @@
 
 /* common media */
 .project-card .image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  /* width: 100%; */
+  /* height: 100%;  */
+  object-fit: contain;
   border: 0;
   display: block;
 }

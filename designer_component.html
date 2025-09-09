@@ -9,10 +9,12 @@
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link href="styles.css?v=11" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="css/designer.css" />
     <link rel="stylesheet" href="css/contact.css" />
-
-    <link href="nx-modal.css" rel="stylesheet" />
+    <link rel="stylesheet" href="nx-inline.css" />
+    <!-- <-- toevoegen -->
+    <link rel="stylesheet" href="nx-modal.css" />
 
     <style>
       .project-card .gradient {
@@ -406,7 +408,7 @@
           >
             <div class="nx-slides" id="nxSlides"></div>
             <!-- Vorige knop -->
-            <!-- <button aria-label="Previous" class="nx-nav prev">
+            <button aria-label="Previous" class="nx-nav prev">
               <svg
                 viewBox="0 0 24 24"
                 width="20"
@@ -419,10 +421,9 @@
               >
                 <polyline points="15 18 9 12 15 6" />
               </svg>
-            </button> -->
+            </button>
 
-            <!-- Volgende knop -->
-            <!-- <button aria-label="Next" class="nx-nav next">
+            <button aria-label="Next" class="nx-nav next">
               <svg
                 viewBox="0 0 24 24"
                 width="20"
@@ -435,7 +436,7 @@
               >
                 <polyline points="9 18 15 12 9 6" />
               </svg>
-            </button> -->
+            </button>
 
             <div class="nx-dots" id="nxDots"></div>
           </div>
@@ -449,11 +450,12 @@
                 </div>
                 <p class="nx-desc" id="nxDesc">Description…</p>
                 <div class="nx-actions">
-                  <button class="nx-btn nx-primary" id="nxView">
-                    <span class="nx-ico-play">▶</span> View Project
+                  <button class="btn btn-primary" type="button">
+                    ▶ View Project
                   </button>
-
-                  <button class="nx-btn nx-ghost">Contact</button>
+                  <button class="btn btn-secondary" type="button">
+                    Contact
+                  </button>
                 </div>
                 <h3 class="nx-h3">Tags</h3>
                 <div class="nx-taglist" id="nxTags"></div>

@@ -1,0 +1,51 @@
+/* Iframe preview preset uit de developer-page */
+.nx-hero iframe {
+  width: min(1200px, 95vw);
+  height: min(780px, 82vh);
+  border: none;
+  background: #fff;
+}
+@media (max-width: 900px) {
+  .nx-hero iframe {
+    width: 95vw;
+    height: 70vh;
+  }
+}
+
+/* Iframe thumbnails binnen cards (zoals nu) */
+.iframe-project {
+  border: none;
+  pointer-events: auto;
+  width: 1212px !important;
+  height: 681px !important;
+  transform: scale(0.25);
+  transform-origin: top left;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #fff;
+}
+.iframe-project[src*="Hockey_shop"] {
+  background: #f0f0f0;
+  transform: scale(0.32);
+  width: 950px !important;
+  height: 530px !important;
+}
+.iframe-project[src*="Felicks"] {
+  transform: scale(0.25);
+  width: 1212px !important;
+  height: 680px !important;
+}
+.iframe-project[src*="Disney+"] {
+  background: #040714;
+  transform: scale(0.28);
+  width: 1080px !important;
+  height: 607px !important;
+}
+.iframe-project[src*="Swear"] {
+  background: #222;
+  transform: scale(0.28);
+  width: 1080px !important;
+  height: 607px !important;
+}

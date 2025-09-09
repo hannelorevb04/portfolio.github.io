@@ -1,0 +1,31 @@
+/* Extra slideshow-bediening die alleen hier gebruikt wordt */
+.project-card .gradient {
+  pointer-events: none;
+}
+
+/* Kleine varianten per slideshow (indien gebruikt) */
+.slideshow-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.slides {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.slide {
+  position: absolute;
+  width: 303px;
+  height: 170px;
+  top: 0;
+  left: 0;
+  object-fit: contain;
+  opacity: 0;
+  transition: opacity 0.4s;
+  background: #f8f8f8;
+}
+.slide.active {
+  opacity: 1;
+}
+/* De nav-knoppen pakken gedeelde styles uit styles.css via .slideshow-nav */

@@ -1,4 +1,3 @@
-/* Universele pijlen-knop styling */
 .arrow-btn {
   background: #fff;
   border: none;
@@ -15,14 +14,12 @@
 .arrow-btn:hover {
   background: #f5f5f5;
 }
-/* SVG pijlen krijgen hun kleur via CSS, niet via het SVG element zelf */
 .arrow-btn svg {
   width: 28px;
   height: 28px;
   display: block;
   color: #1976d2;
 }
-/* Forceer overal standaard sans-serif font */
 h1,
 h2,
 h3,
@@ -37,7 +34,6 @@ h6,
 .div,
 .text-wrapper {
 }
-/* Base + system font (Netflix Sans alternatief) */
 * {
   margin: 0;
   padding: 0;
@@ -50,10 +46,7 @@ body {
 }
 body {
   margin: 0;
-  /* font wordt nu via * gezet */
 }
-
-/* Scrollbars weg */
 body::-webkit-scrollbar,
 html::-webkit-scrollbar {
   display: none;
@@ -62,8 +55,6 @@ body {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
-
-/* ===== Header/Hero (ongewijzigd van jou) ===== */
 .designer-page {
   min-height: 100vh;
   overflow-x: hidden;
@@ -85,32 +76,28 @@ body {
   opacity: 0.7;
 }
 .main-nav {
-  position: absolute; /* los van de flow, bovenop de video */
+  position: absolute;
   top: 24px;
   right: 24px;
   left: auto;
-  padding: 0; /* geen extra marge rond de knop */
+  padding: 0;
   z-index: 10;
-  display: block; /* geen space-between die hem weer naar links duwt */
+  display: block;
 }
-
-/* Center het logo pixel‑precies in de cirkel */
 .nav-profile {
   width: 48px;
   height: 48px;
   border-radius: 50%;
   background: #102e4a;
-  display: grid; /* i.p.v. flex: grid centreert perfect */
-  place-items: center; /* horizontaal + verticaal */
+  display: grid;
+  place-items: center;
 }
-
 .profile-image {
-  width: 30px; /* iets groter dan 26px zodat het optisch klopt */
+  width: 30px;
   height: 30px;
-  display: block; /* geen baseline-offset */
-  object-fit: contain; /* behoud verhoudingen */
+  display: block;
+  object-fit: contain;
 }
-
 .hero-content {
   position: absolute;
   top: 75%;
@@ -139,13 +126,12 @@ body {
 .hero-buttons {
   display: flex;
   gap: 1rem;
-  margin-bottom: 2rem; /* standaard ruimte */
-  padding-bottom: 2rem; /* extra buffer */
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
 }
 .hero-buttons a {
   text-decoration: none;
 }
-
 .btn-resume,
 .btn-linkedin,
 .btn-contact {
@@ -178,8 +164,6 @@ body {
   width: 32px;
   height: 32px;
 }
-
-/* ===== Projects rail ===== */
 .projects-section {
   padding: 0 3rem;
 }
@@ -246,8 +230,8 @@ body {
 }
 .labels {
   display: flex;
-  flex-wrap: wrap; /* zodat ze naar de volgende lijn springen als het niet past */
-  gap: 8px; /* ruimte tussen de labels */
+  flex-wrap: wrap;
+  gap: 8px;
 }
 .label {
   font-weight: 800;
@@ -267,8 +251,6 @@ body {
   color: #fff;
   font-size: 16px;
 }
-
-/* ===== Slideshow ===== */
 .slideshow-container {
   position: relative;
   width: 100%;
@@ -319,10 +301,7 @@ body {
 .slideshow-nav button:hover {
   background: rgba(255, 255, 255, 0.9);
 }
-
-/* ===== Overlay ===== */
 .modal-overlay {
-  /* overlay basisstijl, één keer gedefinieerd */
   display: flex;
   position: fixed;
   inset: 0;
@@ -331,41 +310,24 @@ body {
   align-items: center;
   justify-content: center;
 }
-
-/* ===== Netflix card EXACT-LOOK ===== */
 .nf-card {
-  /* VERWIJDERD: dubbele Netflix card styles */
 }
 .nf-close {
-  /* VERWIJDERD: dubbele Netflix close styles */
 }
 .nf-close:hover {
-  /* VERWIJDERD: dubbele Netflix close hover */
 }
-
 .nf-hero {
-  /* VERWIJDERD: dubbele Netflix hero styles */
 }
 .nf-hero-img {
-  /* VERWIJDERD: dubbele Netflix hero-img styles */
 }
 .nf-hero-grad {
-  /* VERWIJDERD: dubbele Netflix hero-grad styles */
 }
 .nf-hero-inner {
-  /* VERWIJDERD: dubbele Netflix hero-inner styles */
 }
-
-/* Titel (Young Sheldon-stijl) */
 .nf-title {
-  /* VERWIJDERD: dubbele Netflix title styles */
 }
 .nf-title-sub {
-  /* VERWIJDERD: dubbele Netflix title-sub styles */
 }
-/* ...existing code... */
-
-/* Acties */
 .nf-actions {
   display: flex;
   gap: 10px;
@@ -401,8 +363,6 @@ body {
 .nf-ico:hover {
   background: rgba(109, 109, 110, 0.5);
 }
-
-/* Info */
 .nf-info {
   padding: 16px 28px 8px;
   background: #181818;
@@ -435,8 +395,6 @@ body {
 .nf-label {
   color: #9fd7ff;
 }
-
-/* Episodes */
 .nf-episodes {
   background: #141414;
   border-top: 1px solid #2f2f2f;
@@ -459,7 +417,6 @@ body {
   border-radius: 4px;
   padding: 8px 12px;
 }
-
 .nf-ep-list {
   list-style: none;
   margin: 0;
@@ -498,7 +455,6 @@ body {
   margin-top: 4px;
   font-size: 14.5px;
 }
-
 @media (max-width: 900px) {
   .nf-hero {
     height: 200px;
@@ -513,8 +469,6 @@ body {
     width: 120px;
   }
 }
-
-/* ===== Iframe presets (zoals je had) ===== */
 .iframe-project {
   border: none;
   pointer-events: auto;
@@ -566,19 +520,15 @@ body {
     opacity: 1;
   }
 }
-
-/* ===== Screenshot-layout modal (nx-) ===== */
 .nx-card {
   width: min(1000px, 98vw);
-  background: #fff; /* bovenste deel is wit (zoals screenshot) */
+  background: #fff;
   color: #0b1c2a;
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 18px 60px rgba(0, 0, 0, 0.6);
   position: relative;
 }
-
-/* ronde close button rechtsboven */
 .nx-close {
   position: absolute;
   top: 14px;
@@ -597,8 +547,6 @@ body {
 .nx-close:hover {
   filter: brightness(1.1);
 }
-
-/* HERO (bovenste witte vlak met beeld) */
 .nx-hero {
   height: 300px;
   background: #fff;
@@ -611,20 +559,17 @@ body {
   height: 100%;
   object-fit: cover;
 }
-
-/* PANEL (donkerblauw vlak onderaan) */
 .nx-panel {
-  background: linear-gradient(180deg, #0f2f49 0%, #0c2740 100%); /* deep blue */
+  background: linear-gradient(180deg, #0f2f49 0%, #0c2740 100%);
   color: #e9f2f9;
   padding: 40px 36px;
 }
 .nx-panel-inner {
   display: grid;
-  grid-template-columns: 1fr 280px; /* links content, rechts sidebar */
+  grid-template-columns: 1fr 280px;
   gap: 48px;
   align-items: start;
 }
-
 .nx-title {
   font-size: 44px;
   font-weight: 800;
@@ -632,8 +577,6 @@ body {
   margin: 0 0 14px 0;
   color: #eaf4ff;
 }
-
-/* meta regel: HD badge + puntjes */
 .nx-meta {
   display: flex;
   align-items: center;
@@ -655,15 +598,12 @@ body {
   padding: 4px 8px;
   border-radius: 6px;
 }
-
 .nx-desc {
   color: #e6eef6;
   line-height: 1.6;
   margin: 0 0 18px 0;
   font-size: 18px;
 }
-
-/* knoppen */
 .nx-actions {
   display: flex;
   gap: 14px;
@@ -698,8 +638,6 @@ body {
 .nx-ghost:hover {
   background: rgba(255, 255, 255, 0.18);
 }
-
-/* sub-secties */
 .nx-h3 {
   margin: 8px 0 8px;
   font-size: 22px;
@@ -709,8 +647,6 @@ body {
   color: #d9e6f2;
   line-height: 1.6;
 }
-
-/* sidebar */
 .nx-right {
   display: flex;
   flex-direction: column;
@@ -732,8 +668,6 @@ body {
 .nx-spec-list li {
   margin: 6px 0;
 }
-
-/* responsive */
 @media (max-width: 900px) {
   .nx-hero {
     height: 220px;
@@ -749,15 +683,8 @@ body {
     font-size: 34px;
   }
 }
-
-/* =========================
-   STRICT SCOPED NETFLIX MODAL (no bleed)
-   ========================= */
 .modal-overlay {
-  /* laat je bestaande overlay gerust staan;
-     deze is veilig en beïnvloedt niets buiten de modal */
 }
-
 .modal-overlay .nx-card {
   width: min(1000px, 98vw);
   background: #fff;
@@ -767,8 +694,6 @@ body {
   box-shadow: 0 18px 60px rgba(0, 0, 0, 0.6);
   position: relative;
 }
-
-/* Close button */
 .modal-overlay .nx-close {
   position: absolute;
   top: 14px;
@@ -787,8 +712,6 @@ body {
 .modal-overlay .nx-close:hover {
   filter: brightness(1.1);
 }
-
-/* HERO (boven) */
 .modal-overlay .nx-hero {
   height: 300px;
   background: #fff;
@@ -801,8 +724,6 @@ body {
   height: 100%;
   object-fit: cover;
 }
-
-/* PANEL (onder) */
 .modal-overlay .nx-panel {
   background: linear-gradient(180deg, #0f2f49 0%, #0c2740 100%);
   color: #e9f2f9;
@@ -814,8 +735,6 @@ body {
   gap: 48px;
   align-items: start;
 }
-
-/* Titel + meta */
 .modal-overlay .nx-title {
   font-size: 44px;
   font-weight: 800;
@@ -850,8 +769,6 @@ body {
   margin: 0 0 18px 0;
   font-size: 18px;
 }
-
-/* Knoppen */
 .modal-overlay .nx-actions {
   display: flex;
   gap: 14px;
@@ -877,369 +794,6 @@ body {
 }
 .modal-overlay .nx-ico-play {
   font-size: 14px;
-} /* vervangt generieke .play */
-.modal-overlay .nx-ghost {
-  background: rgba(255, 255, 255, 0.12);
-  color: #eaf4ff;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-}
-.modal-overlay .nx-ghost:hover {
-  background: rgba(255, 255, 255, 0.18);
-}
-
-/* Subsecties */
-.modal-overlay .nx-h3 {
-  margin: 8px 0 8px;
-  font-size: 22px;
-  color: #eaf4ff;
-}
-.modal-overlay .nx-body {
-  color: #d9e6f2;
-  line-height: 1.6;
-}
-
-/* Sidebar */
-.modal-overlay .nx-right {
-  display: flex;
-  flex-direction: column;
-  gap: 28px;
-}
-.modal-overlay .nx-spec-title {
-  font-size: 12px;
-  letter-spacing: 0.1em;
-  color: #9fb9cc;
-  font-weight: 800;
-  margin-bottom: 10px;
-}
-.modal-overlay .nx-spec-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  color: #dde9f5;
-}
-.modal-overlay .nx-spec-list li {
-  margin: 6px 0;
-}
-
-/* Responsive */
-@media (max-width: 900px) {
-  .modal-overlay .nx-hero {
-    height: 220px;
-  }
-  .modal-overlay .nx-panel {
-    padding: 30px 22px;
-  }
-  .modal-overlay .nx-panel-inner {
-    grid-template-columns: 1fr;
-    gap: 28px;
-  }
-  .modal-overlay .nx-title {
-    font-size: 34px;
-  }
-}
-
-/* chips/tags in dezelfde kolom – verandert de layout NIET */
-.modal-overlay .nx-taglist {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 12px;
-}
-.modal-overlay .nx-tag {
-  padding: 8px 12px;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 700;
-  color: #dbe8f5;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.22);
-}
-
-.modal-overlay {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 40px 20px; /* ruimte boven en onder */
-  box-sizing: border-box;
-  overflow-y: auto; /* scroll mogelijk als nodig */
-}
-
-.modal-overlay .nx-card {
-  background: #0a2342; /* jouw achtergrondkleur */
-  border-radius: 8px;
-  max-height: 90vh; /* nooit tegen boven/onder plakken */
-  overflow-y: auto; /* inhoud kan scrollen */
-  scrollbar-width: none; /* Firefox: verberg scrollbar */
-  -ms-overflow-style: none; /* IE/Edge: verberg scrollbar */
-}
-
-.modal-overlay .nx-card img {
-  max-width: 100%;
-  max-height: 400px; /* of bv. 50vh */
-  object-fit: contain;
-  display: block;
-  margin: 20px auto; /* ruimte boven & onder + centreren */
-}
-
-/* Chrome, Safari, Edge (Webkit) */
-.modal-overlay .nx-card::-webkit-scrollbar {
-  display: none;
-}
-
-/* --- HERO: toon volledige foto, geen overlap met blauwe panel --- */
-.modal-overlay .nx-hero {
-  background: #fff;
-  /* in plaats van vaste hoogte + absolute img: */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 24px 0; /* ruimte boven & onder de foto */
-  min-height: 0; /* laat de inhoud de hoogte bepalen */
-}
-
-.modal-overlay .nx-hero-img {
-  position: static; /* was absolute */
-  width: auto;
-  height: auto;
-  max-width: 100%;
-  max-height: 380px; /* stel in naar smaak (bv. 45vh) */
-  object-fit: contain; /* volledige foto zichtbaar */
-  margin: 0; /* geen extra margin die kan overlappen */
-  display: block;
-}
-
-/* optioneel: nette overgang naar het blauwe paneel */
-.modal-overlay .nx-panel {
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-/* ruimte rondom de popup + verborgen scrollbalk (laat eerdere regels staan) */
-.modal-overlay {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 40px 20px;
-  box-sizing: border-box;
-  overflow-y: auto;
-}
-.modal-overlay .nx-card {
-  max-height: 90vh;
-  overflow-y: auto;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-.modal-overlay .nx-card::-webkit-scrollbar {
-  display: none;
-}
-
-/* --- Hard override: hero-afbeelding NIET croppen of overlappen --- */
-.modal-overlay .nx-card .nx-hero {
-  position: relative !important;
-  height: auto !important;
-  min-height: 0 !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  padding: 24px 0 !important; /* ruimte boven/onder de foto */
-  background: #fff !important;
-}
-
-.modal-overlay .nx-card .nx-hero-img {
-  position: static !important; /* was absolute */
-  width: auto !important;
-  height: auto !important;
-  max-width: 100% !important;
-  max-height: 380px !important; /* pas aan naar 45vh of wat je wil */
-  object-fit: contain !important; /* volledige foto zichtbaar */
-  display: block !important;
-  margin: 0 auto !important; /* centreren */
-}
-
-/* popup mag nooit de randen raken; inhoud scrolt onzichtbaar */
-.modal-overlay {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 40px 20px;
-  box-sizing: border-box;
-  overflow-y: auto;
-}
-.modal-overlay .nx-card {
-  max-height: 90vh;
-  overflow-y: auto;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-.modal-overlay .nx-card::-webkit-scrollbar {
-  display: none;
-}
-
-/* =========================
-   MODAL (nx-) — volledig gescoped
-   ========================= */
-
-/* Font enkel in de modal */
-.modal-overlay .nx-card,
-.modal-overlay .nx-card * {
-  font-family: sans-serif;
-}
-
-/* overlay: ruimte rond popup + scrollbaar zonder balk */
-.modal-overlay {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 40px 20px;
-  box-sizing: border-box;
-  overflow-y: auto;
-  background: rgba(0, 0, 0, 0.65);
-}
-
-/* kaart: max hoogte, interne scroll, scrollbar verbergen */
-.modal-overlay .nx-card {
-  width: min(1000px, 98vw);
-  background: #fff;
-  color: #0b1c2a;
-  border-radius: 10px;
-  overflow-y: auto;
-  max-height: 90vh;
-  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.6);
-  position: relative;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-.modal-overlay .nx-card::-webkit-scrollbar {
-  display: none;
-}
-
-/* Close */
-.modal-overlay .nx-close {
-  position: absolute;
-  top: 14px;
-  right: 16px;
-  z-index: 5;
-  width: 42px;
-  height: 42px;
-  border-radius: 999px;
-  border: 0;
-
-  background: #2e4c63;
-  color: #fff;
-  font-size: 20px;
-  line-height: 1;
-}
-.modal-overlay .nx-close:hover {
-  filter: brightness(1.1);
-}
-
-/* HERO (lead image) — volledige foto zichtbaar */
-.modal-overlay .nx-hero {
-  background: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 24px 0; /* ruimte boven/onder */
-}
-.modal-overlay .nx-hero-img {
-  position: static !important;
-  width: auto;
-  height: auto;
-  max-width: 100%;
-  max-height: 380px;
-  object-fit: contain;
-  display: block;
-  margin: 0 auto;
-}
-
-/* GALLERY (extra afbeeldingen) */
-.modal-overlay .nx-hero-gallery {
-  background: #fff;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 16px;
-  padding: 24px 24px; /* ruimte rond de galerie */
-  justify-items: center;
-}
-.modal-overlay .nx-hero-gallery .nx-hero-img {
-  width: 100%;
-  height: auto;
-  max-height: 320px;
-  object-fit: contain;
-  border-radius: 6px;
-}
-
-/* PANEL (donkerblauw) – ongewijzigde lay-out */
-.modal-overlay .nx-panel {
-  background: linear-gradient(180deg, #0f2f49 0%, #0c2740 100%);
-  color: #e9f2f9;
-  padding: 40px 36px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-}
-.modal-overlay .nx-panel-inner {
-  display: grid;
-  grid-template-columns: 1fr 280px;
-  gap: 48px;
-  align-items: start;
-}
-.modal-overlay .nx-title {
-  font-size: 44px;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  margin: 0 0 14px 0;
-  color: #eaf4ff;
-}
-.modal-overlay .nx-meta {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: #cfe0ee;
-  margin-bottom: 18px;
-  font-size: 15px;
-}
-.modal-overlay .nx-meta .dot {
-  opacity: 0.75;
-}
-.modal-overlay .nx-badge {
-  display: inline-block;
-  font-size: 12px;
-  font-weight: 700;
-  color: #d9e8f6;
-  background: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  padding: 4px 8px;
-  border-radius: 6px;
-}
-.modal-overlay .nx-desc {
-  color: #e6eef6;
-  line-height: 1.6;
-  margin: 0 0 18px 0;
-  font-size: 18px;
-}
-.modal-overlay .nx-actions {
-  display: flex;
-  gap: 14px;
-  margin-bottom: 26px;
-}
-.modal-overlay .nx-btn {
-  border: 0;
-
-  border-radius: 8px;
-  font-weight: 800;
-  font-size: 16px;
-  padding: 12px 18px;
-}
-/* .modal-overlay .nx-primary {
-  background: #ffffff;
-  color: #0c0c0c;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.modal-overlay .nx-primary:hover {
-  background: #e9e9e9;
-} */
-.modal-overlay .nx-ico-play {
-  font-size: 14px;
 }
 .modal-overlay .nx-ghost {
   background: rgba(255, 255, 255, 0.12);
@@ -1279,8 +833,6 @@ body {
 .modal-overlay .nx-spec-list li {
   margin: 6px 0;
 }
-
-/* Tags */
 .modal-overlay .nx-taglist {
   display: flex;
   flex-wrap: wrap;
@@ -1296,8 +848,6 @@ body {
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.22);
 }
-
-/* responsive */
 @media (max-width: 900px) {
   .modal-overlay .nx-hero-img {
     max-height: 300px;
@@ -1313,18 +863,15 @@ body {
     font-size: 34px;
   }
 }
-
-/* ===== Detailmodal slideshow ===== */
 .modal-overlay .nx-hero-slider {
   background: #fff;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 24px 0; /* ruimte boven/onder de slideshow */
+  padding: 24px 0;
   position: relative;
 }
-
 .modal-overlay .nx-hero-slider .nx-slides {
   width: 100%;
   max-width: 900px;
@@ -1332,7 +879,6 @@ body {
   display: block;
   position: relative;
 }
-
 .modal-overlay .nx-hero-slider .nx-slide {
   position: absolute;
   inset: 0;
@@ -1348,10 +894,7 @@ body {
 }
 .modal-overlay .nx-hero-slider .nx-slide.is-active {
   opacity: 1;
-  /* position: relative; */
 }
-
-/* pijlen */
 .modal-overlay .nx-hero-slider .nx-nav {
   position: absolute;
   top: 50%;
@@ -1377,8 +920,6 @@ body {
 .modal-overlay .nx-hero-slider .nx-nav.next {
   right: 16px;
 }
-
-/* dots */
 .modal-overlay .nx-hero-slider .nx-dots {
   display: flex;
   gap: 10px;
@@ -1398,10 +939,12 @@ body {
   opacity: 1;
   background: #6fa7d1;
 }
-
-/* popup spacing/scroll (laat je eerdere regels staan; hier nogmaals ter zekerheid) */
 .modal-overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 40px 20px;
+  box-sizing: border-box;
   overflow-y: auto;
 }
 .modal-overlay .nx-card {
@@ -1413,8 +956,6 @@ body {
 .modal-overlay .nx-card::-webkit-scrollbar {
   display: none;
 }
-
-/* alleen in modal sans-serif */
 .modal-overlay .nx-card,
 .modal-overlay .nx-card * {
   font-family: sans-serif;
@@ -1422,46 +963,33 @@ body {
 .projects {
   cursor: grab;
   user-select: none;
-  white-space: nowrap; /* als je inline-cards gebruikt */
-  overflow-x: hidden; /* zoals je voorbeeld; of auto als je wil */
+  white-space: nowrap;
+  overflow-x: hidden;
   will-change: transform;
   transition: transform 0.2s ease;
   -webkit-user-drag: none;
   touch-action: pan-x;
 }
-
 .projects img {
   -webkit-user-drag: none;
   user-select: none;
 }
-
 .projects.active {
   cursor: grabbing;
-  transform: scale(1); /* zet op 1.0/0.98 naar smaak */
+  transform: scale(1);
 }
-
 .projects.dragging {
   cursor: grabbing;
 }
-
-/* Hide dot row when empty */
 .nx-dots:empty {
   display: none;
 }
-
-/* Prevent overlays from eating clicks */
 .project-card .gradient {
   pointer-events: none;
 }
 .project-card .iframe-project {
   pointer-events: none !important;
 }
-
-/* =========================
-   RESPONSIVE ENHANCEMENTS
-   ========================= */
-
-/* Fluid typografie en spacing */
 :root {
   --padX: clamp(1rem, 4vw, 3rem);
 }
@@ -1471,8 +999,6 @@ body {
 .projects-section {
   padding: 0 var(--padX);
 }
-
-/* Hero schaalt mee */
 .hero-title {
   font-size: clamp(1.8rem, 3.5vw + 0.5rem, 3rem);
   line-height: 1.1;
@@ -1483,35 +1009,28 @@ body {
 .video-header {
   height: clamp(56vh, 68vh, 75vh);
 }
-
-/* Project cards: houd verhouding netjes */
 .project-card {
-  aspect-ratio: 16 / 12; /* hoogte volgt breedte */
-  height: auto; /* i.p.v. vaste 227px */
+  aspect-ratio: 16 / 12;
+  height: auto;
 }
 .project-card .image {
   width: 100%;
-  height: 70%; /* bovenste media stuk */
+  height: 70%;
   object-fit: contain;
 }
 .project-card .text {
   bottom: 12px;
 }
-
-/* Desktop ≥1200px — zoals je had (rail) */
 @media (min-width: 1200px) {
   .projects {
-    /* gap: 3rem 1.5rem; */
     overflow-x: auto;
     flex-wrap: nowrap;
   }
   .project-card {
     width: 303px;
-    margin-bottom: 3rem; /* extra marge onder elke kaart */
-  } /* exact kaartformaat van je design */
+    margin-bottom: 3rem;
+  }
 }
-
-/* Tablet (900–1199px) — iets breder, rail blijft */
 @media (max-width: 1199px) {
   .projects {
     gap: 0.6rem;
@@ -1520,8 +1039,6 @@ body {
     width: min(300px, 42vw);
   }
 }
-
-/* Kleine tablets/landscape phones (≤900px) */
 @media (max-width: 900px) {
   .video-header {
     height: 60vh;
@@ -1533,8 +1050,6 @@ body {
   .hero-buttons {
     gap: 0.75rem;
   }
-
-  /* Rail -> tegelraster; makkelijker scrollen op mobiel */
   .projects {
     overflow-x: visible;
     overflow-y: visible;
@@ -1542,7 +1057,7 @@ body {
     gap: 14px;
   }
   .project-card {
-    width: calc(50% - 7px); /* 2 naast elkaar */
+    width: calc(50% - 7px);
     max-width: 520px;
     aspect-ratio: 16 / 11;
   }
@@ -1550,8 +1065,6 @@ body {
     height: 66%;
   }
 }
-
-/* Phones (≤600px) — 1 kaart per rij + grotere tap targets */
 @media (max-width: 600px) {
   .main-nav {
     padding: 0.9rem var(--padX);
@@ -1565,10 +1078,8 @@ body {
   .hero-buttons .btn-resume,
   .hero-buttons .btn-linkedin {
     padding: 0.7rem 1.1rem;
-    margin-bottom: 3rem; /* meer marge op kleine schermen */
-    /* padding-bottom: 3rem; */
+    margin-bottom: 3rem;
   }
-
   .projects {
     gap: 12px;
   }
@@ -1583,8 +1094,6 @@ body {
     font-size: 9.5px;
   }
 }
-
-/* ===== Modals/iframes globaal wat flexibeler ===== */
 .modal-overlay .nx-card {
   width: min(1000px, 96vw);
   max-height: 90vh;
@@ -1602,30 +1111,21 @@ body {
   border: none;
   background: #fff;
 }
-
-/* ===== Profiles pagina: stack & grotere touch targets ===== */
 .profiles-container {
   flex-wrap: wrap;
 }
 .profile-card {
   cursor: pointer;
 }
-
-/* desktop/rail: horizontaal slepen */
 .projects {
   touch-action: pan-x;
-  -webkit-overflow-scrolling: touch; /* lekkere inertie op iOS */
+  -webkit-overflow-scrolling: touch;
 }
-
-/* mobiel/grid: verticaal scrollen over de kaarten */
-/* @media (max-width: 900px) { */
 .projects {
-  touch-action: pan-y; /* laat verticale pan toe */
-  overflow-x: visible; /* we gebruiken geen horizontale rail meer */
-  overflow-y: visible; /* scrollen gaat via de pagina */
+  touch-action: pan-y;
+  overflow-x: visible;
+  overflow-y: visible;
 }
-
-/* laat kinderen de touch-action van de container erven */
 .project-card,
 .project-card * {
   touch-action: inherit;
@@ -1634,27 +1134,23 @@ body {
 .project-card .overlap-group > .image {
   width: 100%;
 }
-/* } */
-/* BASIS (desktop/rail) */
 .projects {
   display: flex;
   gap: 0.45rem;
-  overflow-x: auto; /* horizontaal scrollen/slepen toegestaan */
+  overflow-x: auto;
   overflow-y: hidden;
   scroll-behavior: smooth;
   padding-bottom: 1rem;
-  touch-action: pan-x; /* horizontale gestures */
+  touch-action: pan-x;
   -webkit-overflow-scrolling: touch;
 }
-
-/* MOBIEL & TABLET (grid; verticaal scrollen via pagina) */
 @media (max-width: 900px) {
   .projects {
     flex-wrap: wrap;
     gap: 14px;
-    overflow-x: visible; /* geen horizontale rail */
+    overflow-x: visible;
     overflow-y: visible;
-    touch-action: pan-y; /* verticale gestures */
+    touch-action: pan-y;
   }
 }
 body,
@@ -1673,15 +1169,14 @@ button,
 .hero-description {
   font-family: "Montserrat", sans-serif !important;
 }
-/* === Forceer overal dezelfde pijltjesstijl === */
 .slideshow-nav button,
 .slideshow-nav button:focus {
   width: 42px;
   height: 42px;
   border-radius: 50%;
   border: 1px solid rgba(16, 46, 74, 0.25);
-  background: rgba(16, 46, 74, 0.9) !important; /* donkerblauw */
-  color: #fff !important; /* witte pijl */
+  background: rgba(16, 46, 74, 0.9) !important;
+  color: #fff !important;
   font-size: 20px;
   font-weight: 700;
   display: grid;
@@ -1690,25 +1185,20 @@ button,
   transition: background 0.2s, transform 0.2s;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
 }
-
 .slideshow-nav button:hover {
   background: rgba(16, 46, 74, 1) !important;
   transform: scale(1.05);
 }
-/* === Unified Arrow Style (inline + modal) === */
 :root {
   --arrow-size: 44px;
-  --arrow-bg: #fff; /* cirkel wit */
-  --arrow-bg-hover: #f0f4f8; /* lichte hover */
+  --arrow-bg: #fff;
+  --arrow-bg-hover: #f0f4f8;
   --arrow-border: 1px solid rgba(16, 46, 74, 0.25);
   --arrow-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-  --arrow-color: #102e4a; /* pijl donkerblauw */
+  --arrow-color: #102e4a;
 }
-
-/* Buttons used in inline sliders */
 .slideshow-nav button,
 .nx-inline .slideshow-nav button,
-/* Buttons used in modal slider */
 .modal-overlay .nx-hero-slider .nx-nav,
 .modal-overlay .nx-hero-slider button.nx-nav {
   width: var(--arrow-size) !important;
@@ -1716,9 +1206,7 @@ button,
   border-radius: 50% !important;
   border: var(--arrow-border) !important;
   background: var(--arrow-bg) !important;
-  color: var(
-    --arrow-fg
-  ) !important; /* werkt voor glyphs en SVG met currentColor */
+  color: var(--arrow-fg) !important;
   display: grid !important;
   place-items: center !important;
   font-size: 20px !important;
@@ -1726,7 +1214,6 @@ button,
   box-shadow: var(--arrow-shadow) !important;
   cursor: pointer !important;
 }
-
 .slideshow-nav button:focus,
 .nx-inline .slideshow-nav button:focus,
 .modal-overlay .nx-hero-slider .nx-nav:focus,
@@ -1734,21 +1221,17 @@ button,
   outline: none !important;
   box-shadow: 0 0 0 3px rgba(16, 46, 74, 0.18), var(--arrow-shadow) !important;
 }
-
-/* Als er SVG-pijlen binnenin zitten, maak ze wit via currentColor */
 .slideshow-prev svg,
 .slideshow-next svg,
 .modal-overlay .nx-hero-slider .nx-nav svg {
   width: 1em;
   height: 1em;
-  stroke: currentColor; /* neemt de kleur van de knop aan */
+  stroke: currentColor;
   stroke-width: 3;
-  stroke-linecap: round; /* afgeronde uiteinden */
-  stroke-linejoin: round; /* afgeronde hoeken */
+  stroke-linecap: round;
+  stroke-linejoin: round;
   fill: none;
 }
-
-/* Optioneel: centreren/posities – pas aan indien nodig */
 .nx-inline .slideshow-nav {
   padding: 0 8px;
 }
@@ -1758,20 +1241,15 @@ button,
 .modal-overlay .nx-hero-slider .nx-nav.next {
   right: 16px !important;
 }
-/* Contact (sluit aan bij about-cards) */
 .contact-section {
   margin: 32px 0 0;
 }
-
 .contact-form {
   display: flex;
   flex-direction: column;
   gap: 14px;
   max-width: 520px;
-  /* xp-card geeft al: wit, border, radius, shadow, padding, hover */
 }
-
-/* Labels + velden consistent met site */
 .contact-form label {
   font-weight: 700;
   font-size: 0.95rem;
@@ -1800,66 +1278,29 @@ button,
   box-shadow: 0 0 0 3px rgba(64, 105, 138, 0.18);
   background: #fff;
 }
-
-/* Knop: hergebruik je donkere CTA-stijl */
 .contact-form .btn-linkedin {
   align-self: flex-start;
   text-decoration: none;
   cursor: pointer;
 }
-
-/* Kleine tweak zodat xp-card-hover niet “springt” bij focussen */
 .contact-form.xp-card:hover {
   transform: translateY(-2px);
 }
-
-/* .popup-card {
-  background: #fff;
-  color: var(--ink);
-  padding: 24px;
-  border-radius: 12px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
-  text-align: center;
-  max-width: 320px;
-} */
-
-/* .popup-card h3 {
-  margin: 0 0 12px;
-} */
-
-/* .popup-card button {
-  margin-top: 16px;
-  padding: 10px 16px;
-  border: none;
-  border-radius: 8px;
-  background: linear-gradient(180deg, #2b66ff, #2452d6);
-  color: #fff;
-  font-weight: 600;
-  cursor: pointer;
-} */
-/* ========== Polishing: ritme, typografie, spacing, hover, responsive ========== */
-
-/* 1) Consistente sectieruimte + subtiele onderstreep voor titels */
 .section-title {
-  margin: 0 0 12px; /* korter bij title */
+  margin: 0 0 12px;
   line-height: 1.15;
 }
 .section-title + * {
-  margin-top: 10px; /* net wat lucht na titel */
+  margin-top: 10px;
 }
 .about-wrap > * {
-  /* consistente verticale flow */
   margin-bottom: clamp(20px, 3.2vw, 36px);
 }
-
-/* 2) Hero-paragraaf leesbaarder */
 .hero-content .hero-description {
   max-width: 840px;
   line-height: 1.65;
   opacity: 0.98;
 }
-
-/* 3) Timeline finetune: eind-lijn mooie margins, compactere items */
 .tl {
   padding-top: 14px;
   padding-bottom: 18px;
@@ -1877,8 +1318,6 @@ button,
 .tl-meta {
   font-size: 0.94rem;
 }
-
-/* 4) Cards: iets meer adem + zachtere hover */
 .xp-card,
 .skill-card,
 .certificate-card {
@@ -1892,8 +1331,6 @@ button,
   transform: translateY(-2px);
   box-shadow: 0 12px 26px rgba(16, 46, 74, 0.12);
 }
-
-/* 5) Tags: netjes afbreken, niet proppen */
 .tags,
 .xp-tags {
   gap: 8px 10px;
@@ -1908,8 +1345,6 @@ button,
     white-space: normal;
   }
 }
-
-/* 6) Grids: betere responsieve breekpunten */
 .skills-grid {
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 }
@@ -1926,8 +1361,6 @@ button,
     padding: 16px;
   }
 }
-
-/* 7) Buttons: subtiele micro-interactie die bij je stijl past */
 .btn-resume,
 .btn-linkedin {
   transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
@@ -1942,8 +1375,6 @@ button,
   transform: translateY(0);
   opacity: 0.9;
 }
-
-/* 8) Contactformulier: velden consistent + focus state netter */
 .contact-form label {
   margin-bottom: 4px;
 }
@@ -1956,13 +1387,9 @@ button,
 .contact-form textarea:focus {
   box-shadow: 0 0 0 3px rgba(64, 105, 138, 0.18);
 }
-
-/* 9) Popup: nette max-breedte op mobiel */
 .popup-card {
   width: min(92vw, 360px);
 }
-
-/* 10) Afbeeldingen/certificaten: nette uitlijning en spacing */
 .certificate-card img {
   display: block;
   margin: 6px auto 12px;
@@ -1977,7 +1404,6 @@ button,
   font-size: 0.92rem;
   color: var(--muted);
 }
-
 .footer-inner {
   max-width: 1080px;
   margin: 0 auto;
@@ -1987,19 +1413,16 @@ button,
   align-items: center;
   text-align: center;
 }
-
 .footer-name {
   margin: 0;
   font-weight: 600;
   color: var(--ink);
 }
-
 .footer-links {
   display: flex;
   gap: 18px;
   flex-wrap: wrap;
 }
-
 .footer-links a {
   color: var(--muted);
   text-decoration: none;
@@ -2009,8 +1432,6 @@ button,
 .footer-links a:hover {
   color: var(--ink);
 }
-
-/* Contact form in footer */
 .footer-contact {
   max-width: 500px;
   width: 100%;
@@ -2039,10 +1460,8 @@ button,
   box-shadow: 0 0 0 2px rgba(64, 105, 138, 0.15);
 }
 .footer-contact button {
-  align-self: center; /* knop in het midden */
+  align-self: center;
 }
-
-/* ===== Unified Buttons ===== */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -2057,8 +1476,6 @@ button,
   text-decoration: none;
   transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease;
 }
-
-/* Primaire actieknop (Resume, Send, View Project) */
 .btn-primary {
   background: linear-gradient(90deg, #40698a, #2a4a66);
   color: #fff;
@@ -2073,8 +1490,6 @@ button,
   transform: translateY(0);
   opacity: 0.92;
 }
-
-/* Secundair (Info, LinkedIn, Close popup) */
 .btn-secondary {
   background: #eef5fb;
   color: #102e4a;
@@ -2086,8 +1501,6 @@ button,
 .btn-secondary:active {
   opacity: 0.9;
 }
-
-/* Ghost / outline */
 .btn-ghost {
   background: transparent;
   color: #40698a;
