@@ -67,21 +67,36 @@
 }
 .project-card .slideshow-nav .prev,
 .project-card .slideshow-nav .next {
-  pointer-events: auto;
-  border: 0;
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
   background: rgba(255, 255, 255, 0.94);
-  color: #1a2b3c;
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18);
-  font-size: 22px;
-  line-height: 42px;
+  color: #102e4a; /* <- pijlkleur via currentColor */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(16, 46, 74, 0.25);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
   cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.05s ease;
 }
-.project-card .slideshow-nav .prev:hover,
-.project-card .slideshow-nav .next:hover {
-  background: #fff;
+
+:root {
+  --arrow-fg: #102e4a; /* default donkerblauw */
+}
+
+.project-card .slideshow-nav .prev:focus:not(:hover),
+.project-card .slideshow-nav .next:focus:not(:hover) {
+  background: rgba(255, 255, 255, 0.94);
+  color: #102e4a;
+  outline: none;
+}
+
+/* **cruciaal**: forceer dat het SVG-lijntje de knopkleur volgt */
+.project-card .slideshow-nav button svg,
+.project-card .slideshow-nav button svg * {
+  stroke: currentColor !important;
+  fill: none;
 }
 
 .project-card .slideshow-dots {

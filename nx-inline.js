@@ -40,16 +40,17 @@
   }
 
   /* afgeronde pijlen als SVG, kleuren via CSS (currentColor) */
+  // pijltje erft altijd de 'color' van de knop
   const svgArrow = (dir) => `
-    <svg viewBox="0 0 24 24" width="20" height="20"
-         fill="none" stroke="currentColor" stroke-width="3"
-         stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      ${
-        dir === "prev"
-          ? '<polyline points="15 18 9 12 15 6" />'
-          : '<polyline points="9 18 15 12 9 6" />'
-      }
-    </svg>`;
+  <svg viewBox="0 0 24 24" width="20" height="20"
+       fill="none" stroke="currentColor" stroke-width="3"
+       stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    ${
+      dir === "prev"
+        ? '<polyline points="15 18 9 12 15 6" />'
+        : '<polyline points="9 18 15 12 9 6" />'
+    }
+  </svg>`;
 
   function buildCard(card) {
     const list = parseSlides(card.getAttribute("data-slides")).filter(Boolean);
