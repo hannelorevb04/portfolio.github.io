@@ -3,22 +3,27 @@
   <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Hannelore Van Buynderen - Designer Portfolio</title>
+
+    <!-- SEO meta -->
     <meta
       name="description"
-      content="Portfolio van Hannelore Van Buynderen — UX/UI designer & front-end developer."
+      content="Portfolio van Hannelore Van Buynderen — UX/UI designer & front-end developer. Bekijk projecten rond branding, adoptie-app Felicks, Hoppin redesign en meer."
     />
 
-    <title>Hannelore Van Buynderen - Designer Portfolio</title>
+    <!-- Preconnect voor snellere fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
-    <link rel="stylesheet" href="css/designer.css" />
+    <!-- <link rel="stylesheet" href="css/designer.css" /> -->
+    <!-- verwijderd, 404 -->
     <link rel="stylesheet" href="css/contact.css" />
     <link rel="stylesheet" href="nx-inline.css" />
-    <!-- <-- toevoegen -->
     <link rel="stylesheet" href="nx-modal.css" />
 
     <style>
@@ -27,6 +32,7 @@
       }
     </style>
   </head>
+
   <body>
     <form name="contact" netlify data-netlify="true" style="display: none">
       <input type="text" name="name" />
@@ -132,10 +138,12 @@
           >
             <div class="overlap-group">
               <img
+                src="images/mockup_bachelorproef.png"
                 alt="Felicks mock-up"
                 class="image"
-                src="images/mockup_bachelorproef.png"
+                fetchpriority="high"
               />
+
               <!-- <iframe
                 class="embed-fill"
                 src="https://embed.figma.com/design/frdQclrLRjueLxFQxEwPyW/DesignFileBachelorproef?node-id=1-5&embed-host=share"
@@ -165,6 +173,7 @@
                 alt="2Check mock-up"
                 class="image"
                 src="images/mockup_2Check.png"
+                fetchpriority="high"
               />
               <div class="gradient"></div>
               <div class="text"><div class="div">2Check</div></div>
@@ -187,6 +196,7 @@
                 alt="Find me mock-up"
                 class="image"
                 src="images/mockup_find_me.png"
+                fetchpriority="high"
               />
               <div class="gradient"></div>
               <div class="text"><div class="div">Find me</div></div>
@@ -209,6 +219,7 @@
                 alt="XD Promoting mock-up"
                 class="image"
                 src="images/mockup_TM.png"
+                fetchpriority="high"
               />
               <div class="gradient"></div>
               <div class="text"><div class="div">XD Promoting</div></div>
@@ -231,6 +242,7 @@
                 alt="Hoppin mock-up"
                 class="image"
                 src="images/mockup_hoppin.png"
+                fetchpriority="high"
               />
               <div class="gradient"></div>
               <div class="text"><div class="div">Hoppin</div></div>
@@ -253,6 +265,7 @@
                 alt="CarGov mock-up"
                 class="image"
                 src="images/mockup_cargov.png"
+                loading="lazy"
               />
               <div class="gradient"></div>
               <div class="text"><div class="div">CarGov</div></div>
@@ -272,10 +285,12 @@
           >
             <div class="overlap-group">
               <img
+                src="images/mockup_nevah.png"
                 alt="Nevah mock-up"
                 class="image"
-                src="images/mockup_nevah.png"
+                loading="lazy"
               />
+
               <div class="gradient"></div>
               <div class="text"><div class="div">Nevah</div></div>
             </div>
@@ -297,6 +312,7 @@
                 alt="Forcia mock-up"
                 class="image"
                 src="images/mockup_forcia.png"
+                loading="lazy"
               />
               <div class="gradient"></div>
               <div class="text"><div class="div">Forcia</div></div>
