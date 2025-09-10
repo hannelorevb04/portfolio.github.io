@@ -1,4 +1,5 @@
-/* nx-modal.js — v34
+/* nx-modal.js — v35
+   - View Project button opens best target (data-link > first iframe > first slide)
    - Hides arrows/dots when there are 0–1 slides (modal + cards)
    - Centers media, supports iframes, comparisons, contributors, keyboard-nav
 */
@@ -7,15 +8,13 @@
   const modal = DOC.getElementById("nxModal");
   if (!modal) return;
 
-  /* ---------- Failsafe CSS (so even other scripts can't force-show nav) ---------- */
+  /* ---------- Failsafe CSS (enforce hide when no nav) ---------- */
   (function injectFailsafeCSS() {
     const css = `
-      /* Modal: when .no-nav is present on the hero, always hide controls */
       #nxModal .nx-hero-slider.no-nav .nx-nav,
       #nxModal .nx-hero-slider.no-nav .nx-dots { display: none !important; }
 
-      /* Cards (inline slideshows): mark container with data-no-nav="1" to hide */
-      .slideshow-container[data-no-nav="1"] .slideshow-nav { display: none !important; }
+      .slideshow-container[data-no-nav="1"] .slideshow-nav,
       .slideshow-container[data-no-nav="1"] .prev,
       .slideshow-container[data-no-nav="1"] .next { display: none !important; }
     `;
@@ -40,10 +39,18 @@
   const right = modal.querySelector(".nx-right");
   const rightDis = modal.querySelector(".nx-discipline, #nxDiscipline");
   const rightTl = modal.querySelector(".nx-tools, #nxTools");
-  const cmpWrap = modal.querySelector(".nx-comparisons") || null;
+
+  /* Modal actions (buttons) */
+  const viewBtn = modal.querySelector(
+    ".nx-actions .btn.btn-primary, .nx-actions .nx-btn.nx-primary"
+  );
+  const contactBtn = modal.querySelector(
+    ".nx-actions .btn.btn-secondary, .nx-actions .nx-btn:not(.nx-primary)"
+  );
 
   let idx = 0,
     total = 0;
+  let currentViewUrl = ""; // ← wordt op openFromCard ingevuld
 
   /* ---------- Helpers ---------- */
   const wipe = (el) => {
@@ -62,7 +69,7 @@
   const q = (r, s) => (r || DOC).querySelector(s);
   const qa = (r, s) => Array.from((r || DOC).querySelectorAll(s));
 
-  /* ---------- Ensure modal arrows exist (Designer HTML sometimes comments them out) ---------- */
+  /* ---------- Ensure modal arrows exist ---------- */
   (function ensureArrowsExist() {
     if (!hero) return;
     const svgArrow = (dir) => `
@@ -83,8 +90,6 @@
       hero.appendChild(prevBtn);
     } else if (!prevBtn.querySelector("svg")) {
       prevBtn.innerHTML = svgArrow("prev");
-      prevBtn.type = "button";
-      prevBtn.setAttribute("aria-label", "Previous");
     }
     if (!nextBtn) {
       nextBtn = DOC.createElement("button");
@@ -95,8 +100,6 @@
       hero.appendChild(nextBtn);
     } else if (!nextBtn.querySelector("svg")) {
       nextBtn.innerHTML = svgArrow("next");
-      nextBtn.type = "button";
-      nextBtn.setAttribute("aria-label", "Next");
     }
   })();
 
@@ -111,19 +114,39 @@
 
   /* ---------- Extract slides from card ---------- */
   function extractSlides(card) {
-    // 1) data-slides='["img1","iframe:..."]'
     const raw = card.getAttribute("data-slides");
     if (raw) {
       const arr = tryJSON(raw);
       if (Array.isArray(arr) && arr.length) return arr;
     }
-    // 2) inline slideshow in card
     const inlineImgs = qa(card, ".slideshow-container .slides img");
     if (inlineImgs.length)
       return inlineImgs.map((img) => img.getAttribute("src"));
-    // 3) fallback: first image in card
     const first = q(card, "img");
     return first ? [first.getAttribute("src")] : [];
+  }
+
+  /* ---------- Pick best 'View Project' URL ---------- */
+  function pickViewUrl(card, slidesArr) {
+    // 1) explicit data-link
+    const direct = card.getAttribute("data-link");
+    if (
+      (direct && /^(https?:)?\/\//.test(direct)) ||
+      (direct && !direct.startsWith("iframe:"))
+    )
+      return direct;
+
+    // 2) first iframe:... in slides
+    const firstIframe = (slidesArr || []).find((s) =>
+      String(s).startsWith("iframe:")
+    );
+    if (firstIframe) return String(firstIframe).slice(7);
+
+    // 3) fallback: first slide URL (image or relative page)
+    const first = (slidesArr || [])[0];
+    if (first) return String(first).replace(/^iframe:/, "");
+
+    return "";
   }
 
   /* ---------- Build modal slides ---------- */
@@ -238,43 +261,36 @@
     }
   }
 
-  /* ---------- Comparisons ---------- */
+  /* ---------- (Optional) Comparisons & Contributors ---------- */
   function buildComparisons(card) {
     const raw = card.getAttribute("data-compare");
     const arr = raw ? tryJSON(raw) : null;
     const list = Array.isArray(arr) ? arr : [];
-    const target = cmpWrap || tagsEl || leftCol;
+    const target = leftCol; // eenvoudig gehouden
     if (!target) return;
-
     qa(target, ".nx-compare[data-dynamic]").forEach((n) => n.remove());
-
     list.forEach((spec) => {
       const [left, right, lLab, rLab] = String(spec)
         .split("|")
         .map((s) => s.trim());
       if (!left || !right) return;
-
       const w = DOC.createElement("div");
       w.className = "nx-compare";
       w.setAttribute("data-dynamic", "");
-
       const imgR = DOC.createElement("img");
       imgR.className = "nx-cmp-img right";
       imgR.src = right;
       imgR.alt = rLab || "After";
-
       const imgL = DOC.createElement("img");
       imgL.className = "nx-cmp-img left";
       imgL.src = left;
       imgL.alt = lLab || "Before";
       imgL.style.clipPath = "inset(0 50% 0 0)";
-
       const handle = DOC.createElement("div");
       handle.className = "nx-cmp-handle";
       const knob = DOC.createElement("div");
       knob.className = "nx-cmp-knob";
       handle.appendChild(knob);
-
       w.appendChild(imgR);
       w.appendChild(imgL);
       w.appendChild(handle);
@@ -282,7 +298,6 @@
     });
   }
 
-  /* ---------- Contributors ---------- */
   function buildContributors(card) {
     const raw = card.getAttribute("data-contributors");
     let arr = [];
@@ -329,17 +344,40 @@
 
   /* ---------- Open/Close ---------- */
   function openFromCard(card) {
+    const slidesArr = extractSlides(card);
+
     fillInfo(card);
-    buildSlides(extractSlides(card));
+    buildSlides(slidesArr);
     buildComparisons(card);
     buildContributors(card);
+
+    // Compute & bind "View Project"
+    currentViewUrl = pickViewUrl(card, slidesArr);
+    if (viewBtn) {
+      if (currentViewUrl) {
+        viewBtn.style.display = "";
+        viewBtn.onclick = () =>
+          window.open(currentViewUrl, "_blank", "noopener");
+      } else {
+        viewBtn.onclick = null;
+        viewBtn.style.display = "none";
+      }
+    }
+
+    // Optional: Contact scroll naar footer
+    if (contactBtn) {
+      contactBtn.onclick = () => {
+        const footer = DOC.querySelector(".site-footer");
+        closeModal();
+        if (footer && "scrollIntoView" in footer)
+          footer.scrollIntoView({ behavior: "smooth" });
+      };
+    }
 
     modal.style.display = "flex";
     DOC.body.style.overflow = "hidden";
     idx = 0;
     goTo(0);
-
-    // re-check nav (async DOM building)
     setTimeout(updateModalNav, 30);
     setTimeout(updateModalNav, 150);
   }
@@ -349,10 +387,11 @@
     DOC.body.style.overflow = "";
     wipe(slidesEl);
     if (dotsEl) wipe(dotsEl);
-    qa(cmpWrap || DOC, ".nx-compare[data-dynamic]").forEach((n) => n.remove());
+    qa(leftCol || DOC, ".nx-compare[data-dynamic]").forEach((n) => n.remove());
     q(right, ".nx-contrib-spec")?.remove();
     total = 0;
     idx = 0;
+    currentViewUrl = "";
     setModalNavVisible();
   }
 
@@ -393,15 +432,13 @@
 
   /* ---------- CARDS: hide arrows if <= 1 slide ---------- */
   function updateCardNavs() {
-    // A) For inline slideshows with .slideshow-container
+    // A) Inline slideshows
     qa(DOC, ".slideshow-container").forEach((sc) => {
       const slides = qa(sc, ".slides img, .slides .slide");
       const need = slides.length > 1;
       const nav = q(sc, ".slideshow-nav");
       if (nav) show(nav, need);
-      // Also mark so CSS can enforce
       sc.setAttribute("data-no-nav", need ? "0" : "1");
-      // Some setups use .prev/.next directly under container:
       const prev = q(sc, ".prev"),
         next = q(sc, ".next");
       if (!need) {
@@ -410,16 +447,14 @@
       }
     });
 
-    // B) For cards that only use data-slides (no inline slideshow DOM)
+    // B) Cards that only use data-slides
     qa(DOC, ".project-card").forEach((card) => {
       const raw = card.getAttribute("data-slides");
       if (!raw) return;
       let arr = tryJSON(raw) || [];
       const need = Array.isArray(arr) && arr.length > 1;
-      // If some theme inserted .slideshow-nav inside card anyway:
       const nav = q(card, ".slideshow-nav");
       if (nav) show(nav, need);
-      // If stray .prev/.next exist:
       const prev = q(card, ".prev"),
         next = q(card, ".next");
       if (!need) {
@@ -443,6 +478,7 @@
     updateCardNavs();
     updateModalNav();
   }
+
   if ("MutationObserver" in window) {
     new MutationObserver(updateCardNavs).observe(DOC.body, {
       childList: true,
@@ -450,7 +486,6 @@
     });
   }
 
-  // Re-check modal nav after any project-card click that opens it
   DOC.addEventListener("click", (e) => {
     if (!e.target.closest(".project-card")) return;
     setTimeout(updateModalNav, 50);
