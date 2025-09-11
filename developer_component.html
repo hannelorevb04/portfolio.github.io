@@ -10,10 +10,29 @@
 
     <title>Hannelore Van Buynderen - Developer Portfolio</title>
 
+    <!-- Preconnect + non-blocking fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
+      rel="preload"
+      as="style"
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+      />
+    </noscript>
+
+    <!-- Verwijderd: <link rel="stylesheet" href="css/developer.css" /> (404) -->
+
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="css/developer.css" />
     <link rel="stylesheet" href="css/contact.css" />
@@ -38,6 +57,57 @@
       }
     </style>
   </head>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Alle cover-afbeeldingen in de kaarten
+      const covers = Array.from(
+        document.querySelectorAll(
+          ".project-card .overlap-group img, .project-card .overlap-group iframe.image"
+        )
+      );
+
+      if (covers.length) {
+        // kies de eerste werkelijk zichtbare als LCP
+        let lcp = covers[0];
+        for (const el of covers) {
+          const r = el.getBoundingClientRect();
+          if (
+            r.top < innerHeight &&
+            r.bottom > 0 &&
+            r.left < innerWidth &&
+            r.right > 0
+          ) {
+            lcp = el;
+            break;
+          }
+        }
+
+        covers.forEach((el) => {
+          // Afbeeldingen
+          if (el.tagName === "IMG") {
+            el.setAttribute("decoding", "async");
+            if (el === lcp) {
+              el.setAttribute("fetchpriority", "high");
+              el.removeAttribute("loading");
+            } else {
+              el.setAttribute("fetchpriority", "low");
+              if (!el.hasAttribute("loading"))
+                el.setAttribute("loading", "lazy");
+            }
+          }
+          // Iframes (zoals Useless Web)
+          if (
+            el.tagName === "IFRAME" &&
+            el !== lcp &&
+            !el.hasAttribute("loading")
+          ) {
+            el.setAttribute("loading", "lazy");
+          }
+        });
+      }
+    });
+  </script>
+
   <body>
     <form name="contact" netlify data-netlify="true" style="display: none">
       <input type="text" name="name" />
@@ -48,9 +118,18 @@
     <div class="designer-page">
       <!-- Header -->
       <div class="video-header">
-        <video autoplay="" class="background-video" loop="" muted="">
+        <video
+          class="background-video"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+          poster="images/beach_poster.jpg"
+        >
           <source src="images/beach_1.mp4" type="video/mp4" />
         </video>
+
         <nav class="main-nav">
           <div class="nav-profile">
             <a href="profiles.html">
@@ -660,7 +739,7 @@
     <!-- Scripts -->
     <script defer src="nx-inline.js"></script>
     <script defer src="nx-modal.js"></script>
-    <script src="nx-card-slideshow.js"></script>
+    <script defer src="nx-card-slideshow.js"></script>
 
     <!-- Footer component injectie -->
     <div data-include="components/footer.html"></div>
