@@ -15,9 +15,22 @@
   <body>
     <div class="profiles-page">
       <video autoplay="" class="background-video" loop="" muted="">
-        <source src="images/beach_1.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
+        <video
+          class="background-video"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+          poster="images/beach_poster.jpg"
+        >
+          <source
+            src="images/beach_1080.mp4"
+            type="video/mp4"
+            media="(min-width: 1024px)"
+          />
+          <source src="images/beach_720.mp4" type="video/mp4" />
+        </video>
       <h1 class="profiles-title">Who's watching?</h1>
       <div class="profiles-container">
         <div class="profile-card designer" onclick="selectProfile('designer')">
