@@ -58,6 +58,87 @@
       }
     </style>
   </head>
+  <script>
+    (function () {
+      const ORIGIN = location.origin;
+      const MAX_W = 700; // niet-LCP plaatjes (~ 332–478px getoond in je grid)  
+      const LCP_W = 1000; // LCP iets groter voor scherpte
+      const Q = 82; // kwaliteit (visueel OK, bytes lager)
+
+      const toProxy = (url, width, forceExt) => {
+        const abs = url.startsWith("http")
+          ? url
+          : ORIGIN + (url.startsWith("/") ? "" : "/") + url;
+        let ext = forceExt;
+        if (!ext) {
+          const m = abs.toLowerCase().match(/\.(png|jpe?g)$/);
+          ext = m ? (m[1] === "png" ? "png" : "jpg") : "jpg";
+        }
+        // wsrv.nl verkleint en behoudt het gevraagde formaat
+        return `https://wsrv.nl/?url=${encodeURIComponent(
+          abs
+        )}&w=${width}&q=${Q}&output=${ext}`;
+      };
+
+      const imgs = Array.from(document.querySelectorAll(".projects img.image"));
+      if (imgs.length) {
+        // kies eerste zichtbare image als LCP-kandidaat
+        let lcp = imgs[0];
+        for (const img of imgs) {
+          const r = img.getBoundingClientRect();
+          if (
+            r.top < innerHeight &&
+            r.bottom > 0 &&
+            r.left < innerWidth &&
+            r.right > 0
+          ) {
+            lcp = img;
+            break;
+          }
+        }
+
+        imgs.forEach((img) => {
+          const src = img.getAttribute("src");
+          if (!src) return;
+          img.setAttribute("decoding", "async");
+          if (img === lcp) {
+            img.setAttribute("fetchpriority", "high");
+            img.removeAttribute("loading");
+            img.src = toProxy(src, LCP_W);
+          } else {
+            img.setAttribute("fetchpriority", "low");
+            img.setAttribute("loading", "lazy");
+            const loadLite = () => {
+              img.src = toProxy(src, MAX_W);
+            };
+            if ("IntersectionObserver" in window) {
+              const io = new IntersectionObserver(
+                (es, obs) => {
+                  es.forEach((e) => {
+                    if (e.isIntersecting) {
+                      loadLite();
+                      obs.disconnect();
+                    }
+                  });
+                },
+                { rootMargin: "300px" }
+              );
+              io.observe(img);
+            } else {
+              loadLite();
+            }
+          }
+        });
+      }
+
+      // verklein video-poster on-the-fly (je poster was 3840px; getoond ~1760px)  
+      const vid = document.querySelector("video[poster]");
+      if (vid) {
+        const p = vid.getAttribute("poster");
+        if (p) vid.setAttribute("poster", toProxy(p, 1600, "jpg"));
+      }
+    })();
+  </script>
 
   <body>
     <form name="contact" netlify data-netlify="true" style="display: none">
