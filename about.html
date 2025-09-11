@@ -4,15 +4,54 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>About – Hannelore Van Buynderen</title>
+    <meta
+      name="description"
+      content="About Hannelore Van Buynderen — UX/UI designer & front-end developer in Boechout (Antwerp). From user flows & wireframes to pixel-perfect UI and working prototypes."
+    />
 
+    <!-- Preconnects (kleine LCP-winst) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+
+    <!-- Google Fonts: non-blocking stylesheet -->
     <link
+      rel="preload"
+      as="style"
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+    />
+    <link
       rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+      />
+    </noscript>
+
+    <!-- Devicon: non-blocking stylesheet (icons blijven werken, maar blokken render niet) -->
+    <link
+      rel="preload"
+      as="style"
+      href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
     />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
+      media="print"
+      onload="this.media='all'"
     />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
+      />
+    </noscript>
+
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="css/about.css" />
     <link rel="stylesheet" href="css/contact.css" />
@@ -416,6 +455,7 @@
 
     <!-- ======= HERO ======= -->
     <div class="video-header">
+      <!-- één enkele, correcte video -->
       <video
         class="background-video"
         autoplay
@@ -432,13 +472,16 @@
         />
         <source src="images/beach_720.mp4" type="video/mp4" />
       </video>
+
       <nav class="main-nav">
         <div class="nav-profile">
           <a href="profiles.html">
             <img
-              class="profile-image"
-              src="images/Hannelore_1.png"
-              alt="Profile"
+              class="about-photo"
+              src="images/double_exposure.png"
+              alt="Portrait of Hannelore Van Buynderen"
+              fetchpriority="high"
+              decoding="async"
             />
           </a>
         </div>
@@ -636,12 +679,20 @@
               <img
                 src="images/GLS_certificaat.png"
                 alt="GSL Classroom Certificate"
+                loading="lazy"
+                decoding="async"
               />
+
               <p>Tecnológico de Monterrey &amp; Thomas More — 2024</p>
             </div>
             <div class="certificate-card">
               <div class="skill-head"><h3>Bachelor's degree</h3></div>
-              <img src="images/Thomas More.png" alt="Bachelor's degree" />
+              <img
+                src="images/Thomas More.png"
+                alt="Bachelor's degree"
+                loading="lazy"
+                decoding="async"
+              />
               <p>Thomas More, Mechelen — 2025</p>
             </div>
           </div>
