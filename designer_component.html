@@ -28,11 +28,10 @@
 
     <!-- Globale sizing & video styles (1 plek aanpassen = overal doorgevoerd) -->
     <style>
-      /* —— Afbeeldingen in projectkaarten (uniform via 1 variabele) —— */
       :root {
-        /* kies jouw doelbreedte voor project-thumbnails (retina-proof) */
-        --project-img-max: 660px; /* zet bv. 560px of 740px als je wil */
-        --project-img-aspect: 4 / 3; /* optioneel voor consistente hoogte */
+        /* pas deze aan en het werkt overal */
+        --project-img-max: 660px; /* bv. 560px of 740px */
+        --project-img-aspect: 4/3; /* optioneel consistente hoogte */
       }
       .projects .image {
         display: block;
@@ -40,7 +39,6 @@
         max-width: var(--project-img-max);
         height: auto;
       }
-      /* Wil je overal dezelfde hoogte/ratio en nette crop? laat dit aan. */
       @supports (aspect-ratio: 1) {
         .projects .image {
           aspect-ratio: var(--project-img-aspect);
@@ -48,7 +46,7 @@
         }
       }
 
-      /* —— Video altijd scherp en zonder rek/stretch —— */
+      /* video */
       .video-header {
         position: relative;
         overflow: hidden;
@@ -57,18 +55,6 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
-      }
-      /* optionele subtiele overlay die compressie-artefacts maskeert */
-      .video-header::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(
-          to bottom,
-          rgba(0, 0, 0, 0.12),
-          rgba(0, 0, 0, 0.1)
-        );
-        pointer-events: none;
       }
     </style>
   </head>
@@ -90,6 +76,7 @@
           loop
           playsinline
           preload="metadata"
+          poster="images/beach_poster.jpg"
         >
           <source
             src="images/beach_1080.mp4"
@@ -97,7 +84,6 @@
             media="(min-width: 1024px)"
           />
           <source src="images/beach_720.mp4" type="video/mp4" />
-          <img src="images/beach_poster.png" alt="Ocean background" />
         </video>
 
         <!-- Navigation -->
@@ -562,19 +548,40 @@
     <div data-include="components/footer.html"></div>
     <script src="assets/js/insert-components.js" defer></script>
     <script>
-      // Markeer ALLE afbeeldingen (behalve de eerste "belangrijkste") als lazy + async
+      // Kies 1 LCP-kandidaat: eerste zichtbare projectafbeelding in de viewport
       document.addEventListener("DOMContentLoaded", () => {
-        const imgs = Array.from(document.querySelectorAll("img.image"));
-        if (imgs.length) {
-          // De eerste laten we met hoge prioriteit (als je stap 3 deed)
-          const [, ...rest] = imgs;
-          rest.forEach((img) => {
+        const all = Array.from(document.querySelectorAll(".projects .image"));
+
+        // fallback als niets gevonden wordt
+        let lcp = all[0];
+
+        // pak de eerste die in de viewport staat
+        for (const img of all) {
+          const r = img.getBoundingClientRect();
+          if (
+            r.top < window.innerHeight &&
+            r.bottom > 0 &&
+            r.left < window.innerWidth &&
+            r.right > 0
+          ) {
+            lcp = img;
+            break;
+          }
+        }
+
+        // zet prioriteiten: 1 hoog, rest laag + lazy + async
+        all.forEach((img) => {
+          if (img === lcp) {
+            img.setAttribute("fetchpriority", "high");
+            img.removeAttribute("loading"); // niet lazy
+          } else {
+            img.setAttribute("fetchpriority", "low");
             if (!img.hasAttribute("loading"))
               img.setAttribute("loading", "lazy");
-            if (!img.hasAttribute("decoding"))
-              img.setAttribute("decoding", "async");
-          });
-        }
+          }
+          if (!img.hasAttribute("decoding"))
+            img.setAttribute("decoding", "async");
+        });
       });
     </script>
   </body>
