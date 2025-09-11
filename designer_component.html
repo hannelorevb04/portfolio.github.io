@@ -40,35 +40,102 @@
 
     <!-- Globale, centrale sizing & performance helpers -->
     <style>
-      :root {
-        --project-img-max: 660px; /* optioneel; bepaalt maximale weergavebreedte */
-        /* --project-img-aspect: 4/3;  niet meer afdwingen */
-      }
+      /* —— MINI PATCH: kaart zoals je screenshot, zonder HTML aan te passen —— */
 
-      /* Toon images 1:1 zonder crop */
-      .projects .image {
-        display: block;
-        width: 100%;
-        max-width: var(--project-img-max);
-        height: auto; /* geen geforceerde hoogte */
-        object-fit: unset; /* geen crop */
-      }
-
-      /* Sectie optimalisatie mag blijven */
-      .projects {
-        content-visibility: auto;
-        contain-intrinsic-size: 1000px;
-      }
-
-      /* Video netjes zonder overlay */
-      .video-header {
-        position: relative;
+      /* kaart netjes afgerond en geclipt */
+      .project-card {
+        border-radius: 18px;
         overflow: hidden;
       }
-      .background-video {
+
+      /* maak van de overlap-group een 2-rijen grid:
+   rij 1 = cover (image + gradient), rij 2 = tekst/meta  */
+      .project-card .overlap-group {
+        display: grid;
+        grid-template-rows: auto auto; /* cover boven, meta onder */
+        background: linear-gradient(
+          180deg,
+          #0f2a42 0%,
+          #1f3c57 100%
+        ); /* ondervlak */
+      }
+
+      /* COVER (rij 1) */
+      .project-card .image {
+        grid-row: 1;
+        grid-column: 1;
         width: 100%;
-        height: 100%;
-        object-fit: cover;
+        aspect-ratio: 16 / 9; /* filmisch kader, responsive hoogte */
+        object-fit: cover; /* vult volledig */
+        display: block;
+        position: relative; /* nodig voor stacking met gradient */
+        z-index: 1;
+      }
+
+      /* Zorg dat de gradient alleen over de foto ligt (zelfde gridcel) */
+      .project-card .gradient {
+        grid-row: 1;
+        grid-column: 1;
+        position: relative !important; /* overschrijft evt. absolute styles */
+        z-index: 2;
+        background: linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0) 35%,
+          rgba(7, 24, 39, 0.6) 68%,
+          rgba(9, 31, 49, 0.88) 100%
+        );
+        pointer-events: none;
+      }
+
+      /* META (rij 2) — titel + tools onder de foto */
+      .project-card .text {
+        grid-row: 2;
+        grid-column: 1;
+        position: static !important; /* niet meer absolute over de foto */
+        inset: auto !important;
+        padding: 18px 20px 22px;
+        color: #fff;
+      }
+
+      /* Titel */
+      .project-card .text .div {
+        margin: 0 0 10px 0;
+        font-weight: 800;
+        font-size: clamp(18px, 2.4vw, 28px);
+        line-height: 1.15;
+        letter-spacing: 0.2px;
+        text-shadow: 0 2px 14px rgba(0, 0, 0, 0.35);
+      }
+
+      /* Tools als pills (werkt met jouw bestaande tools/spans) */
+      .project-card .text .badges,
+      .project-card .text .tools,
+      .project-card .text .labels,
+      .project-card .text .contributors {
+        /* welke je ook gebruikt */
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .project-card .text .badge,
+      .project-card .text .tool,
+      .project-card .text .label,
+      .project-card .text .contributor {
+        display: inline-flex;
+        align-items: center;
+        height: 28px;
+        padding: 0 12px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.28);
+        background: rgba(255, 255, 255, 0.14);
+        color: #fff;
+        font-weight: 700;
+        font-size: 12px;
+        letter-spacing: 0.6px;
+        text-transform: uppercase;
+        backdrop-filter: blur(2px);
+        -webkit-backdrop-filter: blur(2px);
       }
 
       /* Verwijder de overlay: .video-header::after { ... } helemaal weglaten */
@@ -166,6 +233,39 @@
           img.setAttribute("fetchpriority", "low");
           if (!img.hasAttribute("loading")) img.setAttribute("loading", "lazy");
         }
+      });
+    });
+  </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      document.querySelectorAll(".project-card").forEach((card) => {
+        const toolsRaw = card.dataset.tools || ""; // bv. "HTML, CSS" of "Figma • UX/UI"
+        const textBox = card.querySelector(".text");
+        if (!textBox || !toolsRaw) return;
+
+        // Split op komma, bullet (•), slash en pipe
+        const tokens = toolsRaw
+          .split(/[,\u2022\/|]+/)
+          .map((s) => s.trim())
+          .filter(Boolean);
+        if (!tokens.length) return;
+
+        // maak badges container (als die er nog niet is)
+        let row = card.querySelector(".badges");
+        if (!row) {
+          row = document.createElement("div");
+          row.className = "badges";
+          textBox.appendChild(row);
+        } else {
+          row.innerHTML = "";
+        }
+
+        tokens.forEach((t) => {
+          const b = document.createElement("span");
+          b.className = "badge";
+          b.textContent = t.toUpperCase(); // stijl zoals op je screenshot
+          row.appendChild(b);
+        });
       });
     });
   </script>
