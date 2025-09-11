@@ -11,142 +11,59 @@
       content="Portfolio van Hannelore Van Buynderen — UX/UI designer & front-end developer. Bekijk projecten rond branding, adoptie-app Felicks, Hoppin redesign en meer."
     />
 
-    <!-- Sneller fonts (niet render-blockend) -->
+    <!-- Sneller fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      rel="preload"
-      as="style"
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
-    />
-    <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
-      media="print"
-      onload="this.media='all'"
     />
-    <noscript>
-      <link
-        rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
-      />
-    </noscript>
 
-    <!-- Jouw styles (laat alleen de bestaande die écht bestaan) -->
+    <!-- Styles -->
     <link rel="stylesheet" href="styles.css" />
+    <!-- verwijderd: <link rel="stylesheet" href="css/designer.css" /> -->
     <link rel="stylesheet" href="css/contact.css" />
     <link rel="stylesheet" href="nx-inline.css" />
     <link rel="stylesheet" href="nx-modal.css" />
 
-    <!-- Globale, centrale sizing & performance helpers -->
+    <!-- Globale sizing & video styles (1 plek aanpassen = overal doorgevoerd) -->
     <style>
-      /* —— MINI PATCH: kaart zoals je screenshot, zonder HTML aan te passen —— */
+      :root {
+        /* pas deze aan en het werkt overal */
+        --project-img-max: 660px; /* bv. 560px of 740px */
+        --project-img-aspect: 4/3; /* optioneel consistente hoogte */
+      }
+      /* .projects .image {
+        display: block;
+        width: 100%;
+        max-width: var(--project-img-max);
+        height: auto;
+      } */
+      /* @supports (aspect-ratio: 1) {
+        .projects .image {
+          aspect-ratio: var(--project-img-aspect);
+          object-fit: cover;
+        }
+      } */
 
-      /* kaart netjes afgerond en geclipt */
-      .project-card {
-        border-radius: 18px;
+      /* video */
+      .video-header {
+        position: relative;
         overflow: hidden;
       }
-
-      /* maak van de overlap-group een 2-rijen grid:
-   rij 1 = cover (image + gradient), rij 2 = tekst/meta  */
-      .project-card .overlap-group {
-        display: grid;
-        grid-template-rows: auto auto; /* cover boven, meta onder */
-        background: linear-gradient(
-          180deg,
-          #0f2a42 0%,
-          #1f3c57 100%
-        ); /* ondervlak */
-      }
-
-      /* COVER (rij 1) */
-      .project-card .image {
-        grid-row: 1;
-        grid-column: 1;
+      .background-video {
         width: 100%;
-        aspect-ratio: 16 / 9; /* filmisch kader, responsive hoogte */
-        object-fit: cover; /* vult volledig */
-        display: block;
-        position: relative; /* nodig voor stacking met gradient */
-        z-index: 1;
+        height: 100%;
+        object-fit: cover;
       }
-
-      /* Zorg dat de gradient alleen over de foto ligt (zelfde gridcel) */
-      .project-card .gradient {
-        grid-row: 1;
-        grid-column: 1;
-        position: relative !important; /* overschrijft evt. absolute styles */
-        z-index: 2;
-        background: linear-gradient(
-          to bottom,
-          rgba(0, 0, 0, 0) 35%,
-          rgba(7, 24, 39, 0.6) 68%,
-          rgba(9, 31, 49, 0.88) 100%
-        );
-        pointer-events: none;
-      }
-
-      /* META (rij 2) — titel + tools onder de foto */
-      .project-card .text {
-        grid-row: 2;
-        grid-column: 1;
-        position: static !important; /* niet meer absolute over de foto */
-        inset: auto !important;
-        padding: 18px 20px 22px;
-        color: #fff;
-      }
-
-      /* Titel */
-      .project-card .text .div {
-        margin: 0 0 10px 0;
-        font-weight: 800;
-        font-size: clamp(18px, 2.4vw, 28px);
-        line-height: 1.15;
-        letter-spacing: 0.2px;
-        text-shadow: 0 2px 14px rgba(0, 0, 0, 0.35);
-      }
-
-      /* Tools als pills (werkt met jouw bestaande tools/spans) */
-      .project-card .text .badges,
-      .project-card .text .tools,
-      .project-card .text .labels,
-      .project-card .text .contributors {
-        /* welke je ook gebruikt */
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-      }
-
-      .project-card .text .badge,
-      .project-card .text .tool,
-      .project-card .text .label,
-      .project-card .text .contributor {
-        display: inline-flex;
-        align-items: center;
-        height: 28px;
-        padding: 0 12px;
-        border-radius: 999px;
-        border: 1px solid rgba(255, 255, 255, 0.28);
-        background: rgba(255, 255, 255, 0.14);
-        color: #fff;
-        font-weight: 700;
-        font-size: 12px;
-        letter-spacing: 0.6px;
-        text-transform: uppercase;
-        backdrop-filter: blur(2px);
-        -webkit-backdrop-filter: blur(2px);
-      }
-
-      /* Verwijder de overlay: .video-header::after { ... } helemaal weglaten */
     </style>
   </head>
-  <!-- <script>
-    document.addEventListener("DOMContentLoaded", () => {
+  <script>
+    (function () {
       const ORIGIN = location.origin;
-      const MAX_W = 700;
-      const LCP_W = 1000;
-      const Q = 82;
+      const MAX_W = 700; // niet-LCP plaatjes (~ 332–478px getoond in je grid)  
+      const LCP_W = 1000; // LCP iets groter voor scherpte
+      const Q = 82; // kwaliteit (visueel OK, bytes lager)
 
       const toProxy = (url, width, forceExt) => {
         const abs = url.startsWith("http")
@@ -157,117 +74,70 @@
           const m = abs.toLowerCase().match(/\.(png|jpe?g)$/);
           ext = m ? (m[1] === "png" ? "png" : "jpg") : "jpg";
         }
+        // wsrv.nl verkleint en behoudt het gevraagde formaat
         return `https://wsrv.nl/?url=${encodeURIComponent(
           abs
         )}&w=${width}&q=${Q}&output=${ext}`;
       };
 
       const imgs = Array.from(document.querySelectorAll(".projects img.image"));
-      if (!imgs.length) return;
-
-      const lcp =
-        imgs.find((i) => i.getAttribute("fetchpriority") === "high") || imgs[0];
-
-      imgs.forEach((img) => {
-        const src = img.getAttribute("src");
-        if (!src) return;
-
-        if (img === lcp) {
-          img.src = toProxy(src, LCP_W);
-        } else {
-          const loadLite = () => {
-            img.src = toProxy(src, MAX_W);
-          };
-          if ("IntersectionObserver" in window) {
-            const io = new IntersectionObserver(
-              (entries, obs) => {
-                entries.forEach((e) => {
-                  if (e.isIntersecting) {
-                    loadLite();
-                    obs.unobserve(e.target);
-                  }
-                });
-              },
-              { rootMargin: "300px" }
-            );
-            io.observe(img);
-          } else {
-            loadLite();
+      if (imgs.length) {
+        // kies eerste zichtbare image als LCP-kandidaat
+        let lcp = imgs[0];
+        for (const img of imgs) {
+          const r = img.getBoundingClientRect();
+          if (
+            r.top < innerHeight &&
+            r.bottom > 0 &&
+            r.left < innerWidth &&
+            r.right > 0
+          ) {
+            lcp = img;
+            break;
           }
         }
-      });
 
+        imgs.forEach((img) => {
+          const src = img.getAttribute("src");
+          if (!src) return;
+          img.setAttribute("decoding", "async");
+          if (img === lcp) {
+            img.setAttribute("fetchpriority", "high");
+            img.removeAttribute("loading");
+            img.src = toProxy(src, LCP_W);
+          } else {
+            img.setAttribute("fetchpriority", "low");
+            img.setAttribute("loading", "lazy");
+            const loadLite = () => {
+              img.src = toProxy(src, MAX_W);
+            };
+            if ("IntersectionObserver" in window) {
+              const io = new IntersectionObserver(
+                (es, obs) => {
+                  es.forEach((e) => {
+                    if (e.isIntersecting) {
+                      loadLite();
+                      obs.disconnect();
+                    }
+                  });
+                },
+                { rootMargin: "300px" }
+              );
+              io.observe(img);
+            } else {
+              loadLite();
+            }
+          }
+        });
+      }
+
+      // verklein video-poster on-the-fly (je poster was 3840px; getoond ~1760px)  
       const vid = document.querySelector("video[poster]");
       if (vid) {
         const p = vid.getAttribute("poster");
         if (p) vid.setAttribute("poster", toProxy(p, 1600, "jpg"));
       }
-    });
-  </script> -->
-
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const all = Array.from(document.querySelectorAll(".projects img.image"));
-      if (!all.length) return;
-
-      let lcp = all[0];
-      for (const img of all) {
-        const r = img.getBoundingClientRect();
-        if (
-          r.top < innerHeight &&
-          r.bottom > 0 &&
-          r.left < innerWidth &&
-          r.right > 0
-        ) {
-          lcp = img;
-          break;
-        }
-      }
-
-      all.forEach((img) => {
-        img.setAttribute("decoding", "async");
-        if (img === lcp) {
-          img.setAttribute("fetchpriority", "high");
-          img.removeAttribute("loading");
-        } else {
-          img.setAttribute("fetchpriority", "low");
-          if (!img.hasAttribute("loading")) img.setAttribute("loading", "lazy");
-        }
-      });
-    });
-  </script>
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      document.querySelectorAll(".project-card").forEach((card) => {
-        const toolsRaw = card.dataset.tools || ""; // bv. "HTML, CSS" of "Figma • UX/UI"
-        const textBox = card.querySelector(".text");
-        if (!textBox || !toolsRaw) return;
-
-        // Split op komma, bullet (•), slash en pipe
-        const tokens = toolsRaw
-          .split(/[,\u2022\/|]+/)
-          .map((s) => s.trim())
-          .filter(Boolean);
-        if (!tokens.length) return;
-
-        // maak badges container (als die er nog niet is)
-        let row = card.querySelector(".badges");
-        if (!row) {
-          row = document.createElement("div");
-          row.className = "badges";
-          textBox.appendChild(row);
-        } else {
-          row.innerHTML = "";
-        }
-
-        tokens.forEach((t) => {
-          const b = document.createElement("span");
-          b.className = "badge";
-          b.textContent = t.toUpperCase(); // stijl zoals op je screenshot
-          row.appendChild(b);
-        });
-      });
-    });
+    })();
   </script>
 
   <body>
@@ -290,7 +160,7 @@
           poster="images/beach_poster.jpg"
         >
           <source
-            src="images/beach_1080_1.mp4"
+            src="images/beach_1080.mp4"
             type="video/mp4"
             media="(min-width: 1024px)"
           />
@@ -463,9 +333,6 @@
             data-title="XD Promoting"
             data-link="https://www.figma.com/proto/Z1xxeDSuq4bxy92W8XdhuK/Engels?page-id=0%3A1&node-id=6-1243&p=f&viewport=554%2C427%2C0.25&t=8bypZ1p0uVE9jCee-1&scaling=scale-down&content-scaling=fixed"
             data-tools="Figma"
-            data-contributors='[
-              {"name":"Sieme Macquoy","url":"https://sieme.be/"}
-            ]'
           >
             <div class="overlap-group">
               <img
@@ -761,5 +628,42 @@
     <!-- Footer component injectie -->
     <div data-include="components/footer.html"></div>
     <script src="assets/js/insert-components.js" defer></script>
+    <script>
+      // Kies 1 LCP-kandidaat: eerste zichtbare projectafbeelding in de viewport
+      document.addEventListener("DOMContentLoaded", () => {
+        const all = Array.from(document.querySelectorAll(".projects .image"));
+
+        // fallback als niets gevonden wordt
+        let lcp = all[0];
+
+        // pak de eerste die in de viewport staat
+        for (const img of all) {
+          const r = img.getBoundingClientRect();
+          if (
+            r.top < window.innerHeight &&
+            r.bottom > 0 &&
+            r.left < window.innerWidth &&
+            r.right > 0
+          ) {
+            lcp = img;
+            break;
+          }
+        }
+
+        // zet prioriteiten: 1 hoog, rest laag + lazy + async
+        all.forEach((img) => {
+          if (img === lcp) {
+            img.setAttribute("fetchpriority", "high");
+            img.removeAttribute("loading"); // niet lazy
+          } else {
+            img.setAttribute("fetchpriority", "low");
+            if (!img.hasAttribute("loading"))
+              img.setAttribute("loading", "lazy");
+          }
+          if (!img.hasAttribute("decoding"))
+            img.setAttribute("decoding", "async");
+        });
+      });
+    </script>
   </body>
 </html>
