@@ -10,10 +10,9 @@
 
     <title>Hannelore Van Buynderen - Mixed Media Portfolio</title>
 
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="css/mixed-media.css" />
     <link rel="stylesheet" href="css/contact.css" />
@@ -26,6 +25,43 @@
       }
     </style>
   </head>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Alle projectbeelden (slides + losse images)
+      const all = Array.from(document.querySelectorAll(".projects .image"));
+
+      if (!all.length) return;
+
+      // Probeer eerst de actieve slide als LCP, anders de eerste die in beeld is
+      let lcp = document.querySelector(".slides .slide.active") || all[0];
+      for (const img of all) {
+        const r = img.getBoundingClientRect();
+        if (
+          r.top < innerHeight &&
+          r.bottom > 0 &&
+          r.left < innerWidth &&
+          r.right > 0
+        ) {
+          lcp = img;
+          break;
+        }
+      }
+
+      // Zet prioriteiten
+      all.forEach((img) => {
+        img.setAttribute("decoding", "async");
+
+        if (img === lcp) {
+          img.setAttribute("fetchpriority", "high"); // Lighthouse vroeg hierom
+          img.removeAttribute("loading"); // LCP niet lazy
+        } else {
+          img.setAttribute("fetchpriority", "low");
+          if (!img.hasAttribute("loading")) img.setAttribute("loading", "lazy");
+        }
+      });
+    });
+  </script>
+
   <body>
     <form name="contact" netlify data-netlify="true" style="display: none">
       <input type="text" name="name" />
@@ -36,8 +72,21 @@
     <div class="designer-page">
       <!-- Header -->
       <div class="video-header">
-        <video autoplay="" class="background-video" loop="" muted="">
-          <source src="images/beach_1.mp4" type="video/mp4" />
+        <video
+          class="background-video"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+          poster="images/beach_poster.jpg"
+        >
+          <source
+            src="images/beach_1080.mp4"
+            type="video/mp4"
+            media="(min-width: 1024px)"
+          />
+          <source src="images/beach_720.mp4" type="video/mp4" />
         </video>
         <nav class="main-nav">
           <div class="nav-profile">
@@ -537,8 +586,8 @@
     </div>
     <script defer src="nx-inline.js?v=1"></script>
     <script defer src="nx-modal.js?v=29"></script>
-    <script src="drag-scroll.js"></script>
-    <script src="nx-card-slideshow.js"></script>
+    <script defer src="drag-scroll.js"></script>
+    <script defer src="nx-card-slideshow.js"></script>
 
     <!-- Footer component injectie -->
     <div data-include="components/footer.html"></div>
