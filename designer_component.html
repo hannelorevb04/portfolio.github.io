@@ -41,32 +41,26 @@
     <!-- Globale, centrale sizing & performance helpers -->
     <style>
       :root {
-        /* 1 plek om alle project-thumbnails te sturen (retina-proof) */
-        --project-img-max: 660px; /* pas aan (bv. 560px / 740px) */
-        --project-img-aspect: 4/3; /* optioneel: consistente hoogte/crop */
+        --project-img-max: 660px; /* optioneel; bepaalt maximale weergavebreedte */
+        /* --project-img-aspect: 4/3;  niet meer afdwingen */
       }
 
-      /* ALLE projectafbeeldingen centraal gestuurd (geen per-image sizes nodig) */
+      /* Toon images 1:1 zonder crop */
       .projects .image {
         display: block;
         width: 100%;
         max-width: var(--project-img-max);
-        height: auto;
-      }
-      @supports (aspect-ratio: 1) {
-        .projects .image {
-          aspect-ratio: var(--project-img-aspect);
-          object-fit: cover; /* nette crop bij vaste ratio */
-        }
+        height: auto; /* geen geforceerde hoogte */
+        object-fit: unset; /* geen crop */
       }
 
-      /* Sneller renderen van grote secties */
+      /* Sectie optimalisatie mag blijven */
       .projects {
         content-visibility: auto;
-        contain-intrinsic-size: 1000px; /* voorkomt layout jump terwijl sectie offscreen is */
+        contain-intrinsic-size: 1000px;
       }
 
-      /* Video altijd scherp en zonder rek/stretch */
+      /* Video netjes zonder overlay */
       .video-header {
         position: relative;
         overflow: hidden;
@@ -77,59 +71,15 @@
         object-fit: cover;
       }
 
-      /* Subtiele overlay (maskeert compressie-artefacts in effen vlakken) */
-      .video-header::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(
-          to bottom,
-          rgba(0, 0, 0, 0.12),
-          rgba(0, 0, 0, 0.1)
-        );
-        pointer-events: none;
-      }
+      /* Verwijder de overlay: .video-header::after { ... } helemaal weglaten */
     </style>
   </head>
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      const all = Array.from(document.querySelectorAll(".projects img.image"));
-      if (!all.length) return;
-
-      // kies de eerste écht zichtbare als LCP-kandidaat
-      let lcp = all[0];
-      for (const img of all) {
-        const r = img.getBoundingClientRect();
-        if (
-          r.top < innerHeight &&
-          r.bottom > 0 &&
-          r.left < innerWidth &&
-          r.right > 0
-        ) {
-          lcp = img;
-          break;
-        }
-      }
-
-      all.forEach((img) => {
-        img.setAttribute("decoding", "async");
-        if (img === lcp) {
-          img.setAttribute("fetchpriority", "high");
-          img.removeAttribute("loading"); // niet lazy voor de LCP
-        } else {
-          img.setAttribute("fetchpriority", "low");
-          if (!img.hasAttribute("loading")) img.setAttribute("loading", "lazy");
-        }
-      });
-    });
-  </script>
-
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
       const ORIGIN = location.origin;
-      const MAX_W = 700; // niet-LCP plaatjes (~332–478px getoond)
-      const LCP_W = 1000; // iets groter voor scherpte
-      const Q = 82; // visueel prima, bytes lager
+      const MAX_W = 700;
+      const LCP_W = 1000;
+      const Q = 82;
 
       const toProxy = (url, width, forceExt) => {
         const abs = url.startsWith("http")
@@ -140,7 +90,6 @@
           const m = abs.toLowerCase().match(/\.(png|jpe?g)$/);
           ext = m ? (m[1] === "png" ? "png" : "jpg") : "jpg";
         }
-        // wsrv.nl verkleint en behoudt het gevraagde formaat (png/jpg)
         return `https://wsrv.nl/?url=${encodeURIComponent(
           abs
         )}&w=${width}&q=${Q}&output=${ext}`;
@@ -149,7 +98,6 @@
       const imgs = Array.from(document.querySelectorAll(".projects img.image"));
       if (!imgs.length) return;
 
-      // bepaal welke als LCP gemarkeerd is (fetchpriority=high)
       const lcp =
         imgs.find((i) => i.getAttribute("fetchpriority") === "high") || imgs[0];
 
@@ -177,18 +125,48 @@
             );
             io.observe(img);
           } else {
-            // fallback
             loadLite();
           }
         }
       });
 
-      // verklein (te grote) poster ook on-the-fly
       const vid = document.querySelector("video[poster]");
       if (vid) {
         const p = vid.getAttribute("poster");
         if (p) vid.setAttribute("poster", toProxy(p, 1600, "jpg"));
       }
+    });
+  </script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const all = Array.from(document.querySelectorAll(".projects img.image"));
+      if (!all.length) return;
+
+      let lcp = all[0];
+      for (const img of all) {
+        const r = img.getBoundingClientRect();
+        if (
+          r.top < innerHeight &&
+          r.bottom > 0 &&
+          r.left < innerWidth &&
+          r.right > 0
+        ) {
+          lcp = img;
+          break;
+        }
+      }
+
+      all.forEach((img) => {
+        img.setAttribute("decoding", "async");
+        if (img === lcp) {
+          img.setAttribute("fetchpriority", "high");
+          img.removeAttribute("loading");
+        } else {
+          img.setAttribute("fetchpriority", "low");
+          if (!img.hasAttribute("loading")) img.setAttribute("loading", "lazy");
+        }
+      });
     });
   </script>
 
