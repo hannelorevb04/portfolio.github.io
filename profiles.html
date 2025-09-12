@@ -12,6 +12,112 @@
     <link rel="stylesheet" href="profiles.css" />
     <title>Portfolio - Who's Watching?</title>
   </head>
+  <script>
+    // --- vervang je bestaande pickColor(...) door deze versie ---
+    function pickColor(el) {
+      const W = 40,
+        H = 40; // was: w=40, h=40
+      const cnv = document.createElement("canvas");
+      cnv.width = W;
+      cnv.height = H;
+      const ctx = cnv.getContext("2d", { willReadFrequently: true });
+      ctx.drawImage(el, 0, 0, W, H);
+      const d = ctx.getImageData(0, 0, W, H).data;
+
+      // 1) kwantiseer + tel (voorkeur voor verzadigde, niet-te-donkere pixels)
+      const step = 24;
+      const buckets = new Map();
+      for (let i = 0; i < d.length; i += 4) {
+        const r = d[i],
+          g = d[i + 1],
+          b = d[i + 2],
+          a = d[i + 3];
+        if (a < 120) continue;
+        const max = Math.max(r, g, b),
+          min = Math.min(r, g, b);
+        const sat = max ? (max - min) / max : 0;
+        const val = max / 255;
+        const luma = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+        if (sat < 0.25 || val < 0.35 || luma < 35 || luma > 245) continue;
+
+        const rq = Math.round(r / step) * step;
+        const gq = Math.round(g / step) * step;
+        const bq = Math.round(b / step) * step;
+        const key = `${rq},${gq},${bq}`;
+        const cur = buckets.get(key) || { score: 0, r: rq, g: gq, b: bq };
+        cur.score += 1 + sat * 2 + val;
+        buckets.set(key, cur);
+      }
+
+      // 2) kies beste bucket
+      let best = { score: -1, r: 122, g: 160, b: 255 };
+      buckets.forEach((v) => {
+        if (v.score > best.score) best = v;
+      });
+
+      // 3) boost kleur in HSL → terug naar RGB
+      const rgb2hsl = (r, g, b) => {
+        r /= 255;
+        g /= 255;
+        b /= 255;
+        const max = Math.max(r, g, b),
+          min = Math.min(r, g, b);
+        let hue,
+          sat2,
+          light = (max + min) / 2;
+        if (max === min) {
+          hue = 0;
+          sat2 = 0;
+        } else {
+          const diff = max - min;
+          sat2 = light > 0.5 ? diff / (2 - max - min) : diff / (max + min);
+          switch (max) {
+            case r:
+              hue = (g - b) / diff + (g < b ? 6 : 0);
+              break;
+            case g:
+              hue = (b - r) / diff + 2;
+              break;
+            case b:
+              hue = (r - g) / diff + 4;
+              break;
+          }
+          hue /= 6;
+        }
+        return [hue, sat2, light];
+      };
+      const hsl2rgb = (hue, sat2, light) => {
+        const f = (p, q, t) => {
+          if (t < 0) t += 1;
+          if (t > 1) t -= 1;
+          if (t < 1 / 6) return p + (q - p) * 6 * t;
+          if (t < 1 / 2) return q;
+          if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
+          return p;
+        };
+        let r, g, b;
+        if (sat2 === 0) {
+          r = g = b = light;
+        } else {
+          const q =
+            light < 0.5 ? light * (1 + sat2) : light + sat2 - light * sat2;
+          const p = 2 * light - q;
+          r = f(p, q, hue + 1 / 3);
+          g = f(p, q, hue);
+          b = f(p, q, hue - 1 / 3);
+        }
+        return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
+      };
+
+      let [hue, sat2, light] = rgb2hsl(best.r, best.g, best.b); // was: [h,s,l]
+      sat2 = Math.max(sat2, 0.75); // vivid
+      light = Math.min(Math.max(light * 1.05, 0.5), 0.7);
+
+      const [R, G, B] = hsl2rgb(hue, sat2, light);
+      return `rgba(${R},${G},${B},0.75)`;
+    }
+  </script>
+
   <body>
     <div class="profiles-page">
       <!-- één enkele, correcte video -->
@@ -67,6 +173,16 @@
           </div>
           <h3 class="profile-label">Mixed-media</h3>
         </div>
+        <div class="profile-card mixed" onclick="selectProfile('Stalker')">
+          <div class="profile-circle">
+            <img
+              src="images/Hannelore_1.png"
+              alt="Adobe"
+              class="profile-icon"
+            />
+          </div>
+          <h3 class="profile-label">Stalker</h3>
+        </div>
       </div>
     </div>
 
@@ -81,6 +197,8 @@
         } else if (profileType === "mixed-media") {
           // window.location.href = "mixed-media.html";
           window.location.href = "mixed-media_component.html";
+        } else if (profileType === "Stalker") {
+          window.location.href = "about.html";
         }
       }
     </script>
