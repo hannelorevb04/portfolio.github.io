@@ -34,7 +34,7 @@
     <!-- Verwijderd: <link rel="stylesheet" href="css/developer.css" /> (404) -->
 
     <link rel="stylesheet" href="styles.css" />
-    <link rel="stylesheet" href="css/developer.css" />
+    <!-- <link rel="stylesheet" href="css/developer.css" /> -->
     <link rel="stylesheet" href="css/contact.css" />
     <link rel="stylesheet" href="nx-modal.css" />
     <link rel="stylesheet" href="nx-inline.css" />
@@ -57,57 +57,6 @@
       }
     </style>
   </head>
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      // Alle cover-afbeeldingen in de kaarten
-      const covers = Array.from(
-        document.querySelectorAll(
-          ".project-card .overlap-group img, .project-card .overlap-group iframe.image"
-        )
-      );
-
-      if (covers.length) {
-        // kies de eerste werkelijk zichtbare als LCP
-        let lcp = covers[0];
-        for (const el of covers) {
-          const r = el.getBoundingClientRect();
-          if (
-            r.top < innerHeight &&
-            r.bottom > 0 &&
-            r.left < innerWidth &&
-            r.right > 0
-          ) {
-            lcp = el;
-            break;
-          }
-        }
-
-        covers.forEach((el) => {
-          // Afbeeldingen
-          if (el.tagName === "IMG") {
-            el.setAttribute("decoding", "async");
-            if (el === lcp) {
-              el.setAttribute("fetchpriority", "high");
-              el.removeAttribute("loading");
-            } else {
-              el.setAttribute("fetchpriority", "low");
-              if (!el.hasAttribute("loading"))
-                el.setAttribute("loading", "lazy");
-            }
-          }
-          // Iframes (zoals Useless Web)
-          if (
-            el.tagName === "IFRAME" &&
-            el !== lcp &&
-            !el.hasAttribute("loading")
-          ) {
-            el.setAttribute("loading", "lazy");
-          }
-        });
-      }
-    });
-  </script>
-
   <body>
     <form name="contact" netlify data-netlify="true" style="display: none">
       <input type="text" name="name" />
@@ -439,57 +388,75 @@
             </div>
           </div>
           <!-- Woordlogo -->
+          <!-- Woordlogo (GEFIXT) -->
           <div
             class="project-card"
-            data-desc="Animated wordmarks experimenting with typography, CSS transforms and timing for expressive micro‑branding."
+            data-desc="Animated wordmarks experimenting with typography, CSS transforms and timing for expressive micro-branding."
             data-discipline="CSS Animation / Motion"
             data-meta="Website • CSS animation"
             data-slides='[
-              "iframe:Woordlogo/index_1.html",
-              "iframe:Woordlogo - groep/woordlogos/Entertainment/entertainment.html",
-              "iframe:Woordlogo - groep/woordlogos/fitness/index.html",
-              "iframe:Woordlogo - groep/woordlogos/timeline/index.html"
-            ]'
+    "iframe:Woordlogo/index_1.html",
+    "iframe:Woordlogo - groep/woordlogos/Entertainment/entertainment.html",
+    "iframe:Woordlogo - groep/woordlogos/fitness/index.html",
+    "iframe:Woordlogo - groep/woordlogos/timeline/index.html"
+  ]'
+            data-inline-slides='[
+  "Woordlogo/cover.png",
+  "Woordlogo - groep/woordlogos/Entertainment/cover.png",
+  "Woordlogo - groep/woordlogos/fitness/cover.png",
+  "Woordlogo - groep/woordlogos/timeline/cover.png"
+]'
             data-tags="CSS animation"
             data-title="Woordlogo"
+            data-tools="CSS animation"
+            data-contributors='[
+    {"name":"Naomi Goyvaerts","url":"https://anomi.be/"},
+    {"name":"Amy Bruyninckx","url":"https://amybruyninckx.com/"},
+    {"name":"Seda Ezzat","url":"https://sedaezzat.be/"}
+  ]'
+            id="woordlogoCard"
+          >
+            <div class="overlap-group">
+              <img
+                class="image"
+                src="Woordlogo/cover.png"
+                alt="Woordlogo cover"
+              />
+              <div class="gradient"></div>
+              <div class="text">
+                <div class="div">Woordlogo</div>
+                <div class="labels"><div class="label">CSS animation</div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Useless Web -->
+          <!-- <div
+            class="project-card"
+            data-desc="Playful micro‑experiments focusing on CSS animation and DOM tricks — tiny apps with a single fun interaction."
+            data-discipline="Frontend / Experiments"
+            data-meta="Website • CSS animation"
+            data-slides='["Useless web/cover.png",
+               "Useless web - groep/useless webs/Chicken_or_egg/cover.png",
+               "Useless web - groep/useless webs/Never_ending_candle/cover.png",
+               "Useless web - groep/useless webs/Valentine/cover.png"]'
+            data-tags="CSS animation"
+            data-title="Useless Web"
             data-tools="CSS animation"
             data-contributors='[
               {"name":"Naomi Goyvaerts","url":"https://anomi.be/"},
               {"name":"Amy Bruyninckx","url":"https://amybruyninckx.com/"},
               {"name":"Seda Ezzat","url":"https://sedaezzat.be/"}
             ]'
-            id="woordlogoCard"
-          >
-            <div class="overlap-group">
-              <!-- <iframe
-                class="image iframe-project"
-                frameborder="0"
-                scrolling="no"
-                src="Woordlogo/index_1.html"
-                title="Word Logo Animation"
-              ></iframe> -->
-              <img src="Woordlogo/cover.png" alt="Woordlogo cover" />
-              <div class="gradient"></div>
-              <div class="text">
-                <div class="div">Woordlogo</div>
-                <div class="labels">
-                  <div class="label">CSS animation</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Useless Web -->
+            id="uselessCard"
+          > -->
           <div
             class="project-card"
             data-desc="Playful micro‑experiments focusing on CSS animation and DOM tricks — tiny apps with a single fun interaction."
             data-discipline="Frontend / Experiments"
             data-meta="Website • CSS animation"
-            data-slides='[
-              "iframe:Useless web/index_2.html",
-              "iframe:Useless web - groep/useless webs/Chicken_or_egg/iframe_chicken_or_egg.html",
-              "iframe:Useless web - groep/useless webs/Never_ending_candle/iframe_never_ending_candle.html",
-              "iframe:Useless web - groep/useless webs/Valentine/iframe_valentine.html"
-            ]'
+            data-inline-slides="[]"
+            data-slides="[]"
             data-tags="CSS animation"
             data-title="Useless Web"
             data-tools="CSS animation"
@@ -501,13 +468,24 @@
             id="uselessCard"
           >
             <div class="overlap-group">
-              <iframe
+              <!-- <iframe
                 class="image iframe-project"
                 frameborder="0"
                 scrolling="no"
                 src="Useless web/index_2.html"
                 title="Useless Web"
-              ></iframe>
+              ></iframe> -->
+              <!-- <img
+                class="image"
+                src="Useless web/cover.png"
+                alt="Useless Web cover"
+              /> -->
+              <img
+                class="image"
+                src="Woordlogo/cover.png"
+                alt="Useless Web (placeholder)"
+              />
+
               <div class="gradient"></div>
               <div class="text">
                 <div class="div">Useless Web</div>
@@ -588,7 +566,7 @@
           </div>
         </div>
         <!-- Arduino Piano (Huis) -->
-        <div
+        <!-- <div
           class="project-card"
           data-desc="Small Arduino experiment paired with a web interface; simple note mapping and on‑screen keys."
           data-discipline="Hardware / Arduino"
@@ -600,13 +578,6 @@
           id="pianoCard"
         >
           <div class="overlap-group">
-            <!-- <iframe
-              class="image iframe-project"
-              frameborder="0"
-              scrolling="no"
-              src="Huis/index.html"
-              title="Arduino Piano"
-            ></iframe> -->
             <div class="gradient"></div>
             <div class="text">
               <div class="div">Arduino piano</div>
@@ -615,7 +586,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
         <!-- Military Game (P5) -->
         <div
           class="project-card"
@@ -705,8 +676,8 @@
             <div class="nx-left">
               <h2 class="nx-title">Title</h2>
               <div class="nx-meta">
-                <span class="nx-badge">PROJECT</span
-                ><span class="nx-meta-text">Meta</span>
+                <!-- <span class="nx-badge">PROJECT</span> -->
+                <span class="nx-meta-text">Meta</span>
               </div>
               <p class="nx-desc">Description…</p>
               <div class="nx-actions">
@@ -739,7 +710,7 @@
     <!-- Scripts -->
     <script defer src="nx-inline.js"></script>
     <script defer src="nx-modal.js"></script>
-    <script defer src="nx-card-slideshow.js"></script>
+    <!-- <script defer src="nx-card-slideshow.js"></script> -->
 
     <!-- Footer component injectie -->
     <div data-include="components/footer.html"></div>

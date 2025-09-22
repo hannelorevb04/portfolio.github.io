@@ -1,184 +1,211 @@
-(function () {
-  const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
-
-  function parseSlides(raw) {
-    if (!raw) return [];
+(() => {
+  // ---------- helpers ----------
+  const $$ = (s, c = document) => Array.from(c.querySelectorAll(s));
+  const make = (t, c, p, b) => {
+    const e = document.createElement(t);
+    if (c) e.className = c;
+    if (p) {
+      b ? p.insertBefore(e, b) : p.appendChild(e);
+    }
+    return e;
+  };
+  const parseArr = (raw) => {
     try {
-      const arr = JSON.parse(raw);
-      return Array.isArray(arr) ? arr : [];
+      const a = JSON.parse(raw || "[]");
+      return Array.isArray(a) ? a : [];
     } catch {
       return [];
     }
-  }
+  };
+  const titleOf = (card) => card.getAttribute("data-title") || "Project";
 
-  function make(tag, cls, parent, before) {
-    const el = document.createElement(tag);
-    if (cls) el.className = cls;
-    if (parent) {
-      if (before) parent.insertBefore(el, before);
-      else parent.appendChild(el);
+  const getCover = (card) => {
+    const img = card.querySelector(".overlap-group img");
+    return img
+      ? {
+          src: img.getAttribute("src"),
+          alt: img.getAttribute("alt") || titleOf(card),
+        }
+      : null;
+  };
+
+  // 1) Bronlijst voor de GRID:
+  //    - Als data-inline-slides AANWEZIG is → gebruik die exact (ook als het [] is).
+  //    - Anders leid voorzichtig af uit data-slides (iframe/video -> map/cover.png; http(s) -> cover).
+  function getInlineSources(card) {
+    const hasInline = card.hasAttribute("data-inline-slides");
+    const fromInline = parseArr(card.getAttribute("data-inline-slides"))
+      .map((s) =>
+        String(s)
+          .replace(/^image:/, "")
+          .trim()
+      )
+      .filter(Boolean);
+    if (hasInline) return fromInline; // expliciet: zelfs als het leeg is → niets in grid
+
+    const cover = getCover(card)?.src || "";
+    const fromSlides = parseArr(card.getAttribute("data-slides"));
+    const out = [];
+    for (const def of fromSlides) {
+      const s = String(def || "").trim();
+      if (!s) continue;
+
+      if (s.startsWith("image:")) {
+        out.push(s.slice(6));
+        continue;
+      }
+
+      if (s.startsWith("iframe:") || s.startsWith("video:")) {
+        const url = s.replace(/^(iframe:|video:)/, "").trim();
+        if (/^https?:\/\//i.test(url)) {
+          out.push(cover);
+          continue;
+        } // extern -> cover in grid
+        const dir = url.replace(/\/[^\/]*$/, "/"); // lokaal -> map/cover.png
+        out.push(dir + "cover.png");
+        continue;
+      }
+      out.push(s); // plain image-pad
     }
-    return el;
-  }
-
-  function parseIframeDef(def) {
-    // "iframe:URL|scale=0.8|x=-10px|y=8px"
-    const out = { url: "", scale: null, x: null, y: null };
-    if (typeof def !== "string") return out;
-    if (!def.startsWith("iframe:")) return out;
-    const rest = def.slice(7);
-    const parts = rest.split("|");
-    out.url = (parts.shift() || "").trim();
-    parts.forEach((p) => {
-      const [k, v] = p.split("=").map((s) => (s || "").trim());
-      if (!k) return;
-      if (k === "scale") out.scale = parseFloat(v);
-      if (k === "x") out.x = v;
-      if (k === "y") out.y = v;
-    });
+    if (!out.length && cover) out.push(cover);
     return out;
   }
 
-  /* afgeronde pijlen als SVG, kleuren via CSS (currentColor) */
-  // pijltje erft altijd de 'color' van de knop
-  const svgArrow = (dir) => `
-  <svg viewBox="0 0 24 24" width="20" height="20"
-       fill="none" stroke="currentColor" stroke-width="3"
-       stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-    ${
-      dir === "prev"
-        ? '<polyline points="15 18 9 12 15 6" />'
-        : '<polyline points="9 18 15 12 9 6" />'
+  // 2) Preload: alleen bestaande beelden, geen .jpg/.png wissel-trucs. Duplicaten eruit.
+  async function prepareSources(card, rawList) {
+    const load = (src) =>
+      new Promise((res) => {
+        if (!src) return res("");
+        const im = new Image();
+        im.onload = () => res(src);
+        im.onerror = () => res(""); // kapot? skippen
+        im.src = src;
+      });
+    const uniq = new Set();
+    const out = [];
+    for (const s of rawList) {
+      const ok = await load(s);
+      if (!ok || uniq.has(ok)) continue;
+      uniq.add(ok);
+      out.push(ok);
     }
-  </svg>`;
+    return out;
+  }
 
-  function buildCard(card) {
-    const list = parseSlides(card.getAttribute("data-slides")).filter(Boolean);
-    if (list.length <= 1) return; // geen slideshow nodig
+  const svgArrow = (dir) => `
+    <svg viewBox="0 0 24 24" width="20" height="20"
+         fill="none" stroke="currentColor" stroke-width="3"
+         stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      ${
+        dir === "prev"
+          ? '<polyline points="15 18 9 12 15 6" />'
+          : '<polyline points="9 18 15 12 9 6" />'
+      }
+    </svg>`;
 
+  // ---------- builder ----------
+  async function buildCard(card) {
     const host = card.querySelector(".overlap-group") || card;
     if (!host) return;
-    if (host.querySelector(".slideshow-container")) return;
 
-    // clear single preview
-    host
-      .querySelectorAll("img.image, iframe.image")
-      .forEach((el) => el.remove());
+    // Geen iframes in de grid: vervang inline <iframe> door cover-image
+    const ifr = host.querySelector("iframe.image, iframe.iframe-project");
+    if (ifr) {
+      const cov = getCover(card);
+      const img = make("img", "image");
+      if (cov) {
+        img.src = cov.src;
+        img.alt = (cov.alt || titleOf(card)) + " – cover";
+      }
+      ifr.replaceWith(img);
+    }
 
-    // Insert first
+    // bronnen ophalen + valideren
+    let sources = await prepareSources(card, getInlineSources(card));
+
+    // Minder dan 2 unieke images? Geen slideshow opbouwen (pijlen zouden niets doen)
+    if (sources.length <= 1 || host.querySelector(".slideshow-container"))
+      return;
+
+    // Slideshow DOM
     const container = make("div", "slideshow-container", host, host.firstChild);
     const slidesWrap = make("div", "slides", container);
 
-    // Per-card defaults
-    const dScale = parseFloat(card.getAttribute("data-iframe-scale") || "0.82");
-    const dX = card.getAttribute("data-iframe-offset-x") || "0px";
-    const dY = card.getAttribute("data-iframe-offset-y") || "0px";
-
-    // Build slides
-    list.forEach((src, idx) => {
-      const isIframe = typeof src === "string" && src.indexOf("iframe:") === 0;
+    sources.forEach((src, i) => {
       const slide = make(
         "div",
-        "slide" + (idx === 0 ? " active" : ""),
+        "slide" + (i === 0 ? " active" : ""),
         slidesWrap
       );
+      const img = make("img", "image", slide);
+      img.src = src;
 
-      if (isIframe) {
-        const info = parseIframeDef(src);
-        const scaler = make("div", "iframe-scaler", slide);
-        scaler.style.setProperty(
-          "--scale",
-          String(
-            info.scale && info.scale > 0 && info.scale <= 1
-              ? info.scale
-              : dScale
-          )
-        );
-        scaler.style.setProperty("--tx", info.x != null ? info.x : dX);
-        scaler.style.setProperty("--ty", info.y != null ? info.y : dY);
+      // ALT voor a11y (korte, stabiele tekst)
+      const t = titleOf(card);
+      img.alt = `${t} – ${i + 1}`;
 
-        const ifr = make("iframe", "image", scaler);
-        ifr.src = info.url;
-        ifr.setAttribute("frameborder", "0");
-        ifr.setAttribute("scrolling", "no");
-        ifr.setAttribute("loading", "eager");
-        ifr.title =
-          (card.getAttribute("data-title") || "Project") + " – " + (idx + 1);
-        ifr.style.pointerEvents = "none";
-      } else {
-        const img = make("img", "image", slide);
-        img.src = src;
-        img.alt =
-          (card.getAttribute("data-title") || "Project") + " – " + (idx + 1);
-        img.decoding = "async";
-      }
+      img.decoding = "async";
+      img.loading = i === 0 ? "eager" : "lazy";
     });
 
-    // Alleen pijlen (geen dots) — SVG inside
+    // Navigatie + autoplay
     const nav = make("div", "slideshow-nav", container);
-
     const prev = make("button", "prev", nav);
     prev.type = "button";
-    prev.setAttribute("aria-label", "Previous");
     prev.innerHTML = svgArrow("prev");
-
     const next = make("button", "next", nav);
     next.type = "button";
-    next.setAttribute("aria-label", "Next");
     next.innerHTML = svgArrow("next");
 
+    // Pijlen altijd klikbaar (overlay blokkeert niet)
+    nav.style.pointerEvents = "none";
+    prev.style.pointerEvents = next.style.pointerEvents = "auto";
+
+    // Toetsenbord
+    container.setAttribute("tabindex", "0");
+
     let idx = 0,
-      total = list.length,
+      total = sources.length,
       timer = null,
       hovering = false;
     const AUTO_MS = 3800;
+    const slides = () => $$(".slide", slidesWrap);
 
-    function show(n) {
-      const slides = $$(".slide", slidesWrap);
-      slides[idx]?.classList.remove("active");
+    const show = (n) => {
+      const arr = slides();
+      arr[idx]?.classList.remove("active");
       idx = (n + total) % total;
-      slides[idx]?.classList.add("active");
-    }
-    function step(d) {
-      show(idx + d);
-    }
-    function stop() {
+      arr[idx]?.classList.add("active");
+    };
+    const step = (d) => show(idx + d);
+    const stop = () => {
       if (timer) {
         clearInterval(timer);
         timer = null;
       }
-    }
-    function start() {
+    };
+    const start = () => {
       if (total > 1 && !hovering) {
         timer = setInterval(() => step(1), AUTO_MS);
       }
-    }
-    function restart() {
+    };
+    const restart = () => {
       stop();
       start();
-    }
+    };
 
-    prev.addEventListener("click", (ev) => {
-      ev.stopPropagation();
+    // Directe click-handlers (betrouwbaar)
+    prev.addEventListener("click", (e) => {
+      e.stopPropagation();
       step(-1);
       restart();
     });
-    next.addEventListener("click", (ev) => {
-      ev.stopPropagation();
+    next.addEventListener("click", (e) => {
+      e.stopPropagation();
       step(1);
       restart();
     });
 
-    container.addEventListener("mouseenter", () => {
-      hovering = true;
-      stop();
-    });
-    container.addEventListener("mouseleave", () => {
-      hovering = false;
-      start();
-    });
-
-    // Toetsenbord-ondersteuning (optioneel, handig)
     container.addEventListener("keydown", (e) => {
       if (e.key === "ArrowLeft") {
         step(-1);
@@ -189,12 +216,20 @@
         restart();
       }
     });
+    container.addEventListener("mouseenter", () => {
+      hovering = true;
+      stop();
+    });
+    container.addEventListener("mouseleave", () => {
+      hovering = false;
+      start();
+    });
 
     start();
   }
 
   function init() {
-    document.querySelectorAll(".project-card").forEach(buildCard);
+    $$(".project-card").forEach((card) => buildCard(card));
   }
   if (document.readyState === "loading")
     document.addEventListener("DOMContentLoaded", init);
