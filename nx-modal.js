@@ -348,20 +348,15 @@
 
     fillInfo(card);
     buildSlides(slidesArr);
+    nxApplyPerSlideLinks(card, slidesEl);
+
     buildComparisons(card);
     buildContributors(card);
 
-    // Compute & bind "View Project"
-    currentViewUrl = pickViewUrl(card, slidesArr);
+    // View Project-knop tonen; link wordt door de sync-IIFE gezet op basis van de actieve slide
     if (viewBtn) {
-      if (currentViewUrl) {
-        viewBtn.style.display = "";
-        viewBtn.onclick = () =>
-          window.open(currentViewUrl, "_blank", "noopener");
-      } else {
-        viewBtn.onclick = null;
-        viewBtn.style.display = "none";
-      }
+      viewBtn.style.display = "";
+      viewBtn.onclick = null; // geen statische binding
     }
 
     // Optional: Contact scroll naar footer
@@ -492,3 +487,145 @@
     setTimeout(updateModalNav, 200);
   });
 })();
+
+/* ===== Sync "View Project" with the currently visible slide in the modal ===== */
+(() => {
+  const modal = document.getElementById("nxModal");
+  if (!modal) return;
+
+  const slidesRoot = modal.querySelector(".nx-slides");
+  // Ondersteun zowel jouw <button class="btn btn-primary"> als varianten
+  const actionBtn =
+    modal.querySelector(".nx-actions .btn.btn-primary") ||
+    modal.querySelector(".nx-actions .nx-btn.nx-primary");
+
+  function currentSlide() {
+    return slidesRoot
+      ? slidesRoot.querySelector(".nx-slide.is-active") ||
+          slidesRoot.firstElementChild
+      : null;
+  }
+
+  // Bepaal de “link” van de actieve slide
+  function linkFromSlide(slide) {
+    if (!slide) return "";
+
+    // 1) Expliciet gezet?
+    const explicit = slide.getAttribute("data-link") || slide.dataset?.link;
+    if (explicit) return explicit;
+
+    // 2) Iframe → src
+    const ifr = slide.querySelector("iframe[src]");
+    if (ifr && ifr.src) return ifr.src;
+
+    // 3) Video → <source> of video.src
+    const vsrc = slide.querySelector("video source[src]");
+    if (vsrc) return vsrc.getAttribute("src") || "";
+    const vid = slide.querySelector("video[src]");
+    if (vid && vid.src) return vid.src;
+
+    // 4) Image → src (laat gebruikers desnoods de full image openen)
+    const img = slide.querySelector("img[src]");
+    if (img && img.src) return img.src;
+
+    return "";
+  }
+
+  function applyLink(href) {
+    if (!actionBtn) return;
+
+    const isAnchor = actionBtn.tagName.toLowerCase() === "a";
+    if (href) {
+      if (isAnchor) {
+        actionBtn.href = href;
+        actionBtn.target = "_blank";
+        actionBtn.rel = "noopener";
+        actionBtn.removeAttribute("aria-disabled");
+        actionBtn.classList.remove("is-disabled");
+      } else {
+        actionBtn.dataset.href = href;
+        actionBtn.removeAttribute("disabled");
+      }
+    } else {
+      if (isAnchor) {
+        actionBtn.href = "#";
+        actionBtn.setAttribute("aria-disabled", "true");
+        actionBtn.classList.add("is-disabled");
+      } else {
+        actionBtn.dataset.href = "";
+        actionBtn.setAttribute("disabled", "disabled");
+      }
+    }
+  }
+
+  // Zorg dat klikken op de knop opent in nieuw tabblad (voor <button>)
+  function ensureClickBinding() {
+    if (!actionBtn) return;
+    if (actionBtn._nxBound) return; // éénmalig binden
+    actionBtn._nxBound = true;
+
+    if (actionBtn.tagName.toLowerCase() !== "a") {
+      actionBtn.addEventListener("click", (e) => {
+        const href = actionBtn.dataset.href;
+        if (href) {
+          window.open(href, "_blank", "noopener");
+        }
+      });
+    }
+  }
+
+  function sync() {
+    ensureClickBinding();
+    const href = linkFromSlide(currentSlide());
+    applyLink(href);
+  }
+
+  // Initial sync bij load/openen
+  sync();
+
+  // Resync bij klikken op prev/next of dots
+  modal
+    .querySelectorAll(".nx-nav.prev, .nx-nav.next, .nx-dots")
+    .forEach((el) => {
+      el.addEventListener("click", () => setTimeout(sync, 0));
+    });
+
+  // Observeer class-wijzigingen (active slide)
+  if (slidesRoot) {
+    const obs = new MutationObserver(() => setTimeout(sync, 0));
+    obs.observe(slidesRoot, {
+      subtree: true,
+      attributes: true,
+      attributeFilter: ["class"],
+      childList: true,
+    });
+  }
+
+  // Resync wanneer de modal getoond/verandert
+  const obs2 = new MutationObserver(() => setTimeout(sync, 0));
+  obs2.observe(modal, {
+    attributes: true,
+    attributeFilter: ["style", "class"],
+  });
+})();
+
+function nxParseList(raw) {
+  if (raw == null) return [];
+  try {
+    const a = JSON.parse(raw);
+    return Array.isArray(a) ? a : [];
+  } catch {
+    return String(raw)
+      .split(",")
+      .map((s) => s.trim())
+      .filter(Boolean);
+  }
+}
+function nxApplyPerSlideLinks(card, slidesRoot) {
+  const links = nxParseList(card.getAttribute("data-links"));
+  if (!slidesRoot || !links.length) return;
+  Array.from(slidesRoot.children).forEach((slideEl, i) => {
+    const href = links[i];
+    if (href) slideEl.setAttribute("data-link", href);
+  });
+}
