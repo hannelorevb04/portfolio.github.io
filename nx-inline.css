@@ -2,7 +2,7 @@
 .project-card .slideshow-container {
   position: relative;
   width: 100%;
-  height: var(--card-media-h, 220px); /* was: 100%  ->  begrensd */
+  height: var(--card-media-h, 220px);
   border-radius: inherit;
   overflow: hidden;
 }
@@ -25,11 +25,11 @@
 /* common media */
 /* images netjes gecentreerd binnen de card, zonder rekken */
 .project-card .image {
-  max-width: 100%;
+  /* max-width: 100%;
   max-height: 100%;
   width: auto;
-  height: auto;
-  object-fit: contain; /* past binnen het venster */
+  height: auto; */
+  object-fit: contain;
   display: block;
 }
 

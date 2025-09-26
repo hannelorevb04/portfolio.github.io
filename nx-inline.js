@@ -133,7 +133,10 @@
     const nextBtn = $(".slideshow-next", nav);
 
     // Zichtbaarheid nav bij < 2 slides
-    nav.style.display = slides().length < 2 ? "none" : "";
+    // Altijd tonen; disable bij 1 slide
+    const hasMultiple = slides().length > 1;
+    nav.style.display = "";
+    prevBtn.disabled = nextBtn.disabled = !hasMultiple;
 
     // Overlay blokkeert niet
     nav.style.pointerEvents = "none";
@@ -335,7 +338,11 @@
       ) {
         slides[0].classList.add("active");
       }
-      if (nav) nav.style.display = slides.length < 2 ? "none" : "";
+      if (nav) {
+        nav.style.display = "";
+        const disabled = slides.length < 2;
+        nav.querySelectorAll("button").forEach((b) => (b.disabled = disabled));
+      }
     });
   }
   if (document.readyState === "loading")
