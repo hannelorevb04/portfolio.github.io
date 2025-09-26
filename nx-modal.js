@@ -261,40 +261,116 @@
     }
   }
 
-  /* ---------- (Optional) Comparisons & Contributors ---------- */
+  // === helper: maak comparator sleepbaar ===
+  function enableCompareDrag(wrap) {
+    const leftImg = wrap.querySelector(".nx-cmp-img.left");
+    const handle = wrap.querySelector(".nx-cmp-handle");
+    const knob = wrap.querySelector(".nx-cmp-knob");
+
+    let dragging = false;
+    let pct = 0.5; // 0..1
+
+    function apply(p) {
+      pct = Math.max(0, Math.min(1, p));
+      // Clip linkerbeeld en positioneer handle
+      leftImg.style.clipPath = `inset(0 ${(1 - pct) * 100}% 0 0)`;
+      handle.style.left = `${pct * 100}%`;
+    }
+
+    function relX(e) {
+      const rect = wrap.getBoundingClientRect();
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      return (clientX - rect.left) / rect.width;
+    }
+
+    // Pointer (desktop) + touch
+    function down(e) {
+      dragging = true;
+      apply(relX(e));
+      e.preventDefault();
+    }
+    function move(e) {
+      if (!dragging) return;
+      apply(relX(e));
+    }
+    function up() {
+      dragging = false;
+    }
+
+    // Pointer
+    wrap.addEventListener("pointerdown", down);
+    window.addEventListener("pointermove", move);
+    window.addEventListener("pointerup", up);
+
+    // Touch (fallback)
+    wrap.addEventListener("touchstart", down, { passive: false });
+    window.addEventListener("touchmove", move, { passive: false });
+    window.addEventListener("touchend", up);
+
+    window.addEventListener("resize", () => apply(pct));
+    apply(0.5);
+  }
+
+  // === vervang de oude buildComparisons(...) door deze ===
   function buildComparisons(card) {
     const raw = card.getAttribute("data-compare");
     const arr = raw ? tryJSON(raw) : null;
     const list = Array.isArray(arr) ? arr : [];
-    const target = leftCol; // eenvoudig gehouden
+    const target = leftCol; // plaats ze in de linker kolom van de modal
     if (!target) return;
+
+    // Opruimen van vorige dynamische comparators
     qa(target, ".nx-compare[data-dynamic]").forEach((n) => n.remove());
+
     list.forEach((spec) => {
+      // "left|right|Left Label|Right Label"
       const [left, right, lLab, rLab] = String(spec)
         .split("|")
         .map((s) => s.trim());
       if (!left || !right) return;
+
       const w = DOC.createElement("div");
       w.className = "nx-compare";
       w.setAttribute("data-dynamic", "");
+
       const imgR = DOC.createElement("img");
       imgR.className = "nx-cmp-img right";
       imgR.src = right;
       imgR.alt = rLab || "After";
+
       const imgL = DOC.createElement("img");
       imgL.className = "nx-cmp-img left";
       imgL.src = left;
       imgL.alt = lLab || "Before";
-      imgL.style.clipPath = "inset(0 50% 0 0)";
+      imgL.style.clipPath = "inset(0 50% 0 0)"; // start half/half
+
       const handle = DOC.createElement("div");
       handle.className = "nx-cmp-handle";
       const knob = DOC.createElement("div");
       knob.className = "nx-cmp-knob";
       handle.appendChild(knob);
+
+      // <-- Labels (tags) op de slider zelf
+      if (lLab) {
+        const labL = DOC.createElement("div");
+        labL.className = "nx-cmp-label left";
+        labL.textContent = lLab;
+        w.appendChild(labL);
+      }
+      if (rLab) {
+        const labR = DOC.createElement("div");
+        labR.className = "nx-cmp-label right";
+        labR.textContent = rLab;
+        w.appendChild(labR);
+      }
+
       w.appendChild(imgR);
       w.appendChild(imgL);
       w.appendChild(handle);
       target.appendChild(w);
+
+      // sleep/drag activeren
+      enableCompareDrag(w);
     });
   }
 
