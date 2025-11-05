@@ -1099,3 +1099,11 @@
 </body>
 
 </html>
+<?php
+$title = "Developer — Portfolio";
+include __DIR__ . '/partials/head.php';
+include __DIR__ . '/partials/header.php';
+?>
+<main class="container">…</main>
+<?php include __DIR__ . '/partials/modal.php'; ?>
+<?php include __DIR__ . '/partials/footer.php'; ?>
