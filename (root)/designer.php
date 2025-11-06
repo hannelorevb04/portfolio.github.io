@@ -1,24 +1,46 @@
 <?php
 $title = "Designer — Portfolio";
-$hero = [
+$hero  = [
     'title' => 'Designer',
-    'lead'  => 'Exploring the balance between function and identity…',
+    'lead' => 'Exploring the balance between function and identity…',
     'actions' => [
-        ['label' => 'Resume', 'href' => '/resume.pdf', 'variant' => 'secondary'],
-        ['label' => 'LinkedIn', 'href' => 'https://www.linkedin.com/in/…', 'variant' => 'primary'],
-    ]
+        ['label' => 'Resume', 'href' => '/CV_Hannelore_Van_Buynderen.pdf', 'variant' => 'primary'],
+        ['label' => 'Info', 'href' => '/about.php', 'variant' => 'secondary'],
+    ],
 ];
-include __DIR__ . "/partials/head.php";
-include __DIR__ . "/partials/header.php";
+include __DIR__ . '/partials/head.php';
+include __DIR__ . '/partials/header.php';
 ?>
-
-<main class="container">
-    <?php
-    // ⤵️ Plak hier de BODY-inhoud uit designer_component.html
-    //    (laat <html>, <head>, <body>, <video-header> etc. achterwege,
-    //     die komen al uit de includes)
-    ?>
+<main class="container designer-page">
+    <section class="projects-section">
+        <h2 class="section-title">UX/UI</h2>
+        <div class="projects">
+            <!-- Voorbeeld project-card -->
+            <div
+                class="project-card"
+                id="felicksCard"
+                data-title="Felicks"
+                data-meta="App • UX/UI"
+                data-desc="Awareness-first dog adoption app…"
+                data-tags="Figma"
+                data-discipline="UX/UI"
+                data-tools="Figma"
+                data-slides='["image:/Felicks/cover.png"]'>
+                <div class="overlap-group">
+                    <div class="slideshow-container">
+                        <div class="slides">
+                            <img class="image slide active" src="/Felicks/cover.png" alt="Felicks cover" loading="eager" decoding="async">
+                        </div>
+                    </div>
+                    <div class="gradient"></div>
+                    <div class="text">
+                        <div class="div">Felicks</div>
+                    </div>
+                </div>
+            </div>
+            <!-- /project-card -->
+        </div>
+    </section>
 </main>
-
-<?php include __DIR__ . "/partials/modal.php"; ?>
-<?php include __DIR__ . "/partials/footer.php"; ?>
+<?php include __DIR__ . '/partials/modal.php'; ?>
+<?php include __DIR__ . '/partials/footer.php'; ?>

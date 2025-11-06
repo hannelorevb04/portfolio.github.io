@@ -1,34 +1,41 @@
-<div id="nxModal" class="modal-overlay" style="display:none" role="dialog" aria-modal="true" aria-label="Project modal">
+<?php // PARTIAL: universele NX modal 
+?>
+<div aria-label="Project modal" aria-modal="true" class="modal-overlay" id="nxModal" role="dialog" style="display:none">
     <div class="nx-card">
-        <button class="nx-close" aria-label="Close">×</button>
+        <button aria-label="Close" class="nx-close">×</button>
 
-        <div class="nx-hero-slider">
+        <div aria-label="Project media" class="nx-hero-slider">
             <div class="nx-slides"></div>
-            <button class="nx-nav prev" aria-label="Previous"></button>
-            <button class="nx-nav next" aria-label="Next"></button>
-            <div class="nx-dots"></div>
+            <button aria-label="Previous" class="nx-nav prev">‹</button>
+            <button aria-label="Next" class="nx-nav next">›</button>
+            <div aria-label="Slide indicators" class="nx-dots"></div>
         </div>
 
         <section class="nx-panel">
             <div class="nx-panel-inner">
                 <div class="nx-left">
-                    <h2 class="nx-title" id="nxTitle">Project</h2>
-                    <div class="nx-meta"><span class="nx-meta-text" id="nxMeta"></span></div>
-                    <p class="nx-desc" id="nxDesc"></p>
+                    <h2 class="nx-title">Title</h2>
+                    <div class="nx-meta"><span class="nx-meta-text">Meta</span></div>
+                    <p class="nx-desc">Description…</p>
                     <div class="nx-actions">
-                        <a class="nx-btn nx-primary"><span class="play">▶</span> View project</a>
-                        <button class="nx-btn">Contact</button>
+                        <button class="btn btn-primary" type="button">▶ View Project</button>
+                        <button class="btn btn-secondary" type="button">Contact</button>
                     </div>
-                    <div class="nx-taglist" id="nxTags"></div>
+                    <h3 class="nx-h3">Tags</h3>
+                    <div class="nx-taglist"></div>
                 </div>
                 <aside class="nx-right">
                     <div class="nx-spec">
                         <div class="nx-spec-title">DISCIPLINE</div>
-                        <div class="nx-spec-list"><span class="nx-discipline" id="nxDiscipline">—</span></div>
+                        <ul class="nx-spec-list">
+                            <li class="nx-discipline">—</li>
+                        </ul>
                     </div>
                     <div class="nx-spec">
                         <div class="nx-spec-title">TOOLS</div>
-                        <div class="nx-spec-list"><span class="nx-tools" id="nxTools">—</span></div>
+                        <ul class="nx-spec-list">
+                            <li class="nx-tools">—</li>
+                        </ul>
                     </div>
                 </aside>
             </div>

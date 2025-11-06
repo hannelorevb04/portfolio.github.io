@@ -1,48 +1,45 @@
 <?php
-$title = "Portfolio - Who's Watching?";
-$extraCss = ["/assets/profiles.css"];
-include __DIR__ . "/partials/head.php";
+$title = "Who's watching? — Portfolio";
+$extra_styles = ['/assets/profiles.css'];   // << hier jouw pagina-CSS
+include __DIR__ . '/partials/head.php';
 ?>
 
-<script>
-    // selectProfile -> link naar .php (niet naar *_component.html)
-    function selectProfile(type) {
-        if (type === "designer") location.href = "/designer.php";
-        else if (type === "developer") location.href = "/developer.php";
-        else if (type === "mixed-media") location.href = "/mixed-media.php";
-        else if (type === "profile") location.href = "/about.php";
-    }
-</script>
 
-<div class="profiles-page">
-    <video class="background-video" autoplay muted loop playsinline preload="metadata" poster="/images/beach_poster.jpg">
-        <source src="/images/beach_1080.mp4" type="video/mp4" media="(min-width: 1024px)">
-        <source src="/images/beach_720.mp4" type="video/mp4">
-    </video>
+<video class="background-video" autoplay muted loop playsinline preload="metadata" poster="/images/beach_poster.jpg">
+    <source src="/images/beach_1.mp4" type="video/mp4">
+</video>
 
-    <h1 class="profiles-title">Who's watching?</h1>
+<main class="profile-selection">
+    <h1>Who's watching?</h1>
 
-    <div class="profiles-container">
-        <button class="profile-card designer" type="button" onclick="selectProfile('designer')">
-            <span class="profile-circle"><img src="/images/logos_figma.png" alt="Figma" class="profile-icon"></span>
-            <span class="profile-label">Designer</span>
-        </button>
+    <div class="profiles-grid">
+        <a href="/designer.php" class="profile">
+            <div class="circle">
+                <img src="/images/logos_figma.png" alt="Designer logo">
+            </div>
+            <span>Designer</span>
+        </a>
 
-        <button class="profile-card developer" type="button" onclick="selectProfile('developer')">
-            <span class="profile-circle"><img src="/images/devicon_vscode.png" alt="VS Code" class="profile-icon"></span>
-            <span class="profile-label">Developer</span>
-        </button>
+        <a href="/developer.php" class="profile">
+            <div class="circle">
+                <img src="/images/devicon_vscode.png" alt="Developer logo">
+            </div>
+            <span>Developer</span>
+        </a>
 
-        <button class="profile-card mixed" type="button" onclick="selectProfile('mixed-media')">
-            <span class="profile-circle"><img src="/images/logos_creative_cloud.png" alt="Adobe CC" class="profile-icon"></span>
-            <span class="profile-label">Mixed-media</span>
-        </button>
+        <a href="/mixed-media.php" class="profile">
+            <div class="circle">
+                <img src="/images/logos_creative_cloud.png" alt="Mixed-media logo">
+            </div>
+            <span>Mixed-media</span>
+        </a>
 
-        <button class="profile-card mixed" type="button" onclick="selectProfile('profile')">
-            <span class="profile-circle"><img src="/images/Hannelore_1.png" alt="Profile" class="profile-icon"></span>
-            <span class="profile-label">Profile</span>
-        </button>
+        <a href="/about.php" class="profile">
+            <div class="circle">
+                <img src="/images/Hannelore_1.png" alt="Profile photo">
+            </div>
+            <span>Profile</span>
+        </a>
     </div>
-</div>
 
-<?php include __DIR__ . "/partials/footer.php"; ?>
+</main>

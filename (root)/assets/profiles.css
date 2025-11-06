@@ -1,0 +1,119 @@
+/* =========================
+   PROFILES PAGE STYLING
+   ========================= */
+
+body .background-video {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  filter: brightness(90%);
+}
+
+body .profile-selection {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #102e4a;
+  padding: 2rem 1rem;
+}
+
+body .profile-selection h1 {
+  font-size: clamp(1.8rem, 2.8vw, 2.4rem);
+  font-weight: 800;
+  margin-bottom: 3rem;
+}
+
+/* GRID: PROFIELEN NAAST ELKAAR */
+body .profiles-grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(2rem, 4vw, 4rem);
+  flex-wrap: wrap;
+}
+
+/* BASIS PROFIEL */
+body .profile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: #102e4a;
+  font-weight: 700;
+  transition: transform 0.25s ease;
+}
+
+/* CIRKEL */
+body .profile .circle {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #19314b 0%, #0b2238 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  z-index: 1;
+}
+
+/* LOGO */
+body .profile .circle img {
+  width: 70%;
+  height: 70%;
+  object-fit: contain;
+  border-radius: 0;
+  transition: transform 0.3s ease;
+}
+
+/* NAAM */
+body .profile span {
+  margin-top: 0.8rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+/* GLOW-EFFECT RONDOM CIRKEL */
+body .profile::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(26, 76, 140, 0.45) 0%,
+    rgba(26, 76, 140, 0.25) 40%,
+    rgba(26, 76, 140, 0) 70%
+  );
+  transform: translate(-50%, -50%) scale(0.95);
+  opacity: 0;
+  filter: blur(8px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  z-index: 0;
+}
+
+/* HOVER: GLOW + ZACHTE ZOOM */
+body .profile:hover::after {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1.15);
+}
+
+body .profile:hover .circle {
+  transform: scale(1.08);
+}
+
+body .profile:hover .circle img {
+  transform: scale(1.05);
+}

@@ -1,0 +1,367 @@
+/* NX Modal minimal, clean */
+:root {
+  --nx-overlay: rgba(5, 8, 15, 0.72);
+  --nx-card-bg: #0c1520;
+  --nx-panel-bg: #0e1a28;
+  --nx-text: #e9f0f7;
+  --nx-border: #1f3246;
+  --nx-hero-height: 380px;
+}
+
+#nxModal.modal-overlay {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: var(--nx-overlay);
+  z-index: 999999;
+}
+
+.nx-card {
+  width: min(1100px, 100%);
+  background: var(--nx-card-bg);
+  color: var(--nx-text);
+  border: 1px solid var(--nx-border);
+  border-radius: 18px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+  position: relative;
+}
+
+.nx-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  border: 1px solid var(--nx-border);
+  background: #233449;
+  color: var(--nx-text);
+  font-size: 20px;
+  cursor: pointer;
+}
+.nx-close:hover {
+  filter: brightness(1.1);
+}
+
+/* Slider */
+.nx-hero-slider {
+  position: relative;
+  background: #0b121b;
+  border-bottom: 1px solid var(--nx-border);
+}
+.nx-slides {
+  position: relative;
+  height: var(--nx-hero-height);
+  overflow: hidden;
+}
+.nx-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+.nx-slide.is-active {
+  opacity: 1;
+}
+.nx-slide img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain; /* behoudt verhoudingen */
+  display: block;
+  margin: auto; /* centreert horizontaal én verticaal */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.nx-slide iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: #fff;
+  display: block;
+}
+
+/* Nav + dots */
+.nx-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  border: 1px solid var(--nx-border);
+  background: #233449;
+  color: var(--nx-text);
+  cursor: pointer;
+}
+.nx-nav.prev {
+  left: 10px;
+}
+.nx-nav.next {
+  right: 10px;
+}
+.nx-nav:hover {
+  filter: brightness(1.1);
+}
+.nx-dots {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  z-index: 3;
+}
+.nx-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  border: 0;
+  background: #44576c;
+  cursor: pointer;
+}
+.nx-dot.is-active {
+  background: #7db1ff;
+}
+
+/* Info */
+.nx-panel {
+  background: var(--nx-panel-bg);
+}
+.nx-panel-inner {
+  display: grid;
+  gap: 22px;
+  grid-template-columns: 1fr;
+  padding: 16px 20px;
+}
+@media (min-width: 860px) {
+  .nx-panel-inner {
+    grid-template-columns: 1.5fr 1fr;
+  }
+}
+.nx-title {
+  font-size: 24px;
+  margin: 4px 0 6px;
+}
+.nx-meta {
+  color: #b9c5d3;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.nx-desc {
+  margin: 12px 0 14px;
+}
+.nx-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+.nx-btn {
+  border: 1px solid var(--nx-border);
+  background: #233449;
+  color: var(--nx-text);
+  padding: 10px 14px;
+  border-radius: 12px;
+  cursor: pointer;
+}
+.nx-primary {
+  background: linear-gradient(180deg, #2b66ff, #2452d6);
+  border-color: #1c45b6;
+}
+.nx-taglist {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.nx-tag {
+  font-size: 12px;
+  padding: 6px 9px;
+  border-radius: 999px;
+  background: #162436;
+  border: 1px solid var(--nx-border);
+}
+
+/* drag feedback */
+.projects.dragging {
+  cursor: grabbing;
+}
+
+/* === Image Comparison (modal) === */
+.modal-overlay .nx-compare {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/10;
+  max-height: 420px;
+  overflow: hidden;
+  border-radius: 10px;
+  background: #0b0b0b10;
+  margin-top: 14px;
+}
+.modal-overlay .nx-cmp-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+.modal-overlay .nx-cmp-left {
+  clip-path: inset(0 50% 0 0);
+}
+.modal-overlay .nx-cmp-handle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 2px;
+  background: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
+}
+.modal-overlay .nx-cmp-knob {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25), inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+}
+.nx-cmp-label {
+  position: absolute;
+  bottom: 8px; /* afstand van boven */
+  z-index: 10; /* altijd boven de foto */
+  background: #162436;
+  border: 1px solid var(--nx-border);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 6px 10px;
+  border-radius: 6px;
+  pointer-events: none;
+}
+.nx-cmp-label.left {
+  left: 10px; /* linksboven */
+}
+
+.nx-cmp-label.right {
+  right: 10px; /* rechtsboven */
+}
+
+/* Contributors-blok (chips onder 'Tags') */
+.modal-overlay .nx-contributors {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.modal-overlay .nx-contrib-title {
+  margin-top: 18px; /* ruimte boven sectie */
+  font-size: 20px;
+  color: #eaf4ff;
+}
+
+.modal-overlay .nx-contributors .contributor {
+  text-decoration: none;
+  cursor: pointer;
+  background: rgba(16, 46, 74, 0.9);
+  color: #fff;
+  border-radius: 999px;
+  padding: 8px 12px;
+  font-size: 14px;
+  font-weight: 700;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  transition: background 0.2s;
+}
+.modal-overlay .nx-contributors .contributor:hover {
+  background: rgba(16, 46, 74, 1);
+}
+
+.modal-overlay .nx-contrib-spec .nx-spec-title {
+  letter-spacing: 0.04em;
+  color: #c8d6e6;
+}
+
+.modal-overlay .nx-contrib-spec .nx-spec-list {
+  list-style: none;
+  margin: 6px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px; /* compacte verticale gap */
+}
+
+.modal-overlay .nx-contrib-spec .nx-spec-list a {
+  text-decoration: none; /* geen standaard underline */
+  color: #e9f0f7; /* zelfde tekstkleur als modal */
+  font-family: sans-serif;
+  border-bottom: 1px solid transparent;
+  transition: color 0.15s ease, border-color 0.15s ease, opacity 0.15s ease;
+  opacity: 0.9;
+}
+
+.modal-overlay .nx-contrib-spec .nx-spec-list a:hover,
+.modal-overlay .nx-contrib-spec .nx-spec-list a:focus {
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.25); /* subtiele underline on hover */
+  opacity: 1;
+}
+
+.modal-overlay .nx-contrib-spec .nx-spec-list a:active {
+  opacity: 0.8;
+}
+/* ==== Unified arrow button styles (modal) ==== */
+#nxModal .nx-hero-slider .nx-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(16, 46, 74, 0.25);
+  background: #fff;
+  color: #102e4a;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  z-index: 3;
+}
+
+#nxModal .nx-hero-slider .nx-nav.prev {
+  left: 16px;
+}
+#nxModal .nx-hero-slider .nx-nav.next {
+  right: 16px;
+}
+
+#nxModal .nx-hero-slider .nx-nav:hover {
+  filter: brightness(1.02);
+}
+
+#nxModal .nx-hero-slider .nx-nav:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(16, 46, 74, 0.18), 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+#nxModal .nx-hero-slider .nx-nav svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+}
