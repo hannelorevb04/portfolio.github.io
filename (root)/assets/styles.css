@@ -1515,3 +1515,71 @@ button,
 .btn-ghost:hover {
   background: rgba(16, 46, 74, 0.05);
 }
+
+/* ===== HERO BUTTONS FIX ===== */
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-top: 1.2rem;
+}
+
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6em;
+  height: 44px;
+  padding: 0 1.4em;
+  border-radius: 999px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+/* === PRIMARY BUTTON === */
+.btn-primary {
+  background: linear-gradient(180deg, #3e6b84 0%, #244a5e 100%);
+  color: #fff;
+  border: none;
+  box-shadow: 0 3px 10px rgba(16, 46, 74, 0.25);
+}
+.btn-primary:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.08);
+}
+
+/* --- INFO button clean look --- */
+.btn-secondary {
+  outline: none;
+  box-shadow: 0 10px 20px rgba(16, 46, 74, 0.18); /* enkel schaduw, geen rand */
+}
+.btn-secondary:focus {
+  outline: none;
+}
+
+.btn-secondary:hover {
+  background: #ffffff;
+  box-shadow: 0 6px 14px rgba(16, 46, 74, 0.18);
+  transform: translateY(-1px);
+}
+
+/* --- Info icon styling --- */
+.btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.2em;
+  height: 1.2em;
+}
+
+.btn-secondary .btn-icon svg {
+  display: block;
+  width: 1.2em;
+  height: 1.2em;
+}
