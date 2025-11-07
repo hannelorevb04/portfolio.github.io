@@ -173,6 +173,7 @@ body {
 .projects-section {
   padding: 0 3rem;
 }
+
 .section-title {
   color: #102e4a;
   font-size: 2rem;
@@ -1582,4 +1583,124 @@ button,
   display: block;
   width: 1.2em;
   height: 1.2em;
+}
+
+/* ---- Card media: always fill ---- */
+.project-card .slideshow-container,
+.project-card .slides {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10; /* uniforme hoogte voor alle cards */
+  overflow: hidden; /* randen weg */
+}
+
+.project-card .slides img,
+.project-card .image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  /* height: 100%; */
+  /* object-fit: cover; */
+  display: block;
+}
+
+/* (optioneel) ronde bovenhoeken als je die wilt laten meegaan */
+.project-card .slideshow-container {
+  border-top-left-radius: 14px;
+  border-top-right-radius: 14px;
+}
+
+/* =========================================
+   CONTACT POPUP
+   ========================================= */
+.popup-overlay {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(15, 24, 37, 0.35);
+  backdrop-filter: blur(3px);
+  z-index: 2147483647;
+}
+
+.popup-overlay.is-visible {
+  display: flex !important;
+}
+
+.popup-card {
+  background: rgba(255, 255, 255, 0.92);
+  width: min(520px, 92vw);
+  padding: 24px 28px 20px;
+  border-radius: 22px;
+  text-align: center;
+  color: #0b2740;
+  box-shadow: 0 40px 70px rgba(16, 46, 74, 0.35),
+    0 8px 18px rgba(16, 46, 74, 0.18);
+  animation: popup-fade 0.25s ease-out;
+}
+
+.popup-icon {
+  width: 58px;
+  height: 58px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  margin: 0 auto 14px;
+  background: linear-gradient(180deg, #f0f7ff, #e5eef8);
+  box-shadow: inset 0 0 0 2px rgba(16, 46, 74, 0.08),
+    0 6px 16px rgba(16, 46, 74, 0.12);
+}
+
+.popup-card h3 {
+  margin: 0 0 8px;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.popup-card p {
+  margin: 0 0 18px;
+  color: #2d4b64;
+  line-height: 1.45;
+}
+
+@keyframes popup-fade {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Navigatie-links bovenaan */
+.footer-links a,
+.main-nav a,
+nav a {
+  color: #102e4a;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.25s ease;
+}
+
+.footer-links a:hover,
+.main-nav a:hover,
+nav a:hover {
+  color: #40698a; /* iets lichtere blauw bij hover */
+}
+
+/* Contactformulier heading */
+.footer-contact h3,
+.hero-content h1,
+.hero-content p,
+.section-title {
+  color: #102e4a;
+}
+
+/* Placeholder kleur subtiel grijsblauw */
+input::placeholder,
+textarea::placeholder {
+  color: #9bb2c4;
 }
