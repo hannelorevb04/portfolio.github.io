@@ -323,7 +323,6 @@ include __DIR__ . '/partials/header.php';
             <!-- Woordlogo (groep + solo) -->
             <div
                 class="project-card"
-                data-desc="Animated wordmarks experimenting with typography, CSS transforms and timing for expressive micro-branding."
                 data-discipline="CSS Animation / Motion"
                 data-meta="Website • CSS animation"
                 data-slides='[
@@ -346,6 +345,41 @@ include __DIR__ . '/partials/header.php';
                     "Woordlogo - groep/woordlogos/fitness/index.html",
                     "Woordlogo - groep/woordlogos/timeline/index.html"
                 ]'
+
+                data-episodes='[
+    {
+      "no": 1,
+      "title": "Solo — Basiswoordlogo",
+      "desc": "Eerste exploratie met keyframes en transforms.",
+      "thumb": "/Woordlogo/cover.jpg",
+      "link": "/Woordlogo/index_1.html",
+      "duration": "—"
+    },
+    {
+      "no": 2,
+      "title": "Groep — Entertainment",
+      "desc": "Thema met verschillende micro-animaties.",
+      "thumb": "/Woordlogo - groep/woordlogos/Entertainment/cover.png",
+      "link": "/Woordlogo - groep/woordlogos/Entertainment/entertainment.html",
+      "duration": "—"
+    },
+    {
+      "no": 3,
+      "title": "Groep — Fitness",
+      "desc": "Expressieve timing (scale/rotate).",
+      "thumb": "/Woordlogo - groep/woordlogos/fitness/cover.png",
+      "link": "/Woordlogo - groep/woordlogos/fitness/index.html",
+      "duration": "—"
+    },
+    {
+      "no": 4,
+      "title": "Groep — Timeline",
+      "desc": "Lineaire & stapsgewijze animaties met delays.",
+      "thumb": "/Woordlogo - groep/woordlogos/timeline/cover.png",
+      "link": "/Woordlogo - groep/woordlogos/timeline/index.html",
+      "duration": "—"
+    }
+  ]'
                 id="woordlogoCard">
                 <div class="overlap-group">
                     <!-- <div class="slideshow-container">
@@ -464,14 +498,13 @@ include __DIR__ . '/partials/header.php';
 </main>
 
 <?php
-// 3) Modals + Footer + scripts
-include __DIR__ . '/partials/modal.php';
-// include __DIR__ . '/partials/footer.php';
-include __DIR__ . '/partials/contact.php';
+include __DIR__ . '/partials/modal.php';   // 1 modal voor alle pagina’s
+include __DIR__ . '/partials/footer.php';  // jouw footer
 ?>
-<script defer src="/assets/nx-inline.js"></script>
-<script defer src="/assets/nx-modal.js"></script>
-<script defer src="/assets/nx-card-slideshow.js"></script>
+<link rel="stylesheet" href="/assets/nx-modal.css?v=36">
+<script defer src="/assets/nx-inline.js?v=36"></script>
+<script defer src="/assets/nx-modal.js?v=36"></script>
+
 </body>
 
 </html>

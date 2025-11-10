@@ -1704,3 +1704,166 @@ input::placeholder,
 textarea::placeholder {
   color: #9bb2c4;
 }
+
+/* === Episodes: Disney-achtige tegels === */
+.nx-episodes {
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.nx-ep {
+  position: relative;
+  background: #0f2233; /* donkerblauw kaartje */
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 28px rgba(16, 46, 74, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: transform 0.18s ease, box-shadow 0.18s ease,
+    border-color 0.18s ease;
+  cursor: pointer;
+  outline: none;
+}
+.nx-ep:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 34px rgba(16, 46, 74, 0.28);
+  border-color: rgba(64, 200, 255, 0.25);
+}
+.nx-ep:focus-visible {
+  box-shadow: 0 0 0 3px rgba(64, 200, 255, 0.45);
+}
+
+/* 16:9 thumb + overlay + play */
+.nx-ep-thumb {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+}
+.nx-ep-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.nx-ep-thumb::after {
+  /* donkere gradient onderaan */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 40%,
+    rgba(0, 0, 0, 0.55) 100%
+  );
+  pointer-events: none;
+}
+.nx-ep-playbtn {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  transition: opacity 0.18s ease;
+}
+.nx-ep:hover .nx-ep-playbtn,
+.nx-ep:focus-within .nx-ep-playbtn {
+  opacity: 1;
+}
+.nx-ep-playbtn .bubble {
+  width: 58px;
+  height: 58px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  color: #102e4a;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+}
+.nx-ep-playbtn svg {
+  display: block;
+}
+
+/* tekstblok */
+.nx-ep-meta {
+  padding: 12px 14px 16px;
+}
+.nx-ep-title {
+  color: #ecf6ff;
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: 0.2px;
+}
+.nx-ep-sub {
+  margin-top: 6px;
+  color: #cfe4f6;
+  opacity: 0.92;
+  font-size: 0.98rem;
+}
+.nx-ep-extra {
+  margin-top: 8px;
+  font-size: 0.85rem;
+  color: #a9c7dd;
+  opacity: 0.9;
+}
+
+/* actieve tegel (gekozen) */
+.nx-ep.is-active {
+  outline: 3px solid rgba(44, 212, 255, 0.36);
+}
+
+/* Verwijder elke witte achtergrond bij hover op de thumbnail */
+.nx-ep-thumb,
+.nx-ep-thumb:hover,
+.nx-ep-thumb::after {
+  background: none !important;
+  background-color: transparent !important;
+}
+
+/* Zorg dat de hover-overlay transparant blijft */
+.nx-ep-playbtn,
+.nx-ep-playbtn:hover {
+  background: transparent !important;
+}
+
+.nx-ep {
+  border: none !important;
+  box-shadow: none !important;
+}
+.nx-ep img {
+  display: block;
+  border: none;
+}
+.nx-ep-accent {
+  display: none !important;
+}
+
+/* Play-icoon container */
+.nx-ep-playbtn {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  background: transparent;
+}
+
+/* Toon icoon bij hover */
+/* .nx-ep:hover .nx-ep-playbtn {
+  opacity: 1;
+} */
+
+/* De knop zelf */
+.nx-ep-playbtn .bubble {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  color: #0e2a45; /* jouw blauw */
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+.nx-ep-playbtn .bubble:hover {
+  transform: scale(1.05);
+  background: rgba(255, 255, 255, 0.25);
+}

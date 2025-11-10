@@ -218,6 +218,125 @@
     idx = 0;
   }
 
+  function buildEpisodes(card) {
+    const host =
+      document.getElementById("nxEpisodes") ||
+      document.querySelector("#nxModal .nx-episodes");
+    if (!host) return;
+
+    host.innerHTML = "";
+    const list = (tryJSON(card.getAttribute("data-episodes")) || []).filter(
+      Boolean
+    );
+    if (!list.length) return;
+
+    list.forEach((ep, i) => {
+      const tile = document.createElement("article");
+      tile.className = "nx-ep";
+      tile.tabIndex = 0; // focusable
+      tile.setAttribute("data-idx", i);
+
+      // --- thumb + overlay play ---
+      const thumb = document.createElement("div");
+      thumb.className = "nx-ep-thumb";
+      const img = document.createElement("img");
+      img.src = ep.thumb || "";
+      img.alt = ep.title || "Episode";
+      thumb.appendChild(img);
+
+      const play = document.createElement("button");
+      play.className = "nx-ep-playbtn";
+      play.type = "button";
+      play.setAttribute("aria-label", `Play ${ep.title || "episode"}`);
+      play.innerHTML = `
+      <span class="bubble">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="8,5 19,12 8,19" fill="currentColor"/>
+        </svg>
+      </span>
+    `;
+      // Play -> ga meteen naar ep.link (nieuw tabblad)
+      play.addEventListener("click", (e) => {
+        e.stopPropagation();
+        if (ep.link) window.open(ep.link, "_blank", "noopener");
+      });
+
+      thumb.appendChild(play);
+      tile.appendChild(thumb);
+
+      // --- tekstblok ---
+      const meta = document.createElement("div");
+      meta.className = "nx-ep-meta";
+      const title = document.createElement("div");
+      title.className = "nx-ep-title";
+      title.textContent = `${ep.no ?? i + 1}. ${ep.title || ""}`;
+      const sub = document.createElement("div");
+      sub.className = "nx-ep-sub";
+      sub.textContent = ep.desc || "";
+      const extra = document.createElement("div");
+      extra.className = "nx-ep-extra";
+      if (ep.duration) extra.textContent = ep.duration;
+      meta.appendChild(title);
+      if (ep.desc) meta.appendChild(sub);
+      if (ep.duration) meta.appendChild(extra);
+      tile.appendChild(meta);
+
+      // --- tegel selecteren: zet View Project + toon in hero ---
+      function selectEpisode() {
+        host
+          .querySelectorAll(".nx-ep.is-active")
+          .forEach((n) => n.classList.remove("is-active"));
+        tile.classList.add("is-active");
+
+        // View Project knop
+        const vp =
+          document.getElementById("nxViewProject") ||
+          document.querySelector("#nxModal .nx-actions .btn.btn-primary");
+        if (vp) {
+          vp.setAttribute("href", ep.link || "#");
+          vp.setAttribute("target", "_blank");
+          vp.setAttribute("rel", "noopener");
+        }
+
+        // Hero vervangen door iframe (of fallback: afbeelding)
+        const slides = document.querySelector("#nxModal .nx-slides");
+        if (slides) {
+          slides.innerHTML = "";
+          const wrap = document.createElement("div");
+          wrap.className = "nx-slide is-active";
+
+          if (
+            ep.link &&
+            (ep.link.startsWith("http") || ep.link.endsWith(".html"))
+          ) {
+            const iframe = document.createElement("iframe");
+            iframe.src = ep.link;
+            iframe.loading = "lazy";
+            iframe.allowFullscreen = true;
+            iframe.frameBorder = "0";
+            wrap.appendChild(iframe);
+          } else {
+            const im = document.createElement("img");
+            im.src = ep.thumb || "";
+            im.alt = ep.title || "Episode";
+            wrap.appendChild(im);
+          }
+          slides.appendChild(wrap);
+        }
+      }
+      tile.addEventListener("click", selectEpisode);
+      tile.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") selectEpisode();
+      });
+
+      host.appendChild(tile);
+    });
+
+    // Kies standaard de eerste aflevering
+    const first = host.querySelector(".nx-ep");
+    if (first) first.click();
+  }
+
   /* ---------- Modal navigation ---------- */
   function goTo(n) {
     if (!slidesEl || total <= 0) return;
@@ -473,9 +592,9 @@
     fillInfo(card);
     buildSlides(slidesArr);
     nxApplyPerSlideLinks(card, slidesEl);
-
     buildComparisons(card);
     buildContributors(card);
+    buildEpisodes(card);
 
     // Toon/label “View Project”
     if (viewBtn) {

@@ -385,11 +385,9 @@ include __DIR__ . '/partials/header.php';
 </main>
 
 <?php
-// 3) Modals + Footer + scripts
-include __DIR__ . '/partials/modal.php';
-include __DIR__ . '/partials/footer.php';
+include __DIR__ . '/partials/modal.php';   // 1 modal voor alle pagina’s
+include __DIR__ . '/partials/footer.php';  // jouw footer
 ?>
-
-<!-- Extra scripts -->
-<script defer src="/assets/nx-inline.js"></script>
-<script defer src="/assets/nx-modal.js"></script>
+<link rel="stylesheet" href="/assets/nx-modal.css?v=36">
+<script defer src="/assets/nx-inline.js?v=36"></script>
+<script defer src="/assets/nx-modal.js?v=36"></script>
