@@ -69,6 +69,30 @@
   const q = (r, s) => (r || DOC).querySelector(s);
   const qa = (r, s) => Array.from((r || DOC).querySelectorAll(s));
 
+  function nxBestLinkForCard(card, slidesArr) {
+    // 1) data-link op de kaart wint altijd
+    const dl = card.getAttribute("data-link");
+    if (dl) return dl;
+
+    // 2) eerste iframe:... in data-slides
+    const firstIframe = (slidesArr || []).find((s) =>
+      String(s).startsWith("iframe:")
+    );
+    if (firstIframe) return String(firstIframe).slice(7);
+
+    // 3) expliciete per-slide links (data-links)
+    const perSlide = nxParseList(card.getAttribute("data-links"));
+    if (perSlide.length) return perSlide[0];
+
+    // 4) fallback: eerste slide (ook als dat een afbeelding is)
+    if (slidesArr && slidesArr.length)
+      return String(slidesArr[0]).replace(/^iframe:/, "");
+
+    // 5) ultimate fallback: eerste img in de kaart
+    const img = card.querySelector("img[src]");
+    return img ? img.src : "";
+  }
+
   /* ---------- Ensure modal arrows exist ---------- */
   (function ensureArrowsExist() {
     if (!hero) return;
@@ -422,6 +446,46 @@
   function openFromCard(card) {
     const slidesArr = extractSlides(card);
 
+    modal.dataset.cardLink = card.getAttribute("data-link") || "";
+    modal.dataset.cardLinkLabel = card.getAttribute("data-link-label") || "";
+
+    // Zet de beste View Project URL vast voor deze modal-sessie
+    const best = nxBestLinkForCard(card, slidesArr);
+    modal.dataset.viewUrl = best; // <- “lock” voor de sync IIFE
+
+    const viewBtnEl =
+      modal.querySelector("#nxViewProject") ||
+      modal.querySelector(".nx-actions .btn.btn-primary");
+
+    if (viewBtnEl) {
+      if (viewBtnEl.tagName.toLowerCase() === "a") {
+        viewBtnEl.href = best || "#";
+        viewBtnEl.target = "_blank";
+        viewBtnEl.rel = "noopener";
+        if (!best) viewBtnEl.setAttribute("aria-disabled", "true");
+        else viewBtnEl.removeAttribute("aria-disabled");
+      } else {
+        viewBtnEl.dataset.href = best || "";
+        viewBtnEl.removeAttribute("disabled");
+      }
+    }
+
+    fillInfo(card);
+    buildSlides(slidesArr);
+    nxApplyPerSlideLinks(card, slidesEl);
+
+    buildComparisons(card);
+    buildContributors(card);
+
+    // Toon/label “View Project”
+    if (viewBtn) {
+      viewBtn.style.display = "";
+      viewBtn.onclick = null;
+      // Optioneel: aangepaste knoptekst per kaart
+      const lbl = modal.dataset.cardLinkLabel;
+      if (lbl) viewBtn.textContent = lbl;
+      else viewBtn.textContent = "▶ View Project";
+    }
     fillInfo(card);
     buildSlides(slidesArr);
     nxApplyPerSlideLinks(card, slidesEl);
@@ -463,6 +527,8 @@
     total = 0;
     idx = 0;
     currentViewUrl = "";
+    modal.dataset.cardLink = "";
+    modal.dataset.cardLinkLabel = "";
     setModalNavVisible();
   }
 
@@ -584,6 +650,7 @@
 
   // Bepaal de “link” van de actieve slide
   function linkFromSlide(slide) {
+    if (modal.dataset.viewUrl) return modal.dataset.viewUrl;
     if (!slide) return "";
 
     // 1) Expliciet gezet?
@@ -652,7 +719,9 @@
 
   function sync() {
     ensureClickBinding();
-    const href = linkFromSlide(currentSlide());
+    const cardLink = modal.dataset.cardLink || "";
+    const slideHref = linkFromSlide(currentSlide());
+    const href = cardLink || slideHref;
     applyLink(href);
   }
 
