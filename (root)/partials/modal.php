@@ -19,32 +19,31 @@
                     <p class="nx-desc">Description…</p>
                     <div class="nx-actions">
                         <!-- inside .nx-actions -->
-                        <div class="nx-actions">
-                            <a id="nxViewProject"
-                                class="btn btn-primary"
-                                href="#"
-                                target="_blank"
-                                rel="noopener">▶ View Project</a>
-                            <button class="btn btn-secondary" type="button">Contact</button>
-                        </div>
-                        <h3 class="nx-h3">Tags</h3>
-                        <div class="nx-taglist"></div>
+                        <a id="nxViewProject"
+                            class="btn btn-primary"
+                            href="#"
+                            target="_blank"
+                            rel="noopener">▶ View Project</a>
+                        <button class="btn btn-secondary" type="button">Contact</button>
                     </div>
-                    <aside class="nx-right">
-                        <div class="nx-spec">
-                            <div class="nx-spec-title">DISCIPLINE</div>
-                            <ul class="nx-spec-list">
-                                <li class="nx-discipline">—</li>
-                            </ul>
-                        </div>
-                        <div class="nx-spec">
-                            <div class="nx-spec-title">TOOLS</div>
-                            <ul class="nx-spec-list">
-                                <li class="nx-tools">—</li>
-                            </ul>
-                        </div>
-                    </aside>
+                    <h3 class="nx-h3">Tags</h3>
+                    <div class="nx-taglist"></div>
                 </div>
+                <aside class="nx-right">
+                    <div class="nx-spec">
+                        <div class="nx-spec-title">DISCIPLINE</div>
+                        <ul class="nx-spec-list">
+                            <li class="nx-discipline">—</li>
+                        </ul>
+                    </div>
+                    <div class="nx-spec">
+                        <div class="nx-spec-title">TOOLS</div>
+                        <ul class="nx-spec-list">
+                            <li class="nx-tools">—</li>
+                        </ul>
+                    </div>
+                </aside>
+            </div>
         </section>
     </div>
 </div>

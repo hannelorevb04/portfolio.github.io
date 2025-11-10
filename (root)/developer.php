@@ -471,7 +471,6 @@ include __DIR__ . '/partials/contact.php';
 ?>
 <script defer src="/assets/nx-inline.js"></script>
 <script defer src="/assets/nx-modal.js"></script>
-<!-- onderaan developer.php, vóór </body> -->
 <script defer src="/assets/nx-card-slideshow.js"></script>
 </body>
 

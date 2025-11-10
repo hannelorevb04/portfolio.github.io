@@ -467,9 +467,12 @@ include __DIR__ . '/partials/header.php';
 <?php
 // 3) Modals + Footer + scripts
 include __DIR__ . '/partials/modal.php';
-include __DIR__ . '/partials/footer.php';
-
-// Extra scripts (als je head-partial dit niet al injecteert)
+// include __DIR__ . '/partials/footer.php';
+include __DIR__ . '/partials/contact.php';
 ?>
 <script defer src="/assets/nx-inline.js"></script>
 <script defer src="/assets/nx-modal.js"></script>
+<script defer src="/assets/nx-card-slideshow.js"></script>
+</body>
+
+</html>
