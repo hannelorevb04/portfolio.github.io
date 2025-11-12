@@ -19,7 +19,7 @@
                     <p class="nx-desc">Description…</p>
                     <div class="nx-episodes"></div>
                     <div class="nx-actions-top"></div> <!-- optioneel: ruimte -->
-                    <div class="nx-episodes" id="nxEpisodes"></div>
+
                     <div class="nx-actions">
                         <a id="nxViewProject" class="btn btn-primary" target="_blank" rel="noopener">
                             <span class="play-icon">
@@ -29,7 +29,9 @@
                             </span>
                             View Project</a>
                         <button class="btn btn-secondary" type="button">Contact</button>
+
                     </div>
+                    <div class="nx-episodes" id="nxEpisodes"></div>
 
 
                     <h3 class="nx-h3">Tags</h3>

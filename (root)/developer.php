@@ -416,9 +416,9 @@ include __DIR__ . '/partials/header.php';
                 data-meta="Website • CSS animation"
                 data-slides='[
                     "iframe:Useless web/index_3.html",
-                    "iframe:Useless web - groep/Entertainment/entertainment.html",
-                    "iframe:Woordlogo - groep/woordlogos/fitness/index.html",
-                    "iframe:Woordlogo - groep/woordlogos/timeline/index.html"
+                    "iframe:Useless web - groep/Chicken_or_egg/index.html",
+                    "iframe:Useless web - groep/Never_ending_candle/index.html",
+                    "iframe:Useless web - groep/Valentine/index.html"
                 ]'
                 data-tags="CSS animation"
                 data-title="Woordlogo"
@@ -429,11 +429,11 @@ include __DIR__ . '/partials/header.php';
                     {"name":"Seda Ezzat","url":"https://sedaezzat.be/"}
                 ]'
                 data-links='[
-                    "Woordlogo/index_1.html",
-                    "Woordlogo - groep/woordlogos/Entertainment/entertainment.html",
-                    "Woordlogo - groep/woordlogos/fitness/index.html",
-                    "Woordlogo - groep/woordlogos/timeline/index.html"
-                ]'
+                    "Useless web/index_3.html",
+                    "Useless web - groep/Chicken_or_egg/index.html",
+                    "Useless web - groep/Never_ending_candle/index.html",
+                    "Useless web - groep/Valentine/index.html"
+                    ]'
 
                 data-episodes='[
     {
@@ -446,26 +446,26 @@ include __DIR__ . '/partials/header.php';
     },
     {
       "no": 2,
-      "title": "Groep — Entertainment",
+      "title": "Groep — Chicken or Egg",
       "desc": "Thema met verschillende micro-animaties.",
-      "thumb": "/Woordlogo - groep/woordlogos/Entertainment/cover.png",
-      "link": "/Woordlogo - groep/woordlogos/Entertainment/entertainment.html",
+      "thumb": "/Useless web - groep/Chicken_or_egg/cover.png",
+      "link": "/Useless web - groep/Chicken_or_egg/index.html",
       "duration": "—"
     },
     {
       "no": 3,
-      "title": "Groep — Fitness",
+      "title": "Groep — Never Ending Candle",
       "desc": "Expressieve timing (scale/rotate).",
-      "thumb": "/Woordlogo - groep/woordlogos/fitness/cover.png",
-      "link": "/Woordlogo - groep/woordlogos/fitness/index.html",
+      "thumb": "/Useless web - groep/Never_ending_candle/cover.png",
+      "link": "/Useless web - groep/Never_ending_candle/index.html",
       "duration": "—"
     },
     {
       "no": 4,
-      "title": "Groep — Timeline",
+      "title": "Groep — Valentine",
       "desc": "Lineaire & stapsgewijze animaties met delays.",
-      "thumb": "/Woordlogo - groep/woordlogos/timeline/cover.png",
-      "link": "/Woordlogo - groep/woordlogos/timeline/index.html",
+      "thumb": "/Useless web - groep/Valentine/cover.png",
+      "link": "/Useless web - groep/Valentine/index.html",
       "duration": "—"
     }
   ]'
