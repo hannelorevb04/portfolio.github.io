@@ -409,27 +409,71 @@ include __DIR__ . '/partials/header.php';
                 </div>
             </div>
 
-            <!-- Useless Web (placeholder) -->
+            <!-- Useless Web -->
             <div
                 class="project-card"
-                data-desc="Playful micro-experiments focusing on CSS animation and DOM tricks — tiny apps with a single fun interaction."
-                data-discipline="Frontend / Experiments"
+                data-discipline="CSS Animation / Motion"
                 data-meta="Website • CSS animation"
-                data-inline-slides="[]"
-                data-slides="[]"
+                data-slides='[
+                    "iframe:Useless web/index_3.html",
+                    "iframe:Useless web - groep/Entertainment/entertainment.html",
+                    "iframe:Woordlogo - groep/woordlogos/fitness/index.html",
+                    "iframe:Woordlogo - groep/woordlogos/timeline/index.html"
+                ]'
                 data-tags="CSS animation"
-                data-title="Useless Web"
+                data-title="Woordlogo"
                 data-tools="CSS animation"
                 data-contributors='[
                     {"name":"Naomi Goyvaerts","url":"https://anomi.be/"},
                     {"name":"Amy Bruyninckx","url":"https://amybruyninckx.com/"},
                     {"name":"Seda Ezzat","url":"https://sedaezzat.be/"}
                 ]'
+                data-links='[
+                    "Woordlogo/index_1.html",
+                    "Woordlogo - groep/woordlogos/Entertainment/entertainment.html",
+                    "Woordlogo - groep/woordlogos/fitness/index.html",
+                    "Woordlogo - groep/woordlogos/timeline/index.html"
+                ]'
+
+                data-episodes='[
+    {
+      "no": 1,
+      "title": "Solo — Useless Web",
+      "desc": "Eerste exploratie met keyframes en transforms.",
+      "thumb": "/Useless web/cover.png",
+      "link": "/Useless web/index_3.html",
+      "duration": "—"
+    },
+    {
+      "no": 2,
+      "title": "Groep — Entertainment",
+      "desc": "Thema met verschillende micro-animaties.",
+      "thumb": "/Woordlogo - groep/woordlogos/Entertainment/cover.png",
+      "link": "/Woordlogo - groep/woordlogos/Entertainment/entertainment.html",
+      "duration": "—"
+    },
+    {
+      "no": 3,
+      "title": "Groep — Fitness",
+      "desc": "Expressieve timing (scale/rotate).",
+      "thumb": "/Woordlogo - groep/woordlogos/fitness/cover.png",
+      "link": "/Woordlogo - groep/woordlogos/fitness/index.html",
+      "duration": "—"
+    },
+    {
+      "no": 4,
+      "title": "Groep — Timeline",
+      "desc": "Lineaire & stapsgewijze animaties met delays.",
+      "thumb": "/Woordlogo - groep/woordlogos/timeline/cover.png",
+      "link": "/Woordlogo - groep/woordlogos/timeline/index.html",
+      "duration": "—"
+    }
+  ]'
                 id="uselessCard">
                 <div class="overlap-group">
                     <div class="slideshow-container">
                         <div class="slides">
-                            <img class="image slide active" src="/Woordlogo/cover.jpg" alt="Useless Web (placeholder)" loading="eager" decoding="async" />
+                            <img class="image slide active" src="/Useless web/cover.png" alt="Useless Web" loading="eager" decoding="async" />
                         </div>
                         <div class="slideshow-nav">
                             <button class="slideshow-prev" aria-label="Vorige">
