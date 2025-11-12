@@ -1,3 +1,27 @@
+// === Gedeelde ticker: elke X ms roept alle subscribers aan ===
+(function () {
+  const TICK_MS = 3800;
+  if (!window.__nxTicker) {
+    const subscribers = [];
+    window.__nxTicker = {
+      add(fn) {
+        if (typeof fn === "function") subscribers.push(fn);
+      },
+      remove(fn) {
+        const i = subscribers.indexOf(fn);
+        if (i > -1) subscribers.splice(i, 1);
+      },
+    };
+    setInterval(() => {
+      subscribers.slice().forEach((fn) => {
+        try {
+          fn();
+        } catch {}
+      });
+    }, TICK_MS);
+  }
+})();
+
 (() => {
   // ---------- helpers ----------
   const $$ = (s, c = document) => Array.from(c.querySelectorAll(s));
@@ -107,9 +131,11 @@
     return out;
   }
 
-  // Slider bedraden (pijlen, keyboard, hover-pause, swipe)
   function wireSlider(container, slidesWrap) {
-    // Zorg voor precies één .active
+    const $$ = (s, c = document) => Array.from(c.querySelectorAll(s));
+    const $ = (s, c = document) => c.querySelector(s);
+
+    // precies één .active
     const slides = () => $$(".slide", slidesWrap);
     if (
       slides().length &&
@@ -118,40 +144,39 @@
       slides()[0].classList.add("active");
     }
 
-    // Nav maken als die ontbreekt
+    // nav (zoals je al had) ...
     let nav = $(".slideshow-nav", container);
     if (!nav) {
-      nav = make("div", "slideshow-nav", container);
-      const prev = make("button", "slideshow-prev", nav);
+      nav = document.createElement("div");
+      nav.className = "slideshow-nav";
+      const prev = document.createElement("button");
+      prev.className = "slideshow-prev";
       prev.type = "button";
-      prev.innerHTML = svgArrow("prev");
-      const next = make("button", "slideshow-next", nav);
+      prev.innerHTML = `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>`;
+      const next = document.createElement("button");
+      next.className = "slideshow-next";
       next.type = "button";
-      next.innerHTML = svgArrow("next");
+      next.innerHTML = `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>`;
+      nav.appendChild(prev);
+      nav.appendChild(next);
+      container.appendChild(nav);
     }
     const prevBtn = $(".slideshow-prev", nav);
     const nextBtn = $(".slideshow-next", nav);
 
-    // Zichtbaarheid nav bij < 2 slides
-    // Altijd tonen; disable bij 1 slide
+    // bij 1 slide: buttons disabled
     const hasMultiple = slides().length > 1;
     nav.style.display = "";
     prevBtn.disabled = nextBtn.disabled = !hasMultiple;
-
-    // Overlay blokkeert niet
     nav.style.pointerEvents = "none";
     prevBtn.style.pointerEvents = nextBtn.style.pointerEvents = "auto";
 
-    // Keyboard + autoplay + hover-pause
-    container.setAttribute("tabindex", "0");
     let idx = Math.max(
       0,
       slides().findIndex((s) => s.classList.contains("active"))
     );
     if (idx < 0) idx = 0;
-    let hovering = false,
-      timer = null;
-    const AUTO_MS = 3800;
+    let hovering = false;
 
     const show = (n) => {
       const arr = slides();
@@ -160,73 +185,33 @@
       arr[idx]?.classList.add("active");
     };
     const step = (d) => show(idx + d);
-    const stop = () => {
-      if (timer) {
-        clearInterval(timer);
-        timer = null;
-      }
+
+    // ⏱️ Gedeelde ticker
+    const onTick = () => {
+      if (!hovering && slides().length > 1) step(1);
     };
-    const start = () => {
-      if (slides().length > 1 && !hovering)
-        timer = setInterval(() => step(1), AUTO_MS);
-    };
-    const restart = () => {
-      stop();
-      start();
-    };
+    window.__nxTicker.add(onTick);
 
     prevBtn.addEventListener("click", (e) => {
       e.stopPropagation();
       step(-1);
-      restart();
     });
     nextBtn.addEventListener("click", (e) => {
       e.stopPropagation();
       step(1);
-      restart();
     });
 
+    container.setAttribute("tabindex", "0");
     container.addEventListener("keydown", (e) => {
-      if (e.key === "ArrowLeft") {
-        step(-1);
-        restart();
-      }
-      if (e.key === "ArrowRight") {
-        step(1);
-        restart();
-      }
+      if (e.key === "ArrowLeft") step(-1);
+      if (e.key === "ArrowRight") step(1);
     });
     container.addEventListener("mouseenter", () => {
       hovering = true;
-      stop();
     });
     container.addEventListener("mouseleave", () => {
       hovering = false;
-      start();
     });
-
-    // Swipe
-    let sx = null;
-    slidesWrap.addEventListener(
-      "touchstart",
-      (e) => {
-        sx = e.touches[0].clientX;
-      },
-      { passive: true }
-    );
-    slidesWrap.addEventListener(
-      "touchend",
-      (e) => {
-        if (sx == null) return;
-        const dx = e.changedTouches[0].clientX - sx;
-        if (Math.abs(dx) > 30) step(dx < 0 ? 1 : -1);
-        sx = null;
-        restart();
-      },
-      { passive: true }
-    );
-
-    start();
   }
 
   // --------- hoofd: per kaart bouwen/aanvullen ----------

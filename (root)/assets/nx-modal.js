@@ -600,11 +600,18 @@
     if (viewBtn) {
       viewBtn.style.display = "";
       viewBtn.onclick = null;
-      // Optioneel: aangepaste knoptekst per kaart
+
       const lbl = modal.dataset.cardLinkLabel;
-      if (lbl) viewBtn.textContent = lbl;
-      else viewBtn.textContent = "▶ View Project";
+      if (lbl) {
+        viewBtn.textContent = lbl;
+      } else {
+        viewBtn.innerHTML = `
+      <span class="btn-icon" aria-hidden="true"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polygon points="6,4 20,12 6,20" fill="currentColor"/></svg></span>
+      <span>View project</span>
+    `;
+      }
     }
+
     fillInfo(card);
     buildSlides(slidesArr);
     nxApplyPerSlideLinks(card, slidesEl);

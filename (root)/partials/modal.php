@@ -21,7 +21,13 @@
                     <div class="nx-actions-top"></div> <!-- optioneel: ruimte -->
                     <div class="nx-episodes" id="nxEpisodes"></div>
                     <div class="nx-actions">
-                        <a id="nxViewProject" class="btn btn-primary" target="_blank" rel="noopener">▶ View Project</a>
+                        <a id="nxViewProject" class="btn btn-primary" target="_blank" rel="noopener">
+                            <span class="play-icon">
+                                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <polygon points="6,4 20,12 6,20" fill="currentColor" />
+                                </svg>
+                            </span>
+                            View Project</a>
                         <button class="btn btn-secondary" type="button">Contact</button>
                     </div>
 

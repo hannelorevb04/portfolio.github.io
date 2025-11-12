@@ -2269,3 +2269,86 @@ figure.photo {
 .footer-contact button {
   align-self: center;
 } /* Send in het midden */
+
+/* Play icon binnen knoppen */
+.play-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.2em;
+  height: 1.2em;
+  background: var(--brand-900);
+  color: #fff;
+  border-radius: 50%;
+  margin-right: 0.5em;
+  box-shadow: 0 3px 10px rgba(16, 46, 74, 0.25);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn:hover .play-icon {
+  transform: scale(1.05);
+  box-shadow: 0 5px 14px rgba(16, 46, 74, 0.35);
+}
+
+.play-icon svg {
+  width: 0.7em;
+  height: 0.7em;
+  fill: currentColor;
+}
+
+/* Basis */
+.project-card .slideshow-container {
+  position: relative;
+  width: 100%;
+}
+.project-card .slides {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Toon maar één slide */
+.project-card .slide {
+  display: none;
+}
+.project-card .slide.active {
+  display: block;
+}
+
+/* Zorg dat het beeld netjes past */
+.project-card .slide .image,
+.project-card .slide img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover; /* of 'contain' als je geen crop wil */
+}
+
+/* Pijlen netjes bovenop (optioneel) */
+.project-card .slideshow-nav {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  pointer-events: none;
+  padding: 0 8px;
+}
+.project-card .slideshow-nav button {
+  pointer-events: auto;
+  border: 0;
+  background: rgba(0, 0, 0, 0.25);
+  color: #fff;
+  border-radius: 999px;
+  width: 36px;
+  height: 36px;
+}
+
+.project-card .slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+.project-card .slide.active {
+  opacity: 1;
+}

@@ -382,7 +382,7 @@ include __DIR__ . '/partials/header.php';
   ]'
                 id="woordlogoCard">
                 <div class="overlap-group">
-                    <!-- <div class="slideshow-container">
+                    <div class="slideshow-container">
                         <div class="slides">
                             <img class="image slide active" src="/Woordlogo/cover.jpg" alt="Woordlogo cover" loading="eager" decoding="async" />
                         </div>
@@ -398,7 +398,7 @@ include __DIR__ . '/partials/header.php';
                                 </svg>
                             </button>
                         </div>
-                    </div> -->
+                    </div>
                     <div class="gradient"></div>
                     <div class="text">
                         <div class="div">Woordlogo</div>
@@ -493,8 +493,147 @@ include __DIR__ . '/partials/header.php';
                     </div>
                 </div>
             </div>
+
+            <div
+                class="project-card"
+                data-desc="3D mechanical hinge simulation built with Three.js — interactive board with dynamic lighting and materials."
+                data-discipline="3D / WebGL"
+                data-meta="Three.js"
+                data-slides='["iframe:Flipperboard/Flipperboard.html"]'
+                data-tags="Three.js"
+                data-title="Flipperboard"
+                data-tools="Three.js"
+                id="flipperCard">
+                <div class="overlap-group">
+                    <div class="slideshow-container">
+                        <div class="slides">
+                            <img
+                                class="image slide active"
+                                src="Flipperboard/cover.png"
+                                alt="Flipperboard cover"
+                                loading="eager"
+                                decoding="async" />
+                        </div>
+                    </div>
+                    <div class="gradient"></div>
+                    <div class="text">
+                        <div class="div">Flipperboard</div>
+                        <div class="labels">
+                            <div class="label">Three.js</div>
+                            <!-- <div class="label">JavaScript</div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </section>
+    <!-- =================== Microgames =================== -->
+    <section class="projects-section">
+        <h2 class="section-title">Microgames</h2>
+        <div class="projects">
+
+            <!-- Missile Game -->
+            <div
+                class="project-card"
+                data-desc="JavaScript mini-game: dodge missiles with physics, collision detection and difficulty increase."
+                data-discipline="Game Dev / JavaScript"
+                data-meta="Website • JavaScript / CSS / HTML"
+                data-slides='["iframe:Missile game/vierkant.html"]'
+                data-tags="JavaScript, CSS, HTML"
+                data-title="Missile game"
+                data-tools="JavaScript, CSS, HTML"
+                id="missileCard">
+                <div class="overlap-group">
+                    <div class="slideshow-container">
+                        <div class="slides">
+                            <img
+                                class="image slide active"
+                                src="Missile game/cover.png"
+                                alt="Missile game cover"
+                                loading="eager"
+                                decoding="async" />
+                        </div>
+                        <div class="slideshow-nav">
+                            <button class="slideshow-prev" aria-label="Vorige">
+                                <svg viewBox="0 0 24 24" width="20" height="20" fill="none"
+                                    stroke="currentColor" stroke-width="3"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="15 18 9 12 15 6" />
+                                </svg>
+                            </button>
+                            <button class="slideshow-next" aria-label="Volgende">
+                                <svg viewBox="0 0 24 24" width="20" height="20" fill="none"
+                                    stroke="currentColor" stroke-width="3"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="9 18 15 12 9 6" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="gradient"></div>
+                    <div class="text">
+                        <div class="div">Missile game</div>
+                        <div class="labels">
+                            <div class="label">JavaScript</div>
+                            <div class="label">CSS</div>
+                            <div class="label">HTML</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Military Game -->
+            <div
+                class="project-card"
+                data-desc="P5.js top-down prototype with sprites, movement and basic interactions."
+                data-discipline="Game Dev / P5.js"
+                data-meta="Website • P5.js"
+                data-slides='["iframe:P5/index.html"]'
+                data-tags="P5.js"
+                data-title="Military game"
+                data-tools="P5.js"
+                id="p5Card">
+                <div class="overlap-group">
+                    <div class="slideshow-container">
+                        <div class="slides">
+                            <img
+                                class="image slide active"
+                                src="P5/cover.png"
+                                alt="Military game cover"
+                                loading="eager"
+                                decoding="async" />
+                        </div>
+                        <div class="slideshow-nav">
+                            <button class="slideshow-prev" aria-label="Vorige">
+                                <svg viewBox="0 0 24 24" width="20" height="20" fill="none"
+                                    stroke="currentColor" stroke-width="3"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="15 18 9 12 15 6" />
+                                </svg>
+                            </button>
+                            <button class="slideshow-next" aria-label="Volgende">
+                                <svg viewBox="0 0 24 24" width="20" height="20" fill="none"
+                                    stroke="currentColor" stroke-width="3"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="9 18 15 12 9 6" />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="gradient"></div>
+                    <div class="text">
+                        <div class="div">Military game</div>
+                        <div class="labels">
+                            <div class="label">P5.js</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
 </main>
 
 <?php

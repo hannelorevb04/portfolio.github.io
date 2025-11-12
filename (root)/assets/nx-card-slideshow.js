@@ -1,4 +1,28 @@
 /* nx-card-slideshow.js — hybride: inline of data-slides; images én iframes; pijlen + autoplay (geen dots) */
+// === Gedeelde ticker: elke X ms roept alle subscribers aan ===
+(function () {
+  const TICK_MS = 3800;
+  if (!window.__nxTicker) {
+    const subscribers = [];
+    window.__nxTicker = {
+      add(fn) {
+        if (typeof fn === "function") subscribers.push(fn);
+      },
+      remove(fn) {
+        const i = subscribers.indexOf(fn);
+        if (i > -1) subscribers.splice(i, 1);
+      },
+    };
+    setInterval(() => {
+      subscribers.slice().forEach((fn) => {
+        try {
+          fn();
+        } catch {}
+      });
+    }, TICK_MS);
+  }
+})();
+
 (function () {
   const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
 
@@ -130,11 +154,9 @@
 
   function attachLogic(api) {
     let idx = 0;
-    let timer = null;
     let hovering = false;
-    const AUTO_MS = 3800;
 
-    const slides = () => $$(".slide", api.slidesWrap);
+    const slides = () => Array.from(api.slidesWrap.querySelectorAll(".slide"));
 
     // startpositie
     idx = Math.max(
@@ -150,58 +172,38 @@
       idx = (n + arr.length) % arr.length;
       arr[idx]?.classList.add("active");
     }
-    function step(d) {
-      show(idx + d);
-    }
-    function stop() {
-      if (timer) {
-        clearInterval(timer);
-        timer = null;
-      }
-    }
-    function start() {
-      if (slides().length > 1 && !hovering)
-        timer = setInterval(() => step(1), AUTO_MS);
-    }
-    function restart() {
-      stop();
-      start();
-    }
+    const step = (d) => show(idx + d);
 
+    // ⏱️ Ticker-callback: alleen vooruit als niet gehoverd en er >1 slide is
+    const onTick = () => {
+      if (!hovering && slides().length > 1) step(1);
+    };
+    window.__nxTicker.add(onTick);
+
+    // pijlen
     api.prev.addEventListener("click", (ev) => {
       ev.stopPropagation();
       step(-1);
-      restart();
     });
     api.next.addEventListener("click", (ev) => {
       ev.stopPropagation();
       step(1);
-      restart();
     });
 
+    // hover pauze
     api.container.addEventListener("mouseenter", () => {
       hovering = true;
-      stop();
     });
     api.container.addEventListener("mouseleave", () => {
       hovering = false;
-      start();
     });
 
-    // Toetsenbord (optioneel)
+    // keyboard
     api.container.setAttribute("tabindex", "0");
     api.container.addEventListener("keydown", (e) => {
-      if (e.key === "ArrowLeft") {
-        step(-1);
-        restart();
-      }
-      if (e.key === "ArrowRight") {
-        step(1);
-        restart();
-      }
+      if (e.key === "ArrowLeft") step(-1);
+      if (e.key === "ArrowRight") step(1);
     });
-
-    start();
   }
 
   function buildCard(card) {
