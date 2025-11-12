@@ -499,7 +499,7 @@ include __DIR__ . '/partials/header.php';
 
 <?php
 include __DIR__ . '/partials/modal.php';   // 1 modal voor alle pagina’s
-include __DIR__ . '/partials/footer.php';  // jouw footer
+include __DIR__ . '/partials/contact.php';  // jouw footer
 ?>
 <link rel="stylesheet" href="/assets/nx-modal.css?v=36">
 <script defer src="/assets/nx-inline.js?v=36"></script>
