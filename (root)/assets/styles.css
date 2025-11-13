@@ -2352,3 +2352,12 @@ figure.photo {
 .project-card .slide.active {
   opacity: 1;
 }
+
+@media (max-width: 600px) {
+  .about-photo {
+    width: 45vw; /* kleiner dan op desktop */
+    max-width: 260px; /* limiet */
+    height: auto;
+    margin: 0 auto;
+  }
+}
