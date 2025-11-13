@@ -34,8 +34,7 @@
                     <div class="nx-episodes" id="nxEpisodes"></div>
 
 
-                    <h3 class="nx-h3">Tags</h3>
-                    <div class="nx-taglist"></div>
+
                 </div>
 
                 <aside class="nx-right">
@@ -53,6 +52,13 @@
                     </div>
                 </aside>
             </div>
+            <div class="nx-tags-footer">
+                <h3 class="nx-h3">Tags</h3>
+                <div class="nx-taglist"></div>
+            </div>
         </section>
     </div>
 </div>
+
+<!-- <h3 class="nx-h3">Tags</h3>
+<div class="nx-taglist"></div> -->
