@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Friends 30th anniversary</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="initial-scale=1.0,width=device-width,user-scalable=0"
+    />
+    <style>
+      body {
+        font-family: arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: #f8f9fa;
+      }
+      .center {
+        width: 650px;
+        height: 400px;
+        position: absolute;
+        z-index: 0;
+        left: 50%;
+        top: 50%;
+        margin: -200px 0 0 -325px;
+        text-align: center;
+      }
+
+      .doodle {
+        position: relative;
+        height: 300px;
+        overflow: hidden;
+      }
+
+      .intro {
+        position: relative;
+        top: 75px;
+        left: 10%;
+      }
+
+      .intro img,
+      .google {
+        position: absolute;
+        width: 350px;
+        height: auto;
+        margin: 5px 20px 5px -250px;
+        visibility: hidden;
+      }
+
+      /* Complete animation sequence matching the original */
+      .intro_1 {
+        animation: showFrame 5s linear infinite;
+        animation-delay: 0s;
+      }
+      .intro_2 {
+        animation: showFrame 5s linear infinite;
+        animation-delay: 0.1s;
+      }
+      .intro_3 {
+        animation: showFrame 5s linear infinite;
+        animation-delay: 0.2s;
+      }
+      .intro_4 {
+        animation: showFrame 5s linear infinite;
+        animation-delay: 0.3s;
+      }
+      .intro_5 {
+        animation: showFrame 5s linear infinite;
+        animation-delay: 0.4s;
+      }
+      .intro_6 {
+        animation: showFrame 5s linear infinite;
+        animation-delay: 0.5s;
+      }
+      .intro_7 {
+        animation: showFrame 5s linear infinite;
+        animation-delay: 0.6s;
+      }
+      .intro_8 {
+        animation: showFrame 5s linear infinite;
+        animation-delay: 0.7s;
+      }
+      .intro_9 {
+        animation: showFrame 5s linear infinite;
+        animation-delay: 0.8s;
+      }
+      .intro_10 {
+        animation: showFrame 5s linear infinite;
+        animation-delay: 0.9s;
+      }
+      .intro_11 {
+        animation: showFrame 5s linear infinite;
+        animation-delay: 1s;
+      }
+      .intro_12 {
+        animation: showFrame 5s linear infinite;
+        animation-delay: 1.1s;
+      }
+      .intro_13 {
+        animation: showFrame 5s linear infinite;
+        animation-delay: 1.2s;
+      }
+      .intro_14 {
+        animation: showFrame 5s linear infinite;
+        animation-delay: 1.3s;
+      }
+      .intro_15 {
+        animation: showFrame 5s linear infinite;
+        animation-delay: 1.4s;
+      }
+      .intro_16 {
+        animation: showFrame 5s linear infinite;
+        animation-delay: 1.5s;
+      }
+      .intro_17 {
+        animation: showFrame 5s linear infinite;
+        animation-delay: 1.6s;
+      }
+      .intro_18 {
+        animation: showFrame 5s linear infinite;
+        animation-delay: 1.7s;
+      }
+      .intro_19 {
+        animation: showFrame 5s linear infinite;
+        animation-delay: 1.8s;
+      }
+      .intro_20 {
+        animation: showFrame 5s linear infinite;
+        animation-delay: 1.9s;
+      }
+      .intro_21 {
+        animation: showFrame 5s linear infinite;
+        animation-delay: 2s;
+      }
+      .intro_22 {
+        animation: showFrame 5s linear infinite;
+        animation-delay: 2.1s;
+      }
+      .intro_23 {
+        animation: showFrame 5s linear infinite;
+        animation-delay: 2.2s;
+      }
+      .intro_24 {
+        animation: showFrame 5s linear infinite;
+        animation-delay: 2.3s;
+      }
+      .intro_25 {
+        animation: showFrame 5s linear infinite;
+        animation-delay: 2.4s;
+      }
+      .intro_26 {
+        animation: showFrame 5s linear infinite;
+        animation-delay: 2.5s;
+      }
+      .intro_27 {
+        animation: showFrame 5s linear infinite;
+        animation-delay: 2.6s;
+      }
+      .intro_28 {
+        animation: showFrame 5s linear infinite;
+        animation-delay: 2.7s;
+      }
+      .intro_29 {
+        animation: showFrame 5s linear infinite;
+        animation-delay: 2.8s;
+      }
+      .intro_30 {
+        animation: showFrame 5s linear infinite;
+        animation-delay: 2.9s;
+      }
+      .intro_31 {
+        animation: showFrame 5s linear infinite;
+        animation-delay: 3s;
+      }
+      .intro_32 {
+        animation: showFrame 5s linear infinite;
+        animation-delay: 3.1s;
+      }
+      .intro_33 {
+        animation: showFrame 5s linear infinite;
+        animation-delay: 3.2s;
+      }
+      .intro_34 {
+        animation: showFrame 5s linear infinite;
+        animation-delay: 3.3s;
+      }
+      .intro_35 {
+        animation: showFrame 5s linear infinite;
+        animation-delay: 3.4s;
+      }
+      .intro_36 {
+        animation: showFrame 5s linear infinite;
+        animation-delay: 3.5s;
+      }
+      .intro_37 {
+        animation: showFrame 5s linear infinite;
+        animation-delay: 3.6s;
+      }
+      .intro_38 {
+        animation: showFrame 5s linear infinite;
+        animation-delay: 3.7s;
+      }
+      .intro_39 {
+        animation: showFrame 5s linear infinite;
+        animation-delay: 3.8s;
+      }
+      .intro_40 {
+        animation: showFrame 5s linear infinite;
+        animation-delay: 3.9s;
+      }
+      .intro_41 {
+        animation: showFrame 5s linear infinite;
+        animation-delay: 4s;
+      }
+      .intro_42 {
+        animation: showFrame 5s linear infinite;
+        animation-delay: 4.1s;
+      }
+      .intro_43 {
+        animation: showFrame 5s linear infinite;
+        animation-delay: 4.2s;
+      }
+      .intro_44 {
+        animation: showFrame 5s linear infinite;
+        animation-delay: 4.3s;
+      }
+      .intro_45 {
+        animation: showFrame 5s linear infinite;
+        animation-delay: 4.4s;
+      }
+      .intro_46 {
+        animation: showFrame 5s linear infinite;
+        animation-delay: 4.5s;
+      }
+      .intro_47 {
+        animation: showFrame 5s linear infinite;
+        animation-delay: 4.6s;
+      }
+      .intro_48 {
+        animation: showFrame 5s linear infinite;
+        animation-delay: 4.7s;
+      }
+      .intro_49 {
+        animation: showFrame 5s linear infinite;
+        animation-delay: 4.8s;
+      }
+
+      .google {
+        animation: showFinalLogo 30s linear infinite;
+        animation-delay: 4.9s;
+        width: 300px;
+        margin: 50px 20px 5px -150px;
+      }
+
+      @keyframes showFrame {
+        0%,
+        2% {
+          visibility: visible;
+        }
+        2.1%,
+        99.99% {
+          visibility: hidden;
+        }
+        100% {
+          visibility: hidden;
+        }
+      }
+
+      @keyframes showFinalLogo {
+        0%,
+        16.33% {
+          visibility: hidden;
+        }
+        16.33%,
+        99.99% {
+          visibility: visible;
+        }
+        100% {
+          visibility: visible;
+        }
+      }
+
+      nav {
+        float: right;
+        width: 280px;
+        margin-top: 24px;
+        margin-right: 20px;
+        font-size: 0.8em;
+      }
+      nav a {
+        color: #222;
+        display: block;
+        float: left;
+        margin: 0px 8px;
+      }
+      .signin {
+        font-weight: bold;
+        color: #fff;
+        background: #4485f4;
+        padding: 8px 10px;
+        border-style: none;
+        border-radius: 2px;
+      }
+      .l {
+        line-height: 25px;
+      }
+
+      .search {
+        width: 400px;
+        padding: 12px 16px;
+        border: 1px solid #dfe1e5;
+        border-radius: 24px;
+        font-size: 16px;
+        outline: none;
+      }
+
+      .button {
+        background: #f8f9fa;
+        border: 1px solid #f8f9fa;
+        border-radius: 4px;
+        color: #3c4043;
+        font-size: 14px;
+        margin: 11px 4px;
+        padding: 0 20px;
+        line-height: 27px;
+        height: 36px;
+        cursor: pointer;
+      }
+      .buttons {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+      }
+
+      /* form {
+        margin-top: 20px;
+      } */
+
+      p {
+        margin-top: 20px;
+        font-size: 13px;
+        color: #222;
+      }
+
+      p a {
+        color: #1a0dab;
+        text-decoration: none;
+        margin: 0 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <a href="#" class="l">+You</a>
+      <a href="#" class="l">Gmail</a>
+      <a href="#" class="l">Images</a>
+      <a href="#" class="signin">Sign In</a>
+    </nav>
+    <section class="center">
+      <div class="doodle">
+        <div class="intro">
+          <img
+            class="intro_1"
+            src="images/really_used/intro/1.png"
+            alt="intro"
+          />
+          <img
+            class="intro_2"
+            src="images/really_used/intro/2.png"
+            alt="intro"
+          />
+          <img
+            class="intro_3"
+            src="images/really_used/intro/3.png"
+            alt="intro"
+          />
+          <img
+            class="intro_4"
+            src="images/really_used/intro/4.png"
+            alt="intro"
+          />
+          <img
+            class="intro_5"
+            src="images/really_used/intro/5.png"
+            alt="intro"
+          />
+          <img
+            class="intro_6"
+            src="images/really_used/intro/6.png"
+            alt="intro"
+          />
+          <img
+            class="intro_7"
+            src="images/really_used/intro/7.png"
+            alt="intro"
+          />
+          <img
+            class="intro_8"
+            src="images/really_used/intro/12.png"
+            alt="intro"
+          />
+          <img
+            class="intro_9"
+            src="images/really_used/intro/14.png"
+            alt="intro"
+          />
+          <img
+            class="intro_10"
+            src="images/really_used/intro/23.png"
+            alt="intro"
+          />
+          <img
+            class="intro_11"
+            src="images/really_used/intro/33_1.png"
+            alt="intro"
+          />
+          <img
+            class="intro_12"
+            src="images/really_used/intro/34_1.png"
+            alt="intro"
+          />
+          <img
+            class="intro_13"
+            src="images/really_used/intro/35_1.png"
+            alt="intro"
+          />
+          <img
+            class="intro_14"
+            src="images/really_used/intro/36_1.png"
+            alt="intro"
+          />
+          <img
+            class="intro_15"
+            src="images/really_used/intro/37_1.png"
+            alt="intro"
+          />
+          <img
+            class="intro_16"
+            src="images/really_used/intro/38_1.png"
+            alt="intro"
+          />
+          <img
+            class="intro_17"
+            src="images/really_used/intro/39_1.png"
+            alt="intro"
+          />
+          <img
+            class="intro_18"
+            src="images/really_used/intro/40_1.png"
+            alt="intro"
+          />
+          <img
+            class="intro_19"
+            src="images/really_used/intro/41_1.png"
+            alt="intro"
+          />
+          <img
+            class="intro_20"
+            src="images/really_used/intro/42_1.png"
+            alt="intro"
+          />
+          <img
+            class="intro_21"
+            src="images/really_used/intro/43_1.png"
+            alt="intro"
+          />
+          <img
+            class="intro_22"
+            src="images/really_used/intro/44_1.png"
+            alt="intro"
+          />
+          <img
+            class="intro_23"
+            src="images/really_used/intro/45_1.png"
+            alt="intro"
+          />
+          <img
+            class="intro_24"
+            src="images/really_used/intro/46_1.png"
+            alt="intro"
+          />
+          <img
+            class="intro_25"
+            src="images/really_used/intro/47_1.png"
+            alt="intro"
+          />
+          <img
+            class="intro_26"
+            src="images/really_used/intro/48_1.png"
+            alt="intro"
+          />
+          <img
+            class="intro_27"
+            src="images/really_used/intro/49_1.png"
+            alt="intro"
+          />
+          <img
+            class="intro_28"
+            src="images/really_used/intro/50_1.png"
+            alt="intro"
+          />
+          <img
+            class="intro_29"
+            src="images/really_used/intro/51_1.png"
+            alt="intro"
+          />
+          <img
+            class="intro_30"
+            src="images/really_used/intro/52_1.png"
+            alt="intro"
+          />
+          <img
+            class="intro_31"
+            src="images/really_used/intro/53_1.png"
+            alt="intro"
+          />
+          <img
+            class="intro_32"
+            src="images/really_used/intro/54_1.png"
+            alt="intro"
+          />
+          <img
+            class="intro_33"
+            src="images/really_used/intro/55_1.png"
+            alt="intro"
+          />
+          <img
+            class="intro_34"
+            src="images/really_used/intro/56_1.png"
+            alt="intro"
+          />
+          <img
+            class="intro_35"
+            src="images/really_used/intro/57_1.png"
+            alt="intro"
+          />
+          <img
+            class="intro_36"
+            src="images/really_used/intro/58_1.png"
+            alt="intro"
+          />
+          <img
+            class="intro_37"
+            src="images/really_used/intro/59_1.png"
+            alt="intro"
+          />
+          <img
+            class="intro_38"
+            src="images/really_used/intro/60_1.png"
+            alt="intro"
+          />
+          <img
+            class="intro_39"
+            src="images/really_used/intro/61_1.png"
+            alt="intro"
+          />
+          <img
+            class="intro_40"
+            src="images/really_used/intro/62_1.png"
+            alt="intro"
+          />
+          <img
+            class="intro_41"
+            src="images/really_used/intro/63_1.png"
+            alt="intro"
+          />
+          <img
+            class="intro_42"
+            src="images/really_used/intro/64_1.png"
+            alt="intro"
+          />
+          <img
+            class="intro_43"
+            src="images/really_used/intro/65_1.png"
+            alt="intro"
+          />
+          <img
+            class="intro_44"
+            src="images/really_used/intro/66_1.png"
+            alt="intro"
+          />
+          <img
+            class="intro_45"
+            src="images/really_used/intro/67_1.png"
+            alt="intro"
+          />
+          <img
+            class="intro_46"
+            src="images/really_used/intro/68_1.png"
+            alt="intro"
+          />
+          <img
+            class="intro_47"
+            src="images/really_used/intro/69_1.png"
+            alt="intro"
+          />
+          <img
+            class="intro_48"
+            src="images/really_used/intro/70_1.png"
+            alt="intro"
+          />
+          <img
+            class="intro_49"
+            src="images/really_used/intro/71_1.png"
+            alt="intro"
+          />
+        </div>
+      </div>
+      <form action="" method="post">
+        <input type="text" class="search" placeholder="How you doin'?" />
+        <div class="buttons">
+          <input type="button" value="I know, I know, I know!" class="button" />
+          <input type="button" value="Oh my god!" class="button" />
+        </div>
+      </form>
+      <p>
+        Google.be offered in: <a href="#">Nederlands</a>
+        <a href="#">Français</a> <a href="#">Deutsch</a>
+      </p>
+    </section>
+  </body>
+</html>
