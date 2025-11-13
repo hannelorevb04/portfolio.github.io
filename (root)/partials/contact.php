@@ -28,8 +28,23 @@
                 <input type="hidden" name="_next" value="/thanks.php">
 
                 <button type="submit" class="btn btn-primary">
-                    <span class="play-icon"></span> Send
+                    <span>
+                        <svg
+                            width="1.1em"
+                            height="1.1em"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="white"
+                            stroke-width="2.4"
+                            stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <path d="M22 2 11 13"></path>
+                            <path d="M22 2 15 22 11 13 2 9 22 2z"></path>
+                        </svg>
+                    </span>
+                    Send
                 </button>
+
             </form>
 
 

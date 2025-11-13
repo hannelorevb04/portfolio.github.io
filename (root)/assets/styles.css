@@ -56,7 +56,7 @@ body {
   scrollbar-width: none;
 }
 .designer-page {
-  min-height: 100vh;
+  /* min-height: 100vh; */
   overflow-x: hidden;
 }
 .video-header {
