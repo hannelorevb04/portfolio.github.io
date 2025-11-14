@@ -9,17 +9,17 @@ $hero  = [
           user-friendly interfaces from user flows and wireframes to
           pixel-perfect UI and working prototypes.",
     'actions' => [
-        ['label' => 'Resume',  'href' => '/CV_Hannelore_Van_Buynderen.pdf', 'variant' => 'primary', 'icon' => 'play'],
+        ['label' => 'Resume',  'href' => 'CV_Hannelore_Van_Buynderen.pdf', 'variant' => 'primary', 'icon' => 'play'],
         ['label' => 'LinkedIn',  'href' => 'https://www.linkedin.com/in/hannelore-van-buynderen-056783225/', 'variant' => 'secondary', 'icon' => 'info'],
     ],
     // Optioneel: header-video/poster als je header-partial dit ondersteunt
     'video' => [
-        ['src' => '/images/beach_1080.mp4', 'type' => 'video/mp4', 'media' => '(min-width: 1024px)'],
-        ['src' => '/images/beach_720.mp4',  'type' => 'video/mp4'],
-        'poster' => '/images/beach_poster.jpg'
+        ['src' => 'images/beach_1080.mp4', 'type' => 'video/mp4', 'media' => '(min-width: 1024px)'],
+        ['src' => 'images/beach_720.mp4',  'type' => 'video/mp4'],
+        'poster' => 'images/beach_poster.jpg'
     ],
-    'avatar' => '/images/logos_figma.png',
-    'profiles_link' => '/profiles.php'
+    'avatar' => 'images/logos_figma.png',
+    'profiles_link' => 'profiles.php'
 ];
 
 include __DIR__ . '/partials/head.php';

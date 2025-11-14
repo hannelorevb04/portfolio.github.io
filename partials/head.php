@@ -28,7 +28,7 @@ $title = $title ?? 'Portfolio';
     </noscript>
 
     <!-- Site base styles -->
-    <link rel="stylesheet" href="/assets/styles.css">
+    <link rel="stylesheet" href="assets/styles.css">
 
     <!-- Page-specific styles (optioneel) -->
     <?php if (!empty($extra_styles) && is_array($extra_styles)): ?>
