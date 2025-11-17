@@ -30,7 +30,7 @@ include __DIR__ . '/partials/header.php';
     <!-- =================== UX/UI =================== -->
     <section class="projects-section">
         <h2 class="section-title">UX/UI</h2>
-        <div class="projects">
+        <div class="projects" data-drag-scroll>
 
             <!-- Felicks -->
             <div
@@ -318,7 +318,7 @@ include __DIR__ . '/partials/header.php';
     <!-- =================== Branding =================== -->
     <section class="projects-section">
         <h2 class="section-title">Branding</h2>
-        <div class="projects">
+        <div class="projects" data-drag-scroll>
 
             <!-- Felicks — Branding -->
             <div

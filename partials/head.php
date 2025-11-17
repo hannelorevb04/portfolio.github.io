@@ -29,6 +29,8 @@ $title = $title ?? 'Portfolio';
 
     <!-- Site base styles -->
     <link rel="stylesheet" href="assets/styles.css">
+    <script src="/assets/drag-scroll.js" defer></script>
+
 
     <!-- Page-specific styles (optioneel) -->
     <?php if (!empty($extra_styles) && is_array($extra_styles)): ?>

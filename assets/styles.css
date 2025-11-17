@@ -2375,3 +2375,32 @@ figure.photo {
   flex-wrap: wrap;
   gap: 0.5rem;
 }
+
+.projects {
+  display: flex;
+  gap: 0.45rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: auto; /* geen “glide” zodat drag direct voelt */
+  padding-bottom: 1rem;
+
+  cursor: grab; /* laat zien dat je kunt slepen */
+  user-select: none;
+  -webkit-user-drag: none;
+  touch-action: pan-x;
+}
+
+.projects.is-dragging {
+  cursor: grabbing;
+}
+
+@media (max-width: 900px) {
+  .projects {
+    flex-wrap: wrap;
+    gap: 14px;
+    overflow-x: visible;
+    overflow-y: visible;
+    cursor: default;
+    touch-action: pan-y;
+  }
+}
