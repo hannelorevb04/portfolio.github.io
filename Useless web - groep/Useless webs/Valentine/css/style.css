@@ -1,13 +1,12 @@
- body {
-    background-color: #F5E8E8;
-    font-family: 'limelight', 'arial';
-    overflow: hidden;
+body {
+  background-color: #f5e8e8;
+  font-family: "limelight", "arial";
+  overflow: hidden;
 }
 
-
 .question {
-    text-align: center;
-    margin-top: 150px;
+  text-align: center;
+  margin-top: 150px;
 }
 /* 
 #yes, #no {
@@ -18,16 +17,16 @@
 } */
 
 #yes {
-    color: white;
-    background-color: red;
-    margin-left: 40%;
-    margin-right: 25px;
-    margin-top: 50px;
-    padding: 10px 20px; 
-    border-radius: 8px;
-    text-decoration: none;
-    font-size: 25px;
-} 
+  color: white;
+  background-color: red;
+  margin-left: 40%;
+  margin-right: 25px;
+  margin-top: 50px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 25px;
+}
 
 /* #yes {
     left: 0px;
@@ -40,89 +39,85 @@
 }  */
 
 #no {
-    color: black;
-    border: 1px solid black;
-    padding: 10px 20px; 
-    border-radius: 8px;
-    text-decoration: none;
-    font-size: 25px;
-}  
-
+  color: black;
+  border: 1px solid black;
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 25px;
+}
 
 .container {
-    position: relative;
-    height: 400px; 
+  position: relative;
+  height: 400px;
 }
 
 .heart1,
 .heart2,
 .heart3,
 .heart4 {
-    position: absolute;
-    top: -100%;
+  position: absolute;
+  top: -100%;
 }
 
 .heart1 {
-    left: 10%; 
-    transform: translateX(-50%); 
-    animation: moveDown 4s linear infinite; 
-
-
+  left: 10%;
+  transform: translateX(-50%);
+  animation: moveDown 4s linear infinite;
 }
 
 .heart2 {
-    width: 120px;
-    height: 120px;
-    left: 80%; 
-    transform: translateX(-80%); 
-    animation: moveDown 8s linear infinite; 
+  width: 120px;
+  height: 120px;
+  left: 80%;
+  transform: translateX(-80%);
+  animation: moveDown 8s linear infinite;
 }
 
-
 .heart3 {
-    width: 40px;
-    height: 40px;
-    left: 50%; 
-    transform: translateX(-80%); 
-    transform: rotate(45deg);
-    animation: moveDown 5s linear infinite; 
+  width: 40px;
+  height: 40px;
+  left: 50%;
+  transform: translateX(-80%);
+  transform: rotate(45deg);
+  animation: moveDown 5s linear infinite;
 }
 
 .heart4 {
-    width: 120px;
-    height: 120px;
-    left: 40%; 
-    transform: translateX(-80%); 
-    animation: moveDown 8s linear infinite; 
+  width: 120px;
+  height: 120px;
+  left: 40%;
+  transform: translateX(-80%);
+  animation: moveDown 8s linear infinite;
 }
 
 @keyframes moveDown {
-    0% {
-        top: -100%;
-    }
-    100% {
-        top: 200%; 
-    }
+  0% {
+    top: -100%;
+  }
+  100% {
+    top: 200%;
+  }
 }
 
 .hidden {
-    display: none;
+  display: none;
 }
 
 #sorryScreen {
-    font-size: 32px;
-    width: 521px;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  font-size: 32px;
+  width: 521px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 @media (max-width: 250em) {
-    /* Voor schermen kleiner dan of gelijk aan 42em breedte */
-    #yes,
-    #no {
-        display: inline-block; /* Weergave als inline-blok om naast elkaar te plaatsen */
-        margin-right: 10px; /* Extra marge tussen de elementen */
-    } 
+  /* Voor schermen kleiner dan of gelijk aan 42em breedte */
+  #yes,
+  #no {
+    display: inline-block; /* Weergave als inline-blok om naast elkaar te plaatsen */
+    margin-right: 10px; /* Extra marge tussen de elementen */
+  }
 }

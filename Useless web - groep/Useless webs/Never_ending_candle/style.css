@@ -26,9 +26,9 @@ body {
 }
 
 .holder {
-  margin: 30rem auto 0;
-  width: 75px;
-  height: 50px;
+  margin: 12rem auto 0;
+  width: 150px;
+  height: 400px;
   position: relative;
 }
 
@@ -42,7 +42,7 @@ body {
 .candle {
   bottom: 0;
   width: 150px;
-  height: 200px;
+  height: 300px;
   border-radius: 150px / 40px;
   box-shadow: inset 20px -30px 50px 0 rgba(0, 0, 0, 0.4);
   background: #190f02;

@@ -8,26 +8,16 @@
 header {
   text-align: center;
 }
-header h1 {
-  font-size: 1rem;
-  margin-bottom: 0;
-}
 
 .slideshow img {
   margin-left: 40%;
 }
 
-#currentImage {
-  width: 100px;
-  height: auto;
-  position: absolute;
-  top: 150px;
-}
-
-/* @media (max-width: 42em) {
+@media (max-width: 42em) {
+  /* Voor schermen kleiner dan of gelijk aan 42em breedte */
   #currentImage {
-    width: 50px;
+    width: 250px;
     height: auto;
     margin-left: 30%;
   }
-} */
+}

@@ -449,7 +449,8 @@ include __DIR__ . '/partials/header.php';
       "title": "Groep — Chicken or Egg",
       "desc": "Thema met verschillende micro-animaties.",
       "thumb": "/Useless web - groep/Chicken_or_egg/cover.png",
-      "link": "/Useless web - groep/Chicken_or_egg/index.html",
+      
+      "link": "/Useless web - groep/Useless webs/Chicken_or_egg/chicken_or_egg.html",
       "duration": "—"
     },
     {
@@ -457,7 +458,7 @@ include __DIR__ . '/partials/header.php';
       "title": "Groep — Never Ending Candle",
       "desc": "Expressieve timing (scale/rotate).",
       "thumb": "/Useless web - groep/Never_ending_candle/cover.png",
-      "link": "/Useless web - groep/Never_ending_candle/index.html",
+      "link": "/Useless web - groep/Useless webs/Never_ending_candle/never_ending_candle.html",
       "duration": "—"
     },
     {
@@ -465,7 +466,7 @@ include __DIR__ . '/partials/header.php';
       "title": "Groep — Valentine",
       "desc": "Lineaire & stapsgewijze animaties met delays.",
       "thumb": "/Useless web - groep/Valentine/cover.png",
-      "link": "/Useless web - groep/Valentine/index.html",
+      "link": "/Useless web - groep/Useless webs/Valentine/valentine.html",
       "duration": "—"
     }
   ]'
