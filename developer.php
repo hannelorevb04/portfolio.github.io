@@ -327,7 +327,7 @@ include __DIR__ . '/partials/header.php';
                 data-meta="Website • CSS animation"
                 data-slides='[
                     "iframe:Woordlogo/index_1.html",
-                    "iframe:Woordlogo - groep/Entertainment/entertainment.html",
+                    "iframe:Woordlogo - groep/woordlogos/Entertainment/entertainment.html",
                     "iframe:Woordlogo - groep/woordlogos/fitness/index.html",
                     "iframe:Woordlogo - groep/woordlogos/timeline/index.html"
                 ]'
@@ -353,31 +353,31 @@ include __DIR__ . '/partials/header.php';
       "desc": "Eerste exploratie met keyframes en transforms.",
       "thumb": "/Woordlogo/cover.jpg",
       "link": "/Woordlogo/index_1.html",
-      "duration": "—"
+      "duration": ""
     },
     {
       "no": 2,
       "title": "Groep — Entertainment",
       "desc": "Thema met verschillende micro-animaties.",
-      "thumb": "/Woordlogo - groep/woordlogos/Entertainment/cover.png",
-      "link": "/Woordlogo - groep/woordlogos/Entertainment/entertainment.html",
+      "thumb": "/Woordlogo - groep/Entertainment/cover.png",
+      "link": "/Woordlogo - groep/Entertainment/entertainment.html",
       "duration": "—"
     },
     {
       "no": 3,
       "title": "Groep — Fitness",
       "desc": "Expressieve timing (scale/rotate).",
-      "thumb": "/Woordlogo - groep/woordlogos/fitness/cover.png",
-      "link": "/Woordlogo - groep/woordlogos/fitness/index.html",
-      "duration": "—"
+      "thumb": "/Woordlogo - groep/fitness/cover.png",
+      "link": "/Woordlogo - groep/fitness/index.html",
+      "duration": ""
     },
     {
       "no": 4,
       "title": "Groep — Timeline",
       "desc": "Lineaire & stapsgewijze animaties met delays.",
-      "thumb": "/Woordlogo - groep/woordlogos/timeline/cover.png",
-      "link": "/Woordlogo - groep/woordlogos/timeline/index.html",
-      "duration": "—"
+      "thumb": "/Woordlogo - groep/timeline/cover.png",
+      "link": "/Woordlogo - groep/timeline/index.html",
+      "duration": ""
     }
   ]'
                 id="woordlogoCard">
@@ -442,7 +442,7 @@ include __DIR__ . '/partials/header.php';
       "desc": "Eerste exploratie met keyframes en transforms.",
       "thumb": "/Useless web/cover.png",
       "link": "/Useless web/index_3.html",
-      "duration": "—"
+      "duration": ""
     },
     {
       "no": 2,
@@ -451,7 +451,7 @@ include __DIR__ . '/partials/header.php';
       "thumb": "/Useless web - groep/Chicken_or_egg/cover.png",
       
       "link": "/Useless web - groep/Useless webs/Chicken_or_egg/chicken_or_egg.html",
-      "duration": "—"
+      "duration": ""
     },
     {
       "no": 3,
@@ -459,7 +459,7 @@ include __DIR__ . '/partials/header.php';
       "desc": "Expressieve timing (scale/rotate).",
       "thumb": "/Useless web - groep/Never_ending_candle/cover.png",
       "link": "/Useless web - groep/Useless webs/Never_ending_candle/never_ending_candle.html",
-      "duration": "—"
+      "duration": ""
     },
     {
       "no": 4,
@@ -467,7 +467,7 @@ include __DIR__ . '/partials/header.php';
       "desc": "Lineaire & stapsgewijze animaties met delays.",
       "thumb": "/Useless web - groep/Valentine/cover.png",
       "link": "/Useless web - groep/Useless webs/Valentine/valentine.html",
-      "duration": "—"
+      "duration": ""
     }
   ]'
                 id="uselessCard">
