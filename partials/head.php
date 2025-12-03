@@ -11,6 +11,7 @@ $title = $title ?? 'Portfolio';
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="Portfolio van Hannelore Van Buynderen — UX/UI designer & front-end developer." />
+    <script async defer src="https://tools.luckyorange.com/core/lo.js?site-id=89c36709"></script>
 
     <title><?= htmlspecialchars($title) ?></title>
 
