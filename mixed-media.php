@@ -207,37 +207,84 @@ include __DIR__ . '/partials/header.php';
             <div
                 class="project-card"
                 data-title="Illustration"
-                data-meta=""
-                data-discipline="Compositing"
-                data-tools="Adobe Illustrator"
-                data-tags='["illustration","vector","pen tool","shading","coloring"]'
-                data-desc=""
-                data-slides='["/illustrations/parasol_dog-03.png"]'
-                data-compare='["illustrations/parasol_dog-03.png|illustrations/parasol_dog.jpg|Illustration|Original"]'>
+                data-meta="Personal & fan artwork"
+                data-discipline="Illustration / Fan project"
+                data-tools="Adobe Illustrator, Adobe Photoshop"
+                data-tags='[
+    "illustration",
+    "vector",
+    "pen tool",
+    "shading",
+    "coloring",
+    "fan project",
+    "album artwork",
+    "typography",
+    "mockup"
+  ]'
+                data-desc="A mix of personal illustration work and a fanmade album artwork study inspired by Pommelien Thijs’ Per Ongeluk."
+                data-slides='[
+    "/illustrations/parasol_dog-03.png",
+    "/illustrations/perongeluk_il.jpg",
+  ]'
+                data-compare='[
+    "illustrations/parasol_dog-03.png|illustrations/parasol_dog.jpg|Illustration|Original",
+    "illustrations/perongeluk_il-14.jpg|illustrations/perongeluk_lp_1.jpg|Fan project|Album cover"
+  ]'>
                 <div class="overlap-group">
                     <div class="slideshow-container">
                         <div class="slides">
-                            <img class="image slide active" src="/illustrations/parasol_dog-03.png" alt="Illustration dog" />
+                            <img
+                                class="image slide active"
+                                src="/illustrations/parasol_dog-03.png"
+                                alt="Illustration dog"
+                                loading="eager"
+                                decoding="async" />
+                            <img
+                                class="image slide"
+                                src="/illustrations/perongeluk_il-14.jpg"
+                                alt="Per Ongeluk fan project"
+                                loading="lazy"
+                                decoding="async" />
                         </div>
+
                         <div class="slideshow-nav" aria-hidden="true">
                             <button class="slideshow-prev" aria-label="Vorige">
-                                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    width="20"
+                                    height="20"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="3"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round">
                                     <polyline points="15 18 9 12 15 6" />
                                 </svg>
                             </button>
                             <button class="slideshow-next" aria-label="Volgende">
-                                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                <svg
+                                    viewBox="0 0 24 24"
+                                    width="20"
+                                    height="20"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="3"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round">
                                     <polyline points="9 18 15 12 9 6" />
                                 </svg>
                             </button>
                         </div>
                     </div>
+
                     <div class="gradient"></div>
+
                     <div class="text">
                         <div class="div">Illustration</div>
                     </div>
                 </div>
             </div>
+
 
             <!-- Bauhaus -->
             <div
