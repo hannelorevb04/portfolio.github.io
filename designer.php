@@ -329,7 +329,7 @@ include __DIR__ . '/partials/header.php';
                 data-tools="Figma"
                 data-tags="Brand,Guidelines"
                 data-desc="Warm, friendly brand kit with soft colors and playful typography."
-                data-link="https://acrobat.adobe.com/id/urn:aaid:sc:EU:df82d263-e9e7-4c2c-98d2-04e70f50673d">
+                data-link="https://acrobat.adobe.com/id/urn:aaid:sc:EU:91c5d3a6-96c9-4810-823e-179400402ba0">
                 <div class="overlap-group">
                     <div class="slideshow-container">
                         <div class="slides">
