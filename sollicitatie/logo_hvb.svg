@@ -1,0 +1,32 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 260" fill="none">
+  <g fill="#F4F4F4">
+    <!-- H -->
+    <rect x="0" y="10" width="62" height="240" rx="0"/>
+    <rect x="140" y="10" width="62" height="240" rx="0"/>
+    <rect x="0" y="98" width="202" height="54" rx="0"/>
+
+    <!-- V -->
+    <path d="M 250 10 L 318 10 L 420 210 L 522 10 L 590 10 L 466 250 L 374 250 Z"/>
+
+    <!-- B body -->
+    <rect x="618" y="10" width="70" height="240" rx="0"/>
+    <!-- top bowl -->
+    <path d="M688 10 H792
+             C850 10 890 46 890 92
+             C890 133 858 163 812 166
+             H688 Z"/>
+    <!-- bottom bowl -->
+    <path d="M688 94 H810
+             C858 97 890 128 890 168
+             C890 214 850 250 792 250
+             H688 Z"/>
+  </g>
+
+  <!-- star cutout -->
+  <path d="M 732 128
+           C 776 128, 792 112, 792 68
+           C 792 112, 808 128, 852 128
+           C 808 128, 792 144, 792 188
+           C 792 144, 776 128, 732 128 Z" fill="#0B0B0C"/>
+</svg>
