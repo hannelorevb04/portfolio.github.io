@@ -535,3 +535,23 @@ h3 {
     text-align: left;
   }
 }
+.mockup {
+  position: relative;
+  width: 600px;
+}
+
+.mockup video {
+  position: absolute;
+  top: 12%; /* tweak dit */
+  left: 10%;
+  width: 80%;
+  height: 70%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.mockup img {
+  width: 100%;
+  position: relative;
+  z-index: 2;
+}
