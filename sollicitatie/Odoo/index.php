@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sollicitatie Odoo · Hannelore Van Buynderen</title>
     <link rel="stylesheet" href="style.css" />
+    <script async defer src="https://tools.luckyorange.com/core/lo.js?site-id=89c36709"></script>
+
 </head>
 
 <body>
