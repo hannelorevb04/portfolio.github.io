@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -9,44 +9,51 @@
     />
 
     <title>Welkom - Hannelore Van Buynderen</title>
-    <style>
-      body {
+   <style>
+    body {
         margin: 0;
         height: 100vh;
         display: flex;
         justify-content: center;
         align-items: center;
-        background: #102e4a; /* portfolio-blauw */
+        background: #102e4a;
         color: #fff;
-        font-family: sans-serif;
+        font-family: 'Montserrat', sans-serif;
         overflow: hidden;
-      }
-      h1 {
+    }
+
+    h1 {
+        width: 100%;
+        margin: 0;
+        padding: 0 1rem;
+        box-sizing: border-box;
+        text-align: center;
         font-size: clamp(2rem, 6vw, 4rem);
         font-weight: 800;
         animation: fadeIn 1.5s ease-in-out;
-      }
+    }
 
-      @keyframes fadeIn {
+    @keyframes fadeIn {
         from {
-          opacity: 0;
-          transform: translateY(20px);
+            opacity: 0;
+            transform: translateY(20px);
         }
+
         to {
-          opacity: 1;
-          transform: translateY(0);
+            opacity: 1;
+            transform: translateY(0);
         }
-      }
-    </style>
-  </head>
-  <body>
+    }
+</style>
+
+<body>
     <h1>Hannelore Van Buynderen</h1>
 
-    <script>
-      // Na 3 seconden redirecten naar profiles.html
-      setTimeout(() => {
-        window.location.href = "profiles.html";
-      }, 3000);
-    </script>
-  </body>
+    <!-- <script>
+        setTimeout(() => {
+            window.location.href = "<?= $redirectUrl ?>";
+        }, 3000);
+    </script> -->
+</body>
+
 </html>
